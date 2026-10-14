@@ -33,8 +33,10 @@ _AGE = (
         r"lolis?", r"lolita", r"shota", r"jail\s?bait", r"under\s?age(?:d)?",
         r"young\s(?:girls?|boys?|looking)", r"little\s(?:girls?|boys?)", r"child(?:ren)?",
         r"kids?", r"barely\slegal",
-        # stated age 1-20 ("18yo", "17 year old", "13 y o")
-        r"(?:[1-9]|1\d|20)\s?(?:yo|y o|year old|years old)",
+        # stated age 1-20 ("18yo", "17 y.o.", "16 yrs old", "13 y/o", "17 year old")
+        r"(?:[1-9]|1\d|20)\s?(?:y[./\s]{0,2}o|y(?:ea)?rs?\sold)",
+        # "age 16", "aged 15"
+        r"ages?d?\s(?:[1-9]|1\d|20)",
     ),
 )
 

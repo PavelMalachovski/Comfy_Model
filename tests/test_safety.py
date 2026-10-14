@@ -1,6 +1,8 @@
+from typing import get_args
+
 import pytest
 
-from comfy_model.safety import check_prompt, normalize
+from comfy_model.safety import TIER_RULES, Tier, check_prompt, normalize
 
 TIERS = ("instagram", "social", "fanvue")
 
@@ -34,7 +36,8 @@ def test_clean_prompt_passes():
     assert check_prompt("28-year-old woman at her desk, three monitors, morning light, bikini on a boat", "instagram") == []
 
 
-@pytest.mark.parametrize("text", ["28 year old woman", "29yo", "a 27-year-old engineer", "120 years old statue"])
+@pytest.mark.parametrize("text", ["28 year old woman", "29yo", "a 27-year-old engineer", "120 years old statue",
+    "28 y.o.", "age 28", "aged 29", "age 200"])
 def test_adult_ages_are_not_flagged(text):
     assert check_prompt(text, "instagram") == []
 
@@ -66,3 +69,14 @@ def test_unknown_tier_raises():
 
 def test_normalize():
     assert normalize("  School-Girl__OUTFIT \n  x ") == "school girl outfit x"
+
+
+@pytest.mark.parametrize("text", ["17 y.o.", "15 y.o", "16 yo.", "17yr old", "16 yrs old", "age 16",
+    "aged 15", "13 y/o"])
+def test_age_spelling_variants_banned_everywhere(text):
+    for tier in TIERS:
+        assert check_prompt(text, tier)
+
+
+def test_every_tier_has_rules():
+    assert set(get_args(Tier)) == set(TIER_RULES)
