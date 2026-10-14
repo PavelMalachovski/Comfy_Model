@@ -133,7 +133,7 @@ def export(
         raise _fail("file not found: " + ", ".join(str(f) for f in missing))
     for f in files:
         try:
-            out = export_image(f, to, grain=grain)
+            out = export_image(f, to, grain=grain, warn=lambda m: typer.echo(m, err=True))
         except (ValueError, OSError) as e:
             raise _fail(str(e)) from None
         typer.echo(str(out))

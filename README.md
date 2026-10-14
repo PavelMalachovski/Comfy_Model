@@ -6,6 +6,7 @@ CLI для генерации контента вымышленной ИИ-пе�
 2–3 часа в день. Персонаж вымышленный, взрослый, ни на кого не похож; пометка ИИ везде.
 
 ```bash
+# нужны uv, git, ssh, rsync и ffmpeg (для экспорта видео)
 uv sync
 cp .env.example .env     # RUNPOD_API_KEY, RUNPOD_VOLUME_ID, HF_TOKEN
 uv run cm --help
@@ -30,7 +31,7 @@ uv run cm --help
 | `cm pod up` / `cm pod status` / `cm pod ssh` / `cm pod down` | поднять, проверить, зайти по SSH, выключить под |
 | `cm batch face\|dataset\|photo\|video <сцены.yaml>` | пакетная генерация по файлу сцен |
 | `cm lora prepare` / `cm lora train` / `cm lora status` | датасет и обучение LoRA |
-| `cm export <файлы>` | подготовка к публикации: метка ИИ, без метаданных промпта |
+| `cm export <файлы>` | подготовка к публикации: фото → JPEG с меткой ИИ в EXIF, без метаданных промпта; видео (.mp4) → ремукс через `ffmpeg` без метаданных и с тегом `comment=AI-generated` (без `ffmpeg` видео копируется как есть, с предупреждением) |
 
 Результаты: `out/<дата>-<вид>/<сцена>_<NN>.png|mp4` + `manifest.jsonl`.
 

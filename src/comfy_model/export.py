@@ -3,8 +3,11 @@ from __future__ import annotations
 
 import random
 import shutil
+import subprocess
+import sys
 import zlib
 from pathlib import Path
+from typing import Callable
 
 from PIL import Image, ImageChops
 
@@ -15,6 +18,32 @@ _EXIF_DESCRIPTION = 0x010E
 _EXIF_SOFTWARE = 0x0131
 AI_DESCRIPTION = "AI-generated image"
 AI_SOFTWARE = "AI-generated"
+AI_VIDEO_COMMENT = "AI-generated"
+
+
+def _stderr(message: str) -> None:
+    print(message, file=sys.stderr)
+
+
+def _export_video(src: Path, out: Path, warn: Callable[[str], None]) -> Path:
+    """Remux ``src`` (no re-encode) without its metadata (ComfyUI's SaveVideo stores
+    ``prompt``/``workflow`` in the container) and with an AI comment tag. Without
+    ffmpeg on PATH the file is copied unchanged and ``warn`` is told so."""
+    ffmpeg = shutil.which("ffmpeg")
+    if ffmpeg is None:
+        shutil.copyfile(src, out)
+        warn(f"warning: ffmpeg not found; {src.name} copied unchanged, its metadata "
+             "(prompt/workflow) could not be stripped and no AI tag was added — install ffmpeg")
+        return out
+    argv = [ffmpeg, "-y", "-v", "error", "-i", str(src), "-map_metadata", "-1",
+            "-map_chapters", "-1", "-c", "copy", "-metadata", f"comment={AI_VIDEO_COMMENT}",
+            "-f", "mp4", str(out)]
+    r = subprocess.run(argv, capture_output=True, text=True, stdin=subprocess.DEVNULL)
+    if r.returncode != 0:
+        out.unlink(missing_ok=True)
+        detail = " ".join(r.stderr.split())[:300] or f"exit {r.returncode}"
+        raise ValueError(f"cannot export {src.name}: ffmpeg failed: {detail}")
+    return out
 
 
 def _grain_layer(size: tuple[int, int], sigma: float, seed: int) -> Image.Image:
@@ -27,13 +56,21 @@ def _grain_layer(size: tuple[int, int], sigma: float, seed: int) -> Image.Image:
     return Image.frombytes("L", size, data).convert("RGB")
 
 
-def export_image(src: Path, dest_dir: Path, *, grain: float = 0.03, quality: int = 92) -> Path:
+def export_image(
+    src: Path,
+    dest_dir: Path,
+    *,
+    grain: float = 0.03,
+    quality: int = 92,
+    warn: Callable[[str], None] = _stderr,
+) -> Path:
     """Export `src` into `dest_dir` and return the output path.
 
     Images become `<stem>.jpg` with every source metadata chunk (ComfyUI's PNG
     `prompt`/`workflow`) dropped, an AI label in EXIF and deterministic
     monochrome grain (std `grain * 255`, seeded from the file name). `.mp4`
-    files are copied unchanged.
+    files are remuxed by ffmpeg without metadata and with an AI comment tag
+    (copied unchanged, with a ``warn``ing, when ffmpeg is not installed).
     """
     src = Path(src)
     dest_dir = Path(dest_dir)
@@ -43,9 +80,7 @@ def export_image(src: Path, dest_dir: Path, *, grain: float = 0.03, quality: int
     dest_dir.mkdir(parents=True, exist_ok=True)
 
     if ext in VIDEO_EXTS:
-        out = dest_dir / src.name
-        shutil.copyfile(src, out)
-        return out
+        return _export_video(src, dest_dir / src.name, warn)
 
     out = dest_dir / f"{src.stem}.jpg"
     with Image.open(src) as opened:

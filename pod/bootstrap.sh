@@ -185,9 +185,12 @@ else
     log "starting ComfyUI on port $COMFY_PORT"
     (
         cd "$COMFY_DIR"
-        # Least privilege: ComfyUI runs third-party nodes and is publicly proxied.
+        # Keep the secrets out of ComfyUI's own environment. This is hygiene, not isolation:
+        # ComfyUI (third-party nodes, unauthenticated public proxy URL) runs as root and can
+        # still read them from /proc/1/environ, where RunPod puts every pod env var.
+        # --disable-metadata: no prompt/workflow embedded in saved PNGs and mp4s.
         setsid nohup env -u RUNPOD_API_KEY -u HF_TOKEN "$VENV/bin/python" main.py --listen 0.0.0.0 --port "$COMFY_PORT" \
-            >>"$COMFY_OUT" 2>&1 </dev/null &
+            --disable-metadata >>"$COMFY_OUT" 2>&1 </dev/null &
         echo $! >"$COMFY_PID"
     )
 fi

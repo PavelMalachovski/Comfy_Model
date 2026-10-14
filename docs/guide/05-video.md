@@ -23,8 +23,11 @@ uv run cm batch video scenes/video.yaml
 uv run cm pod down
 ```
 
-Результат: `out/<дата>-video/<сцена>_<NN>.mp4` (+ `manifest.jsonl`). Видео в экспорте
-копируются без изменений:
+Результат: `out/<дата>-video/<сцена>_<NN>.mp4` (+ `manifest.jsonl`). `cm export`
+перепаковывает видео через `ffmpeg` без перекодирования: удаляет все метаданные (в том
+числе промпт и граф ComfyUI) и ставит тег `comment=AI-generated`. Если `ffmpeg` не
+установлен, файл копируется как есть и печатается предупреждение: такое видео **не
+публикуйте**, сначала установите `ffmpeg` и повторите экспорт.
 
 ```bash
 uv run cm export out/<дата>-video/hair-in-wind-dunes_01.mp4

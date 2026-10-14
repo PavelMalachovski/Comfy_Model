@@ -62,6 +62,8 @@ def test_bootstrap_contract():
     assert "COMFY_URL=" in src
     assert "/workspace/.cm/watchdog.pid" in src
     assert "--listen 0.0.0.0" in src
+    # SaveVideo would otherwise embed the prompt/workflow in every mp4
+    assert "--disable-metadata" in src
     assert "nohup" in src
     assert "-C -" in src and "Authorization: Bearer" in src and ".part" in src
     assert "set -x" not in src  # would echo HF_TOKEN / RUNPOD_API_KEY into logs
