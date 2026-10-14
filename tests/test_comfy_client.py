@@ -239,3 +239,13 @@ def test_base_url_trailing_slash(clock):
         respx.get(f"{BASE}/system_stats").mock(return_value=httpx.Response(200, json={}))
         with ComfyClient(BASE + "/", sleep=clock.sleep, clock=clock) as c:
             assert c.ping() is True
+
+
+@respx.mock
+def test_upload_image_custom_name(client, tmp_path: Path):
+    img = tmp_path / "ref.png"
+    img.write_bytes(b"data")
+    route = respx.post(f"{BASE}/upload/image").mock(
+        return_value=httpx.Response(200, json={"name": "abc123-ref.png", "subfolder": "", "type": "input"}))
+    assert client.upload_image(img, name="abc123-ref.png") == "abc123-ref.png"
+    assert b'filename="abc123-ref.png"' in route.calls.last.request.content

@@ -201,13 +201,17 @@ class ComfyClient:
             tmp.unlink(missing_ok=True)
         return dest
 
-    def upload_image(self, path: Path) -> str:
-        """Upload into ComfyUI's input dir; returns the name to use in ``LoadImage``."""
+    def upload_image(self, path: Path, name: str | None = None) -> str:
+        """Upload into ComfyUI's input dir; returns the name to use in ``LoadImage``.
+
+        ``name`` overrides the remote filename (uploads overwrite same-named files,
+        so callers pass a content-derived name to avoid collisions).
+        """
         path = Path(path)
         with path.open("rb") as fh:
             resp = self._request(
                 "POST", "/upload/image",
-                files={"image": (path.name, fh, "application/octet-stream")},
+                files={"image": (name or path.name, fh, "application/octet-stream")},
                 data={"overwrite": "true", "type": "input"},
             )
         self._check(resp)
