@@ -1,0 +1,55 @@
+# ai-toolkit (ostris) config template for the persona LoRA on FLUX.1-dev.
+# Rendered by `cm lora train` (comfy_model.lora.render_training_config): the
+# {{...}} placeholders are replaced and the result is written as YAML.
+# Floats are written in decimal form (0.0001): PyYAML reads `1e-4` as a string.
+job: extension
+config:
+  name: "{{name}}"
+  process:
+    - type: sd_trainer
+      training_folder: /workspace/ai-toolkit/output
+      device: cuda:0
+      trigger_word: "{{trigger}}"
+      network:
+        type: lora
+        linear: 16
+        linear_alpha: 16
+      save:
+        dtype: float16
+        save_every: 500
+        max_step_saves_to_keep: 4
+      datasets:
+        - folder_path: "/workspace/dataset/{{trigger}}"
+          caption_ext: txt
+          caption_dropout_rate: 0.05
+          shuffle_tokens: false
+          cache_latents_to_disk: true
+          resolution: [512, 768, 1024]
+      train:
+        batch_size: 1
+        steps: 2000
+        gradient_accumulation_steps: 1
+        train_unet: true
+        train_text_encoder: false
+        gradient_checkpointing: true
+        noise_scheduler: flowmatch
+        optimizer: adamw8bit
+        lr: 0.0001
+        dtype: bf16
+      model:
+        name_or_path: black-forest-labs/FLUX.1-dev
+        is_flux: true
+        quantize: true
+      sample:
+        sampler: flowmatch
+        sample_every: 500
+        width: 1024
+        height: 1024
+        prompts: "{{sample_prompts}}"
+        seed: 42
+        walk_seed: true
+        guidance_scale: 4
+        sample_steps: 20
+meta:
+  name: "{{name}}"
+  version: "1.0"

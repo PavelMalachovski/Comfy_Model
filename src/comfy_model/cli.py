@@ -1,6 +1,7 @@
-"""`cm` entry point: batch, export, pod (up|status|down|ssh). Later tasks add lora."""
+"""`cm` entry point: batch, export, pod (up|status|down|ssh), lora (prepare|train|status)."""
 from __future__ import annotations
 
+import shlex
 import time
 from datetime import date
 from pathlib import Path
@@ -8,6 +9,7 @@ from typing import Optional
 
 import typer
 
+from comfy_model import lora as lora_mod
 from comfy_model import remote, runpod_pod
 from comfy_model.batch import run_batch
 from comfy_model.comfy_client import ComfyClient, ComfyError
@@ -312,3 +314,94 @@ def pod_ssh() -> None:
     if pod is None:
         raise _fail(NO_POD)
     raise typer.Exit(remote.run(remote.ssh_argv(pod)))
+
+
+# -- cm lora --------------------------------------------------------------------
+lora_app = typer.Typer(help="Prepare a LoRA dataset and train it on the pod.", no_args_is_help=True)
+app.add_typer(lora_app, name="lora")
+
+LORA_LOCAL_CONFIG_DIR = Path(".cm/training")
+TRAIN_SYNC_PATHS = [Path("pod")]
+
+
+@lora_app.command("prepare")
+def lora_prepare(
+    src: Path = typer.Argument(..., help="Dataset batch output dir, after deleting the bad images."),
+    to: Optional[Path] = typer.Option(None, "--to", help="Destination (default dataset/<trigger>)."),
+) -> None:
+    """Number the surviving images and write caption files for training."""
+    try:
+        profile = load_profile()
+        dest = to or Path("dataset") / profile.trigger
+        count = lora_mod.prepare_dataset(src, dest, profile)
+    except (ValueError, OSError) as e:
+        raise _fail(str(e)) from None
+    typer.echo(f"prepared {count} images + captions in {dest}")
+    typer.echo("next: cm pod up (if no pod is running), then cm lora train")
+
+
+def _remote_step(argv: list[str], what: str) -> None:
+    rc = remote.run(argv)
+    if rc != 0:
+        raise _fail(f"{what} failed (exit {rc})")
+
+
+@lora_app.command("train")
+def lora_train(
+    version: int = typer.Option(1, "--version", min=1, help="LoRA version; output is <trigger>_v<N>."),
+) -> None:
+    """Upload dataset + config, start ai-toolkit training detached on the pod (~2 h)."""
+    try:
+        profile = load_profile()
+        hf_token = load_secrets().get("HF_TOKEN")
+    except (ValueError, ConfigError) as e:
+        raise _fail(str(e)) from None
+    if not hf_token:
+        raise _fail(
+            "HF_TOKEN is missing: FLUX.1-dev is a gated model. Accept the FLUX.1-dev license on "
+            "Hugging Face (black-forest-labs/FLUX.1-dev), create a read token and put "
+            "HF_TOKEN=... in .env; then recreate the pod (`cm pod down`, `cm pod up`)."
+        )
+    dataset = Path("dataset") / profile.trigger
+    n_images = sum(1 for p in dataset.glob("img_*") if p.suffix.lower() in lora_mod.IMAGE_EXTS) if dataset.is_dir() else 0
+    if n_images < lora_mod.MIN_IMAGES:
+        raise _fail(f"no prepared dataset in {dataset} ({n_images} images): run `cm lora prepare <dataset-output-dir>`")
+    if not all(p.exists() for p in TRAIN_SYNC_PATHS):
+        raise _fail("run `cm lora train` from the repository root; missing: pod/")
+    try:
+        config_text = lora_mod.render_training_config(profile, version)
+    except ValueError as e:
+        raise _fail(str(e)) from None
+
+    pod = _current_pod()
+    if pod is None:
+        raise _fail(NO_POD)
+
+    name = lora_mod.run_name(profile, version)
+    config_file = LORA_LOCAL_CONFIG_DIR / f"{name}.yaml"
+    config_file.parent.mkdir(parents=True, exist_ok=True)
+    config_file.write_text(config_text, encoding="utf-8")
+
+    trig = shlex.quote(profile.trigger)
+    prep = (f"mkdir -p {lora_mod.REMOTE_DATASET_ROOT} {lora_mod.REMOTE_TRAINING_DIR} /workspace/.cm "
+            f"&& rm -rf {lora_mod.REMOTE_DATASET_ROOT}/{trig}")  # no stale images from an older prepare
+    typer.echo(f"uploading {n_images} images + config to the pod ...")
+    _remote_step(remote.ssh_argv(pod, prep), "preparing the pod directories")
+    _remote_step(remote.rsync_argv(pod, TRAIN_SYNC_PATHS, REMOTE_DIR), "rsync of pod/ scripts")
+    _remote_step(remote.rsync_argv(pod, [dataset], lora_mod.REMOTE_DATASET_ROOT + "/"), "rsync of the dataset")
+    _remote_step(remote.rsync_argv(pod, [config_file], lora_mod.REMOTE_TRAINING_DIR + "/"), "rsync of the training config")
+    _remote_step(remote.ssh_argv(pod, lora_mod.train_command(profile.trigger, version)), "starting training")
+    typer.echo(f"training {name} started on the pod (about 2 h; the pod stays up while it runs)")
+    typer.echo("follow progress: cm lora status")
+    typer.echo(f"when done the LoRA is /workspace/ComfyUI/models/loras/{name}.safetensors (cm batch photo ... --lora {name}.safetensors)")
+
+
+@lora_app.command("status")
+def lora_status() -> None:
+    """Show the last 40 lines of the training log and whether training is running."""
+    pod = _current_pod()
+    if pod is None:
+        raise _fail(NO_POD)
+    rc = remote.run(remote.ssh_argv(pod, lora_mod.status_command()))
+    if rc != 0:
+        raise _fail(f"ssh failed (exit {rc})")
