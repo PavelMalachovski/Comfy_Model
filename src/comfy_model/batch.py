@@ -22,6 +22,13 @@ from comfy_model.workflow import KINDS, load_template, render
 
 VIDEO_LENGTH = 121
 MANIFEST_NAME = "manifest.jsonl"
+# How long to wait for one prompt. A Wan 2.2 clip (121 frames) takes far longer than an image.
+WAIT_TIMEOUT_S = {"video": 2700}
+DEFAULT_WAIT_TIMEOUT_S = 900
+BUSY_MESSAGE = (
+    "ComfyUI still busy; re-run later to resume (same --out; finished files are skipped). "
+    "{item} did not finish within {timeout:g}s, so nothing more was queued behind it."
+)
 
 
 @dataclass
@@ -29,6 +36,7 @@ class BatchReport:
     done: list[Path] = field(default_factory=list)
     skipped: list[Path] = field(default_factory=list)
     failed: list[tuple[str, str]] = field(default_factory=list)
+    aborted: str | None = None  # set when the batch stopped early (prompt timed out)
 
 
 def _ext(kind: str) -> str:
@@ -71,7 +79,10 @@ def run_batch(
     Raises ``SceneError`` (invalid file) or ``ValueError`` (missing ``--lora`` /
     ``--ref`` / input image) before anything is queued. A ``ComfyError`` with
     ``is_validation`` (e.g. a model missing on the volume) aborts the batch; any
-    other ``ComfyError`` is recorded in ``failed`` and the batch continues.
+    other ``ComfyError`` is recorded in ``failed`` and the batch continues. A prompt
+    that does not finish within the per-kind timeout is recorded in ``failed`` and
+    the batch stops (``report.aborted``): ComfyUI is still rendering it, so queueing
+    more would only pile work up behind it.
     """
     if kind not in KINDS:
         raise ValueError(f"unknown kind {kind!r}; expected one of: {', '.join(KINDS)}")
@@ -101,6 +112,7 @@ def run_batch(
     ext = _ext(kind)
     report = BatchReport()
     uploads: dict[Path, str] = {}
+    timeout_s = WAIT_TIMEOUT_S.get(kind, DEFAULT_WAIT_TIMEOUT_S)
 
     def prompt_for(s: Scene) -> str:
         if kind in ("face", "photo"):
@@ -131,6 +143,7 @@ def run_batch(
         report.done.append(dest)
         manifest.write(json.dumps({
             "scene_id": s.id, "n": n, "seed": seed, "prompt": prompt, "file": dest.name, "kind": kind,
+            "tier": s.tier,
         }, ensure_ascii=False) + "\n")
         manifest.flush()
 
@@ -145,31 +158,40 @@ def run_batch(
             if todo and kind == "face":
                 # One queue per scene (batch_size=count); history order maps to n=1..count.
                 seed = s.seed if s.seed is not None else random.randrange(2**32)
+                item = f"{s.id}_{todo[0]:02d}"
                 try:
-                    entry = client.wait(client.queue(build(s, prompt, seed)))
+                    entry = client.wait(client.queue(build(s, prompt, seed)), timeout_s=timeout_s)
                     outs = _pick(client.outputs(entry), ext)
                     for n in todo:
                         if n - 1 < len(outs):
                             save(s, n, seed, prompt, outs[n - 1], dests[n], manifest)
                         else:
                             report.failed.append((f"{s.id}_{n:02d}", f"ComfyUI returned {len(outs)} of {s.count} images"))
-                except (ComfyError, TimeoutError) as e:
-                    if isinstance(e, ComfyError) and e.is_validation:
+                except TimeoutError as e:
+                    report.failed.append((item, str(e)))
+                    report.aborted = BUSY_MESSAGE.format(item=item, timeout=timeout_s)
+                except ComfyError as e:
+                    if e.is_validation:
                         raise
-                    report.failed.append((f"{s.id}_{todo[0]:02d}", str(e)))
+                    report.failed.append((item, str(e)))
             else:
                 for n in todo:
                     seed = s.seed + n - 1 if s.seed is not None else random.randrange(2**32)
+                    item = f"{s.id}_{n:02d}"
                     try:
-                        entry = client.wait(client.queue(build(s, prompt, seed)))
+                        entry = client.wait(client.queue(build(s, prompt, seed)), timeout_s=timeout_s)
                         outs = _pick(client.outputs(entry), ext)
                         if not outs:
-                            raise ComfyError(f"ComfyUI returned no output for {s.id}_{n:02d}")
+                            raise ComfyError(f"ComfyUI returned no output for {item}")
                         save(s, n, seed, prompt, outs[0], dests[n], manifest)
-                    except (ComfyError, TimeoutError) as e:
-                        if isinstance(e, ComfyError) and e.is_validation:
+                    except TimeoutError as e:
+                        report.failed.append((item, str(e)))
+                        report.aborted = BUSY_MESSAGE.format(item=item, timeout=timeout_s)
+                        break
+                    except ComfyError as e:
+                        if e.is_validation:
                             raise
-                        report.failed.append((f"{s.id}_{n:02d}", str(e)))
+                        report.failed.append((item, str(e)))
 
             if on_scene:
                 on_scene(
@@ -178,4 +200,6 @@ def run_batch(
                     len(report.skipped) - counts[1],
                     len(report.failed) - counts[2],
                 )
+            if report.aborted:
+                break
     return report

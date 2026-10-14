@@ -33,7 +33,8 @@ uv run cm --help
 | `cm lora prepare` / `cm lora train` / `cm lora status` | датасет и обучение LoRA |
 | `cm export <файлы>` | подготовка к публикации: фото → JPEG с меткой ИИ в EXIF, без метаданных промпта; видео (.mp4) → ремукс через `ffmpeg` без метаданных и с тегом `comment=AI-generated` (без `ffmpeg` видео копируется как есть, с предупреждением) |
 
-Результаты: `out/<дата>-<вид>/<сцена>_<NN>.png|mp4` + `manifest.jsonl`.
+Результаты: `out/<дата>-<имя файла сцен>/<сцена>_<NN>.png|mp4` + `manifest.jsonl`
+(например, `out/2026-10-20-instagram/`; другая папка — `--out`).
 
 ## Для разработчика
 

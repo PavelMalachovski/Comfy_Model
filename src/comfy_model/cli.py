@@ -75,7 +75,8 @@ def _fail(message: str) -> typer.Exit:
 def batch(
     kind: str = typer.Argument(..., help="face | dataset | photo | video"),
     scenes: Path = typer.Argument(..., help="Scene YAML file."),
-    out: Optional[Path] = typer.Option(None, "--out", help="Output dir (default out/<date>-<kind>)."),
+    out: Optional[Path] = typer.Option(
+        None, "--out", help="Output dir (default out/<date>-<scene file name>, e.g. out/2026-10-20-instagram)."),
     ref: Optional[Path] = typer.Option(None, "--ref", help="Reference image (dataset)."),
     lora: Optional[str] = typer.Option(None, "--lora", help="LoRA file name on the pod (photo)."),
     strength: float = typer.Option(0.9, "--strength", help="LoRA strength (photo)."),
@@ -87,7 +88,9 @@ def batch(
     base = _resolve_url(url)
     if base is None:
         raise _fail(NO_POD)
-    out_dir = out or Path("out") / f"{date.today().isoformat()}-{kind}"
+    out_dir = out or Path("out") / f"{date.today().isoformat()}-{scenes.stem}"
+    # Printed first: an interrupted batch resumes only into the same dir (e.g. after midnight).
+    typer.echo(f"output: {out_dir}  (to resume later: --out {out_dir})")
 
     def progress(scene_id: str, done: int, skipped: int, failed: int) -> None:
         typer.echo(f"{scene_id}: {done} done, {skipped} skipped, {failed} failed")
@@ -117,7 +120,9 @@ def batch(
     )
     for name, msg in report.failed:
         typer.echo(f"  failed {name}: {msg}", err=True)
-    if report.failed:
+    if report.aborted:
+        typer.echo(f"stopped: {report.aborted}", err=True)
+    if report.failed or report.aborted:
         raise typer.Exit(1)
 
 

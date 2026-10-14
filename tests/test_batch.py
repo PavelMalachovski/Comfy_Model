@@ -23,8 +23,11 @@ PROFILE = Profile(
 class FakeClient:
     """Duck-typed ComfyClient. ``errors`` maps queue call index -> exception."""
 
-    def __init__(self, errors: dict[int, Exception] | None = None, outputs_per_prompt: int | None = None):
+    def __init__(self, errors: dict[int, Exception] | None = None, outputs_per_prompt: int | None = None,
+                 wait_errors: dict[int, Exception] | None = None):
         self.queued: list[dict] = []
+        self.waits: list[float] = []
+        self.wait_errors = wait_errors or {}
         self.uploads: list[tuple[Path, str | None]] = []
         self.errors = errors or {}
         self.outputs_per_prompt = outputs_per_prompt
@@ -45,6 +48,10 @@ class FakeClient:
         return pid
 
     def wait(self, prompt_id: str, timeout_s: float = 900, poll_s: float = 2) -> dict:
+        idx = len(self.waits)
+        self.waits.append(timeout_s)
+        if idx in self.wait_errors:
+            raise self.wait_errors[idx]
         return {"id": prompt_id}
 
     def outputs(self, entry: dict) -> list[OutputFile]:
@@ -242,8 +249,9 @@ def test_manifest_lines_written(tmp_path):
     lines = manifest(out)
     assert len(lines) == 2
     for n, m in enumerate(lines, start=1):
-        assert set(m) == {"scene_id", "n", "seed", "prompt", "file", "kind"}
+        assert set(m) == {"scene_id", "n", "seed", "prompt", "file", "kind", "tier"}
         assert m["scene_id"] == "desk" and m["n"] == n and m["kind"] == "photo"
+        assert m["tier"] == "instagram"
         assert m["file"] == f"desk_{n:02d}.png"
         assert m["prompt"].startswith("ohwxgreta, ")
         assert (out / m["file"]).exists()
@@ -253,9 +261,52 @@ def test_manifest_lines_written(tmp_path):
     assert len(manifest(out)) == 3
 
 
+def test_manifest_records_scene_tier(tmp_path):
+    out = tmp_path / "o"
+    body = "defaults:\n  tier: fanvue\nscenes:\n  - id: a\n    prompt: lace set\n    count: 1\n"
+    run_batch("photo", write_scenes(tmp_path, body), FakeClient(), PROFILE, out, lora="l")
+    assert [m["tier"] for m in manifest(out)] == ["fanvue"]
+
+
+@pytest.mark.parametrize("kind,expected", [("photo", 900), ("face", 900), ("video", 2700)])
+def test_wait_timeout_per_kind(tmp_path, kind, expected):
+    d = tmp_path / "s"
+    d.mkdir()
+    (d / "img.png").write_bytes(b"pic")
+    body = DESK if kind != "video" else "scenes:\n  - id: clip\n    prompt: she turns\n    image: img.png\n"
+    client = FakeClient()
+    run_batch(kind, write_scenes(d, body), client, PROFILE, tmp_path / "o", lora="l")
+    assert client.waits and set(client.waits) == {expected}
+
+
+TWO_SCENES = DESK + "  - id: cafe\n    prompt: in a cafe\n    count: 2\n"
+
+
+def test_timeout_stops_batch_without_queueing_more(tmp_path):
+    out = tmp_path / "o"
+    client = FakeClient(wait_errors={1: TimeoutError("ComfyUI prompt p1 not finished after 900s")})
+    seen = []
+    report = run_batch("photo", write_scenes(tmp_path, TWO_SCENES), client, PROFILE, out, lora="l",
+                       on_scene=lambda *a: seen.append(a))
+    assert len(client.queued) == 2  # nothing queued after the timed-out prompt
+    assert [p.name for p in report.done] == ["desk_01.png"]
+    assert report.failed == [("desk_02", "ComfyUI prompt p1 not finished after 900s")]
+    assert report.aborted and "still busy" in report.aborted and "re-run" in report.aborted
+    assert seen == [("desk", 1, 0, 1)]
+
+
+def test_timeout_stops_face_batch(tmp_path):
+    body = ("scenes:\n  - id: f1\n    prompt: portrait\n    count: 2\n"
+            "  - id: f2\n    prompt: portrait outdoors\n    count: 2\n")
+    client = FakeClient(wait_errors={0: TimeoutError("not finished")})
+    report = run_batch("face", write_scenes(tmp_path, body), client, PROFILE, tmp_path / "o")
+    assert len(client.queued) == 1
+    assert report.aborted and report.failed[0][0] == "f1_01"
+
+
 def test_report_is_dataclass_of_lists():
     r = BatchReport()
-    assert r.done == [] and r.skipped == [] and r.failed == []
+    assert r.done == [] and r.skipped == [] and r.failed == [] and r.aborted is None
 
 
 # -- CLI ---------------------------------------------------------------------
@@ -310,3 +361,43 @@ def test_cli_batch_no_pod_exits_1(tmp_path, monkeypatch):
     res = CliRunner().invoke(app, ["batch", "face", str(scenes)])
     assert res.exit_code == 1
     assert "no running pod" in res.output and "cm pod up" in res.output
+
+
+def _repo_cwd(tmp_path, monkeypatch):
+    """cwd = tmp_path with the repo's character/ and workflows/ (read relative to cwd)."""
+    monkeypatch.chdir(tmp_path)
+    repo = Path(__file__).resolve().parent.parent
+    for sub in ("character", "workflows"):
+        (tmp_path / sub).symlink_to(repo / sub)
+
+
+class _FixedDate:
+    @staticmethod
+    def today():
+        import datetime
+        return datetime.date(2026, 10, 20)
+
+
+def test_cli_batch_default_out_is_date_and_scene_file(tmp_path, monkeypatch):
+    _repo_cwd(tmp_path, monkeypatch)
+    monkeypatch.setattr(cli_mod, "date", _FixedDate)
+    monkeypatch.setattr(cli_mod, "_make_client", lambda url: FakeClient())
+    scenes = write_scenes(tmp_path, DESK, name="instagram.yaml")
+    res = CliRunner().invoke(app, ["batch", "photo", str(scenes), "--lora", "l.safetensors",
+                                   "--url", "http://pod:8188"])
+    assert res.exit_code == 0, res.output
+    out = Path("out") / "2026-10-20-instagram"
+    assert (tmp_path / out / "desk_01.png").exists()
+    first = res.output.splitlines()[0]
+    assert str(out) in first and "--out" in first  # printed before any work: resumable after midnight
+
+
+def test_cli_batch_timeout_exits_1_with_resume_hint(tmp_path, monkeypatch):
+    client = FakeClient(wait_errors={0: TimeoutError("not finished after 900s")})
+    monkeypatch.setattr(cli_mod, "_make_client", lambda url: client)
+    out = tmp_path / "o"
+    res = CliRunner().invoke(app, ["batch", "photo", str(write_scenes(tmp_path, TWO_SCENES)),
+                                   "--out", str(out), "--lora", "l", "--url", "http://x"])
+    assert res.exit_code == 1
+    assert len(client.queued) == 1
+    assert "still busy" in res.output and "re-run" in res.output
