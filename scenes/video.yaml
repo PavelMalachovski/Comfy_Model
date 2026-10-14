@@ -1,0 +1,51 @@
+# Image-to-video scenes: subtle motion on top of a finished still.
+# NOTE: the `image:` paths below are PLACEHOLDERS (relative to scenes/). Replace them with
+# real photos exported by `cm export` (they must exist in export/ when you run this).
+# Prompts describe ONLY motion; they are used verbatim.
+# Run (needs a running pod, see `cm pod up`):
+#   cm batch video scenes/video.yaml
+defaults:
+  aspect: "9:16"
+  count: 1
+
+scenes:
+  - id: hair-in-wind-dunes
+    image: ../export/dunes-wind.jpg
+    prompt: >-
+      hair and light shirt moving gently in a steady sea breeze, she slowly turns her head
+      toward the camera and smiles slightly, subtle handheld camera sway
+  - id: typing-home-office
+    image: ../export/home-office-typing.jpg
+    prompt: >-
+      she types on the keyboard, eyes moving across the monitors, a quick glance to the
+      camera with a raised eyebrow, screen glow flickers slightly
+  - id: sipping-coffee-cafe
+    image: ../export/cafe-coffee.jpg
+    prompt: >-
+      she lifts the cup, takes a slow sip, lowers it and looks out of the window, steam
+      rising from the coffee, soft natural motion
+  - id: turn-to-camera-old-town
+    image: ../export/old-town-walk.jpg
+    prompt: >-
+      she walks slowly along the street, then stops and turns to the camera with a relaxed
+      smile, coat moves gently, background pedestrians drift softly
+  - id: night-oncall-laptop
+    image: ../export/oncall-night.jpg
+    prompt: >-
+      she rubs her eyes, sips from the mug, and leans toward the laptop, screen light
+      flickering on her face, quiet and slow motion
+  - id: running-river-morning
+    image: ../export/river-run.jpg
+    prompt: >-
+      she jogs forward along the river path, ponytail swinging, steady breathing, mist
+      drifting over the water, camera tracks smoothly alongside
+  - id: beach-sunset-walk
+    image: ../export/beach-sunset.jpg
+    prompt: >-
+      she walks slowly along the waterline, small waves wash over the sand, hair moves in the
+      wind, warm light shimmers on the sea
+  - id: conference-stage-gesture
+    image: ../export/conference-stage.jpg
+    prompt: >-
+      she speaks into the microphone and gestures with one hand toward the screen, nods
+      slightly, stage light shifts softly

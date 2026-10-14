@@ -1,0 +1,88 @@
+# Fanvue (paid) content: elegant, suggestive, light erotica without vulgarity.
+# Lingerie, swimwear and boudoir mood are fine; NO nudity (enforced by cm). Keep poses
+# tasteful, light soft and warm, composition editorial rather than explicit.
+# Run (after LoRA training; adjust the file name to your version):
+#   cm batch photo scenes/fanvue.yaml --lora ohwxgreta_v1.safetensors
+defaults:
+  tier: fanvue
+  aspect: "4:5"
+  count: 4
+
+scenes:
+  - id: black-lace-bedroom-window
+    prompt: >-
+      standing by a bedroom window in an elegant black lace lingerie set, soft backlight
+      through sheer curtains, one hand resting on the frame, calm direct gaze
+  - id: ivory-silk-bed-morning
+    prompt: >-
+      lying on rumpled ivory sheets in an ivory silk lingerie set, one arm above her head,
+      golden morning light, relaxed unhurried expression
+  - id: red-lingerie-armchair
+    prompt: >-
+      sitting in a leather armchair in a deep red lingerie set and a sheer robe, legs
+      crossed, moody warm lamp light, slight smile
+    aspect: "9:16"
+  - id: satin-robe-hotel-suite
+    prompt: >-
+      in a luxury hotel suite wearing a champagne satin robe loosely tied, standing at a
+      tall window with city lights behind, holding a glass of wine
+  - id: garter-stockings-mirror
+    prompt: >-
+      in front of a vintage mirror in black lingerie, a garter belt and sheer stockings,
+      warm lamp glow, looking at her reflection over her shoulder
+    aspect: "9:16"
+  - id: bodysuit-studio-softbox
+    prompt: >-
+      studio shot in a black lace bodysuit, seamless grey backdrop, softbox light, arms
+      relaxed at her sides, editorial boudoir pose
+  - id: white-shirt-only-kitchen
+    prompt: >-
+      leaning on a kitchen counter in an open men's white shirt over a plain lingerie set,
+      messy morning hair, coffee mug in hand, soft sun, playful look
+  - id: laptop-lingerie-desk-night
+    prompt: >-
+      sitting at her desk at night in a black satin camisole and matching shorts, three
+      monitors glowing blue behind her, glasses on, chin resting on one hand, knowing smile
+  - id: sheer-negligee-doorway
+    prompt: >-
+      standing in a bedroom doorway in a long sheer lace negligee over lingerie, backlit by
+      a warm hallway light, silhouette and soft edges
+    aspect: "9:16"
+  - id: velvet-dress-low-back
+    prompt: >-
+      from behind in a floor-length dark velvet dress with a low back, looking over her
+      shoulder, candle-lit dining room, elegant and quiet
+  - id: bikini-infinity-pool
+    prompt: >-
+      at the edge of an infinity pool in a small white bikini, hair wet and slicked back,
+      sea horizon behind, golden hour light
+  - id: swimsuit-sailing-deck
+    prompt: >-
+      on the deck of a sailboat in a plunging black swimsuit and a loose linen shirt, wind in
+      her hair, blue water, bright sun, sunglasses
+    aspect: "9:16"
+  - id: bath-bubbles-candles
+    prompt: >-
+      in a marble bathtub with foam covering her, candles around the tub, one arm resting on
+      the edge, steam in warm low light, calm eyes on the camera
+  - id: lace-bralette-sofa
+    prompt: >-
+      curled on a grey sofa in a lace bralette and high-waisted briefs, soft blanket across
+      her legs, evening lamp light, relaxed unhurried look
+  - id: corset-fireplace
+    prompt: >-
+      kneeling on a rug in front of a fireplace in a dark green corset-style lingerie set,
+      flickering warm firelight on her skin, slow soft expression
+  - id: lingerie-balcony-dusk
+    prompt: >-
+      on a city balcony at dusk in a silk slip and a light cardigan, lights of Vilnius
+      behind, wind lifting the fabric, quiet confident posture
+    aspect: "9:16"
+  - id: stockings-bed-edge
+    prompt: >-
+      sitting on the edge of a bed pulling on a stocking, black lingerie set, side light from
+      a bedside lamp, face turned to the camera
+  - id: sports-set-yoga-evening
+    prompt: >-
+      stretching on a yoga mat in a tight sports bra and leggings, evening sun low through a
+      window, long shadows on the wooden floor, graceful pose

@@ -1,0 +1,88 @@
+# Social / teaser content (Telegram, X, Reddit): more playful and suggestive than
+# Instagram. Lingerie is allowed on this tier; nudity is not (enforced by cm).
+# Run (after LoRA training; adjust the file name to your version):
+#   cm batch photo scenes/social.yaml --lora ohwxgreta_v1.safetensors
+defaults:
+  tier: social
+  aspect: "4:5"
+  count: 4
+
+scenes:
+  - id: desk-late-night-tank
+    prompt: >-
+      late at night at a home desk with three monitors glowing, fitted tank top and soft
+      shorts, bare legs crossed under the chair, laptop keyboard in front, teasing look over
+      her shoulder
+  - id: oncall-bedroom-oversized-shirt
+    prompt: >-
+      sitting on an unmade bed at 3am with a laptop, wearing a big oversized shirt and shorts,
+      alert glowing on the screen, sleepy half smile, warm bedside lamp
+    aspect: "9:16"
+  - id: coffee-window-robe
+    prompt: >-
+      standing by a bright window in a short silk robe loosely tied, holding a coffee mug,
+      morning light, looking out, relaxed pose
+  - id: black-lace-set-mirror
+    prompt: >-
+      standing in front of a tall mirror in a black lace lingerie set, one hand in her hair,
+      bedroom with soft window light, calm confident look
+  - id: white-lingerie-bed-morning
+    prompt: >-
+      lying on her side on white bed sheets in a white cotton lingerie set, propped on one
+      elbow, soft morning light, looking into the camera
+  - id: sheer-bodysuit-lamp
+    prompt: >-
+      standing near a warm floor lamp in a black bodysuit with sheer sleeves, shadows soft on
+      the wall, direct look into the camera
+    aspect: "9:16"
+  - id: red-dress-hotel-evening
+    prompt: >-
+      sitting on the edge of a hotel bed in a fitted red dress with a high slit, heels
+      beside her, city lights through the window, warm evening light
+  - id: bikini-balcony-sea
+    prompt: >-
+      leaning on a sunny balcony railing in a small black bikini, sea view behind,
+      sunglasses on, bright midday light, relaxed pose
+  - id: bikini-beach-towel
+    prompt: >-
+      lying on a towel at a Baltic beach in a pale green bikini, sunglasses, one knee up,
+      sand and dune grass around, bright sun
+  - id: gym-sports-bra-locker
+    prompt: >-
+      in a gym locker room mirror in a sports bra and high-waisted leggings, towel over her
+      shoulder, ponytail, slightly flushed, bright light
+    aspect: "9:16"
+  - id: sweater-only-sofa
+    prompt: >-
+      curled up on a sofa in an oversized knit sweater and soft shorts with
+      bare legs tucked up, laptop pushed aside, warm lamp light, playful smirk
+  - id: shower-towel-steam
+    prompt: >-
+      wrapped in a white bath towel in a steamy bathroom, wet hair combed back, fogged
+      mirror behind, soft warm light, looking at the camera
+  - id: stockings-desk-chair
+    prompt: >-
+      sitting backwards on a desk chair in a black slip and sheer stockings, home office
+      with monitors behind her, glasses on, dry amused look
+  - id: spa-hot-tub-evening
+    prompt: >-
+      relaxing in an outdoor hot tub at dusk in a black swimsuit, shoulders above the
+      water, steam rising, string lights glowing in the background
+    aspect: "9:16"
+  - id: hoodie-sleeve-tease
+    prompt: >-
+      pulling a hoodie off one shoulder, black lace bralette visible beneath, standing in a
+      sunny living room, glasses pushed up on her head, sideways glance
+  - id: night-city-coat-open
+    prompt: >-
+      standing on a night street in an open long coat over a black satin slip dress, wet
+      pavement reflecting lights, serious fashion pose
+    aspect: "9:16"
+  - id: pool-edge-swimsuit
+    prompt: >-
+      sitting on the edge of a hotel pool in a high-cut black swimsuit, feet in the water,
+      sunglasses, bright afternoon sun
+  - id: reading-bed-lamp
+    prompt: >-
+      reading a paperback in bed in a cream camisole and shorts, round glasses, warm bedside
+      lamp, cozy blanket around her legs

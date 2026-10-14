@@ -1,0 +1,125 @@
+# Instagram feed and stories: everyday life of a remote SRE in Vilnius. Swimwear is
+# fine on this tier; no lingerie or underwear, no nudity (enforced by cm).
+# Scene prompts describe only setting, outfit, pose, light and camera; the appearance
+# sentence and style suffix come from character/profile.yaml automatically.
+# 4:5 = feed posts, 9:16 = stories/reels covers.
+# Run (after LoRA training; adjust the file name to your version):
+#   cm batch photo scenes/instagram.yaml --lora ohwxgreta_v1.safetensors
+defaults:
+  tier: instagram
+  aspect: "4:5"
+  count: 4
+
+scenes:
+  - id: home-office-three-monitors
+    prompt: >-
+      sitting at a standing-height desk in a home office with three monitors showing
+      dashboards and graphs, oversized grey hoodie, thin glasses, mechanical keyboard,
+      cold coffee mug, soft daylight from the window, shot from slightly behind her shoulder
+  - id: oncall-3am-coffee
+    prompt: >-
+      on-call at 3am, dark apartment lit only by a laptop screen and a small desk lamp,
+      holding a steaming coffee mug with both hands, tired but amused expression, red alert
+      graph glowing on the screen, hoodie, hair in a messy bun
+    aspect: "9:16"
+  - id: terminal-green-glow
+    prompt: >-
+      close-up of her face in glasses lit by the glow of a terminal window full of logs,
+      reflection of text in the lenses, dim room, focused raised eyebrow
+  - id: server-room-visit
+    prompt: >-
+      standing in a cold data center aisle between server racks with blinking lights,
+      holding a laptop under one arm, black fleece jacket, cool blue light
+    aspect: "9:16"
+  - id: friday-deploy-desk
+    prompt: >-
+      leaning back in a desk chair with her feet up, laptop open on her knees, one hand
+      covering her eyes in mock despair, bright home office, plant on the shelf
+  - id: whiteboard-architecture
+    prompt: >-
+      standing at a whiteboard covered in architecture diagrams, marker in hand, rolled-up
+      shirt sleeves, glancing back at the camera with a dry smile, bright coworking space
+  - id: conference-talk-stage
+    prompt: >-
+      speaking on a small conference stage, headset microphone, fitted dark blazer, slide
+      with a cluster diagram on a large screen behind her, warm stage light, audience
+      silhouettes blurred in front
+    aspect: "9:16"
+  - id: conference-badge-lanyard
+    prompt: >-
+      in a busy conference hall with a lanyard badge, holding a coffee and a tote bag,
+      laughing at someone off-camera, bright atrium light, candid
+  - id: morning-coffee-kitchen
+    prompt: >-
+      standing in a bright minimalist kitchen making pour-over coffee, oversized white
+      t-shirt and soft shorts, hair loose, morning sun on the counter, side view
+  - id: laptop-cafe-vilnius
+    prompt: >-
+      working on a laptop at a small cafe table near a window in Vilnius old town, latte in
+      a ceramic cup, cream knit sweater, glasses, cobblestones visible outside
+  - id: old-town-cobblestone-walk
+    prompt: >-
+      walking down a cobblestone street in Vilnius old town, baroque church facade behind,
+      beige trench coat, scarf, holding a paper coffee cup, overcast soft light
+    aspect: "9:16"
+  - id: old-town-evening-dress
+    prompt: >-
+      standing in an old town archway in the evening, fitted black midi dress, small
+      shoulder bag, warm street lamps glowing behind, relaxed half smile
+  - id: gediminas-hill-view
+    prompt: >-
+      standing on a hill viewpoint above Vilnius with red rooftops behind her, windbreaker
+      jacket, hair blowing, golden late afternoon light
+    aspect: "9:16"
+  - id: neris-river-run
+    prompt: >-
+      running along the Neris river embankment at sunrise, fitted running top and leggings,
+      ponytail, focused expression, mist on the water, side tracking shot
+  - id: gym-mirror-selfie
+    prompt: >-
+      mirror selfie in a modern gym, black sports top and grey leggings, ponytail,
+      smartphone in hand, slightly sweaty, bright fluorescent light, dumbbell rack behind
+  - id: gym-deadlift
+    prompt: >-
+      lifting a barbell off the floor in a gym, chalk on her hands, focused look, sports
+      top and shorts, side view, hard overhead light
+    aspect: "9:16"
+  - id: hiking-forest-trail
+    prompt: >-
+      hiking on a forest trail in Lithuania, rain jacket, hiking boots, small backpack,
+      pausing to look back over her shoulder, soft green light through pine trees
+  - id: palanga-beach-sunset
+    prompt: >-
+      walking barefoot on the sand at Palanga beach at sunset, white one-piece swimsuit
+      with a light linen shirt open over it, Baltic Sea behind, long golden light
+    aspect: "9:16"
+  - id: nida-dunes-wind
+    prompt: >-
+      standing on the great sand dunes of Nida, wide linen trousers and a white top, hair
+      blowing in strong wind, pale sky, wide landscape with the lagoon below
+  - id: baltic-swimsuit-pier
+    prompt: >-
+      sitting at the end of a wooden pier on the Baltic coast, navy two-piece swimsuit,
+      legs dangling over the water, sunglasses pushed up in her hair, bright summer day
+  - id: train-window-europe
+    prompt: >-
+      sitting by the window of a European train, laptop closed on the table, looking out at
+      green countryside, denim jacket, headphones around her neck, soft passing light
+  - id: lisbon-tram-street
+    prompt: >-
+      on a steep tiled street in Lisbon next to a yellow tram, light summer dress and
+      sunglasses, camera bag over one shoulder, hard midday sun and warm colors
+    aspect: "9:16"
+  - id: rooftop-dinner-evening
+    prompt: >-
+      seated at a rooftop restaurant table in the evening, elegant emerald dress, wine glass
+      untouched, city lights beginning to glow behind her, candle light
+  - id: board-game-night
+    prompt: >-
+      at a living room table with friends' hands and a board game spread out, glasses on,
+      holding a card and smirking, warm lamp light, cozy evening
+  - id: airport-gate-laptop
+    prompt: >-
+      sitting on the floor near an airport gate charging socket, laptop on her knees, small
+      cabin bag beside her, hoodie, big window with planes behind
+    aspect: "9:16"

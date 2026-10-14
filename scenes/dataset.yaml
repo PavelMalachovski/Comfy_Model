@@ -1,0 +1,198 @@
+# Dataset edit instructions for LoRA training (FLUX Kontext). Every instruction is used
+# verbatim and starts "Keep the same woman's face and identity, " so Kontext edits the
+# reference photo into a new angle / framing / outfit / setting / light while keeping her.
+# Mix: front / three-quarter / profile; close-up / half body / full body; hoodie+glasses,
+# dress, gym, swimsuit, coat and casual outfits; indoor and outdoor; day and evening.
+# No lingerie here (dataset prompts follow the instagram tier rules).
+# Run with the chosen face reference image (see scenes/face.yaml):
+#   cm batch dataset scenes/dataset.yaml --ref out/<date>-face/face-window-light-1.png
+defaults:
+  tier: instagram
+  aspect: "4:5"
+  count: 1
+
+scenes:
+  - id: front-closeup-neutral
+    prompt: >-
+      Keep the same woman's face and identity, close-up portrait from the front, neutral
+      expression, soft window light, plain wall background.
+  - id: front-closeup-smile
+    prompt: >-
+      Keep the same woman's face and identity, close-up portrait from the front with a
+      small natural smile, soft daylight, blurred cafe behind her.
+  - id: three-quarter-closeup-hoodie
+    prompt: >-
+      Keep the same woman's face and identity, three-quarter view close-up, wearing a grey
+      oversized hoodie, hair loose, bright indoor daylight.
+  - id: profile-closeup-street
+    prompt: >-
+      Keep the same woman's face and identity, side profile close-up, looking away from
+      the camera, outdoors on a calm street, overcast light.
+  - id: profile-closeup-lamp
+    prompt: >-
+      Keep the same woman's face and identity, side profile close-up, warm lamp light from
+      the front, dark room behind, quiet evening mood.
+  - id: front-half-hoodie-glasses
+    prompt: >-
+      Keep the same woman's face and identity, half body shot from the front, wearing an
+      oversized charcoal hoodie and round glasses, sitting at a wooden desk, soft
+      window light.
+  - id: front-half-hoodie-terminal
+    prompt: >-
+      Keep the same woman's face and identity, half body shot from the front, wearing a
+      black hoodie and glasses, a laptop with a dark terminal window in front of
+      her, warm desk lamp.
+  - id: three-quarter-half-hoodie-park
+    prompt: >-
+      Keep the same woman's face and identity, three-quarter half body shot, wearing a
+      beige hoodie and glasses, holding a paper coffee cup, walking in a green city
+      park, daytime.
+  - id: profile-half-hoodie-balcony
+    prompt: >-
+      Keep the same woman's face and identity, half body shot from the side, wearing a
+      grey hoodie and glasses, leaning on a balcony railing, morning light.
+  - id: front-half-dress-evening
+    prompt: >-
+      Keep the same woman's face and identity, half body shot from the front, wearing a
+      simple black evening dress, indoor restaurant with warm candle light, evening.
+  - id: three-quarter-half-dress-street
+    prompt: >-
+      Keep the same woman's face and identity, three-quarter half body shot, wearing a
+      dark green midi dress, old town cobblestone street at dusk, warm street lamps.
+  - id: profile-half-dress-terrace
+    prompt: >-
+      Keep the same woman's face and identity, half body shot from the side, wearing an
+      elegant navy dress, rooftop terrace at sunset, city skyline blurred behind.
+  - id: front-full-dress-hall
+    prompt: >-
+      Keep the same woman's face and identity, full body shot from the front, wearing a
+      long black evening dress and heels, standing in a bright hotel lobby, evening.
+  - id: three-quarter-full-dress-garden
+    prompt: >-
+      Keep the same woman's face and identity, full body shot, three-quarter view, wearing
+      a light summer dress and white sneakers, walking in a garden, afternoon sun.
+  - id: front-full-jeans-hoodie
+    prompt: >-
+      Keep the same woman's face and identity, full body shot from the front, wearing a
+      hoodie, blue jeans and clean white sneakers, standing on a city street,
+      daytime.
+  - id: profile-full-coat-street
+    prompt: >-
+      Keep the same woman's face and identity, full body shot from the side, wearing a
+      long camel coat, scarf and boots, walking down a snowy street, winter
+      daylight.
+  - id: front-half-gym
+    prompt: >-
+      Keep the same woman's face and identity, half body shot from the front, wearing a
+      fitted black sports top, hair in a ponytail, in a bright gym, fluorescent
+      light.
+  - id: three-quarter-full-gym
+    prompt: >-
+      Keep the same woman's face and identity, full body shot, three-quarter view, wearing
+      grey leggings and a sports top, holding a water bottle, gym mirror wall
+      behind, daytime.
+  - id: front-full-running
+    prompt: >-
+      Keep the same woman's face and identity, full body shot from the front, wearing
+      running shorts, a light running jacket and trail shoes, on a riverside path,
+      early morning light.
+  - id: profile-full-running
+    prompt: >-
+      Keep the same woman's face and identity, full body shot from the side, jogging along
+      a river embankment in sportswear, soft morning sun, trees blurred behind.
+  - id: front-half-swimsuit-beach
+    prompt: >-
+      Keep the same woman's face and identity, half body shot from the front, wearing a
+      plain navy one-piece swimsuit, standing on a sandy Baltic beach, bright
+      overcast sky.
+  - id: three-quarter-full-swimsuit-pool
+    prompt: >-
+      Keep the same woman's face and identity, full body shot, three-quarter view, wearing
+      a black two-piece swimsuit and sunglasses on her head, standing by a hotel
+      pool, midday sun.
+  - id: profile-full-swimsuit-dunes
+    prompt: >-
+      Keep the same woman's face and identity, full body shot from the side, wearing a
+      white swimsuit with a light linen shirt over it, walking on a dune path by the
+      sea, golden hour.
+  - id: front-half-shirt-office
+    prompt: >-
+      Keep the same woman's face and identity, half body shot from the front, wearing a
+      white button-up shirt with rolled sleeves, standing in front of a whiteboard
+      with diagrams, office light.
+  - id: three-quarter-half-blazer-stage
+    prompt: >-
+      Keep the same woman's face and identity, three-quarter half body shot, wearing a
+      fitted dark blazer, holding a small clicker remote, a conference stage with a
+      blurred audience behind, stage light.
+  - id: front-closeup-glasses-screens
+    prompt: >-
+      Keep the same woman's face and identity, close-up from the front, wearing glasses
+      with a faint reflection of monitors in the lenses, dim room, cool screen glow.
+  - id: three-quarter-closeup-beanie
+    prompt: >-
+      Keep the same woman's face and identity, three-quarter close-up, wearing a wool
+      beanie and scarf, outdoors in cold winter air, soft daylight, slightly rosy
+      cheeks.
+  - id: profile-half-sweater-cafe
+    prompt: >-
+      Keep the same woman's face and identity, half body shot from the side, wearing a
+      cream knit sweater, holding a cup of coffee, sitting by a cafe window, warm
+      daylight.
+  - id: three-quarter-full-hiking
+    prompt: >-
+      Keep the same woman's face and identity, full body shot, three-quarter view, wearing
+      a rain jacket, hiking trousers and boots, forest trail, soft overcast light,
+      small backpack.
+  - id: front-full-train-platform
+    prompt: >-
+      Keep the same woman's face and identity, full body shot from the front, wearing a
+      denim jacket and sneakers, carrying a small backpack, standing on a European
+      train platform, daytime.
+  - id: front-half-kitchen-morning
+    prompt: >-
+      Keep the same woman's face and identity, half body shot from the front, wearing an
+      oversized sleep t-shirt, making coffee in a bright home kitchen, early morning
+      light.
+  - id: three-quarter-half-sofa
+    prompt: >-
+      Keep the same woman's face and identity, three-quarter half body shot, wearing a
+      soft grey hoodie and leggings, sitting on a sofa with a laptop on her knees,
+      warm lamp light, evening.
+  - id: profile-closeup-glasses
+    prompt: >-
+      Keep the same woman's face and identity, side profile close-up, wearing thin-framed
+      glasses, reading something on a screen, soft cool light.
+  - id: front-closeup-sunglasses
+    prompt: >-
+      Keep the same woman's face and identity, close-up from the front, wearing sunglasses
+      and a light scarf, outdoors in bright sunlight, blurred city behind.
+  - id: three-quarter-full-market
+    prompt: >-
+      Keep the same woman's face and identity, full body shot, three-quarter view, wearing
+      a linen shirt and wide trousers, walking through an outdoor market with
+      flowers, daytime.
+  - id: front-full-shirt-dress-bridge
+    prompt: >-
+      Keep the same woman's face and identity, full body shot from the front, wearing a
+      long white shirt dress and sandals, standing on a stone bridge, bright summer
+      day.
+  - id: profile-half-bike-street
+    prompt: >-
+      Keep the same woman's face and identity, half body shot from the side, wearing a
+      light jacket and jeans, standing next to a city bike, quiet street, late
+      afternoon sun.
+  - id: three-quarter-half-night-city
+    prompt: >-
+      Keep the same woman's face and identity, three-quarter half body shot, wearing a
+      black coat over a dress, night street with neon signs and car lights, wet
+      pavement reflections.
+  - id: front-full-spa-robe
+    prompt: >-
+      Keep the same woman's face and identity, full body shot from the front, wearing a
+      white spa robe, standing in a bright spa corridor, soft even light.
+  - id: front-half-yoga-mat
+    prompt: >-
+      Keep the same woman's face and identity, half body shot from the front, wearing a
+      fitted sports top and leggings, sitting cross-legged on a yoga mat in a sunny
+      living room, morning light.

@@ -1,0 +1,42 @@
+# Face reference portraits: neutral, front-facing headshots under six different
+# light conditions. Pick the best 1-2 as the identity reference for the dataset step.
+# Scene prompts describe only setting/light/camera; the profile appearance sentence
+# and style suffix are added automatically.
+# Run (face generation, before any LoRA exists):
+#   cm batch face scenes/face.yaml
+defaults:
+  tier: instagram
+  aspect: "4:5"
+  count: 4
+
+scenes:
+  - id: face-window-light
+    prompt: >-
+      head-and-shoulders portrait, neutral relaxed expression, looking straight into the
+      camera, soft daylight from a large window on one side, plain light wall behind,
+      plain grey t-shirt, 85mm lens, shallow depth of field
+  - id: face-overcast-outdoor
+    prompt: >-
+      head-and-shoulders portrait, neutral expression, looking at the camera, standing
+      outdoors on a quiet street under an overcast sky, even soft diffused light, dark
+      jacket collar visible, blurred buildings behind, 85mm lens
+  - id: face-warm-lamp
+    prompt: >-
+      close portrait indoors in the evening, neutral calm expression, looking at the
+      camera, warm tungsten lamp light from the side, cozy room softly blurred behind,
+      simple knit sweater
+  - id: face-studio-softbox
+    prompt: >-
+      studio headshot, neutral expression, facing the camera, large softbox light in
+      front and slightly above, seamless pale grey backdrop, hair pulled back,
+      simple black top, sharp focus on the eyes
+  - id: face-golden-hour
+    prompt: >-
+      portrait outdoors at golden hour, neutral soft expression, looking at the camera,
+      low warm sunlight from the side, gentle rim light in the hair, blurred park trees
+      behind, 85mm lens
+  - id: face-office-fluorescent
+    prompt: >-
+      head-and-shoulders portrait in an office, neutral slightly tired expression,
+      looking at the camera, flat cool fluorescent ceiling light, plain office wall and
+      a blurred desk behind, plain shirt, thin-framed glasses
