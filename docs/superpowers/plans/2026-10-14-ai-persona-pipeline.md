@@ -19,7 +19,7 @@
 - Operator-facing docs (`docs/guide/`, `character/bible.md`) are in **Russian**; persona-facing text (captions, prompt text, example posts) in **English**.
 - Scripts may assume CLI/SSH/Docker fluency; no GUI wrappers.
 - Secrets only via `.env` (git-ignored): `RUNPOD_API_KEY`, `RUNPOD_VOLUME_ID`, `HF_TOKEN`. Never committed.
-- Persona name/handle (planner's call, operator may change in `character/profile.yaml`): **Zofia "Zosia" Wrona**, 28, Kraków, SRE; LoRA trigger token **`ohwxzosia`**.
+- Persona name/handle (planner's call, operator may change in `character/profile.yaml`): **Greta Vaitkutė** (chosen by operator: name Greta, Lithuania), 28, Vilnius, SRE; LoRA trigger token **`ohwxgreta`**.
 
 ## Review Focus
 
@@ -135,8 +135,8 @@ def test_profile_text_passes_strictest_tier():
 
 def test_trigger_only_when_requested():
     p = load_profile()
-    assert p.photo_prompt("at desk", use_trigger=True).startswith("ohwxzosia, ")
-    assert "ohwxzosia" not in p.photo_prompt("at desk", use_trigger=False)
+    assert p.photo_prompt("at desk", use_trigger=True).startswith("ohwxgreta, ")
+    assert "ohwxgreta" not in p.photo_prompt("at desk", use_trigger=False)
 
 def test_video_negative_blocks_minors():
     assert "child" in load_profile().video_negative
@@ -144,9 +144,9 @@ def test_video_negative_blocks_minors():
 
 - [ ] **Step 2: Run** → FAIL.
 
-- [ ] **Step 3: Write `character/profile.yaml`.** `name: "Zofia Wrona"`, `trigger: "ohwxzosia"`, `appearance`: one fixed English sentence starting `"28-year-old Polish woman"` (light ash-blonde hair, light grey-blue eyes, high cheekbones, athletic but not muscular build, natural skin texture with faint freckles); `style_suffix`: candid smartphone photo realism (natural light, slight film grain, realistic skin pores, no heavy makeup); `video_negative` includes `child, teen, underage, deformed, extra limbs, blurry`.
+- [ ] **Step 3: Write `character/profile.yaml`.** `name: "Greta Vaitkutė"`, `trigger: "ohwxgreta"`, `appearance`: one fixed English sentence starting `"28-year-old Lithuanian woman"` (light ash-blonde hair, light grey-blue eyes, high cheekbones, athletic but not muscular build, natural skin texture with faint freckles); `style_suffix`: candid smartphone photo realism (natural light, slight film grain, realistic skin pores, no heavy makeup); `video_negative` includes `child, teen, underage, deformed, extra limbs, blurry`.
 
-- [ ] **Step 4: Write `character/bible.md` (Russian).** Sections: Кто она (биография: Kraków, SRE ~5 лет, удалёнка в западной компании, Kubernetes/CI/CD/on-call), Внешность (дублирует profile.yaml + стиль «днём худи и очки, вечером платье»), Характер и голос (умная, саркастичная, nerd, контраст), Как она пишет (английский с лёгкими восточноевропейскими оборотами; 10 примеров постов для Instagram/X/Reddit на английском, IT-юмор), Как она общается на Fanvue (тон, границы), Запреты (из анти-целей спеки дословно: не похожа на реальных людей, только взрослая, пометка ИИ, не утверждает что она реальный человек), Отложено: персонаж №2 (психолог).
+- [ ] **Step 4: Write `character/bible.md` (Russian).** Sections: Кто она (биография: Вильнюс, Литва, SRE ~5 лет, удалёнка в западной компании, Kubernetes/CI/CD/on-call), Внешность (дублирует profile.yaml + стиль «днём худи и очки, вечером платье»), Характер и голос (умная, саркастичная, nerd, контраст), Как она пишет (английский с лёгкими восточноевропейскими оборотами; 10 примеров постов для Instagram/X/Reddit на английском, IT-юмор), Как она общается на Fanvue (тон, границы), Запреты (из анти-целей спеки дословно: не похожа на реальных людей, только взрослая, пометка ИИ, не утверждает что она реальный человек), Отложено: персонаж №2 (психолог).
 
 - [ ] **Step 5: Implement `profile.py`; run tests** → PASS. **Commit** `feat: character bible and prompt profile`.
 
@@ -246,7 +246,7 @@ Workflow graphs (API format, core nodes unless noted):
   - `test_rerun_skips_existing_outputs` — pre-create `desk_01.png`; scene count 2 → only n=2 queued; report.skipped has `desk_01.png`.
   - `test_invalid_file_queues_nothing` — one invalid scene → `SceneError`, fake client `queue` never called.
   - `test_seed_from_scene_is_deterministic` — seed 100, count 3 → seeds 100,101,102 in manifest.
-  - `test_photo_uses_trigger_and_lora` — rendered workflow contains `"ohwxzosia, "` prefix and `lora_name`.
+  - `test_photo_uses_trigger_and_lora` — rendered workflow contains `"ohwxgreta, "` prefix and `lora_name`.
   - `test_photo_requires_lora` — `kind="photo"` with `lora=None` → `ValueError` mentioning `--lora`.
   - `test_dataset_requires_ref`.
   - `test_execution_error_recorded_and_batch_continues`.
@@ -335,7 +335,7 @@ Workflow graphs (API format, core nodes unless noted):
   - `prepare_dataset(src_dir: Path, dest_dir: Path, profile: Profile) -> int` — copies the operator's curated images (whatever remains in `src_dir` after manual deletion) to `dest_dir/img_NNN.png` + `img_NNN.txt` caption = `"{trigger}, {scene prompt from manifest}"`; images without a manifest line get caption `"{trigger}, a photo of a woman"`; returns count; raises `ValueError` if count < 15 or > 60.
   - `render_training_config(profile: Profile, version: int) -> str` — from `training/lora_flux.yaml`: ai-toolkit `sd_trainer`, base `black-forest-labs/FLUX.1-dev`, `is_flux: true`, `quantize: true`, network `lora` rank 16 / alpha 16, `lr: 1e-4`, `steps: 2000`, `save_every: 500`, `resolution: [512, 768, 1024]`, `batch_size: 1`, `trigger_word` = profile.trigger, dataset `/workspace/dataset/<trigger>`, output name `<trigger>_v<version>`, sample prompts = 3 lines from profile.
   - CLI: `cm lora prepare SRC [--to dataset/<trigger>]`; `cm lora train [--version 1]` → rsync dataset + rendered config, ssh: install ai-toolkit at pinned commit into `/workspace/ai-toolkit` if missing, run training under `nohup` with a heartbeat loop touching `/workspace/.cm/busy` every 60 s (so the watchdog does not kill training), on finish copy final `.safetensors` to `/workspace/ComfyUI/models/loras/`; `cm lora status` tails the log.
-- [ ] **Step 1: Write failing tests:** `test_prepare_numbers_and_captions`; `test_prepare_uses_manifest_prompt`; `test_prepare_rejects_too_few`; `test_training_config_values` (parse rendered YAML: trigger `ohwxzosia`, rank 16, steps 2000, lr 1e-4, output name `ohwxzosia_v1`); `test_train_remote_command_has_heartbeat` (built ssh command string contains `/workspace/.cm/busy`).
+- [ ] **Step 1: Write failing tests:** `test_prepare_numbers_and_captions`; `test_prepare_uses_manifest_prompt`; `test_prepare_rejects_too_few`; `test_training_config_values` (parse rendered YAML: trigger `ohwxgreta`, rank 16, steps 2000, lr 1e-4, output name `ohwxgreta_v1`); `test_train_remote_command_has_heartbeat` (built ssh command string contains `/workspace/.cm/busy`).
 - [ ] **Step 2: Run** → FAIL. **Step 3: Implement.** **Step 4: Run** → PASS. **Step 5: Commit** `feat: LoRA dataset prep and remote training`.
 
 ---
@@ -359,7 +359,7 @@ Workflow graphs (API format, core nodes unless noted):
 
 **Interfaces:**
 - Consumes: `pod/versions.env`, `pod/models.yaml`, `workflow.render`, `load_template`, `PLACEHOLDERS`
-- Behavior: in a temp dir clone ComfyUI at `COMFYUI_TAG` + the two Impact repos at pinned commits, install CPU torch + requirements, create **empty placeholder files** for every manifest model and a dummy `ohwxzosia_v1.safetensors` LoRA and a 64×64 input image, start `main.py --cpu --port 18188`, render every template with sample values, `POST /prompt`, require HTTP 200 with empty `node_errors`, then `POST /interrupt` + clear queue, stop server. Prints a per-workflow OK/FAIL table; exit 1 on any FAIL.
+- Behavior: in a temp dir clone ComfyUI at `COMFYUI_TAG` + the two Impact repos at pinned commits, install CPU torch + requirements, create **empty placeholder files** for every manifest model and a dummy `ohwxgreta_v1.safetensors` LoRA and a 64×64 input image, start `main.py --cpu --port 18188`, render every template with sample values, `POST /prompt`, require HTTP 200 with empty `node_errors`, then `POST /interrupt` + clear queue, stop server. Prints a per-workflow OK/FAIL table; exit 1 on any FAIL.
 
 - [ ] **Step 1: Run** `uv run python scripts/validate_workflows.py` → expect FAIL first time only if templates have wrong node names/inputs; fix templates (Task 4 files) until all four print OK.
 - [ ] **Step 2: Run** `uv run pytest` → all PASS.
@@ -377,7 +377,7 @@ Content (Russian, commands copy-pasteable):
 - **01-setup:** RunPod account + top-up ($10 to start), API key, create 100 GB network volume in the EU datacenter from settings, HuggingFace account + accept FLUX.1-dev license + read token, SSH key, `.env` from `.env.example`, `uv sync`, `cm pod up`, open ComfyUI URL, `cm pod down`. Cost table from the spec §7.
 - **02-create-face:** `cm batch face scenes/face.yaml` → choose one face (check: adult-looking, not resembling anyone famous — reverse image search via Google Lens/Yandex), `cm batch dataset scenes/dataset.yaml --ref …` → delete bad ones by hand.
 - **03-train-lora:** `cm lora prepare`, `cm lora train`, `cm lora status`, how to judge samples, retrain with `--version 2`.
-- **04-daily:** the 2–3 h routine from spec §8.7; `cm batch photo scenes/instagram.yaml --lora ohwxzosia_v1.safetensors`, picking, `cm export`, how to add own scenes.
+- **04-daily:** the 2–3 h routine from spec §8.7; `cm batch photo scenes/instagram.yaml --lora ohwxgreta_v1.safetensors`, picking, `cm export`, how to add own scenes.
 - **05-video:** `cm batch video scenes/video.yaml`.
 - **06-launch:** platform checklist — Instagram (creator account, "AI info" label on every post, SFW only), Reddit and X (AI disclosure in profile, read each subreddit's AI rules), Telegram (free teaser channel, link to Fanvue), Fanvue (ID verification as operator, AI-creator labeling, payout to EU bank), legal (EU AI Act labeling, declare income as self-employed per country), content plan from spec §6 table, 3-month target $500+/mo net ≈ $625 gross, weekly metrics to track (followers per platform, Fanvue subs, revenue).
 
