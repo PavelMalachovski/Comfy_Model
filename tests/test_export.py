@@ -106,3 +106,24 @@ def test_cli_export_missing_file_exits_1(tmp_path):
     result = CliRunner().invoke(app, ["export", str(tmp_path / "nope.png"), "--to", str(tmp_path / "o")])
     assert result.exit_code == 1
     assert "nope.png" in result.output
+
+
+@pytest.mark.parametrize("grain", [0, 0.03])
+def test_png_comment_text_not_leaked(tmp_path, grain):
+    info = PngInfo()
+    info.add_text("comment", "LEAK-comment")
+    src = tmp_path / "c.png"
+    Image.new("RGB", (32, 32), (10, 20, 30)).save(src, pnginfo=info)
+    out = export_image(src, tmp_path / "export", grain=grain)
+    assert b"LEAK-comment" not in out.read_bytes()
+    with Image.open(out) as img:
+        assert "comment" not in img.info
+
+
+@pytest.mark.parametrize("grain", [0, 0.03])
+def test_jpeg_com_segment_not_leaked(tmp_path, grain):
+    src = tmp_path / "j.jpg"
+    Image.new("RGB", (32, 32), (10, 20, 30)).save(src, comment=b"LEAK-jpeg")
+    assert b"LEAK-jpeg" in src.read_bytes()
+    out = export_image(src, tmp_path / "export", grain=grain)
+    assert b"LEAK-jpeg" not in out.read_bytes()

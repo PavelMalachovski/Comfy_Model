@@ -49,7 +49,11 @@ def export_image(src: Path, dest_dir: Path, *, grain: float = 0.03, quality: int
 
     out = dest_dir / f"{src.stem}.jpg"
     with Image.open(src) as opened:
-        img = opened.convert("RGB")  # new image: carries no source info/ICC
+        rgb = opened.convert("RGB")
+        # convert() copies im.info (PNG text, JPEG COM comment, ICC), and the JPEG
+        # writer would emit info["comment"]. Rebuild from raw pixels so nothing
+        # from the source survives.
+        img = Image.frombytes("RGB", rgb.size, rgb.tobytes())
     if grain > 0:
         seed = zlib.crc32(src.name.encode("utf-8"))
         noise = _grain_layer(img.size, grain * 255, seed)
