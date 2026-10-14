@@ -208,3 +208,53 @@ def test_manifest_rejects_entry_without_source(tmp_path: Path):
     p.write_text("models:\n  - {file: a.safetensors, dest: vae}\n")
     with pytest.raises(TemplateError, match="a.safetensors"):
         load_manifest(p)
+
+
+# -- model URL check (python -m comfy_model.workflow --check-urls) ---------------
+import httpx  # noqa: E402
+import respx  # noqa: E402
+
+from comfy_model import workflow as wf_mod  # noqa: E402
+from comfy_model.workflow import ModelSpec, check_urls  # noqa: E402
+
+HF = ModelSpec(file="a.safetensors", dest="vae", repo="o/r", path="a.safetensors")
+GH = ModelSpec(file="b.pth", dest="upscale_models", explicit_url="https://github.com/x/y/b.pth")
+GONE = ModelSpec(file="c.pt", dest="vae", repo="o/missing", path="c.pt")
+
+
+@respx.mock
+def test_check_urls_classifies_status():
+    hf = respx.head(HF.url).mock(return_value=httpx.Response(302))
+    respx.head(GH.url).mock(return_value=httpx.Response(200))
+    respx.head(GONE.url).mock(return_value=httpx.Response(404))
+    results = check_urls([HF, GH, GONE], hf_token="hf_tok")
+    assert [(r.spec.file, r.status, r.ok) for r in results] == [
+        ("a.safetensors", 302, True), ("b.pth", 200, True), ("c.pt", 404, False),
+    ]
+    assert hf.calls[0].request.headers["authorization"] == "Bearer hf_tok"
+
+
+@respx.mock
+def test_check_urls_token_only_sent_to_huggingface():
+    gh = respx.head(GH.url).mock(return_value=httpx.Response(200))
+    check_urls([GH], hf_token="hf_tok")
+    assert "authorization" not in gh.calls[0].request.headers
+
+
+@respx.mock
+def test_check_urls_gated_and_network_error():
+    respx.head(HF.url).mock(return_value=httpx.Response(401))
+    respx.head(GH.url).mock(side_effect=httpx.ConnectError("boom"))
+    gated, err = check_urls([HF, GH])
+    assert gated.ok and gated.status == 401 and "gated" in gated.note
+    assert not err.ok and err.status is None and "ConnectError" in err.note
+
+
+def test_check_urls_main_exit_code(monkeypatch, capsys):
+    monkeypatch.setattr(wf_mod, "check_urls", lambda specs, hf_token=None: [
+        wf_mod.UrlCheck(HF, 302, True, ""), wf_mod.UrlCheck(GONE, 404, False, "not found"),
+    ])
+    monkeypatch.setattr(wf_mod, "load_secrets", lambda: {"HF_TOKEN": "hf_SECRET"})
+    assert wf_mod.main(["--check-urls"]) == 1
+    out = capsys.readouterr().out
+    assert "404" in out and "c.pt" in out and "hf_SECRET" not in out

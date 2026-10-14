@@ -11,11 +11,15 @@ from __future__ import annotations
 import copy
 import json
 import re
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+import httpx
 import yaml
+
+from comfy_model.config import load_secrets
 
 KINDS = ("face", "dataset", "photo", "video")
 
@@ -186,3 +190,55 @@ def load_manifest(path: Path = Path("pod/models.yaml")) -> list[ModelSpec]:
     if errors:
         raise TemplateError("\n".join(errors))
     return specs
+
+
+# -- manifest URL check --------------------------------------------------------
+@dataclass(frozen=True)
+class UrlCheck:
+    spec: ModelSpec
+    status: int | None
+    ok: bool
+    note: str
+
+
+def check_urls(specs: list[ModelSpec], hf_token: str | None = None, timeout_s: float = 20) -> list[UrlCheck]:
+    """HEAD every manifest URL (no redirects followed). 2xx/3xx is fine; 401/403
+    counts as reachable-but-gated; anything else (404, network error) fails.
+    ``hf_token`` is sent to huggingface.co only."""
+    results: list[UrlCheck] = []
+    with httpx.Client(timeout=timeout_s, follow_redirects=False) as http:
+        for spec in specs:
+            headers = {}
+            if hf_token and spec.url.startswith("https://huggingface.co/"):
+                headers["Authorization"] = f"Bearer {hf_token}"
+            try:
+                status = http.head(spec.url, headers=headers).status_code
+            except httpx.HTTPError as e:
+                results.append(UrlCheck(spec, None, False, f"{type(e).__name__}: {e}"))
+                continue
+            if status < 400:
+                results.append(UrlCheck(spec, status, True, ""))
+            elif status in (401, 403):
+                results.append(UrlCheck(spec, status, True, "gated: needs HF_TOKEN and accepted model license"))
+            else:
+                results.append(UrlCheck(spec, status, False, "not found" if status == 404 else "error"))
+    return results
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = sys.argv[1:] if argv is None else argv
+    if args != ["--check-urls"]:
+        print("usage: python -m comfy_model.workflow --check-urls", file=sys.stderr)
+        return 2
+    results = check_urls(load_manifest(), hf_token=load_secrets().get("HF_TOKEN") or None)
+    for r in results:
+        mark = "ok  " if r.ok else "FAIL"
+        status = r.status if r.status is not None else "---"
+        print(f"{mark} {status} {r.spec.file}  {r.spec.url}" + (f"  ({r.note})" if r.note else ""))
+    failed = [r for r in results if not r.ok]
+    print(f"{len(results) - len(failed)}/{len(results)} reachable")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

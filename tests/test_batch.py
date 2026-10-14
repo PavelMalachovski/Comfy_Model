@@ -6,10 +6,12 @@ import pytest
 from typer.testing import CliRunner
 
 from comfy_model import cli as cli_mod
+from comfy_model import runpod_pod
 from comfy_model.batch import BatchReport, run_batch
 from comfy_model.cli import app
 from comfy_model.comfy_client import ComfyError, OutputFile
 from comfy_model.profile import Profile
+from comfy_model.runpod_pod import PodInfo
 from comfy_model.scenes import SceneError
 
 PROFILE = Profile(
@@ -289,8 +291,10 @@ def test_cli_batch_url_from_pod_json(tmp_path, monkeypatch):
     monkeypatch.setattr(cli_mod, "_make_client", lambda url: seen.setdefault("url", url) and FakeClient())
     scenes = write_scenes(tmp_path, DESK)
     monkeypatch.chdir(tmp_path)
-    (tmp_path / ".cm").mkdir()
-    (tmp_path / ".cm" / "pod.json").write_text(json.dumps({"comfy_url": "https://abc-8188.proxy.runpod.net"}))
+    # current_pod() checks the pod still exists via the RunPod API
+    monkeypatch.setattr(runpod_pod, "exists", lambda pod_id: pod_id == "abc")
+    runpod_pod.save_state(PodInfo("abc", "203.0.113.7", 40122, "https://abc-8188.proxy.runpod.net"),
+                          tmp_path / ".cm" / "pod.json")
     # profile + workflows are read relative to cwd, so run from the repo content
     repo = Path(__file__).resolve().parent.parent
     for sub in ("character", "workflows"):
