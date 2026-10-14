@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 import shlex
 import shutil
 from pathlib import Path
@@ -17,6 +18,9 @@ IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".webp")
 MANIFEST_NAME = "manifest.jsonl"
 DEFAULT_CAPTION = "a photo of a woman"
 TEMPLATE_PATH = Path("training/lora_flux.yaml")
+# Every scenes/dataset.yaml instruction starts with this Kontext edit phrase; it says
+# nothing about the image, so it is not part of the training caption.
+_KONTEXT_PREFIX = re.compile(r"^keep the same woman's face and identity,\s*", re.IGNORECASE)
 
 REMOTE_DATASET_ROOT = "/workspace/dataset"
 REMOTE_TRAINING_DIR = "/workspace/cm/training"
@@ -32,8 +36,13 @@ SAMPLE_SCENES = (
 )
 
 
+def _caption_text(prompt: str) -> str:
+    """Manifest prompt -> caption body: whitespace collapsed, Kontext prefix dropped."""
+    return _KONTEXT_PREFIX.sub("", " ".join(prompt.split())).strip()
+
+
 def _manifest_prompts(src_dir: Path) -> dict[str, str]:
-    """file name -> scene prompt from the dataset batch manifest (last entry wins)."""
+    """file name -> caption text from the dataset batch manifest (last entry wins)."""
     path = src_dir / MANIFEST_NAME
     out: dict[str, str] = {}
     if not path.is_file():
@@ -41,7 +50,7 @@ def _manifest_prompts(src_dir: Path) -> dict[str, str]:
     for line in path.read_text(encoding="utf-8").splitlines():
         try:
             entry = json.loads(line)
-            out[entry["file"]] = " ".join(str(entry["prompt"]).split())
+            out[entry["file"]] = _caption_text(str(entry["prompt"]))
         except (ValueError, KeyError, TypeError):
             continue  # blank / truncated / foreign line
     return out
@@ -70,7 +79,7 @@ def prepare_dataset(src_dir: Path, dest_dir: Path, profile: Profile) -> int:
     for i, img in enumerate(images, start=1):
         stem = f"img_{i:03d}"
         shutil.copyfile(img, dest_dir / f"{stem}{img.suffix.lower()}")
-        caption = f"{profile.trigger}, {prompts.get(img.name, DEFAULT_CAPTION)}"
+        caption = f"{profile.trigger}, {prompts.get(img.name) or DEFAULT_CAPTION}"
         (dest_dir / f"{stem}.txt").write_text(caption, encoding="utf-8")
     return len(images)
 

@@ -1,4 +1,6 @@
 .env
+.env.*
+!.env.example
 .cm/
 out/
 dataset/
@@ -7,3 +9,4 @@ __pycache__/
 .superpowers/
 *.egg-info/
 .pytest_cache/
+export/

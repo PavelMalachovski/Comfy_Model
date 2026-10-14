@@ -15,8 +15,8 @@ from comfy_model.runpod_pod import PodError, PodInfo
 
 SETTINGS = Settings(
     gpu_type="NVIDIA GeForce RTX 4090", datacenter="EU-RO-1",
-    image="runpod/pytorch:test", volume_gb=100, idle_timeout_min=15,
-    max_runtime_h=4, comfy_port=8188, remote_root="/workspace",
+    image="runpod/pytorch:test", idle_timeout_min=15,
+    max_runtime_h=4, comfy_port=8188,
 )
 SECRET_VALUES = {
     "RUNPOD_API_KEY": "rpa_SECRETKEY_0123456789",

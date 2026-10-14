@@ -17,11 +17,9 @@ class Settings:
     gpu_type: str
     datacenter: str
     image: str
-    volume_gb: int
     idle_timeout_min: int
     max_runtime_h: float
     comfy_port: int
-    remote_root: str
 
 
 def load_settings(path: Path = Path("config/settings.yaml")) -> Settings:

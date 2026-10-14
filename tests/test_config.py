@@ -11,9 +11,19 @@ def test_settings_defaults_load():
     assert s.gpu_type == "NVIDIA GeForce RTX 4090"
     assert s.datacenter == "EU-RO-1"
     assert "cuda12.8" in s.image
-    assert s.volume_gb == 100
     assert s.comfy_port == 8188
-    assert s.remote_root == "/workspace"
+
+
+@pytest.mark.parametrize("key", ["volume_gb", "remote_root"])
+def test_unused_settings_removed(tmp_path: Path, key):
+    # The volume size is chosen in the RunPod console and /workspace is fixed; these
+    # keys were never read, so a stale settings file must say so instead of being ignored.
+    good = Path("config/settings.yaml").read_text()
+    assert key not in good
+    p = tmp_path / "s.yaml"
+    p.write_text(good + f"{key}: 1\n")
+    with pytest.raises(ConfigError, match=key):
+        load_settings(p)
 
 
 def test_settings_missing_key_names_it(tmp_path: Path):

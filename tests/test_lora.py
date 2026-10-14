@@ -55,6 +55,22 @@ def test_prepare_uses_manifest_prompt(tmp_path):
     assert (dest / "img_002.txt").read_text() == "ohwxgreta, a photo of a woman"
 
 
+def test_prepare_strips_kontext_prefix_from_captions(tmp_path):
+    src, dest = tmp_path / "src", tmp_path / "dest"
+    make_images(src, 15)
+    lines = [
+        {"file": "s01_01.png", "prompt": "Keep the same woman's face and identity, close-up portrait\n  from the front."},
+        {"file": "s02_01.png", "prompt": "keep the same woman's face and identity,   side profile"},
+        {"file": "s03_01.png", "prompt": "Keep the same woman's face and identity, "},
+    ]
+    (src / "manifest.jsonl").write_text(
+        "".join(json.dumps({"scene_id": "x", "n": 1, "seed": 1, "kind": "dataset", **e}) + "\n" for e in lines))
+    lora.prepare_dataset(src, dest, PROFILE)
+    assert (dest / "img_001.txt").read_text() == "ohwxgreta, close-up portrait from the front."
+    assert (dest / "img_002.txt").read_text() == "ohwxgreta, side profile"
+    assert (dest / "img_003.txt").read_text() == "ohwxgreta, a photo of a woman"
+
+
 def test_prepare_rejects_too_few(tmp_path):
     src = tmp_path / "src"
     make_images(src, 14)
