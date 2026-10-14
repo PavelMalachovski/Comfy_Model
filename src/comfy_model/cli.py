@@ -10,6 +10,7 @@ import typer
 
 from comfy_model.batch import run_batch
 from comfy_model.comfy_client import ComfyClient, ComfyError
+from comfy_model.export import export_image
 from comfy_model.profile import load_profile
 from comfy_model.scenes import SceneError
 
@@ -93,3 +94,21 @@ def batch(
         typer.echo(f"  failed {name}: {msg}", err=True)
     if report.failed:
         raise typer.Exit(1)
+
+
+@app.command()
+def export(
+    files: list[Path] = typer.Argument(..., help="Images (.png/.jpg/.webp) or videos (.mp4)."),
+    to: Path = typer.Option(Path("export"), "--to", help="Destination directory."),
+    grain: float = typer.Option(0.03, "--grain", help="Film grain strength (0 = none)."),
+) -> None:
+    """Strip metadata, add the AI label and grain; write posting-ready files."""
+    missing = [f for f in files if not f.is_file()]
+    if missing:
+        raise _fail("file not found: " + ", ".join(str(f) for f in missing))
+    for f in files:
+        try:
+            out = export_image(f, to, grain=grain)
+        except (ValueError, OSError) as e:
+            raise _fail(str(e)) from None
+        typer.echo(str(out))
