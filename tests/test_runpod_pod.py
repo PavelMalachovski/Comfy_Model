@@ -284,6 +284,7 @@ def cli_env(tmp_path, monkeypatch, pubkey):
     monkeypatch.setattr(cli_mod, "load_secrets", lambda: Secrets(SECRET_VALUES))
     rem = FakeRemote()
     monkeypatch.setattr(remote, "run", rem)
+    monkeypatch.setattr(remote, "capture", lambda argv, timeout_s: (255, ""))  # never a real ssh
     monkeypatch.setattr(cli_mod, "_sleep", lambda s: None)
     t = [0.0]
 
@@ -601,3 +602,41 @@ def test_up_signal_during_create_mentions_stray_pod(cli_env, monkeypatch, guard_
     assert not isinstance(res.exception, _UnhandledSignal), "no handler installed"
     assert res.exit_code == 1
     assert "cm-comfyui" in res.output
+
+
+# -- `cm pod status`: watchdog log ------------------------------------------------
+def _status_with_log(cli_env, monkeypatch, result):
+    runpod_pod.save_state(PodInfo("pod1", "203.0.113.7", 40122, "https://pod1-8188.proxy.runpod.net"),
+                          cli_env["state"])
+    seen = []
+
+    def capture(argv, timeout_s):
+        seen.append((argv, timeout_s))
+        return result
+
+    monkeypatch.setattr(remote, "capture", capture)
+    return CliRunner().invoke(app, ["pod", "status"]), seen
+
+
+def test_status_shows_watchdog_log_tail(cli_env, monkeypatch):
+    log = "2026-10-20T08:00:00+00:00 watchdog started: idle=900s max_runtime=14400s\n"
+    res, seen = _status_with_log(cli_env, monkeypatch, (0, log))
+    assert res.exit_code == 0, res.output
+    assert "watchdog started" in res.output
+    assert "WARNING" not in res.output
+    (argv, timeout_s), = seen
+    assert "tail -n 5 /workspace/.cm/watchdog.log" in argv[-1]
+    assert "BatchMode=yes" in argv and "ConnectTimeout=5" in argv and timeout_s <= 15
+
+
+def test_status_warns_when_watchdog_log_has_failed(cli_env, monkeypatch):
+    log = "2026-10-20T12:00:00+00:00 runpodctl remove pod pod1 failed: CalledProcessError\n"
+    res, _ = _status_with_log(cli_env, monkeypatch, (0, log))
+    assert res.exit_code == 0, res.output
+    assert "WARNING" in res.output and "cm pod down" in res.output
+
+
+def test_status_unreachable_ssh_is_not_an_error(cli_env, monkeypatch):
+    res, _ = _status_with_log(cli_env, monkeypatch, (255, ""))
+    assert res.exit_code == 0, res.output
+    assert "pod1" in res.output and "watchdog log: unavailable" in res.output

@@ -13,16 +13,20 @@ from comfy_model.runpod_pod import PodInfo
 KNOWN_HOSTS = ".cm/known_hosts"
 
 
-def _ssh_opts() -> list[str]:
+def _ssh_opts(connect_timeout: int = 15) -> list[str]:
     return [
         "-o", "StrictHostKeyChecking=accept-new",
         "-o", f"UserKnownHostsFile={KNOWN_HOSTS}",
-        "-o", "ConnectTimeout=15",
+        "-o", f"ConnectTimeout={connect_timeout}",
     ]
 
 
-def ssh_argv(pod: PodInfo, command: str | None = None) -> list[str]:
-    argv = ["ssh", *_ssh_opts(), "-p", str(pod.ssh_port), f"root@{pod.ssh_host}"]
+def ssh_argv(
+    pod: PodInfo, command: str | None = None, *, connect_timeout: int = 15, batch_mode: bool = False
+) -> list[str]:
+    """``batch_mode``: never prompt (fail instead), for unattended best-effort checks."""
+    opts = _ssh_opts(connect_timeout) + (["-o", "BatchMode=yes"] if batch_mode else [])
+    argv = ["ssh", *opts, "-p", str(pod.ssh_port), f"root@{pod.ssh_host}"]
     if command:
         argv.append(command)
     return argv
@@ -37,6 +41,19 @@ def rsync_argv(pod: PodInfo, local: list[Path], remote_dir: str) -> list[str]:
         *(str(Path(p)) for p in local),
         f"root@{pod.ssh_host}:{remote_dir}",
     ]
+
+
+def capture(argv: list[str], timeout_s: float) -> tuple[int, str]:
+    """Run ``argv`` capturing stdout; ``(rc, stdout)``. A missing binary or a run
+    longer than ``timeout_s`` gives a non-zero rc and empty output, never an exception."""
+    try:
+        r = subprocess.run(argv, capture_output=True, text=True, timeout=timeout_s,
+                           stdin=subprocess.DEVNULL)
+    except subprocess.TimeoutExpired:
+        return 124, ""
+    except OSError:
+        return 127, ""
+    return r.returncode, r.stdout
 
 
 def run(argv: list[str]) -> int:

@@ -44,3 +44,18 @@ def test_run_returns_exit_code():
 def test_run_missing_binary_is_127(capsys):
     assert remote.run(["definitely-not-a-real-binary-xyz"]) == 127
     assert "definitely-not-a-real-binary-xyz" in capsys.readouterr().err
+
+
+def test_ssh_argv_short_timeout_batch_mode():
+    argv = remote.ssh_argv(POD, "true", connect_timeout=5, batch_mode=True)
+    assert "ConnectTimeout=5" in argv and "BatchMode=yes" in argv
+    assert "ConnectTimeout=15" not in argv
+    assert argv[-2:] == ["root@203.0.113.7", "true"]
+
+
+def test_capture_returns_output_and_survives_errors(tmp_path):
+    assert remote.capture(["echo", "hi"], timeout_s=5) == (0, "hi\n")
+    rc, out = remote.capture([str(tmp_path / "missing-binary")], timeout_s=5)
+    assert rc != 0 and out == ""
+    rc, out = remote.capture(["sleep", "5"], timeout_s=0.2)
+    assert rc != 0 and out == ""

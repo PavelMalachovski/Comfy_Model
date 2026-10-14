@@ -163,6 +163,8 @@ WATCHDOG_CHECK = (
     'pid=$(cat /workspace/.cm/watchdog.pid) && kill -0 "$pid" && grep -qa watchdog.py "/proc/$pid/cmdline"'
 )
 SSH_TIMEOUT_S = 180
+WATCHDOG_LOG_CMD = "tail -n 5 /workspace/.cm/watchdog.log 2>/dev/null"
+STATUS_SSH_TIMEOUT_S = 12
 COMFY_TIMEOUT_S = 600
 
 # Indirection so tests can run the polling loops instantly.
@@ -336,6 +338,23 @@ def pod_status() -> None:
             close()
     typer.echo(f"ComfyUI: {pod.comfy_url} ({'up' if up else 'not responding'})")
     typer.echo(f"ssh: root@{pod.ssh_host} -p {pod.ssh_port}")
+    _show_watchdog_log(pod)
+
+
+def _show_watchdog_log(pod: PodInfo) -> None:
+    """Best effort: the last watchdog log lines, warning if a terminate attempt failed."""
+    argv = remote.ssh_argv(pod, WATCHDOG_LOG_CMD, connect_timeout=5, batch_mode=True)
+    rc, out = remote.capture(argv, timeout_s=STATUS_SSH_TIMEOUT_S)
+    lines = [line for line in out.splitlines() if line.strip()]
+    if rc != 0 and not lines:
+        typer.echo("watchdog log: unavailable (ssh did not answer)")
+        return
+    typer.echo("watchdog log (last lines):" if lines else "watchdog log: empty")
+    for line in lines:
+        typer.echo(f"  {line}")
+    if any("failed" in line.lower() for line in lines):
+        typer.echo("WARNING: the watchdog reports a failure (see above); it may not be able to stop "
+                   "the pod — run `cm pod down` when done and check the RunPod console", err=True)
 
 
 @pod_app.command("down")
