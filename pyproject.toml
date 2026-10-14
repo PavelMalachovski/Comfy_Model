@@ -1,0 +1,28 @@
+[project]
+name = "comfy-model"
+version = "0.1.0"
+description = "cm: drive ComfyUI generation on rented RunPod GPUs for a fictional AI persona"
+requires-python = ">=3.11"
+dependencies = [
+    "typer",
+    "httpx",
+    "pyyaml",
+    "pillow",
+    "runpod",
+]
+
+[project.scripts]
+cm = "comfy_model.cli:app"
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "respx",
+]
+
+[build-system]
+requires = ["uv_build>=0.11.32,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

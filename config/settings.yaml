@@ -1,0 +1,8 @@
+gpu_type: "NVIDIA GeForce RTX 4090"
+datacenter: "EU-RO-1"
+image: "runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04"
+volume_gb: 100
+idle_timeout_min: 15
+max_runtime_h: 4
+comfy_port: 8188
+remote_root: "/workspace"
