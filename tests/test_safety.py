@@ -80,3 +80,30 @@ def test_age_spelling_variants_banned_everywhere(text):
 
 def test_every_tier_has_rules():
     assert set(get_args(Tier)) == set(TIER_RULES)
+
+
+@pytest.mark.parametrize("text", [
+    "childlike face", "childish pose", "teenaged look", "teeny girl", "lolitas", "loli-style",
+    "baby face", "baby-faced", "babyface",
+    "17 yrs. old", "16 yrs.old", "age: 16", "aged: 15", "age of 16", "at the age of 17",
+    "sixteen year old", "fifteen-year-old",
+])
+def test_age_stems_and_phrasing_banned_everywhere(text):
+    for tier in TIERS:
+        assert check_prompt(text, tier), (text, tier)
+
+
+@pytest.mark.parametrize("text", [
+    "nakedness", "Naked", "undressed", "undressing", "UNDRESS", "unclothed",
+    "sheer see-through top", "sheer blouse", "see through dress", "see-through", "see_through",
+    "transparent shirt",
+])
+def test_implied_nudity_banned_all_tiers_v1(text):
+    for tier in TIERS:
+        assert check_prompt(text, tier), (text, tier)
+
+
+@pytest.mark.parametrize("text", ["28 yrs. old", "age: 28", "age of 29", "at the age of 28", "aged: 27",
+    "twenty-eight year old", "a tall glass of water"])
+def test_adult_age_phrasing_not_flagged(text):
+    assert check_prompt(text, "instagram") == []

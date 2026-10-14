@@ -24,6 +24,11 @@ def test_trigger_only_when_requested():
     assert "ohwxgreta" not in p.photo_prompt("at desk", use_trigger=False)
 
 
+def test_video_negative_blocks_nudity():
+    terms = {t.strip() for t in load_profile().video_negative.split(",")}
+    assert {"nude", "naked", "topless", "nipples", "see-through"} <= terms
+
+
 def test_video_negative_blocks_minors():
     neg = load_profile().video_negative
     for term in ("child", "teen", "underage", "deformed", "extra limbs", "blurry"):
