@@ -28,8 +28,8 @@
 
    | Файл сцен | Куда | Уровень |
    |---|---|---|
-   | `scenes/instagram.yaml` | Instagram (лента, сторис) | купальники ок, **без белья**, без наготы |
-   | `scenes/social.yaml` | Telegram, X, Reddit | бельё ок, без наготы |
+   | `scenes/instagram.yaml` | Instagram (лента, сторис), Telegram | купальники ок, **без белья**, без наготы |
+   | `scenes/social.yaml` | X, Reddit | бельё ок, без наготы |
    | `scenes/fanvue.yaml` | Fanvue | элегантная лёгкая эротика, **без наготы** |
 
 3. Выключить под: `uv run cm pod down`.
