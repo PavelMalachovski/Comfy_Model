@@ -64,3 +64,16 @@ def test_files_have_header_comment(name):
     text = (SCENES / name).read_text(encoding="utf-8")
     assert text.startswith("#")
     assert "cm " in text.split("\n\n", 1)[0] or "cm " in text[:600]
+
+
+_RISKY = re.compile(
+    r"\b(sheer|see-through|transparent|backlit|silhouette|towel|foam|bubbles|wet)\b", re.I
+)
+
+
+@pytest.mark.parametrize("name", ["social.yaml", "fanvue.yaml"])
+def test_no_implied_nudity_cues(name):
+    # Cues that tend to render as nudity even though the word filter passes them.
+    for s in load_scenes(SCENES / name, "photo"):
+        m = _RISKY.search(s.prompt) or _RISKY.search(s.id.replace("-", " "))
+        assert m is None, f"{name} scene {s.id!r}: risky cue {m.group(0)!r}"

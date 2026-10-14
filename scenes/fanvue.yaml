@@ -11,42 +11,45 @@ defaults:
 scenes:
   - id: black-lace-bedroom-window
     prompt: >-
-      standing by a bedroom window in an elegant black lace lingerie set, soft backlight
-      through sheer curtains, one hand resting on the frame, calm direct gaze
+      standing by a bedroom window in an elegant opaque black lace lingerie set, soft
+      daylight from the front, curtains drawn halfway, one hand resting on the frame, calm
+      direct gaze
   - id: ivory-silk-bed-morning
     prompt: >-
       lying on rumpled ivory sheets in an ivory silk lingerie set, one arm above her head,
       golden morning light, relaxed unhurried expression
   - id: red-lingerie-armchair
     prompt: >-
-      sitting in a leather armchair in a deep red lingerie set and a sheer robe, legs
-      crossed, moody warm lamp light, slight smile
+      sitting in a leather armchair in a deep red lingerie set and a short black robe
+      belted closed, legs crossed, moody warm lamp light, slight smile
     aspect: "9:16"
   - id: satin-robe-hotel-suite
     prompt: >-
-      in a luxury hotel suite wearing a champagne satin robe loosely tied, standing at a
-      tall window with city lights behind, holding a glass of wine
+      in a luxury hotel suite wearing a champagne satin robe belted closed over a black
+      lingerie set, standing at a tall window with city lights behind, holding a glass of
+      wine
   - id: garter-stockings-mirror
     prompt: >-
-      in front of a vintage mirror in black lingerie, a garter belt and sheer stockings,
-      warm lamp glow, looking at her reflection over her shoulder
+      in front of a vintage mirror in an opaque black lingerie set, a garter belt and
+      black stockings, warm lamp glow, looking at her reflection over her shoulder
     aspect: "9:16"
   - id: bodysuit-studio-softbox
     prompt: >-
       studio shot in a black lace bodysuit, seamless grey backdrop, softbox light, arms
       relaxed at her sides, editorial boudoir pose
-  - id: white-shirt-only-kitchen
+  - id: white-shirt-kitchen
     prompt: >-
-      leaning on a kitchen counter in an open men's white shirt over a plain lingerie set,
-      messy morning hair, coffee mug in hand, soft sun, playful look
+      leaning on a kitchen counter in a white men's shirt buttoned halfway over a black
+      bralette and high-waist briefs, messy morning hair, coffee mug in hand, soft sun,
+      playful look
   - id: laptop-lingerie-desk-night
     prompt: >-
       sitting at her desk at night in a black satin camisole and matching shorts, three
       monitors glowing blue behind her, glasses on, chin resting on one hand, knowing smile
-  - id: sheer-negligee-doorway
+  - id: lace-lingerie-doorway
     prompt: >-
-      standing in a bedroom doorway in a long sheer lace negligee over lingerie, backlit by
-      a warm hallway light, silhouette and soft edges
+      standing in a bedroom doorway in an opaque black satin and lace lingerie set, warm
+      front light from the room, soft edges, hand on the door frame
     aspect: "9:16"
   - id: velvet-dress-low-back
     prompt: >-
@@ -54,17 +57,17 @@ scenes:
       shoulder, candle-lit dining room, elegant and quiet
   - id: bikini-infinity-pool
     prompt: >-
-      at the edge of an infinity pool in a small white bikini, hair wet and slicked back,
+      at the edge of an infinity pool in a small coral bikini, dry hair in a loose braid,
       sea horizon behind, golden hour light
   - id: swimsuit-sailing-deck
     prompt: >-
       on the deck of a sailboat in a plunging black swimsuit and a loose linen shirt, wind in
       her hair, blue water, bright sun, sunglasses
     aspect: "9:16"
-  - id: bath-bubbles-candles
+  - id: bathrobe-candles-bedroom
     prompt: >-
-      in a marble bathtub with foam covering her, candles around the tub, one arm resting on
-      the edge, steam in warm low light, calm eyes on the camera
+      sitting on a bed in a cream satin bathrobe belted closed over a cream lingerie set,
+      candles on the nightstand, warm low light, calm eyes on the camera
   - id: lace-bralette-sofa
     prompt: >-
       curled on a grey sofa in a lace bralette and high-waisted briefs, soft blanket across
