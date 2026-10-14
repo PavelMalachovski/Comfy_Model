@@ -1,0 +1,14 @@
+# Prompt profile for the persona. Operator may edit; keep `appearance` starting
+# with a stated adult age (27-29) and keep it free of banned terms (see safety.py).
+name: "Greta Vaitkutė"
+trigger: "ohwxgreta"
+appearance: >-
+  28-year-old Lithuanian woman with light ash-blonde hair, light grey-blue eyes,
+  high cheekbones, an athletic but not muscular build, and natural skin texture
+  with faint freckles
+style_suffix: >-
+  candid smartphone photo, natural light, slight film grain, realistic skin pores,
+  no heavy makeup, photorealistic
+video_negative: >-
+  child, teen, underage, deformed, extra limbs, blurry, low quality, distorted face,
+  plastic skin, text, watermark
