@@ -1,5 +1,5 @@
-# Social / teaser content (Telegram, X, Reddit): more playful and suggestive than
-# Instagram. Lingerie is allowed on this tier; nudity is not (enforced by cm).
+# Social / teaser content (X, Reddit): more playful and suggestive than Instagram.
+# Not for Telegram: the free Telegram channel posts instagram-tier files only. Lingerie is allowed on this tier; nudity is not (enforced by cm).
 # Run (after LoRA training; adjust the file name to your version):
 #   cm batch photo scenes/social.yaml --lora ohwxgreta_v1.safetensors
 defaults:
@@ -77,8 +77,8 @@ scenes:
       sunny living room, glasses pushed up on her head, sideways glance
   - id: night-city-coat-open
     prompt: >-
-      standing on a night street in an open long coat over a black satin slip dress, rain-
-      dry pavement reflecting lights, serious fashion pose
+      standing on a night street in an open long coat over a black satin slip dress, dry
+      pavement reflecting lights, serious fashion pose
     aspect: "9:16"
   - id: pool-edge-swimsuit
     prompt: >-

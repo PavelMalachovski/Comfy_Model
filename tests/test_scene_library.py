@@ -77,3 +77,16 @@ def test_no_implied_nudity_cues(name):
     for s in load_scenes(SCENES / name, "photo"):
         m = _RISKY.search(s.prompt) or _RISKY.search(s.id.replace("-", " "))
         assert m is None, f"{name} scene {s.id!r}: risky cue {m.group(0)!r}"
+
+
+@pytest.mark.parametrize("name", LIBRARY)
+def test_no_hyphen_broken_across_lines(name):
+    # A ">-" folded scalar turns "rain-\n dry" into the garbled token "rain- dry".
+    kind = LIBRARY[name][0]
+    for s in load_scenes(SCENES / name, kind):
+        assert not re.search(r"\w- ", s.prompt), f"{name} scene {s.id!r}: {s.prompt!r}"
+
+
+def test_social_header_does_not_target_telegram():
+    header = (SCENES / "social.yaml").read_text(encoding="utf-8").split("\n\n", 1)[0]
+    assert "(Telegram" not in header and "instagram-tier" in header
