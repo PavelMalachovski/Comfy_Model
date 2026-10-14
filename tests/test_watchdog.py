@@ -105,7 +105,7 @@ def test_run_loop_terminates_idle_after_timeout_with_fake_clock():
         now=lambda: t["now"],
         sleep=sleep,
         busy=lambda: False,
-        terminate=terminated.append,
+        terminate=lambda r: terminated.append(r) or True,
         idle_timeout_s=IDLE,
         max_runtime_s=MAXRT,
         poll_s=30,
@@ -123,7 +123,7 @@ def test_run_loop_busy_defers_idle():
         now=lambda: t["now"],
         sleep=lambda s: t.__setitem__("now", t["now"] + s),
         busy=lambda: t["now"] < 600,
-        terminate=terminated.append,
+        terminate=lambda r: terminated.append(r) or True,
         idle_timeout_s=IDLE,
         max_runtime_s=MAXRT,
         poll_s=30,
@@ -137,3 +137,76 @@ def test_main_without_pod_id_logs_and_exits_nonzero(tmp_path, monkeypatch):
     monkeypatch.setattr(wd, "LOG_FILE", tmp_path / "sub" / "watchdog.log")
     assert wd.main() != 0
     assert "RUNPOD_POD_ID" in (tmp_path / "sub" / "watchdog.log").read_text()
+
+
+def test_run_loop_retries_failed_terminate():
+    t = {"now": 0.0}
+    calls = []
+
+    def terminate(reason):
+        calls.append(reason)
+        return len(calls) >= 2  # first attempt fails
+
+    reason = run_loop(
+        now=lambda: t["now"],
+        sleep=lambda s: t.__setitem__("now", t["now"] + s),
+        busy=lambda: False,
+        terminate=terminate,
+        idle_timeout_s=IDLE,
+        max_runtime_s=MAXRT,
+        poll_s=30,
+    )
+    assert reason == "idle"
+    assert calls == ["idle", "idle"]
+    assert t["now"] == IDLE + 30
+
+
+def test_log_failure_does_not_prevent_terminate(tmp_path, monkeypatch):
+    blocker = tmp_path / "file"
+    blocker.write_text("x")
+    monkeypatch.setattr(wd, "LOG_FILE", blocker / "sub" / "watchdog.log")  # unwritable
+    ran = []
+    monkeypatch.setattr(
+        wd.subprocess, "run", lambda *a, **k: ran.append(a[0]) or type("R", (), {"returncode": 0, "stderr": ""})()
+    )
+    monkeypatch.setenv("RUNPOD_POD_ID", "pod123")
+    monkeypatch.setenv("IDLE_TIMEOUT_MIN", "0.001")
+    monkeypatch.setattr(wd, "comfy_busy", lambda url: False)
+    monkeypatch.setattr(wd, "ssh_busy", lambda: False)
+    monkeypatch.setattr(wd.time, "sleep", lambda s: None)
+    assert wd.main() == 0
+    assert ran == [["runpodctl", "remove", "pod", "pod123"]]
+
+
+def test_remove_pod_failure_modes(tmp_path, monkeypatch):
+    monkeypatch.setattr(wd, "LOG_FILE", tmp_path / "w.log")
+    R = type("R", (), {"returncode": 1, "stderr": "boom"})
+    monkeypatch.setattr(wd.subprocess, "run", lambda *a, **k: R())
+    assert wd.remove_pod("p") is False
+    assert "rc=1" in (tmp_path / "w.log").read_text()
+
+    def missing(*a, **k):
+        raise FileNotFoundError("runpodctl")
+
+    monkeypatch.setattr(wd.subprocess, "run", missing)
+    assert wd.remove_pod("p") is False
+
+    def hang(*a, **k):
+        raise wd.subprocess.TimeoutExpired("runpodctl", 60)
+
+    monkeypatch.setattr(wd.subprocess, "run", hang)
+    assert wd.remove_pod("p") is False
+
+
+def test_invalid_env_falls_back_to_default_and_logs(tmp_path, monkeypatch):
+    monkeypatch.setattr(wd, "LOG_FILE", tmp_path / "w.log")
+    monkeypatch.setenv("IDLE_TIMEOUT_MIN", "")
+    monkeypatch.setenv("MAX_RUNTIME_H", "-3")
+    assert wd._env_positive("IDLE_TIMEOUT_MIN", 15) == 15
+    assert wd._env_positive("MAX_RUNTIME_H", 4) == 4
+    monkeypatch.setenv("IDLE_TIMEOUT_MIN", "abc")
+    assert wd._env_positive("IDLE_TIMEOUT_MIN", 15) == 15
+    monkeypatch.setenv("IDLE_TIMEOUT_MIN", "5")
+    assert wd._env_positive("IDLE_TIMEOUT_MIN", 15) == 5
+    log = (tmp_path / "w.log").read_text()
+    assert "IDLE_TIMEOUT_MIN" in log and "MAX_RUNTIME_H" in log

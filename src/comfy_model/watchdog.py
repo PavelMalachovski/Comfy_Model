@@ -54,7 +54,8 @@ def ssh_busy(
 
 
 def run_loop(now, sleep, busy, terminate, idle_timeout_s, max_runtime_s, poll_s=POLL_S):
-    """Poll until a shutdown decision is made; call terminate(reason) and return it."""
+    """Poll until a shutdown decision is made and terminate(reason) succeeds (returns
+    truthy); a failed terminate is retried on every following poll."""
     started_at = last_busy_at = now()
     while True:
         t = now()
@@ -62,32 +63,72 @@ def run_loop(now, sleep, busy, terminate, idle_timeout_s, max_runtime_s, poll_s=
         if is_busy:
             last_busy_at = t
         reason = decide(t, started_at, last_busy_at, is_busy, idle_timeout_s, max_runtime_s)
-        if reason:
-            terminate(reason)
+        if reason and terminate(reason):
             return reason
+        # No decision yet, or terminate failed: keep polling and retry next time.
         sleep(poll_s)
 
 
 def _log(msg: str) -> None:
-    LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+    """Best-effort log line; never raises (falls back to stderr)."""
     stamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    with LOG_FILE.open("a") as f:
-        f.write(f"{stamp} {msg}\n")
+    line = f"{stamp} {msg}"
+    try:
+        LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+        with LOG_FILE.open("a") as f:
+            f.write(line + "\n")
+    except Exception as e:
+        print(f"{line} (log file unavailable: {e})", file=sys.stderr)
+
+
+def _env_positive(name: str, default: float) -> float:
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    try:
+        val = float(raw)
+        if val > 0 and val == val and val != float("inf"):
+            return val
+    except ValueError:
+        pass
+    _log(f"invalid {name}={raw!r}; using default {default}")
+    return default
+
+
+def remove_pod(pod_id: str, timeout_s: float = 60) -> bool:
+    """Run `runpodctl remove pod`; True only on exit code 0. Never raises."""
+    try:
+        r = subprocess.run(
+            ["runpodctl", "remove", "pod", pod_id],
+            capture_output=True,
+            text=True,
+            timeout=timeout_s,
+        )
+    except (OSError, subprocess.SubprocessError) as e:
+        _log(f"runpodctl remove pod {pod_id} failed: {type(e).__name__}: {e}")
+        return False
+    if r.returncode != 0:
+        _log(
+            f"runpodctl remove pod {pod_id} failed: rc={r.returncode} "
+            f"stderr={(r.stderr or '').strip()[:500]}"
+        )
+        return False
+    return True
 
 
 def main() -> int:
-    idle_s = float(os.environ.get("IDLE_TIMEOUT_MIN", "15")) * 60
-    max_s = float(os.environ.get("MAX_RUNTIME_H", "4")) * 3600
-    url = os.environ.get("COMFY_URL", "http://127.0.0.1:8188")
     pod_id = os.environ.get("RUNPOD_POD_ID")
     if not pod_id:
         _log("RUNPOD_POD_ID not set; watchdog cannot terminate the pod, exiting")
         print("RUNPOD_POD_ID not set", file=sys.stderr)
         return 1
+    idle_s = _env_positive("IDLE_TIMEOUT_MIN", 15) * 60
+    max_s = _env_positive("MAX_RUNTIME_H", 4) * 3600
+    url = os.environ.get("COMFY_URL") or "http://127.0.0.1:8188"
 
-    def terminate(reason: str) -> None:
+    def terminate(reason: str) -> bool:
         _log(f"terminating pod {pod_id}: reason={reason}")
-        subprocess.run(["runpodctl", "remove", "pod", pod_id], check=False)
+        return remove_pod(pod_id)
 
     _log(f"watchdog started: idle={idle_s:.0f}s max_runtime={max_s:.0f}s comfy={url}")
     run_loop(
