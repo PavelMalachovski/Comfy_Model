@@ -37,7 +37,7 @@ training_alive() {
 # FLUX.1-dev is gated on Hugging Face, so HF_TOKEN is the one variable training needs.
 while IFS= read -r -d '' kv; do
     case "$kv" in
-        HF_TOKEN=*) export "${kv?}" ;;
+        HF_TOKEN=*|COMFY_PORT=*) export "${kv?}" ;;
     esac
 done < <(cat /proc/1/environ 2>/dev/null || true)
 # FLUX.1-dev is ~24 GB: keep the Hugging Face cache on the network volume, not the container disk.
@@ -117,6 +117,13 @@ TRIGGER="$2"
 mkdir -p "$STATE_DIR"
 if training_alive; then
     die "a training is already running (pid $(cat "$PIDFILE")); follow it with cm lora status"
+fi
+
+# The resident ComfyUI may still hold Flux in VRAM (24 GB card): ask it to unload
+# so quantized training fits. Best effort. --noproxy: this is a local call.
+if ! curl -fsS --noproxy '*' -m 10 -X POST "http://127.0.0.1:${COMFY_PORT:-8188}/free" \
+        -H 'Content-Type: application/json' -d '{"unload_models":true,"free_memory":true}' >/dev/null; then
+    log "WARNING: could not ask ComfyUI to free VRAM; training may run out of GPU memory"
 fi
 
 touch "$BUSY"   # busy from the very first second, before the supervisor's own heartbeat starts

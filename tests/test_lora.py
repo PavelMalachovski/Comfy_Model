@@ -281,12 +281,16 @@ exit 1
 """
 
 
-def _sim_train(tmp_path, token: str | None = "hf_SIM", fail: bool = False, no_output: bool = False):
+STUB_CURL = '#!/bin/bash\necho "$@" >> "$CM_STUB_CURL_LOG"\n[ -z "$CM_STUB_CURL_FAIL" ]\n'
+
+
+def _sim_train(tmp_path, token: str | None = "hf_SIM", fail: bool = False, no_output: bool = False,
+               curl_fail: bool = False, extra_environ: bytes = b""):
     ws = tmp_path / "ws"
     pod = ws / "cm" / "pod"
     pod.mkdir(parents=True)
     environ = tmp_path / "environ"
-    environ.write_bytes(b"FOO=bar\0" + (f"HF_TOKEN={token}\0".encode() if token else b"") + b"RUNPOD_API_KEY=secret\0")
+    environ.write_bytes(b"FOO=bar\0" + (f"HF_TOKEN={token}\0".encode() if token else b"") + b"RUNPOD_API_KEY=secret\0" + extra_environ)
     text = TRAIN_SCRIPT.read_text().replace("/proc/1/environ", str(environ)).replace("/workspace", str(ws))
     (pod / "train_lora.sh").write_text(text)
     shutil.copy(REPO / "pod" / "versions.env", pod / "versions.env")
@@ -296,10 +300,13 @@ def _sim_train(tmp_path, token: str | None = "hf_SIM", fail: bool = False, no_ou
     (ws / "ComfyUI" / "models").mkdir(parents=True)
     bindir = tmp_path / "bin"
     bindir.mkdir()
-    for name, body in {"git": STUB_GIT, "python3": STUB_PY3, "venv_python": STUB_VENV_PY}.items():
+    for name, body in {"git": STUB_GIT, "python3": STUB_PY3, "venv_python": STUB_VENV_PY, "curl": STUB_CURL}.items():
         (bindir / name).write_text(body)
         (bindir / name).chmod(0o755)
-    env = {"PATH": f"{bindir}:/usr/bin:/bin", "HOME": str(tmp_path), "CM_STUB_VENV_PY": str(bindir / "venv_python"), "CM_TRAIN_GRACE_S": "1"}
+    env = {"PATH": f"{bindir}:/usr/bin:/bin", "HOME": str(tmp_path), "CM_STUB_VENV_PY": str(bindir / "venv_python"), "CM_TRAIN_GRACE_S": "1",
+           "CM_STUB_CURL_LOG": str(tmp_path / "curl.log")}
+    if curl_fail:
+        env["CM_STUB_CURL_FAIL"] = "1"
     if fail:
         env["CM_STUB_FAIL"] = "1"
     if no_output:
@@ -358,3 +365,73 @@ def test_train_script_requires_hf_token(tmp_path):
     assert "HF_TOKEN" in r.stderr and "license" in r.stderr
     assert not (ws / ".cm" / "busy").exists()
     assert not (ws / ".cm" / "train.pid").exists()
+
+
+def test_train_script_frees_comfy_vram_before_training(tmp_path):
+    r, ws = _sim_train(tmp_path)
+    assert r.returncode == 0, r.stdout + r.stderr
+    _wait_done(ws)
+    calls = (tmp_path / "curl.log").read_text().splitlines()
+    free = [c for c in calls if "/free" in c]
+    assert len(free) == 1
+    assert "http://127.0.0.1:8188/free" in free[0]
+    assert "-X POST" in free[0] and "--noproxy *" in free[0]
+    assert '{"unload_models":true,"free_memory":true}' in free[0]
+
+
+def test_train_script_continues_when_free_fails(tmp_path):
+    r, ws = _sim_train(tmp_path, curl_fail=True)
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert "WARNING: could not ask ComfyUI to free VRAM" in r.stdout
+    assert "DONE:" in _wait_done(ws)
+
+
+def test_train_script_free_uses_comfy_port_from_pod_env(tmp_path):
+    # COMFY_PORT is one of the two pod variables the script imports (with HF_TOKEN)
+    r, ws = _sim_train(tmp_path, extra_environ=b"COMFY_PORT=9999\0")
+    _wait_done(ws)
+    assert "127.0.0.1:9999/free" in (tmp_path / "curl.log").read_text()
+
+
+# -- pod age guard ----------------------------------------------------------------------
+def _write_pod_state(cwd: Path, age_min: float, pod_id: str = "abc"):
+    from datetime import datetime, timedelta, timezone
+    created = (datetime.now(timezone.utc) - timedelta(minutes=age_min)).isoformat(timespec="seconds")
+    (cwd / ".cm").mkdir(exist_ok=True)
+    (cwd / ".cm" / "pod.json").write_text(json.dumps(
+        {"id": pod_id, "ssh_host": POD.ssh_host, "ssh_port": POD.ssh_port,
+         "comfy_url": POD.comfy_url, "created_at": created}))
+
+
+def test_cli_train_refuses_old_pod(tmp_path, monkeypatch, fake_remote):
+    _train_cwd(tmp_path, monkeypatch)
+    _write_pod_state(tmp_path, 125)
+    r = CliRunner().invoke(app, ["lora", "train"])
+    assert r.exit_code == 1
+    assert "up 125 min" in r.output and "4 h" in r.output
+    assert "cm pod down && cm pod up" in r.output and "--force" in r.output
+    assert fake_remote == []
+
+
+def test_cli_train_force_overrides_old_pod(tmp_path, monkeypatch, fake_remote):
+    _train_cwd(tmp_path, monkeypatch)
+    _write_pod_state(tmp_path, 125)
+    r = CliRunner().invoke(app, ["lora", "train", "--force"])
+    assert r.exit_code == 0, r.output
+    assert any(a[0] == "ssh" and "train_lora.sh" in a[-1] for a in fake_remote)
+    assert "hard-stops 4 h" in r.output
+
+
+def test_cli_train_young_pod_ok(tmp_path, monkeypatch, fake_remote):
+    _train_cwd(tmp_path, monkeypatch)
+    _write_pod_state(tmp_path, 10)
+    r = CliRunner().invoke(app, ["lora", "train"])
+    assert r.exit_code == 0, r.output
+    assert "hard-stops 4 h" in r.output
+
+
+def test_cli_train_state_for_other_pod_is_ignored(tmp_path, monkeypatch, fake_remote):
+    _train_cwd(tmp_path, monkeypatch)
+    _write_pod_state(tmp_path, 500, pod_id="someone-else")
+    r = CliRunner().invoke(app, ["lora", "train"])
+    assert r.exit_code == 0, r.output

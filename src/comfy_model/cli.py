@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import shlex
 import time
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -322,6 +322,23 @@ app.add_typer(lora_app, name="lora")
 
 LORA_LOCAL_CONFIG_DIR = Path(".cm/training")
 TRAIN_SYNC_PATHS = [Path("pod")]
+# The watchdog's hard cap counts from pod start, so a first training run (~35 GB of
+# downloads + install + 2000 steps, up to ~3 h) must start on a young pod.
+MAX_POD_AGE_MIN = 60
+
+
+def _pod_age_min(pod_id: str) -> float | None:
+    """Minutes since the pod was created, from .cm/pod.json (None if unknown)."""
+    try:
+        data = runpod_pod.load_state()
+        if not data or data.get("id") != pod_id:
+            return None
+        created = datetime.fromisoformat(str(data["created_at"]))
+        if created.tzinfo is None:
+            created = created.replace(tzinfo=timezone.utc)
+        return (datetime.now(timezone.utc) - created).total_seconds() / 60
+    except (PodError, KeyError, ValueError, TypeError):
+        return None
 
 
 @lora_app.command("prepare")
@@ -349,6 +366,7 @@ def _remote_step(argv: list[str], what: str) -> None:
 @lora_app.command("train")
 def lora_train(
     version: int = typer.Option(1, "--version", min=1, help="LoRA version; output is <trigger>_v<N>."),
+    force: bool = typer.Option(False, "--force", help=f"Train even if the pod is older than {MAX_POD_AGE_MIN} min."),
 ) -> None:
     """Upload dataset + config, start ai-toolkit training detached on the pod (~2 h)."""
     try:
@@ -377,6 +395,13 @@ def lora_train(
     if pod is None:
         raise _fail(NO_POD)
 
+    age = _pod_age_min(pod.id)
+    if age is not None and age > MAX_POD_AGE_MIN and not force:
+        raise _fail(
+            f"the pod has been up {age:.0f} min; training needs up to ~3 h and the pod auto-stops "
+            "at 4 h from its start. Run `cm pod down && cm pod up` first (or pass --force)."
+        )
+
     name = lora_mod.run_name(profile, version)
     config_file = LORA_LOCAL_CONFIG_DIR / f"{name}.yaml"
     config_file.parent.mkdir(parents=True, exist_ok=True)
@@ -392,6 +417,7 @@ def lora_train(
     _remote_step(remote.rsync_argv(pod, [config_file], lora_mod.REMOTE_TRAINING_DIR + "/"), "rsync of the training config")
     _remote_step(remote.ssh_argv(pod, lora_mod.train_command(profile.trigger, version)), "starting training")
     typer.echo(f"training {name} started on the pod (about 2 h; the pod stays up while it runs)")
+    typer.echo("note: the pod hard-stops 4 h after its start (watchdog), whatever is running")
     typer.echo("follow progress: cm lora status")
     typer.echo(f"when done the LoRA is /workspace/ComfyUI/models/loras/{name}.safetensors (cm batch photo ... --lora {name}.safetensors)")
 
