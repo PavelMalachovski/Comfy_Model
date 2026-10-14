@@ -210,3 +210,20 @@ def test_invalid_env_falls_back_to_default_and_logs(tmp_path, monkeypatch):
     assert wd._env_positive("IDLE_TIMEOUT_MIN", 15) == 5
     log = (tmp_path / "w.log").read_text()
     assert "IDLE_TIMEOUT_MIN" in log and "MAX_RUNTIME_H" in log
+
+
+def test_ssh_busy_default_checks_both_heartbeats(tmp_path, monkeypatch):
+    import os
+
+    lora, boot = tmp_path / "busy", tmp_path / "busy.bootstrap"
+    monkeypatch.setattr(wd, "BUSY_FILE", lora)
+    monkeypatch.setattr(wd, "BOOTSTRAP_BUSY_FILE", boot)
+    assert ssh_busy(now=1000.0) is False
+    boot.write_text("")
+    os.utime(boot, (950.0, 950.0))
+    assert ssh_busy(now=1000.0) is True  # bootstrap heartbeat counts
+    boot.unlink()
+    lora.write_text("")
+    os.utime(lora, (950.0, 950.0))
+    assert ssh_busy(now=1000.0) is True  # lora-train heartbeat counts
+    assert ssh_busy(now=950.0 + 601) is False

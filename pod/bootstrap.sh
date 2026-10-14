@@ -23,7 +23,8 @@ WATCHDOG_PID="/workspace/.cm/watchdog.pid"
 WATCHDOG_OUT="$STATE_DIR/watchdog.out"
 COMFY_PID="$STATE_DIR/comfyui.pid"
 COMFY_OUT="$STATE_DIR/comfyui.out"
-BUSY_FILE="$STATE_DIR/busy"
+# Own heartbeat file: "$STATE_DIR/busy" belongs to `cm lora train` (the watchdog honours both).
+BOOTSTRAP_BUSY="$STATE_DIR/busy.bootstrap"
 
 log() { printf '[bootstrap] %s\n' "$*"; }
 die() { printf '[bootstrap] ERROR: %s\n' "$*" >&2; exit 1; }
@@ -72,6 +73,12 @@ export COMFY_URL="http://127.0.0.1:${COMFY_PORT}"
 . "$HERE/versions.env"
 : "${COMFYUI_TAG:?}" "${IMPACT_PACK_COMMIT:?}" "${IMPACT_SUBPACK_COMMIT:?}"
 
+# The watchdog terminates the pod with runpodctl: prove that works before relying on it
+# (output discarded: it could echo credentials).
+command -v runpodctl >/dev/null || die "runpodctl missing; the watchdog could not terminate this pod"
+runpodctl get pod "$RUNPOD_POD_ID" >/dev/null 2>&1 \
+    || die "runpodctl cannot reach the RunPod API (unauthorised?); the watchdog could not terminate this pod"
+
 mkdir -p "$STATE_DIR"
 
 # Is the process in pidfile $1 alive and running $2? (Pidfiles live on the
@@ -101,10 +108,11 @@ start_watchdog
 
 # While installing/downloading, ComfyUI is not up yet, so keep the watchdog's
 # heartbeat fresh; the 4 h hard limit still applies. Stopped on exit.
-heartbeat() { while true; do touch "$BUSY_FILE"; sleep 60; done; }
-heartbeat &
+# Detached from our stdout/stderr so a leftover `sleep 60` cannot hold the ssh session open.
+heartbeat() { while true; do touch "$BOOTSTRAP_BUSY"; sleep 60; done; }
+heartbeat >/dev/null 2>&1 </dev/null &
 HEARTBEAT_PID=$!
-stop_heartbeat() { kill "$HEARTBEAT_PID" 2>/dev/null || true; rm -f "$BUSY_FILE"; }
+stop_heartbeat() { kill "$HEARTBEAT_PID" 2>/dev/null || true; rm -f "$BOOTSTRAP_BUSY"; }
 trap stop_heartbeat EXIT
 
 # --- venv ------------------------------------------------------------------------
@@ -177,7 +185,8 @@ else
     log "starting ComfyUI on port $COMFY_PORT"
     (
         cd "$COMFY_DIR"
-        setsid nohup "$VENV/bin/python" main.py --listen 0.0.0.0 --port "$COMFY_PORT" \
+        # Least privilege: ComfyUI runs third-party nodes and is publicly proxied.
+        setsid nohup env -u RUNPOD_API_KEY -u HF_TOKEN "$VENV/bin/python" main.py --listen 0.0.0.0 --port "$COMFY_PORT" \
             >>"$COMFY_OUT" 2>&1 </dev/null &
         echo $! >"$COMFY_PID"
     )

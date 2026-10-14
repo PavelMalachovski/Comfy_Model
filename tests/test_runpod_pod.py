@@ -459,3 +459,32 @@ def test_create_kwargs_match_installed_sdk(fake, pubkey):
     assert set(fake.created[0]) <= set(params)
     for fn in ("get_pod", "terminate_pod"):
         assert callable(getattr(real_sdk, fn))
+
+
+class RaisingRunpod(FakeRunpod):
+    def __init__(self, message):
+        super().__init__()
+        self.api_key = "k"
+        self.message = message
+
+    def get_pod(self, pod_id):
+        raise RuntimeError(self.message)
+
+
+@pytest.mark.parametrize("message", ["Pod not found", "pod does not exist", "No pod with id abc", "NOT FOUND"])
+def test_current_pod_not_found_error_clears_state(monkeypatch, tmp_path, message):
+    monkeypatch.setattr(runpod_pod, "runpod", RaisingRunpod(message))
+    state = tmp_path / "pod.json"
+    runpod_pod.save_state(PodInfo("pod1", "h", 1, "u"), state)
+    assert runpod_pod.exists("pod1") is False
+    assert runpod_pod.current_pod(state) is None
+    assert not state.exists()
+
+
+def test_current_pod_other_error_keeps_state(monkeypatch, tmp_path):
+    monkeypatch.setattr(runpod_pod, "runpod", RaisingRunpod("Something went wrong (500)"))
+    state = tmp_path / "pod.json"
+    runpod_pod.save_state(PodInfo("pod1", "h", 1, "u"), state)
+    with pytest.raises(RuntimeError, match="500"):
+        runpod_pod.current_pod(state)
+    assert state.exists()

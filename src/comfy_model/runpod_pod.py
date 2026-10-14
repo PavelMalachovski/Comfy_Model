@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import time
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
@@ -19,6 +20,7 @@ STATE_PATH = Path(".cm/pod.json")
 PUBKEY_PATH = Path("~/.ssh/id_ed25519.pub")
 POD_NAME = "cm-comfyui"
 CONTAINER_DISK_GB = 20
+_NOT_FOUND_RE = re.compile(r"not found|does not exist|no pod", re.IGNORECASE)
 
 # The runpod SDK module, imported on first use (`import runpod` costs ~2 s, which
 # every `cm` command would otherwise pay). Tests replace this attribute.
@@ -168,8 +170,14 @@ def terminate(pod_id: str) -> None:
 
 
 def exists(pod_id: str) -> bool:
-    """True while RunPod still knows the pod (API errors propagate)."""
-    pod = _api().get_pod(pod_id)
+    """True while RunPod still knows the pod. An API error saying the pod does
+    not exist counts as gone; any other API error propagates."""
+    try:
+        pod = _api().get_pod(pod_id)
+    except Exception as e:
+        if _NOT_FOUND_RE.search(str(e)):
+            return False
+        raise
     return isinstance(pod, dict) and pod.get("desiredStatus") != "TERMINATED"
 
 

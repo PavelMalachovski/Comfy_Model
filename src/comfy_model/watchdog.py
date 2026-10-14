@@ -12,7 +12,8 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-BUSY_FILE = Path("/workspace/.cm/busy")
+BUSY_FILE = Path("/workspace/.cm/busy")  # `cm lora train` heartbeat
+BOOTSTRAP_BUSY_FILE = Path("/workspace/.cm/busy.bootstrap")  # pod/bootstrap.sh heartbeat
 LOG_FILE = Path("/workspace/.cm/watchdog.log")
 POLL_S = 30.0
 
@@ -43,14 +44,20 @@ def comfy_busy(base_url: str) -> bool:
 
 
 def ssh_busy(
-    path: Path = BUSY_FILE, now: float | None = None, max_age_s: float = 600
+    path: Path | None = None, now: float | None = None, max_age_s: float = 600
 ) -> bool:
-    """True if the heartbeat file (written by `cm lora train`) is fresh."""
-    try:
-        mtime = path.stat().st_mtime
-    except OSError:
-        return False
-    return (time.time() if now is None else now) - mtime < max_age_s
+    """True if a heartbeat file is fresh: ``path`` if given, else either the
+    `cm lora train` file or the bootstrap file."""
+    paths = [path] if path is not None else [BUSY_FILE, BOOTSTRAP_BUSY_FILE]
+    t = time.time() if now is None else now
+    for p in paths:
+        try:
+            mtime = p.stat().st_mtime
+        except OSError:
+            continue
+        if t - mtime < max_age_s:
+            return True
+    return False
 
 
 def run_loop(now, sleep, busy, terminate, idle_timeout_s, max_runtime_s, poll_s=POLL_S):
