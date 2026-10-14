@@ -182,10 +182,23 @@ def exists(pod_id: str) -> bool:
 
 
 # -- local state ----------------------------------------------------------------
+def _previous_created_at(pod_id: str, state: Path) -> str | None:
+    try:
+        old = json.loads(state.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    if isinstance(old, dict) and old.get("id") == pod_id and isinstance(old.get("created_at"), str):
+        return old["created_at"]
+    return None
+
+
 def save_state(pod: PodInfo, state: Path = STATE_PATH) -> None:
+    """Write ``pod`` to the state file. ``created_at`` (read by the pod-age guard of
+    ``cm lora train``) is kept when the file already tracks the same pod."""
     state = Path(state)
     state.parent.mkdir(parents=True, exist_ok=True)
-    data = {**asdict(pod), "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+    created = _previous_created_at(pod.id, state) or datetime.now(timezone.utc).isoformat(timespec="seconds")
+    data = {**asdict(pod), "created_at": created}
     tmp = state.with_name(f".{state.name}.tmp")
     tmp.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     os.replace(tmp, state)

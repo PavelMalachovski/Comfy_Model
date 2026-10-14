@@ -2,10 +2,12 @@
 from __future__ import annotations
 
 import shlex
+import signal
 import time
+from contextlib import contextmanager
 from datetime import date, datetime, timezone
 from pathlib import Path
-from typing import Optional
+from typing import Iterator, Optional
 
 import typer
 
@@ -172,6 +174,46 @@ class _UpError(RuntimeError):
     pass
 
 
+STRAY_POD_HINT = f"check the RunPod console for a stray pod named {runpod_pod.POD_NAME}"
+
+
+def _echo_err(message: str) -> None:
+    """stderr echo that cannot abort a teardown (the terminal may already be gone)."""
+    try:
+        typer.echo(message, err=True)
+    except OSError:
+        pass
+
+
+@contextmanager
+def _signals_interrupt() -> Iterator[None]:
+    """Turn SIGHUP (closed terminal / dropped ssh) and SIGTERM into KeyboardInterrupt,
+    so `cm pod up` still reaches its teardown instead of dying with a billing pod.
+    Only the first signal interrupts; later ones are ignored while tearing down."""
+    fired: list[int] = []
+
+    def handler(signum: int, frame: object) -> None:
+        if fired:
+            return
+        fired.append(signum)
+        raise KeyboardInterrupt(f"received {signal.Signals(signum).name}")
+
+    previous = {}
+    for name in ("SIGHUP", "SIGTERM"):
+        sig = getattr(signal, name, None)
+        if sig is None:
+            continue
+        try:
+            previous[sig] = signal.signal(sig, handler)
+        except ValueError:  # not the main thread: nothing to install
+            pass
+    try:
+        yield
+    finally:
+        for sig, old in previous.items():
+            signal.signal(sig, old)
+
+
 def _clear_known_hosts() -> None:
     Path(remote.KNOWN_HOSTS).unlink(missing_ok=True)
 
@@ -228,13 +270,13 @@ def _teardown(pod_id: str, secrets: Secrets) -> None:
     try:
         runpod_pod.terminate(pod_id)
     except Exception as e:
-        typer.echo(_redact(
+        _echo_err(_redact(
             f"FAILED to terminate pod {pod_id} ({type(e).__name__}: {e}); it may still be billing — "
-            "run `cm pod down` or terminate it in the RunPod console", secrets), err=True)
+            "run `cm pod down` or terminate it in the RunPod console", secrets))
         return
     runpod_pod.clear_state()
     _clear_known_hosts()
-    typer.echo(f"terminated pod {pod_id}", err=True)
+    _echo_err(f"terminated pod {pod_id}")
 
 
 @pod_app.command("up")
@@ -252,21 +294,23 @@ def pod_up() -> None:
     if existing:
         raise _fail(f"pod {existing.id} already running: {existing.comfy_url} (use it, or `cm pod down`)")
 
-    try:
-        pod_id = runpod_pod.create(settings, secrets)
-    except ConfigError as e:
-        raise _fail(str(e)) from None
-    except Exception as e:
-        raise _fail(_redact(f"pod creation failed: {type(e).__name__}: {e}", secrets)) from None
-    typer.echo(f"created pod {pod_id}; waiting for it to start ...")
+    with _signals_interrupt():
+        try:
+            pod_id = runpod_pod.create(settings, secrets)
+        except ConfigError as e:
+            raise _fail(str(e)) from None
+        except (Exception, KeyboardInterrupt) as e:
+            _echo_err(_redact(f"pod creation failed: {type(e).__name__}: {e}; {STRAY_POD_HINT}", secrets))
+            raise typer.Exit(1) from None
 
-    try:
-        info = _provision(pod_id, settings.comfy_port)
-    except (Exception, KeyboardInterrupt) as e:
-        msg = str(e) if isinstance(e, _UpError) else f"{type(e).__name__}: {e}"
-        typer.echo(_redact(f"error: {msg}", secrets), err=True)
-        _teardown(pod_id, secrets)
-        raise typer.Exit(1)
+        try:
+            typer.echo(f"created pod {pod_id}; waiting for it to start ...")
+            info = _provision(pod_id, settings.comfy_port)
+        except (Exception, KeyboardInterrupt) as e:
+            msg = str(e) if isinstance(e, _UpError) else f"{type(e).__name__}: {e}"
+            _echo_err(_redact(f"error: {msg}", secrets))
+            _teardown(pod_id, secrets)
+            raise typer.Exit(1) from None
 
     runpod_pod.save_state(info)
     typer.echo(f"ComfyUI: {info.comfy_url}")

@@ -1,5 +1,7 @@
 import json
 import logging
+import os
+import signal
 from pathlib import Path
 
 import pytest
@@ -488,3 +490,114 @@ def test_current_pod_other_error_keeps_state(monkeypatch, tmp_path):
     with pytest.raises(RuntimeError, match="500"):
         runpod_pod.current_pod(state)
     assert state.exists()
+
+
+def test_save_state_keeps_created_at_for_same_pod(tmp_path):
+    # `cm pod up` saves twice (after wait_ready and at the end); the pod-age guard of
+    # `cm lora train` must see the first stamp, not the time bootstrap finished.
+    state = tmp_path / "pod.json"
+    info = PodInfo("pod1", "203.0.113.7", 40122, "u")
+    runpod_pod.save_state(info, state)
+    data = json.loads(state.read_text())
+    data["created_at"] = "2026-10-14T08:00:00+00:00"
+    state.write_text(json.dumps(data))
+    runpod_pod.save_state(info, state)
+    assert json.loads(state.read_text())["created_at"] == "2026-10-14T08:00:00+00:00"
+
+
+def test_save_state_new_pod_gets_new_created_at(tmp_path):
+    state = tmp_path / "pod.json"
+    runpod_pod.save_state(PodInfo("old", "h", 1, "u"), state)
+    data = json.loads(state.read_text())
+    data["created_at"] = "2026-10-14T08:00:00+00:00"
+    state.write_text(json.dumps(data))
+    runpod_pod.save_state(PodInfo("new", "h", 1, "u"), state)
+    data = json.loads(state.read_text())
+    assert data["id"] == "new" and data["created_at"] != "2026-10-14T08:00:00+00:00"
+
+
+def test_save_state_over_corrupt_file_writes_fresh(tmp_path):
+    state = tmp_path / "pod.json"
+    state.write_text("{not json")
+    runpod_pod.save_state(PodInfo("pod1", "h", 1, "u"), state)
+    assert json.loads(state.read_text())["id"] == "pod1"
+
+
+# -- signals during `cm pod up` (closed terminal / kill) ----------------------
+
+class _UnhandledSignal(BaseException):
+    """Raised by the test's own handler: `cm pod up` did not install one."""
+
+
+@pytest.fixture
+def guard_signals():
+    def unhandled(signum, frame):
+        raise _UnhandledSignal(signum)
+
+    saved = {s: signal.signal(s, unhandled) for s in (signal.SIGHUP, signal.SIGTERM)}
+    yield unhandled
+    for s, h in saved.items():
+        signal.signal(s, h)
+
+
+@pytest.mark.parametrize("sig", [signal.SIGHUP, signal.SIGTERM])
+def test_up_signal_during_provisioning_terminates_pod(cli_env, monkeypatch, guard_signals, sig):
+    def killed(pod_id, **kw):
+        os.kill(os.getpid(), sig)
+        raise AssertionError("signal did not interrupt")
+
+    monkeypatch.setattr(runpod_pod, "wait_ready", killed)
+    res = CliRunner().invoke(app, ["pod", "up"])
+    assert not isinstance(res.exception, _UnhandledSignal), "no handler installed"
+    assert res.exit_code == 1
+    assert cli_env["runpod"].terminated == ["pod1"]
+    assert not cli_env["state"].exists()
+    assert sig.name in res.output
+    # handlers restored after the command
+    assert signal.getsignal(signal.SIGHUP) is guard_signals
+    assert signal.getsignal(signal.SIGTERM) is guard_signals
+
+
+def test_up_signal_during_rsync_terminates_pod(cli_env, monkeypatch, guard_signals):
+    rem = cli_env["remote"]
+
+    def run(argv):
+        if argv[0] == "rsync":
+            os.kill(os.getpid(), signal.SIGHUP)
+        return rem(argv)
+
+    monkeypatch.setattr(remote, "run", run)
+    res = CliRunner().invoke(app, ["pod", "up"])
+    assert not isinstance(res.exception, _UnhandledSignal), "no handler installed"
+    assert res.exit_code == 1
+    assert cli_env["runpod"].terminated == ["pod1"]
+
+
+def test_up_success_restores_signal_handlers(cli_env, guard_signals):
+    res = CliRunner().invoke(app, ["pod", "up"])
+    assert res.exit_code == 0, res.output
+    assert signal.getsignal(signal.SIGHUP) is guard_signals
+    assert signal.getsignal(signal.SIGTERM) is guard_signals
+
+
+def test_up_create_failure_mentions_stray_pod(cli_env, monkeypatch):
+    def boom(**kw):
+        raise RuntimeError("504 gateway timeout")
+
+    monkeypatch.setattr(cli_env["runpod"], "create_pod", boom)
+    res = CliRunner().invoke(app, ["pod", "up"])
+    assert res.exit_code == 1
+    assert "pod creation failed" in res.output
+    assert "RunPod console" in res.output and "cm-comfyui" in res.output
+
+
+def test_up_signal_during_create_mentions_stray_pod(cli_env, monkeypatch, guard_signals):
+    def killed(**kw):
+        os.kill(os.getpid(), signal.SIGTERM)
+        raise AssertionError("signal did not interrupt")
+
+    monkeypatch.setattr(cli_env["runpod"], "create_pod", killed)
+    res = CliRunner().invoke(app, ["pod", "up"])
+    assert not isinstance(res.exception, _UnhandledSignal), "no handler installed"
+    assert res.exit_code == 1
+    assert "cm-comfyui" in res.output
