@@ -33,7 +33,7 @@ scenes:
   - id: leather-gloves-close
     prompt: "close-up of her pulling on black leather gloves, cold stare at the camera, dark background"
   - id: leather-trench-street
-    prompt: "walking toward the camera on a wet-free night street, belted black leather trench coat, knee-high boots, city lights"
+    prompt: "walking toward the camera on a dry night street, belted black leather trench coat, knee-high boots, city lights"
   - id: marble-staircase-red-gown
     aspect: "9:16"
     prompt: "descending a marble staircase in a long red evening gown, hand on the railing, grand hotel lobby"
@@ -56,7 +56,7 @@ scenes:
   - id: art-gallery
     prompt: "standing in a modern art gallery in front of a large abstract painting, black blazer, arms crossed"
   - id: spa-robe-lounge
-    prompt: "relaxing in a spa lounge in a thick white robe belted closed, cucumber water, calm expression"
+    prompt: "relaxing in a spa lounge in a white linen kaftan over a black one-piece swimsuit, cucumber water, calm expression"
   - id: gym-power-pose
     prompt: "in a modern gym, black sports top and leggings, standing with hands on hips, mirror wall, bright light"
   - id: winter-memory-siberia

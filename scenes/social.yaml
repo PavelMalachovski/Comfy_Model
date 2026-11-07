@@ -31,7 +31,7 @@ scenes:
   - id: heels-stairs-pov
     prompt: "standing at the top of marble stairs in black stiletto heels and a fitted black dress, camera at the bottom of the stairs looking up"
   - id: black-lingerie-velvet-chair
-    prompt: "sitting on a velvet chair in an opaque black lace lingerie set and stockings, black heels, dim warm light"
+    prompt: "sitting on a velvet chair in an opaque black satin lingerie set with fully lined cups and stockings, black heels, dim warm light"
   - id: lingerie-under-trench
     aspect: "9:16"
     prompt: "black leather trench coat open over an opaque black lingerie set, standing in a hotel corridor, heels"

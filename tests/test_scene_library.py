@@ -81,11 +81,11 @@ def test_files_have_header_comment(name):
 
 
 _RISKY = re.compile(
-    r"\b(sheer|see-through|transparent|backlit|silhouette|towel|foam|bubbles|wet)\b", re.I
+    r"\b(sheer|see-through|transparent|backlit|silhouette|towel|foam|bubbles|wet|lace|slip)\b", re.I
 )
 
 
-@pytest.mark.parametrize("name", ["social.yaml", "fanvue.yaml"])
+@pytest.mark.parametrize("name", ["instagram.yaml", "social.yaml", "fanvue.yaml"])
 def test_no_implied_nudity_cues(name):
     # Cues that tend to render as nudity even though the word filter passes them.
     for s in load_scenes(SCENES / name, "photo"):
@@ -109,3 +109,11 @@ def test_social_header_mentions_telegram_paid():
 def test_headers_use_roxana_lora():
     for name in ("instagram.yaml", "social.yaml", "fanvue.yaml"):
         assert "--lora ohwxroxana_v1.safetensors" in (SCENES / name).read_text(encoding="utf-8")
+
+
+@pytest.mark.parametrize("name", ["instagram.yaml", "social.yaml", "fanvue.yaml"])
+def test_robes_have_stated_underlayer(name):
+    # A robe with nothing stated under it tends to render open over bare skin.
+    for s in load_scenes(SCENES / name, "photo"):
+        if re.search(r"\brobes?\b", s.prompt, re.I):
+            assert re.search(r"\brobe\b[^.]*\bover\b", s.prompt, re.I), f"{name} scene {s.id!r}"

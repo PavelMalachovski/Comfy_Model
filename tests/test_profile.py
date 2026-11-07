@@ -30,7 +30,7 @@ def test_video_negative_blocks_nudity():
 
 def test_video_negative_blocks_minors():
     neg = load_profile().video_negative
-    for term in ("child", "teen", "underage", "deformed", "extra limbs", "blurry"):
+    for term in ("child", "teen", "underage", "deformed", "extra limbs", "blurry", "upskirt", "underwear"):
         assert term in neg
 
 
@@ -82,8 +82,9 @@ def test_non_string_value_rejected(tmp_path: Path):
 
 
 BIBLE = Path("character/bible.md")
-POST_TIERS = {"Instagram": "instagram", "X": "social", "Reddit": "social", "Telegram": "social"}
-MIN_POSTS = {"Instagram": 5, "X": 3, "Reddit": 2, "Telegram": 2}
+POST_TIERS = {"Instagram": "instagram", "X": "social", "Reddit": "social",
+              "Telegram (бесплатный)": "instagram", "Telegram (платный)": "social"}
+MIN_POSTS = {"Instagram": 5, "X": 3, "Reddit": 2, "Telegram (бесплатный)": 2, "Telegram (платный)": 2}
 
 
 def _posts_by_platform() -> dict[str, list[str]]:

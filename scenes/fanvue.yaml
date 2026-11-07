@@ -17,7 +17,7 @@ scenes:
   - id: hotel-suite-robe-lingerie
     prompt: "short black satin robe belted closed over an opaque black lingerie set, standing by a hotel suite window at night"
   - id: corset-fireplace
-    prompt: "black lace corset and opaque black briefs, sitting by a fireplace, knee-high boots, warm firelight on her face"
+    prompt: "black satin corset and opaque black briefs, sitting by a fireplace, knee-high boots, warm firelight on her face"
   - id: throne-red-lingerie
     aspect: "9:16"
     prompt: "seated on a velvet throne in an opaque red lingerie set and black stockings, legs crossed, dramatic light"
@@ -32,6 +32,6 @@ scenes:
     prompt: "sitting in a leather armchair in an opaque black bodysuit, thigh-high boots, riding crop across her lap"
   - id: silk-sheets-morning
     aspect: "9:16"
-    prompt: "sitting up in bed in an opaque black silk slip, morning light through curtains, coffee cup"
+    prompt: "sitting up in bed in black satin pajamas, morning light through curtains, coffee cup"
   - id: balcony-night-lingerie-coat
     prompt: "long black coat open over an opaque black lingerie set, balcony at night, skyline lights"

@@ -70,7 +70,12 @@
 > Your Mistress in latex, straight from Dubai. Tell me why you deserve to look.
 > Be honest: how long would you last as my slave?
 
-### Telegram
+### Telegram (бесплатный)
+
+> Today's order: stand up straight and stop apologizing. I'm watching.
+> Dubai is hot today. My mood is not.
+
+### Telegram (платный)
 
 > New set tonight: black latex on the penthouse terrace. Only for those who earned it.
 > Daily task: no complaining for 24 hours. Report to me tomorrow.

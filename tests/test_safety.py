@@ -111,7 +111,11 @@ def test_adult_age_phrasing_not_flagged(text):
 
 @pytest.mark.parametrize("text", ["black latex catsuit", "PVC dress", "vinyl gloves", "rubber outfit",
     "foot worship", "bare feet close-up", "soles to the camera", "toes", "slave kneeling", "mistress",
-    "dominatrix", "femdom", "fetish", "bdsm", "riding crop", "whip", "collar and leash", "stockings", "fishnets"])
+    "dominatrix", "femdom", "fetish", "bdsm", "riding crop", "whip", "collar and leash", "stockings", "fishnets",
+    "barefoot close-up", "pedicure close-up", "bondage", "handcuffs", "harness", "ball gag", "chains",
+    "spanking paddle", "submissive", "domme", "boot worship", "goddess worship", "humiliation", "trampling",
+    "human footstool", "chastity cage", "findom", "paypig", "leather catsuit", "pantyhose", "nylons",
+    "hosiery", "on his knees before her", "leather collar", "spiked collar"])
 def test_fetish_cues_banned_on_instagram_only(text):
     assert check_prompt(text, "instagram")
     assert check_prompt(text, "social") == []
@@ -119,6 +123,9 @@ def test_fetish_cues_banned_on_instagram_only(text):
 
 
 @pytest.mark.parametrize("text", ["leather trench coat", "knee-high leather boots", "red-soled heels",
-    "black satin evening gown", "tailored power suit", "sitting on a velvet throne-like armchair"])
+    "black satin evening gown", "tailored power suit", "sitting on a velvet throne-like armchair",
+    "coat with a fur collar", "open collar white shirt", "pointed-toe pumps", "dressed head to toe in black",
+    "standing at the foot of the stairs", "six-foot-tall doorway", "vinyl record player", "rubber plant in the corner",
+    "red soles of her heels", "thin gold chain necklace"])
 def test_instagram_allows_power_dressing(text):
     assert check_prompt(text, "instagram") == []

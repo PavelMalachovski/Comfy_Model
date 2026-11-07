@@ -3,7 +3,7 @@
 Rules are word-boundary regexes over *normalized* text (lowercase, ``-``/``_``
 turned into spaces, whitespace collapsed), so "School-Girl", "SCHOOL_GIRL" and
 "school  girl" are all the same term. Tiers: ``instagram`` (SFW showcase: no
-lingerie, no fetish cues), ``social`` (X, Reddit, Telegram) and ``fanvue``. Rules are keyed by tier; to relax a tier
+lingerie, no fetish cues), ``social`` (X, Reddit, paid Telegram) and ``fanvue``. Rules are keyed by tier; to relax a tier
 later (e.g. explicit Fanvue) edit its entry in ``TIER_RULES``.
 """
 from __future__ import annotations
@@ -81,10 +81,16 @@ _LIKENESS = (
 _FETISH = (
     "fetish",
     _words(
-        r"latex", r"pvc", r"vinyl", r"rubber", r"foot\s?worship", r"feet", r"foot",
-        r"soles?", r"toes?", r"slaves?", r"mistress\w*", r"dominatrix", r"femdom",
-        r"fetish\w*", r"bdsm", r"riding\s?crop", r"whips?", r"collars?", r"leash\w*",
-        r"stockings?", r"fishnets?", r"kneel\w*",
+        r"latex", r"pvc", r"vinyl(?!\srecords?)", r"rubber(?!\splants?)",
+        r"foot\s?worship", r"feet", r"foot(?!\s(?:of|tall|long))", r"footstool",
+        r"barefoot", r"pedicure\w*", r"(?<!red\s)soles?", r"(?<!pointed\s)(?<!square\s)(?<!almond\s)(?<!head\sto\s)toes?",
+        r"slaves?", r"mistress\w*", r"dominatrix", r"femdom", r"dommes?", r"submissive\w*",
+        r"fetish\w*", r"bdsm", r"bondage", r"riding\s?crop", r"whips?",
+        r"(?:leather|dog|spiked|slave|o\s?ring|pet)\s?collars?", r"collars?\s(?:and|&)\s(?:a\s)?leash", r"leash\w*",
+        r"handcuff\w*", r"harness\w*", r"(?:ball\s)?gags?", r"(?<!gold\s)(?<!silver\s)chain(?:s|ed)?(?!\s(?:necklace|bracelet))", r"spank\w*", r"paddles?",
+        r"worship\w*", r"humiliat\w*", r"trampl\w*", r"chastity", r"findom", r"pay\s?pigs?",
+        r"catsuits?", r"stockings?", r"fishnets?", r"pantyhose", r"nylons", r"hosiery",
+        r"kneel\w*", r"on\s(?:his|their|your|my)\sknees",
     ),
 )
 
