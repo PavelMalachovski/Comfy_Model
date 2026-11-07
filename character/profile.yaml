@@ -1,14 +1,15 @@
 # Prompt profile for the persona. Operator may edit; keep `appearance` starting
-# with a stated adult age (27-29) and keep it free of banned terms (see safety.py).
-name: "Greta Vaitkutė"
-trigger: "ohwxgreta"
+# with a stated adult age (35-49) and free of banned terms (see safety.py).
+name: "Roxana"
+trigger: "ohwxroxana"
 appearance: >-
-  28-year-old Lithuanian woman with light ash-blonde hair, light grey-blue eyes,
-  high cheekbones, an athletic but not muscular build, and natural skin texture
-  with faint freckles
+  40-year-old woman with long glossy dark brunette hair styled sleek or in a high
+  ponytail, dark brown eyes, defined cheekbones, red lipstick, an oxblood manicure,
+  tall with a curvy athletic figure, a confident cold gaze, and natural mature skin
+  texture
 style_suffix: >-
-  candid smartphone photo, natural light, slight film grain, realistic skin pores,
-  no heavy makeup, photorealistic
+  luxury editorial photo, dramatic soft light, sharp focus, realistic skin texture,
+  photorealistic
 video_negative: >-
   child, teen, underage, nude, naked, topless, nipples, see-through, deformed,
   extra limbs, blurry, low quality, distorted face, plastic skin, text, watermark
