@@ -24,7 +24,7 @@ def sample_values(kind: str) -> dict:
         "prompt": "a woman at her desk", "negative": "blurry", "seed": 42,
         "width": 896, "height": 1120, "batch_size": 2, "length": 121,
         "filename_prefix": "x/y", "ref_image": "ref.png", "image": "start.png",
-        "lora_name": "greta.safetensors", "lora_strength": 0.9,
+        "lora_name": "roxana.safetensors", "lora_strength": 0.9,
     }
     return {k: vals[k] for k in PLACEHOLDERS[kind]}
 

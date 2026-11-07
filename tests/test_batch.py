@@ -15,7 +15,7 @@ from comfy_model.runpod_pod import PodInfo
 from comfy_model.scenes import SceneError
 
 PROFILE = Profile(
-    name="Greta", trigger="ohwxgreta", appearance="28-year-old woman",
+    name="Roxana", trigger="ohwxroxana", appearance="28-year-old woman",
     style_suffix="candid photo", video_negative="blurry, deformed",
 )
 
@@ -90,7 +90,7 @@ def test_rerun_skips_existing_outputs(tmp_path):
     out.mkdir()
     (out / "desk_01.png").write_bytes(b"old")
     client = FakeClient()
-    report = run_batch("photo", write_scenes(tmp_path, DESK), client, PROFILE, out, lora="greta.safetensors")
+    report = run_batch("photo", write_scenes(tmp_path, DESK), client, PROFILE, out, lora="roxana.safetensors")
     assert len(client.queued) == 1
     assert node_inputs(client.queued[0], "filename_prefix") == ["cm/desk"] * 1
     assert [p.name for p in report.skipped] == ["desk_01.png"]
@@ -136,11 +136,11 @@ def test_random_seed_recorded(tmp_path):
 def test_photo_uses_trigger_and_lora(tmp_path):
     client = FakeClient()
     run_batch("photo", write_scenes(tmp_path, DESK), client, PROFILE, tmp_path / "o",
-              lora="greta.safetensors", lora_strength=0.8)
+              lora="roxana.safetensors", lora_strength=0.8)
     wf = client.queued[0]
     prompt = node_inputs(wf, "text")[0]
-    assert prompt.startswith("ohwxgreta, 28-year-old woman, sitting at a desk, laptop")
-    assert node_inputs(wf, "lora_name") == ["greta.safetensors"]
+    assert prompt.startswith("ohwxroxana, 28-year-old woman, sitting at a desk, laptop")
+    assert node_inputs(wf, "lora_name") == ["roxana.safetensors"]
     assert node_inputs(wf, "strength_model") == [0.8]
     assert (896, 1120) == (node_inputs(wf, "width")[0], node_inputs(wf, "height")[0])
 
@@ -183,7 +183,7 @@ def test_face_one_queue_per_scene_with_batch_size(tmp_path):
     assert len(client.queued) == 1
     assert node_inputs(client.queued[0], "batch_size") == [3]
     assert node_inputs(client.queued[0], "text")[0].startswith("28-year-old woman, neutral portrait")
-    assert "ohwxgreta" not in node_inputs(client.queued[0], "text")[0]
+    assert "ohwxroxana" not in node_inputs(client.queued[0], "text")[0]
     assert [p.name for p in report.done] == ["f1_01.png", "f1_02.png", "f1_03.png"]
     assert [m["file"] for m in manifest(out)] == ["f1_01.png", "f1_02.png", "f1_03.png"]
     # all present -> no requeue
@@ -253,7 +253,7 @@ def test_manifest_lines_written(tmp_path):
         assert m["scene_id"] == "desk" and m["n"] == n and m["kind"] == "photo"
         assert m["tier"] == "instagram"
         assert m["file"] == f"desk_{n:02d}.png"
-        assert m["prompt"].startswith("ohwxgreta, ")
+        assert m["prompt"].startswith("ohwxroxana, ")
         assert (out / m["file"]).exists()
     # append mode across runs
     run_batch("photo", write_scenes(tmp_path, DESK.replace("count: 2", "count: 3")), FakeClient(),
@@ -322,7 +322,7 @@ def test_cli_batch_with_fake_client(tmp_path, monkeypatch):
     scenes = write_scenes(tmp_path, DESK)
     out = tmp_path / "out"
     res = CliRunner().invoke(app, ["batch", "photo", str(scenes), "--out", str(out),
-                                   "--lora", "greta.safetensors", "--url", "http://pod:8188"])
+                                   "--lora", "roxana.safetensors", "--url", "http://pod:8188"])
     assert res.exit_code == 0, res.output
     assert seen["url"] == "http://pod:8188"
     assert "desk" in res.output and "2 done" in res.output

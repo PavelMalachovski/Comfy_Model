@@ -17,7 +17,7 @@ def _make_png(path, color=(120, 90, 60), size=(64, 48), with_text=True):
     info = None
     if with_text:
         info = PngInfo()
-        info.add_text("prompt", '{"secret": "ohwxgreta in a bikini"}')
+        info.add_text("prompt", '{"secret": "ohwxroxana in a bikini"}')
         info.add_text("workflow", '{"nodes": []}')
     img.save(path, pnginfo=info)
     return path
@@ -32,7 +32,7 @@ def test_workflow_metadata_stripped(tmp_path):
         assert "workflow" not in img.info
     data = out.read_bytes()
     assert b"prompt" not in data
-    assert b"ohwxgreta" not in data
+    assert b"ohwxroxana" not in data
     assert b"workflow" not in data
 
 
@@ -165,13 +165,13 @@ def test_mp4_real_ffmpeg_strips_prompt_metadata(tmp_path):
     made = subprocess.run(
         ["ffmpeg", "-y", "-v", "error", "-f", "lavfi", "-i", "color=c=red:s=32x32:d=0.2",
          # ComfyUI's SaveVideo writes prompt/workflow as custom mp4 tags (use_metadata_tags)
-         "-c:v", "mpeg4", "-movflags", "use_metadata_tags", "-metadata", "prompt=LEAK-ohwxgreta", "-metadata", "comment=LEAK-workflow",
+         "-c:v", "mpeg4", "-movflags", "use_metadata_tags", "-metadata", "prompt=LEAK-ohwxroxana", "-metadata", "comment=LEAK-workflow",
          str(src)],
         capture_output=True, text=True,
     )
     if made.returncode != 0:
         pytest.skip(f"ffmpeg cannot encode a test clip: {made.stderr[:200]}")
-    assert b"LEAK-ohwxgreta" in src.read_bytes()
+    assert b"LEAK-ohwxroxana" in src.read_bytes()
     out = export_image(src, tmp_path / "export")
     data = out.read_bytes()
     assert b"LEAK-" not in data

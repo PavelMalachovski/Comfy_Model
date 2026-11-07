@@ -1,6 +1,6 @@
 # 03. Обучение LoRA
 
-Цель: получить файл `ohwxgreta_v1.safetensors`, после которого лицо Греты одно и то же
+Цель: получить файл `ohwxroxana_v1.safetensors`, после которого лицо Роксаны одно и то же
 во всех кадрах. Разовая операция (~2 ч, ≈ $1–2).
 
 ## Перед стартом
@@ -15,8 +15,8 @@
 uv run cm lora prepare out/<дата>-dataset
 ```
 
-Команда нумерует оставшиеся картинки и пишет подписи в `dataset/ohwxgreta/`.
-`ohwxgreta` — триггер-слово LoRA.
+Команда нумерует оставшиеся картинки и пишет подписи в `dataset/ohwxroxana/`.
+`ohwxroxana` — триггер-слово LoRA.
 
 ## 2. Свежий под и запуск обучения
 
@@ -41,7 +41,7 @@ uv run cm lora status
 Показывает последние 40 строк лога и идёт ли ещё обучение. Заглядывайте раз в
 20–30 минут.
 
-Готовый файл: `/workspace/ComfyUI/models/loras/ohwxgreta_v1.safetensors`. После
+Готовый файл: `/workspace/ComfyUI/models/loras/ohwxroxana_v1.safetensors`. После
 этого можно сразу генерировать фото (см. [04](04-daily.md)), пока под жив.
 
 ## 4. Как оценить результат
@@ -49,7 +49,7 @@ uv run cm lora status
 Сделайте пробную серию и посмотрите 20–30 кадров:
 
 ```bash
-uv run cm batch photo scenes/instagram.yaml --lora ohwxgreta_v1.safetensors
+uv run cm batch photo scenes/instagram.yaml --lora ohwxroxana_v1.safetensors
 ```
 
 Хорошо, если:
@@ -71,7 +71,7 @@ uv run cm pod down && uv run cm pod up
 uv run cm lora train --version 2
 ```
 
-Результат: `ohwxgreta_v2.safetensors`, v1 остаётся рядом. После этого в `--lora`
+Результат: `ohwxroxana_v2.safetensors`, v1 остаётся рядом. После этого в `--lora`
 укажите новую версию.
 
 После обучения выключите под: `uv run cm pod down`.

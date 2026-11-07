@@ -30,9 +30,9 @@ TRAIN_PID = "/workspace/.cm/train.pid"
 
 # Sample images rendered during training (trigger prepended via Profile.photo_prompt).
 SAMPLE_SCENES = (
-    "standing on a street in Vilnius in autumn, looking at the camera",
-    "sitting in a cafe with a laptop, smiling",
-    "walking along a beach in a casual summer dress",
+    "standing at a Dubai penthouse window at dusk, black evening gown, looking at the camera",
+    "seated in a velvet armchair in a tailored black power suit, cold stare",
+    "walking on a yacht deck in white linen, sunglasses in hand",
 )
 
 

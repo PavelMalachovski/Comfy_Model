@@ -46,7 +46,7 @@ from comfy_model.workflow import KINDS, PLACEHOLDERS, load_manifest, load_templa
 
 PORT = 18188
 URL = f"http://127.0.0.1:{PORT}"
-LORA_NAME = "ohwxgreta_v1.safetensors"
+LORA_NAME = "ohwxroxana_v1.safetensors"
 INPUT_IMAGE = "cm_validate.png"
 STARTUP_TIMEOUT_S = 600
 REPOS = {

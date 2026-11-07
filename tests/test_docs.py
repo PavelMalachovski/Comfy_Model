@@ -52,8 +52,8 @@ def _mentioned_commands() -> set[tuple[str, ...]]:
 def test_guide_files_exist():
     names = {p.name for p in GUIDE_DIR.glob("*.md")}
     assert {
-        "01-setup.md", "02-create-face.md", "03-train-lora.md",
-        "04-daily.md", "05-video.md", "06-launch.md",
+        "00-mac.md", "01-setup.md", "02-create-face.md", "03-train-lora.md",
+        "04-daily.md", "05-video.md", "06-launch.md", "07-warmup.md",
     } <= names
     assert (ROOT / "README.md").exists()
 

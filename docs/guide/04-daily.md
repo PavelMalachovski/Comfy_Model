@@ -8,9 +8,9 @@
 | Публикация постов | 30–60 мин | ежедневно |
 | Переписка на Fanvue, ответы в комментариях, метрики | остальное время | ежедневно |
 
-Ориентир по объёму: ~100–150 отобранных фото в месяц (Instagram 1 пост/день и
-сторис; Reddit/X несколько постов в день из того же пула; Fanvue 3–5 постов в
-неделю) и 8–15 коротких видео ([05](05-video.md)).
+Старт (этап 1): 30 фото и 3–5 Reels для Instagram + запас фото для X, Reddit и платного
+Telegram. Дальше ориентир ~100–150 отобранных фото в месяц и 8–15 коротких видео
+([05](05-video.md)); ритм постинга — в [07. Прогрев](07-warmup.md).
 
 ## Цикл генерации (раз в 2–3 дня)
 
@@ -19,18 +19,18 @@
    несколько подряд и уйти заниматься другим.
 
    ```bash
-   uv run cm batch photo scenes/instagram.yaml --lora ohwxgreta_v1.safetensors
-   uv run cm batch photo scenes/social.yaml    --lora ohwxgreta_v1.safetensors
-   uv run cm batch photo scenes/fanvue.yaml    --lora ohwxgreta_v1.safetensors
+   uv run cm batch photo scenes/instagram.yaml --lora ohwxroxana_v1.safetensors
+   uv run cm batch photo scenes/social.yaml    --lora ohwxroxana_v1.safetensors
+   uv run cm batch photo scenes/fanvue.yaml    --lora ohwxroxana_v1.safetensors
    ```
 
    Какой файл для какой площадки:
 
    | Файл сцен | Куда | Уровень |
    |---|---|---|
-   | `scenes/instagram.yaml` | Instagram (лента, сторис), Telegram | купальники ок, **без белья**, без наготы |
-   | `scenes/social.yaml` | X, Reddit | бельё ок, без наготы |
-   | `scenes/fanvue.yaml` | Fanvue | элегантная лёгкая эротика, **без наготы** |
+   | `scenes/instagram.yaml` | Instagram (лента, сторис), бесплатный Telegram | роскошь и власть; **без белья, латекса, ступней и фетиш-слов**, без наготы |
+   | `scenes/social.yaml` | X, Reddit, платный Telegram | латекс, бельё, корсеты, сапоги, каблуки; без наготы |
+   | `scenes/fanvue.yaml` | Fanvue (за подпиской) | то же, интимнее; топлес с пэстис — только на этапе 3 |
 
 3. Выключить под: `uv run cm pod down`.
 
@@ -63,7 +63,7 @@
 Выбранные файлы публикуйте **только** после экспорта:
 
 ```bash
-uv run cm export out/2026-10-20-instagram/home-office-three-monitors_01.png
+uv run cm export out/2026-10-20-instagram/penthouse-skyline-gown_01.png
 ```
 
 `cm export` кладёт JPEG в `export/`, записывает в EXIF пометку «AI-generated»,
@@ -83,10 +83,10 @@ uv run cm export out/2026-10-20-instagram/*_01.png
 
 ```yaml
 scenes:
-  - id: rooftop-sunset-run
+  - id: rooftop-sunset-power
     prompt: >-
-      jogging on a rooftop terrace at sunset, fitted running outfit,
-      warm backlight, candid mid-stride shot
+      standing on a rooftop terrace at sunset, tailored white suit,
+      warm side light, camera slightly below eye level
 ```
 
 Правила:
@@ -98,6 +98,6 @@ scenes:
 - Запрещённые слова и намёки на несовершеннолетних или наготу отклоняются проверкой
   безопасности (в том числе `sheer`, `see-through`, `transparent`, `undressed`, `baby face`
   на любом тире). Не обходите её.
-- Текст постов (подписи) пишется по-английски в голосе Греты, см. `character/bible.md`.
+- Текст постов (подписи) пишется по-английски в голосе Роксаны, см. `character/bible.md`.
 
 Дальше: [05. Видео](05-video.md).

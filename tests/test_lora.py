@@ -17,7 +17,7 @@ REPO = Path(__file__).resolve().parent.parent
 TRAIN_SCRIPT = REPO / "pod" / "train_lora.sh"
 POD = PodInfo(id="abc", ssh_host="203.0.113.7", ssh_port=40122, comfy_url="https://abc-8188.proxy.runpod.net")
 
-PROFILE = Profile(name="Greta", trigger="ohwxgreta", appearance="28-year-old woman",
+PROFILE = Profile(name="Roxana", trigger="ohwxroxana", appearance="28-year-old woman",
                   style_suffix="photo", video_negative="blurry")
 
 
@@ -33,13 +33,13 @@ def make_images(d: Path, n: int, ext: str = "png") -> list[Path]:
 
 # -- prepare ------------------------------------------------------------------------
 def test_prepare_numbers_and_captions(tmp_path):
-    src, dest = tmp_path / "src", tmp_path / "dataset" / "ohwxgreta"
+    src, dest = tmp_path / "src", tmp_path / "dataset" / "ohwxroxana"
     make_images(src, 16)
     assert lora.prepare_dataset(src, dest, PROFILE) == 16
     assert sorted(p.name for p in dest.glob("*.png")) == [f"img_{i:03d}.png" for i in range(1, 17)]
     assert (dest / "img_001.png").read_bytes() == b"img1"  # sorted by source name
     assert (dest / "img_016.png").read_bytes() == b"img16"
-    assert (dest / "img_001.txt").read_text() == "ohwxgreta, a photo of a woman"
+    assert (dest / "img_001.txt").read_text() == "ohwxroxana, a photo of a woman"
 
 
 def test_prepare_uses_manifest_prompt(tmp_path):
@@ -51,8 +51,8 @@ def test_prepare_uses_manifest_prompt(tmp_path):
         + json.dumps({"scene_id": "gone", "n": 1, "seed": 2, "prompt": "deleted one",
                       "file": "gone_01.png", "kind": "dataset"}) + "\n")
     lora.prepare_dataset(src, dest, PROFILE)
-    assert (dest / "img_001.txt").read_text() == "ohwxgreta, sitting in a cafe"
-    assert (dest / "img_002.txt").read_text() == "ohwxgreta, a photo of a woman"
+    assert (dest / "img_001.txt").read_text() == "ohwxroxana, sitting in a cafe"
+    assert (dest / "img_002.txt").read_text() == "ohwxroxana, a photo of a woman"
 
 
 def test_prepare_strips_kontext_prefix_from_captions(tmp_path):
@@ -66,9 +66,9 @@ def test_prepare_strips_kontext_prefix_from_captions(tmp_path):
     (src / "manifest.jsonl").write_text(
         "".join(json.dumps({"scene_id": "x", "n": 1, "seed": 1, "kind": "dataset", **e}) + "\n" for e in lines))
     lora.prepare_dataset(src, dest, PROFILE)
-    assert (dest / "img_001.txt").read_text() == "ohwxgreta, close-up portrait from the front."
-    assert (dest / "img_002.txt").read_text() == "ohwxgreta, side profile"
-    assert (dest / "img_003.txt").read_text() == "ohwxgreta, a photo of a woman"
+    assert (dest / "img_001.txt").read_text() == "ohwxroxana, close-up portrait from the front."
+    assert (dest / "img_002.txt").read_text() == "ohwxroxana, side profile"
+    assert (dest / "img_003.txt").read_text() == "ohwxroxana, a photo of a woman"
 
 
 def test_prepare_rejects_too_few(tmp_path):
@@ -116,15 +116,15 @@ def test_prepare_missing_src(tmp_path):
 def test_training_config_values():
     cfg = yaml.safe_load(lora.render_training_config(load_profile(), 1))
     assert cfg["job"] == "extension"
-    assert cfg["config"]["name"] == "ohwxgreta_v1"
+    assert cfg["config"]["name"] == "ohwxroxana_v1"
     p = cfg["config"]["process"][0]
     assert p["type"] == "sd_trainer"
     assert p["training_folder"] == "/workspace/ai-toolkit/output"
-    assert p["trigger_word"] == "ohwxgreta"
+    assert p["trigger_word"] == "ohwxroxana"
     assert p["network"] == {"type": "lora", "linear": 16, "linear_alpha": 16}
     assert p["save"]["save_every"] == 500
     ds = p["datasets"][0]
-    assert ds["folder_path"] == "/workspace/dataset/ohwxgreta"
+    assert ds["folder_path"] == "/workspace/dataset/ohwxroxana"
     assert ds["resolution"] == [512, 768, 1024]
     assert p["train"]["steps"] == 2000
     assert p["train"]["lr"] == 1e-4
@@ -132,12 +132,12 @@ def test_training_config_values():
     assert p["model"]["name_or_path"] == "black-forest-labs/FLUX.1-dev"
     assert p["model"]["is_flux"] is True and p["model"]["quantize"] is True
     assert len(p["sample"]["prompts"]) == 3
-    assert all("ohwxgreta" in s for s in p["sample"]["prompts"])
+    assert all("ohwxroxana" in s for s in p["sample"]["prompts"])
 
 
 def test_training_config_version_in_name():
     cfg = yaml.safe_load(lora.render_training_config(load_profile(), 3))
-    assert cfg["config"]["name"] == "ohwxgreta_v3"
+    assert cfg["config"]["name"] == "ohwxroxana_v3"
 
 
 # -- remote script --------------------------------------------------------------------
@@ -151,8 +151,8 @@ def test_train_remote_command_has_heartbeat():
     assert "RUNPOD_API_KEY" not in src  # training needs only HF_TOKEN
     assert "set -x" not in src
     assert "/workspace/ComfyUI/models/loras" in src
-    cmd = lora.train_command("ohwxgreta", 1)
-    assert "train_lora.sh" in cmd and "ohwxgreta_v1" in cmd
+    cmd = lora.train_command("ohwxroxana", 1)
+    assert "train_lora.sh" in cmd and "ohwxroxana_v1" in cmd
 
 
 @pytest.mark.skipif(shutil.which("shellcheck") is None, reason="shellcheck not installed")
@@ -183,7 +183,7 @@ def test_cli_prepare(tmp_path, monkeypatch):
     make_images(tmp_path / "out", 16)
     r = CliRunner().invoke(app, ["lora", "prepare", "out"])
     assert r.exit_code == 0, r.output
-    assert len(list((tmp_path / "dataset" / "ohwxgreta").glob("img_*.png"))) == 16
+    assert len(list((tmp_path / "dataset" / "ohwxroxana").glob("img_*.png"))) == 16
     assert "16" in r.output
 
 
@@ -203,7 +203,7 @@ def _train_cwd(tmp_path, monkeypatch, n=16):
         shutil.copytree(REPO / d, tmp_path / d)
     src = tmp_path / "out"
     make_images(src, n)
-    lora.prepare_dataset(src, tmp_path / "dataset" / "ohwxgreta", PROFILE)
+    lora.prepare_dataset(src, tmp_path / "dataset" / "ohwxroxana", PROFILE)
     return tmp_path
 
 
@@ -214,14 +214,14 @@ def test_cli_train_syncs_and_launches(tmp_path, monkeypatch, fake_remote):
     flat = [" ".join(a) for a in fake_remote]
     assert any(a[0] == "rsync" and "/workspace/dataset/" in a[-1] for a in fake_remote)
     assert any(a[0] == "rsync" and a[-1].endswith(":/workspace/cm/training/") for a in fake_remote)
-    assert any(a[0] == "rsync" and a[-2].endswith("ohwxgreta_v2.yaml") for a in fake_remote)
+    assert any(a[0] == "rsync" and a[-2].endswith("ohwxroxana_v2.yaml") for a in fake_remote)
     assert any(a[0] == "rsync" and "pod" in a and a[-1].endswith(":/workspace/cm/") for a in fake_remote)
     ssh_cmds = [a[-1] for a in fake_remote if a[0] == "ssh"]
-    assert any("train_lora.sh" in c and "ohwxgreta_v2" in c for c in ssh_cmds)
+    assert any("train_lora.sh" in c and "ohwxroxana_v2" in c for c in ssh_cmds)
     assert "cm lora status" in r.output
     assert "hf_x" not in r.output + "".join(flat)  # token is never sent from the laptop
-    cfg = yaml.safe_load((tmp_path / ".cm" / "training" / "ohwxgreta_v2.yaml").read_text())
-    assert cfg["config"]["name"] == "ohwxgreta_v2"
+    cfg = yaml.safe_load((tmp_path / ".cm" / "training" / "ohwxroxana_v2.yaml").read_text())
+    assert cfg["config"]["name"] == "ohwxroxana_v2"
 
 
 def test_cli_train_no_pod(tmp_path, monkeypatch, fake_remote):
@@ -311,8 +311,8 @@ def _sim_train(tmp_path, token: str | None = "hf_SIM", fail: bool = False, no_ou
     (pod / "train_lora.sh").write_text(text)
     shutil.copy(REPO / "pod" / "versions.env", pod / "versions.env")
     (ws / "cm" / "training").mkdir()
-    (ws / "cm" / "training" / "ohwxgreta_v1.yaml").write_text("x: 1\n")
-    (ws / "dataset" / "ohwxgreta").mkdir(parents=True)
+    (ws / "cm" / "training" / "ohwxroxana_v1.yaml").write_text("x: 1\n")
+    (ws / "dataset" / "ohwxroxana").mkdir(parents=True)
     (ws / "ComfyUI" / "models").mkdir(parents=True)
     bindir = tmp_path / "bin"
     bindir.mkdir()
@@ -327,7 +327,7 @@ def _sim_train(tmp_path, token: str | None = "hf_SIM", fail: bool = False, no_ou
         env["CM_STUB_FAIL"] = "1"
     if no_output:
         env["CM_STUB_NO_OUTPUT"] = "1"
-    r = subprocess.run(["bash", str(pod / "train_lora.sh"), "ohwxgreta_v1", "ohwxgreta"],
+    r = subprocess.run(["bash", str(pod / "train_lora.sh"), "ohwxroxana_v1", "ohwxroxana"],
                        capture_output=True, text=True, env=env, timeout=40)
     return r, ws
 
@@ -350,7 +350,7 @@ def test_train_script_full_run_simulated(tmp_path):
     assert "started training" in r.stdout
     log = _wait_done(ws)
     assert "DONE:" in log
-    assert (ws / "ComfyUI" / "models" / "loras" / "ohwxgreta_v1.safetensors").read_text() == "weights\n"
+    assert (ws / "ComfyUI" / "models" / "loras" / "ohwxroxana_v1.safetensors").read_text() == "weights\n"
     assert not (ws / ".cm" / "busy").exists()
     assert not (ws / ".cm" / "train.pid").exists()
     assert (ws / "ai-toolkit" / ".git" / "cm-ref").read_text().strip() == \
@@ -365,14 +365,14 @@ def test_train_script_failure_clears_busy(tmp_path):
     assert "FAILED: training exited with code 3" in r.stderr
     assert "FAILED: training exited with code 3" in _wait_done(ws)
     assert not (ws / ".cm" / "busy").exists()
-    assert not (ws / "ComfyUI" / "models" / "loras" / "ohwxgreta_v1.safetensors").exists()
+    assert not (ws / "ComfyUI" / "models" / "loras" / "ohwxroxana_v1.safetensors").exists()
 
 
 def test_train_script_missing_output_is_failure(tmp_path):
     r, ws = _sim_train(tmp_path, no_output=True)
     assert r.returncode != 0
     assert "does not exist" in _wait_done(ws)
-    assert not (ws / "ComfyUI" / "models" / "loras" / "ohwxgreta_v1.safetensors").exists()
+    assert not (ws / "ComfyUI" / "models" / "loras" / "ohwxroxana_v1.safetensors").exists()
 
 
 def test_train_script_requires_hf_token(tmp_path):
