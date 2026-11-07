@@ -107,3 +107,18 @@ def test_implied_nudity_banned_all_tiers_v1(text):
     "twenty-eight year old", "a tall glass of water"])
 def test_adult_age_phrasing_not_flagged(text):
     assert check_prompt(text, "instagram") == []
+
+
+@pytest.mark.parametrize("text", ["black latex catsuit", "PVC dress", "vinyl gloves", "rubber outfit",
+    "foot worship", "bare feet close-up", "soles to the camera", "toes", "slave kneeling", "mistress",
+    "dominatrix", "femdom", "fetish", "bdsm", "riding crop", "whip", "collar and leash", "stockings", "fishnets"])
+def test_fetish_cues_banned_on_instagram_only(text):
+    assert check_prompt(text, "instagram")
+    assert check_prompt(text, "social") == []
+    assert check_prompt(text, "fanvue") == []
+
+
+@pytest.mark.parametrize("text", ["leather trench coat", "knee-high leather boots", "red-soled heels",
+    "black satin evening gown", "tailored power suit", "sitting on a velvet throne-like armchair"])
+def test_instagram_allows_power_dressing(text):
+    assert check_prompt(text, "instagram") == []

@@ -2,7 +2,8 @@
 
 Rules are word-boundary regexes over *normalized* text (lowercase, ``-``/``_``
 turned into spaces, whitespace collapsed), so "School-Girl", "SCHOOL_GIRL" and
-"school  girl" are all the same term. Rules are keyed by tier; to relax a tier
+"school  girl" are all the same term. Tiers: ``instagram`` (SFW showcase: no
+lingerie, no fetish cues), ``social`` (X, Reddit, Telegram) and ``fanvue``. Rules are keyed by tier; to relax a tier
 later (e.g. explicit Fanvue) edit its entry in ``TIER_RULES``.
 """
 from __future__ import annotations
@@ -75,10 +76,22 @@ _LIKENESS = (
     ),
 )
 
+# Instagram is the SFW showcase: no fetish cues (latex, feet, slave/mistress roleplay,
+# hosiery). X, Reddit, Telegram and Fanvue allow them.
+_FETISH = (
+    "fetish",
+    _words(
+        r"latex", r"pvc", r"vinyl", r"rubber", r"foot\s?worship", r"feet", r"foot",
+        r"soles?", r"toes?", r"slaves?", r"mistress\w*", r"dominatrix", r"femdom",
+        r"fetish\w*", r"bdsm", r"riding\s?crop", r"whips?", r"collars?", r"leash\w*",
+        r"stockings?", r"fishnets?", r"kneel\w*",
+    ),
+)
+
 _BASE: list[Rule] = [_AGE, _NUDITY, _LIKENESS]
 
 TIER_RULES: dict[str, list[Rule]] = {
-    "instagram": [*_BASE, _LINGERIE],
+    "instagram": [*_BASE, _LINGERIE, _FETISH],
     "social": list(_BASE),
     "fanvue": list(_BASE),
 }
