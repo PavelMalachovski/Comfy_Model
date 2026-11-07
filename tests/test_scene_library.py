@@ -12,10 +12,10 @@ SCENES = Path(__file__).resolve().parent.parent / "scenes"
 LIBRARY = {
     "face.yaml": ("face", "instagram", 6),
     "dataset.yaml": ("dataset", "instagram", 40),
-    "instagram.yaml": ("photo", "instagram", 20),
+    "instagram.yaml": ("photo", "instagram", 30),
     "social.yaml": ("photo", "social", 15),
-    "fanvue.yaml": ("photo", "fanvue", 15),
-    "video.yaml": ("video", None, 6),
+    "fanvue.yaml": ("photo", "fanvue", 10),
+    "video.yaml": ("video", "instagram", 3),
 }
 
 
@@ -41,10 +41,23 @@ def test_dataset_library_shape():
     assert all(s.prompt.startswith("Keep the same woman's face and identity, ") for s in scenes)
 
 
-def test_instagram_has_it_content():
+def test_instagram_library_shape():
     scenes = load_scenes(SCENES / "instagram.yaml", "photo")
-    pat = re.compile(r"monitor|laptop|terminal|server|keyboard|on-call", re.I)
+    assert len(scenes) == 30
+    assert {s.count for s in scenes} == {2}
+
+
+def test_instagram_has_dubai_luxury():
+    scenes = load_scenes(SCENES / "instagram.yaml", "photo")
+    pat = re.compile(r"dubai|penthouse|yacht|desert|boutique|skyline", re.I)
     assert sum(1 for s in scenes if pat.search(s.prompt)) >= 5
+
+
+def test_social_library_shape():
+    scenes = load_scenes(SCENES / "social.yaml", "photo")
+    assert len(scenes) >= 15
+    assert sum(1 for s in scenes if "latex" in s.prompt.lower()) >= 5
+    assert sum(1 for s in scenes if re.search(r"boots|heels", s.prompt, re.I)) >= 3
 
 
 @pytest.mark.parametrize("name", ["instagram.yaml", "social.yaml", "fanvue.yaml"])
@@ -55,6 +68,7 @@ def test_photo_libraries_mix_aspects(name):
 
 def test_video_library_shape():
     scenes = load_scenes(SCENES / "video.yaml", "video")
+    assert 3 <= len(scenes) <= 5
     assert {s.aspect for s in scenes} == {"9:16"}
     assert all(s.image.startswith("../export/") for s in scenes)
 
@@ -87,6 +101,11 @@ def test_no_hyphen_broken_across_lines(name):
         assert not re.search(r"\w- ", s.prompt), f"{name} scene {s.id!r}: {s.prompt!r}"
 
 
-def test_social_header_does_not_target_telegram():
+def test_social_header_mentions_telegram_paid():
     header = (SCENES / "social.yaml").read_text(encoding="utf-8").split("\n\n", 1)[0]
-    assert "(Telegram" not in header and "instagram-tier" in header
+    assert "paid Telegram" in header and "X" in header and "Reddit" in header
+
+
+def test_headers_use_roxana_lora():
+    for name in ("instagram.yaml", "social.yaml", "fanvue.yaml"):
+        assert "--lora ohwxroxana_v1.safetensors" in (SCENES / name).read_text(encoding="utf-8")

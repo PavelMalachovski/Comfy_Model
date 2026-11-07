@@ -1,90 +1,50 @@
-# Social / teaser content (X, Reddit): more playful and suggestive than Instagram.
-# Not for Telegram: the free Telegram channel posts instagram-tier files only. Lingerie is allowed on this tier; nudity is not (enforced by cm).
+# X (Twitter), Reddit and the paid Telegram channel: femdom showcase.
+# Latex, lingerie, corsets, boots and heels allowed; always opaque, named garments; no nudity.
+# Feet close-ups come in phase 2 (feet detailer). Mark media as sensitive (X) / NSFW (Reddit).
+# Scene prompts describe only setting, outfit, pose, light and camera; the appearance
+# sentence and style suffix come from character/profile.yaml automatically.
 # Run (after LoRA training; adjust the file name to your version):
-#   cm batch photo scenes/social.yaml --lora ohwxgreta_v1.safetensors
+#   cm batch photo scenes/social.yaml --lora ohwxroxana_v1.safetensors
 defaults:
-  tier: social
+  tier: "social"
   aspect: "4:5"
-  count: 4
+  count: 2
 
 scenes:
-  - id: desk-late-night-tank
-    prompt: >-
-      late at night at a home desk with three monitors glowing, fitted tank top and soft
-      shorts, bare legs crossed under the chair, laptop keyboard in front, teasing look over
-      her shoulder
-  - id: oncall-bedroom-oversized-shirt
-    prompt: >-
-      sitting on an unmade bed at 3am with a laptop, wearing a big oversized shirt and shorts,
-      alert glowing on the screen, sleepy half smile, warm bedside lamp
+  - id: latex-dress-penthouse
     aspect: "9:16"
-  - id: coffee-window-robe
-    prompt: >-
-      standing by a bright window in a short silk robe belted closed over a black lingerie
-      set, holding a coffee mug, morning front light, looking out, relaxed pose
-  - id: black-lace-set-mirror
-    prompt: >-
-      standing in front of a tall mirror in a black lace lingerie set, one hand in her hair,
-      bedroom with soft window light, calm confident look
-  - id: white-lingerie-bed-morning
-    prompt: >-
-      lying on her side on white bed sheets in a white cotton lingerie set, propped on one
-      elbow, soft morning light, looking into the camera
-  - id: bodysuit-lamp
-    prompt: >-
-      standing near a warm floor lamp in an opaque black long-sleeve bodysuit, soft
-      shadows on the wall, direct look into the camera
+    prompt: "standing at a penthouse window at night in a glossy black latex dress, long black opera gloves, skyline behind, camera slightly below"
+  - id: latex-catsuit-throne
+    prompt: "seated on a dark velvet throne in a black latex catsuit, legs crossed, knee-high boots, dramatic side light"
+  - id: latex-corset-blazer
+    prompt: "black latex corset under an open tailored blazer, standing in a dim office, hands on hips"
+  - id: red-latex-armchair
     aspect: "9:16"
-  - id: red-dress-hotel-evening
-    prompt: >-
-      sitting on the edge of a hotel bed in a fitted red dress with a high slit, heels
-      beside her, city lights through the window, warm evening light
-  - id: bikini-balcony-sea
-    prompt: >-
-      leaning on a sunny balcony railing in a small black bikini, sea view behind,
-      sunglasses on, bright midday light, relaxed pose
-  - id: bikini-beach-sand
-    prompt: >-
-      lying on the sand at a Baltic beach in a pale green bikini, sunglasses, one knee up,
-      dune grass around, bright sun
-  - id: gym-sports-bra-mirror
-    prompt: >-
-      in a gym mirror in a black sports bra and high-waisted leggings, gym bag on her
-      shoulder, ponytail, slightly flushed, bright light
+    prompt: "lounging in a leather armchair in a red latex dress, black stiletto heels, moody lamp light"
+  - id: latex-gloves-crop
+    prompt: "close-up of black latex gloves holding a riding crop, her face in soft focus behind"
+  - id: pov-from-floor
     aspect: "9:16"
-  - id: sweater-only-sofa
-    prompt: >-
-      curled up on a sofa in an oversized knit sweater and soft shorts with
-      bare legs tucked up, laptop pushed aside, warm lamp light, playful smirk
-  - id: robe-lingerie-bathroom
-    prompt: >-
-      standing in a bright bathroom in a white bathrobe belted closed over a grey lingerie
-      set, hair pinned up in a clip, clear mirror behind, soft warm morning light,
-      looking at the camera
-  - id: stockings-desk-chair
-    prompt: >-
-      sitting backwards on a desk chair in a black satin slip dress and black stockings,
-      home office with monitors behind her, glasses on, dry amused look
-  - id: pool-edge-dusk-swimsuit
-    prompt: >-
-      waist-up at the edge of an outdoor pool at dusk in a dark red swimsuit, both straps
-      and neckline clearly visible, hair pinned up, string lights glowing in the
-      background
+    prompt: "camera at floor level looking up at her standing over it, black latex dress, thigh-high boots, cold stare, ceiling lights"
+  - id: boots-on-desk
+    prompt: "sitting behind a desk with her knee-high leather boots resting on it, black pencil skirt, office at night"
+  - id: heels-stairs-pov
+    prompt: "standing at the top of marble stairs in black stiletto heels and a fitted black dress, camera at the bottom of the stairs looking up"
+  - id: black-lingerie-velvet-chair
+    prompt: "sitting on a velvet chair in an opaque black lace lingerie set and stockings, black heels, dim warm light"
+  - id: lingerie-under-trench
     aspect: "9:16"
-  - id: hoodie-sleeve-tease
-    prompt: >-
-      pulling a hoodie off one shoulder, black lace bralette visible beneath, standing in a
-      sunny living room, glasses pushed up on her head, sideways glance
-  - id: night-city-coat-open
-    prompt: >-
-      standing on a night street in an open long coat over a black satin slip dress, dry
-      pavement reflecting lights, serious fashion pose
+    prompt: "black leather trench coat open over an opaque black lingerie set, standing in a hotel corridor, heels"
+  - id: leather-pants-kneeling-view
+    prompt: "in black leather trousers and a black corset top, standing over a velvet cushion on the floor, camera low"
+  - id: collar-in-hand
+    prompt: "holding a black leather collar and leash toward the camera, black latex dress, cold smile"
+  - id: fishnets-bar-stool
+    prompt: "sitting on a bar stool in a black mini dress and fishnet stockings, red-soled heels, dark bar"
+  - id: latex-yacht-night
     aspect: "9:16"
-  - id: pool-edge-swimsuit
-    prompt: >-
-      sitting on the edge of a hotel pool in a high-cut black swimsuit, feet in the water,
-      sunglasses, bright afternoon sun
-  - id: reading-bed-lamp
-    prompt: >-
-      reading a paperback in bed in a cream camisole and shorts, round glasses, warm bedside
-      lamp, cozy blanket around her legs
+    prompt: "on a yacht deck at night in a black latex dress, city lights across the water, wind in her hair"
+  - id: thigh-boots-mirror
+    prompt: "standing in front of a large mirror in thigh-high black boots and an opaque black bodysuit, hotel suite"
+  - id: crop-and-chair
+    prompt: "sitting backwards on a chair in a black latex top and leather skirt, riding crop resting on her shoulder"

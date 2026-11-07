@@ -1,125 +1,82 @@
-# Instagram feed and stories: everyday life of a remote SRE in Vilnius. Swimwear is
-# fine on this tier; no lingerie or underwear, no nudity (enforced by cm).
+# Instagram showcase and free Telegram channel: a powerful, luxurious woman in Dubai.
+# SFW only: no lingerie, no latex or fetish cues, no feet close-ups, no nudity (enforced by cm).
 # Scene prompts describe only setting, outfit, pose, light and camera; the appearance
 # sentence and style suffix come from character/profile.yaml automatically.
-# 4:5 = feed posts, 9:16 = stories/reels covers.
+# 30 scenes x 2 variants -> pick the best 30. 4:5 = feed, 9:16 = stories/Reels covers.
 # Run (after LoRA training; adjust the file name to your version):
-#   cm batch photo scenes/instagram.yaml --lora ohwxgreta_v1.safetensors
+#   cm batch photo scenes/instagram.yaml --lora ohwxroxana_v1.safetensors
 defaults:
-  tier: instagram
+  tier: "instagram"
   aspect: "4:5"
-  count: 4
+  count: 2
 
 scenes:
-  - id: home-office-three-monitors
-    prompt: >-
-      sitting at a standing-height desk in a home office with three monitors showing
-      dashboards and graphs, oversized grey hoodie, thin glasses, mechanical keyboard,
-      cold coffee mug, soft daylight from the window, shot from slightly behind her shoulder
-  - id: oncall-3am-coffee
-    prompt: >-
-      on-call at 3am, dark apartment lit only by a laptop screen and a small desk lamp,
-      holding a steaming coffee mug with both hands, tired but amused expression, red alert
-      graph glowing on the screen, hoodie, hair in a messy bun
+  - id: penthouse-skyline-gown
     aspect: "9:16"
-  - id: terminal-green-glow
-    prompt: >-
-      close-up of her face in glasses lit by the glow of a terminal window full of logs,
-      reflection of text in the lenses, dim room, focused raised eyebrow
-  - id: server-room-visit
-    prompt: >-
-      standing in a cold data center aisle between server racks with blinking lights,
-      holding a laptop under one arm, black fleece jacket, cool blue light
+    prompt: "standing at the floor-to-ceiling window of a Dubai penthouse, black satin evening gown, city skyline at dusk behind her, looking back over her shoulder, camera slightly below eye level"
+  - id: desert-dunes-black-gown
+    prompt: "standing on a desert dune at sunset in a long black gown, fabric moving in the wind, golden light, full body, low camera angle"
+  - id: yacht-deck-white-linen
+    prompt: "sitting on the deck of a luxury yacht, white linen shirt and black trousers, sunglasses in hand, turquoise sea, bright midday light"
+  - id: boutique-shopping-bags
+    prompt: "walking out of a luxury boutique holding shopping bags, camel coat, red-soled heels, street level shot"
+  - id: rooftop-bar-evening
     aspect: "9:16"
-  - id: friday-deploy-desk
-    prompt: >-
-      leaning back in a desk chair with her feet up, laptop open on her knees, one hand
-      covering her eyes in mock despair, bright home office, plant on the shelf
-  - id: whiteboard-architecture
-    prompt: >-
-      standing at a whiteboard covered in architecture diagrams, marker in hand, rolled-up
-      shirt sleeves, glancing back at the camera with a dry smile, bright coworking space
-  - id: conference-talk-stage
-    prompt: >-
-      speaking on a small conference stage, headset microphone, fitted dark blazer, slide
-      with a cluster diagram on a large screen behind her, warm stage light, audience
-      silhouettes blurred in front
+    prompt: "seated at a rooftop bar in Dubai at night, black dress, cocktail glass, skyline bokeh, three-quarter view"
+  - id: boardroom-head-of-table
+    prompt: "standing at the head of a long boardroom table, tailored black power suit, hands resting on the table, glass walls, cold daylight"
+  - id: luxury-car-door
+    prompt: "stepping out of a black luxury car, leather trench coat, knee-high leather boots, night street, camera low"
+  - id: velvet-armchair-throne
     aspect: "9:16"
-  - id: conference-badge-lanyard
-    prompt: >-
-      in a busy conference hall with a lanyard badge, holding a coffee and a tote bag,
-      laughing at someone off-camera, bright atrium light, candid
-  - id: morning-coffee-kitchen
-    prompt: >-
-      standing in a bright minimalist kitchen making pour-over coffee, oversized white
-      t-shirt and soft shorts, hair loose, morning sun on the counter, side view
-  - id: laptop-cafe-vilnius
-    prompt: >-
-      working on a laptop at a small cafe table near a window in Vilnius old town, latte in
-      a ceramic cup, cream knit sweater, glasses, cobblestones visible outside
-  - id: old-town-cobblestone-walk
-    prompt: >-
-      walking down a cobblestone street in Vilnius old town, baroque church facade behind,
-      beige trench coat, scarf, holding a paper coffee cup, overcast soft light
+    prompt: "seated in a large dark-red velvet throne-like armchair, legs crossed, black dress, dim moody lighting, camera at seat height"
+  - id: leather-gloves-close
+    prompt: "close-up of her pulling on black leather gloves, cold stare at the camera, dark background"
+  - id: leather-trench-street
+    prompt: "walking toward the camera on a wet-free night street, belted black leather trench coat, knee-high boots, city lights"
+  - id: marble-staircase-red-gown
     aspect: "9:16"
-  - id: old-town-evening-dress
-    prompt: >-
-      standing in an old town archway in the evening, fitted black midi dress, small
-      shoulder bag, warm street lamps glowing behind, relaxed half smile
-  - id: gediminas-hill-view
-    prompt: >-
-      standing on a hill viewpoint above Vilnius with red rooftops behind her, windbreaker
-      jacket, hair blowing, golden late afternoon light
+    prompt: "descending a marble staircase in a long red evening gown, hand on the railing, grand hotel lobby"
+  - id: glass-desk-office
+    prompt: "sitting behind a large glass desk, white silk blouse, pen in hand, Dubai skyline window behind, looking up at the camera"
+  - id: private-jet-cabin
+    prompt: "seated in a cream leather seat of a private jet, black turtleneck, champagne glass, window light"
+  - id: terrace-morning-coffee
+    prompt: "on a penthouse terrace in the morning, silk blouse, coffee cup, sunglasses, soft sunlight"
+  - id: hotel-lobby-walk
     aspect: "9:16"
-  - id: neris-river-run
-    prompt: >-
-      running along the Neris river embankment at sunrise, fitted running top and leggings,
-      ponytail, focused expression, mist on the water, side tracking shot
-  - id: gym-mirror-selfie
-    prompt: >-
-      mirror selfie in a modern gym, black sports top and grey leggings, ponytail,
-      smartphone in hand, slightly sweaty, bright fluorescent light, dumbbell rack behind
-  - id: gym-deadlift
-    prompt: >-
-      lifting a barbell off the floor in a gym, chalk on her hands, focused look, sports
-      top and shorts, side view, hard overhead light
+    prompt: "walking through a luxury hotel lobby, black suit, heels, people blurred in the background"
+  - id: dinner-candle-light
+    prompt: "seated at a fine dining table, black dress, candle light, untouched dessert in front of her, slight smirk"
+  - id: desert-camp-shawl
+    prompt: "sitting on cushions in a desert camp at sunset, black shawl over her shoulders, lanterns, warm light"
+  - id: palm-island-view
     aspect: "9:16"
-  - id: hiking-forest-trail
-    prompt: >-
-      hiking on a forest trail in Lithuania, rain jacket, hiking boots, small backpack,
-      pausing to look back over her shoulder, soft green light through pine trees
-  - id: palanga-beach-sunset
-    prompt: >-
-      walking barefoot on the sand at Palanga beach at sunset, white one-piece swimsuit
-      with a light linen shirt open over it, Baltic Sea behind, long golden light
+    prompt: "standing on a balcony overlooking the palm-shaped island in Dubai, white dress, wind in her hair, daylight"
+  - id: art-gallery
+    prompt: "standing in a modern art gallery in front of a large abstract painting, black blazer, arms crossed"
+  - id: spa-robe-lounge
+    prompt: "relaxing in a spa lounge in a thick white robe belted closed, cucumber water, calm expression"
+  - id: gym-power-pose
+    prompt: "in a modern gym, black sports top and leggings, standing with hands on hips, mirror wall, bright light"
+  - id: winter-memory-siberia
     aspect: "9:16"
-  - id: nida-dunes-wind
-    prompt: >-
-      standing on the great sand dunes of Nida, wide linen trousers and a white top, hair
-      blowing in strong wind, pale sky, wide landscape with the lagoon below
-  - id: baltic-swimsuit-pier
-    prompt: >-
-      sitting at the end of a wooden pier on the Baltic coast, navy two-piece swimsuit,
-      legs dangling over the water, sunglasses pushed up in her hair, bright summer day
-  - id: train-window-europe
-    prompt: >-
-      sitting by the window of a European train, laptop closed on the table, looking out at
-      green countryside, denim jacket, headphones around her neck, soft passing light
-  - id: lisbon-tram-street
-    prompt: >-
-      on a steep tiled street in Lisbon next to a yellow tram, light summer dress and
-      sunglasses, camera bag over one shoulder, hard midday sun and warm colors
+    prompt: "old-money winter look: black coat with fur-trimmed hood, snowy birch forest, cold blue light"
+  - id: sunset-pool-edge
+    prompt: "sitting at an infinity pool edge in a black one-piece swimsuit with both straps visible, Dubai skyline at sunset"
+  - id: chess-game
+    prompt: "playing chess at a marble table, black dress, looking at the camera instead of the board, dim warm light"
+  - id: elevator-glass-city
     aspect: "9:16"
-  - id: rooftop-dinner-evening
-    prompt: >-
-      seated at a rooftop restaurant table in the evening, elegant emerald dress, wine glass
-      untouched, city lights beginning to glow behind her, candle light
-  - id: board-game-night
-    prompt: >-
-      at a living room table with friends' hands and a board game spread out, glasses on,
-      holding a card and smirking, warm lamp light, cozy evening
-  - id: airport-gate-laptop
-    prompt: >-
-      sitting on the floor near an airport gate charging socket, laptop on her knees, small
-      cabin bag beside her, hoodie, big window with planes behind
+    prompt: "standing in a glass elevator rising over the city at night, black suit, reflection in the glass"
+  - id: bookshelf-library
+    prompt: "in a private library, reading glasses, holding an open book, tall bookshelves, warm lamp light"
+  - id: mirror-earrings
+    prompt: "fastening diamond earrings in a hotel suite mirror, black evening dress, soft light"
+  - id: sports-car-wheel
+    prompt: "sitting behind the wheel of a sports car, sunglasses, black leather jacket, desert highway outside"
+  - id: balcony-night-wine
     aspect: "9:16"
+    prompt: "leaning on a balcony rail at night with a glass of red wine, black dress, skyline lights"
+  - id: red-soled-heels-stairs
+    prompt: "sitting on outdoor marble stairs, black suit, red-soled heels in focus in the foreground, low camera angle"
