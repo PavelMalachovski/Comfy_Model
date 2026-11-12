@@ -78,9 +78,9 @@ def test_versions_env_pins():
         if line and not line.startswith("#"):
             k, _, v = line.partition("=")
             pins[k] = v
-    assert set(pins) == {"COMFYUI_TAG", "IMPACT_PACK_COMMIT", "IMPACT_SUBPACK_COMMIT", "AI_TOOLKIT_COMMIT"}
+    assert set(pins) == {"COMFYUI_TAG", "IMPACT_PACK_COMMIT", "IMPACT_SUBPACK_COMMIT", "AI_TOOLKIT_COMMIT", "SEEDVR2_COMMIT"}
     assert pins["COMFYUI_TAG"].startswith("v")
-    for k in ("IMPACT_PACK_COMMIT", "IMPACT_SUBPACK_COMMIT", "AI_TOOLKIT_COMMIT"):
+    for k in ("IMPACT_PACK_COMMIT", "IMPACT_SUBPACK_COMMIT", "AI_TOOLKIT_COMMIT", "SEEDVR2_COMMIT"):
         assert len(pins[k]) == 40 and all(c in "0123456789abcdef" for c in pins[k]), k
 
 
@@ -180,3 +180,23 @@ def test_bootstrap_full_run_simulated(tmp_path):
     comfy_env = json.loads(envdump.read_text())
     assert "RUNPOD_API_KEY" not in comfy_env and "HF_TOKEN" not in comfy_env
     assert "COMFY_URL" in comfy_env
+
+
+def _downloads_for(manifest: Path | None) -> str:
+    env = {**os.environ, "CM_PY": sys.executable}
+    if manifest is not None:
+        env["CM_MANIFEST"] = str(manifest)
+    r = subprocess.run(["bash", str(BOOTSTRAP), "--print-downloads"],
+                       capture_output=True, text=True, env=env, timeout=30)
+    assert r.returncode == 0, r.stderr
+    return r.stdout
+
+
+def test_print_downloads_honours_cm_manifest():
+    out = _downloads_for(REPO / "pod" / "bakeoff_models.yaml")
+    assert "z_image_bf16.safetensors" in out
+    assert "flux1-dev-fp8" not in out
+
+
+def test_print_downloads_defaults_to_production_manifest():
+    assert "flux1-dev-fp8" in _downloads_for(None)

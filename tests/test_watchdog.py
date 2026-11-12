@@ -227,3 +227,41 @@ def test_ssh_busy_default_checks_both_heartbeats(tmp_path, monkeypatch):
     os.utime(lora, (950.0, 950.0))
     assert ssh_busy(now=1000.0) is True  # lora-train heartbeat counts
     assert ssh_busy(now=950.0 + 601) is False
+
+
+# -- stuck job guard ----------------------------------------------------------------
+def test_stuck_guard_treats_a_hung_job_as_idle():
+    from comfy_model.watchdog import StuckGuard
+    t = [0.0]
+    queue = [("p1",)]
+    g = StuckGuard(lambda: queue[0], now=lambda: t[0], stuck_s=1800)
+    assert g() is True
+    t[0] = 1700
+    assert g() is True
+    t[0] = 1801
+    assert g() is False  # same prompt running for over 30 min
+
+
+def test_stuck_guard_resets_when_the_job_changes():
+    from comfy_model.watchdog import StuckGuard
+    t = [0.0]
+    queue = [("p1",)]
+    g = StuckGuard(lambda: queue[0], now=lambda: t[0], stuck_s=1800)
+    g()
+    t[0] = 1700
+    queue[0] = ("p2",)
+    assert g() is True
+    t[0] = 3000
+    assert g() is True  # p2 has run 1300 s only
+    queue[0] = None
+    assert g() is False  # empty queue
+
+
+def test_running_ids_parses_queue():
+    from comfy_model.watchdog import comfy_running_ids
+    srv = _serve(json.dumps({"queue_running": [[3, "abc", {}]], "queue_pending": [[4, "def", {}]]}).encode())
+    try:
+        assert comfy_running_ids(f"http://127.0.0.1:{srv.server_address[1]}") == ("abc",)
+    finally:
+        srv.shutdown()
+        srv.server_close()

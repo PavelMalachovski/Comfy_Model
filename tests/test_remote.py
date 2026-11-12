@@ -10,6 +10,8 @@ SSH_OPTS = [
     "-o", "StrictHostKeyChecking=accept-new",
     "-o", "UserKnownHostsFile=.cm/known_hosts",
     "-o", "ConnectTimeout=15",
+    "-o", "ServerAliveInterval=30",
+    "-o", "ServerAliveCountMax=6",
 ]
 
 
@@ -29,7 +31,7 @@ def test_rsync_argv():
         POD, [Path("pod/"), Path("workflows"), Path("src/comfy_model/watchdog.py")], "/workspace/cm/"
     )
     assert argv == [
-        "rsync", "-az", "--exclude=__pycache__",
+        "rsync", "-rlptDz", "--exclude=__pycache__",
         "-e", "ssh " + " ".join(SSH_OPTS) + " -p 40122",
         "pod", "workflows", "src/comfy_model/watchdog.py",
         "root@203.0.113.7:/workspace/cm/",

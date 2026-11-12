@@ -401,3 +401,48 @@ def test_cli_batch_timeout_exits_1_with_resume_hint(tmp_path, monkeypatch):
     assert res.exit_code == 1
     assert len(client.queued) == 1
     assert "still busy" in res.output and "re-run" in res.output
+
+
+def _marked_face_dir(tmp_path: Path) -> Path:
+    d = tmp_path / "alt"
+    d.mkdir()
+    g = json.loads(Path("workflows/face.json").read_text())
+    g["999"] = {"class_type": "Marker", "inputs": {}}
+    (d / "face.json").write_text(json.dumps(g))
+    return d
+
+
+def test_workflows_dir_selects_the_template(tmp_path):
+    client = FakeClient()
+    path = write_scenes(tmp_path, DESK, name="a.yaml")
+    run_batch("face", path, client, PROFILE, tmp_path / "o", workflows_dir=_marked_face_dir(tmp_path))
+    assert client.queued and all("999" in wf for wf in client.queued)
+
+
+def test_default_workflows_dir_is_repo_workflows(tmp_path):
+    client = FakeClient()
+    run_batch("face", write_scenes(tmp_path, DESK, name="a.yaml"), client, PROFILE, tmp_path / "o")
+    assert client.queued and all("999" not in wf for wf in client.queued)
+
+
+def test_missing_kind_in_workflows_dir_queues_nothing(tmp_path):
+    client = FakeClient()
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    with pytest.raises(ValueError, match="not found"):
+        run_batch("face", write_scenes(tmp_path, DESK, name="a.yaml"), client, PROFILE, tmp_path / "o",
+                  workflows_dir=empty)
+    assert client.queued == []
+
+
+def test_cli_batch_uses_profile_option(tmp_path, monkeypatch):
+    fake = FakeClient()
+    monkeypatch.setattr(cli_mod, "_make_client", lambda url: fake)
+    prof = tmp_path / "p.yaml"
+    text = Path("character/profile.yaml").read_text().replace("37-year-old woman", "37-year-old woman PROBEMARK", 1)
+    prof.write_text(text)
+    scenes = write_scenes(tmp_path, DESK)
+    res = CliRunner().invoke(app, ["batch", "photo", str(scenes), "--out", str(tmp_path / "o"),
+                                   "--url", "http://x", "--lora", "r.safetensors", "--profile", str(prof)])
+    assert res.exit_code == 0, res.output
+    assert "PROBEMARK" in (tmp_path / "o" / "manifest.jsonl").read_text()

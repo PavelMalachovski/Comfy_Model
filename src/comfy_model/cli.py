@@ -1,6 +1,7 @@
 """`cm` entry point: batch, export, pod (up|status|down|ssh), lora (prepare|train|status)."""
 from __future__ import annotations
 
+import re
 import shlex
 import signal
 import time
@@ -11,6 +12,7 @@ from typing import Iterator, Optional
 
 import typer
 
+from comfy_model import bakeoff
 from comfy_model import lora as lora_mod
 from comfy_model import remote, runpod_pod
 from comfy_model.batch import run_batch
@@ -18,6 +20,7 @@ from comfy_model.comfy_client import ComfyClient, ComfyError
 from comfy_model.config import ConfigError, Secrets, load_secrets, load_settings
 from comfy_model.export import export_image
 from comfy_model.profile import load_profile
+from comfy_model.refine import refine_dataset
 from comfy_model.runpod_pod import PodError, PodInfo
 from comfy_model.scenes import SceneError
 
@@ -83,6 +86,9 @@ def batch(
     lora: Optional[str] = typer.Option(None, "--lora", help="LoRA file name on the pod (photo)."),
     strength: float = typer.Option(0.9, "--strength", help="LoRA strength (photo)."),
     url: Optional[str] = typer.Option(None, "--url", help="ComfyUI URL (default: running pod)."),
+    workflows: Path = typer.Option(Path("workflows"), "--workflows", help="Directory of workflow templates."),
+    profile_path: Path = typer.Option(Path("character/profile.yaml"), "--profile",
+                                      help="Persona profile YAML (e.g. a variant for a probe)."),
 ) -> None:
     """Generate every scene of SCENES; re-running skips outputs that already exist."""
     if kind not in ("face", "dataset", "photo", "video"):
@@ -98,12 +104,13 @@ def batch(
         typer.echo(f"{scene_id}: {done} done, {skipped} skipped, {failed} failed")
 
     try:
-        profile = load_profile()
+        profile = load_profile(profile_path)
         client = _make_client(base)
         try:
             report = run_batch(
                 kind, scenes, client, profile, out_dir,
                 ref_image=ref, lora=lora, lora_strength=strength, on_scene=progress,
+                workflows_dir=workflows,
             )
         finally:
             close = getattr(client, "close", None)
@@ -126,6 +133,55 @@ def batch(
         typer.echo(f"stopped: {report.aborted}", err=True)
     if report.failed or report.aborted:
         raise typer.Exit(1)
+
+
+bakeoff_app = typer.Typer(help="Compare base models blind on identical prompts.", no_args_is_help=True)
+app.add_typer(bakeoff_app, name="bakeoff")
+BAKEOFF_OUT = Path("out/bakeoff")
+
+
+@bakeoff_app.command("run")
+def bakeoff_run(
+    out: Path = typer.Option(BAKEOFF_OUT, "--out", help="Output dir; re-running resumes it."),
+    only: Optional[str] = typer.Option(None, "--only", help="Comma-separated candidates (default: all)."),
+    limit: Optional[int] = typer.Option(None, "--limit", help="At most N new frames per candidate."),
+    url: Optional[str] = typer.Option(None, "--url", help="ComfyUI URL (default: running pod)."),
+) -> None:
+    """Render every bake-off scene on each candidate; finished frames are skipped."""
+    names = only.split(",") if only else [c.name for c in bakeoff.CANDIDATES]
+    base = _resolve_url(url)
+    if base is None:
+        raise _fail(NO_POD)
+    client = _make_client(base)
+    try:
+        report = bakeoff.run_bakeoff(names, client, out, limit=limit, on_item=typer.echo)
+    except ValueError as e:  # SceneError and TemplateError included
+        raise _fail(str(e)) from None
+    except ComfyError as e:
+        raise _fail(f"aborted: {e}") from None
+    finally:
+        close = getattr(client, "close", None)
+        if close:
+            close()
+    typer.echo(f"total: {len(report.done)} done, {len(report.skipped)} skipped, {len(report.failed)} failed -> {out}")
+    for name, msg in report.failed:
+        typer.echo(f"  failed {name}: {msg}", err=True)
+    if report.aborted:
+        typer.echo(f"stopped: {report.aborted}", err=True)
+    if report.failed or report.aborted:
+        raise typer.Exit(1)
+
+
+@bakeoff_app.command("sheets")
+def bakeoff_sheets(
+    out: Path = typer.Option(BAKEOFF_OUT, "--out", help="Directory of a bake-off run."),
+) -> None:
+    """Build blind contact sheets; the letter key stays in <out>/key.json."""
+    try:
+        sheets = bakeoff.make_sheets(out)
+    except ValueError as e:
+        raise _fail(str(e)) from None
+    typer.echo(f"sheets: {sheets}  (choose a winner before opening {out / 'key.json'})")
 
 
 @app.command()
@@ -157,6 +213,18 @@ PREP_CMD = (
     "(export DEBIAN_FRONTEND=noninteractive; apt-get update -qq && apt-get install -y -qq rsync >/dev/null))"
 )
 BOOTSTRAP_CMD = "bash /workspace/cm/pod/bootstrap.sh"
+
+
+def bootstrap_cmd(models: Path | None) -> str:
+    """Bootstrap command line; ``models`` selects another manifest under pod/ (e.g. the bake-off's)."""
+    if models is None:
+        return BOOTSTRAP_CMD
+    posix = models.as_posix()
+    if not re.fullmatch(r"pod/[A-Za-z0-9_-]+\.yaml", posix):
+        raise ValueError(f"--models must be a pod/<name>.yaml path, got {posix}")
+    return f"CM_MANIFEST={REMOTE_DIR}{posix} {BOOTSTRAP_CMD}"
+
+
 # kill -0 alone could match an unrelated process reusing a pid from an old pidfile
 # (the pidfile lives on the persistent network volume).
 WATCHDOG_CHECK = (
@@ -251,7 +319,7 @@ def _wait_comfy(url: str) -> None:
             close()
 
 
-def _provision(pod_id: str, comfy_port: int) -> PodInfo:
+def _provision(pod_id: str, comfy_port: int, models: Path | None = None) -> PodInfo:
     info = runpod_pod.wait_ready(pod_id, comfy_port=comfy_port)
     _clear_known_hosts()
     runpod_pod.save_state(info)  # lets `cm pod down` find the pod if this process dies
@@ -259,7 +327,7 @@ def _provision(pod_id: str, comfy_port: int) -> PodInfo:
     _wait_ssh(info)
     _remote_ok(remote.ssh_argv(info, PREP_CMD), "preparing /workspace/cm on the pod")
     _remote_ok(remote.rsync_argv(info, SYNC_PATHS, REMOTE_DIR), "rsync to the pod")
-    _remote_ok(remote.ssh_argv(info, BOOTSTRAP_CMD), "pod bootstrap")
+    _remote_ok(remote.ssh_argv(info, bootstrap_cmd(models)), "pod bootstrap")
     if remote.run(remote.ssh_argv(info, WATCHDOG_CHECK)) != 0:
         raise _UpError("watchdog is not running on the pod (see /workspace/.cm/watchdog.out); "
                        "refusing to leave an unsupervised pod")
@@ -282,8 +350,18 @@ def _teardown(pod_id: str, secrets: Secrets) -> None:
 
 
 @pod_app.command("up")
-def pod_up() -> None:
+def pod_up(
+    models: Optional[Path] = typer.Option(
+        None, "--models", help="Model manifest under pod/ (default pod/models.yaml)."),
+) -> None:
     """Create the pod, sync files, bootstrap ComfyUI + watchdog, wait until ComfyUI answers."""
+    if models is not None:
+        try:
+            bootstrap_cmd(models)
+        except ValueError as e:
+            raise _fail(str(e)) from None
+        if not models.is_file():
+            raise _fail(f"model manifest not found: {models}")
     try:
         settings = load_settings()
         secrets = _configure()
@@ -307,7 +385,7 @@ def pod_up() -> None:
 
         try:
             typer.echo(f"created pod {pod_id}; waiting for it to start ...")
-            info = _provision(pod_id, settings.comfy_port)
+            info = _provision(pod_id, settings.comfy_port, models)
         except (Exception, KeyboardInterrupt) as e:
             msg = str(e) if isinstance(e, _UpError) else f"{type(e).__name__}: {e}"
             _echo_err(_redact(f"error: {msg}", secrets))
@@ -422,7 +500,7 @@ def lora_prepare(
     except (ValueError, OSError) as e:
         raise _fail(str(e)) from None
     typer.echo(f"prepared {count} images + captions in {dest}")
-    typer.echo("next: cm pod up (if no pod is running), then cm lora train")
+    typer.echo("next: cm pod up (if no pod is running), then cm lora train --base flux|qwen")
 
 
 def _remote_step(argv: list[str], what: str) -> None:
@@ -431,18 +509,53 @@ def _remote_step(argv: list[str], what: str) -> None:
         raise _fail(f"{what} failed (exit {rc})")
 
 
+@lora_app.command("refine")
+def lora_refine(
+    src: Path = typer.Argument(..., help="Culled dataset directory."),
+    out: Path = typer.Option(..., "--out", help="Directory for the refined copies."),
+    url: Optional[str] = typer.Option(None, "--url", help="ComfyUI URL (default: running pod)."),
+    graph: Path = typer.Option(Path("workflows/qwen/refine.json"), "--graph",
+                               help="Per-image graph, e.g. workflows/qwen/seedvr.json for the detail upscale."),
+) -> None:
+    """Restore skin texture on a culled dataset with a low-denoise Qwen pass (or another --graph)."""
+    base = _resolve_url(url)
+    if base is None:
+        raise _fail(NO_POD)
+    client = _make_client(base)
+    try:
+        report = refine_dataset(src, out, client, on_item=typer.echo, graph_path=graph)
+    except ValueError as e:
+        raise _fail(str(e)) from None
+    except ComfyError as e:
+        raise _fail(f"aborted: {e}") from None
+    finally:
+        close = getattr(client, "close", None)
+        if close:
+            close()
+    typer.echo(f"total: {len(report.done)} done, {len(report.skipped)} skipped, {len(report.failed)} failed -> {out}")
+    for name, msg in report.failed:
+        typer.echo(f"  failed {name}: {msg}", err=True)
+    if report.aborted:
+        typer.echo(f"stopped: {report.aborted}", err=True)
+    if report.failed or report.aborted:
+        raise typer.Exit(1)
+
+
 @lora_app.command("train")
 def lora_train(
     version: int = typer.Option(1, "--version", min=1, help="LoRA version; output is <trigger>_v<N>."),
     force: bool = typer.Option(False, "--force", help=f"Train even if the pod is older than {MAX_POD_AGE_MIN} min."),
+    base: str = typer.Option("flux", "--base", help="Base model: flux or qwen."),
 ) -> None:
     """Upload dataset + config, start ai-toolkit training detached on the pod (~2 h)."""
+    if base not in lora_mod.TEMPLATES:
+        raise _fail(f"unknown base {base!r}; expected one of: {', '.join(lora_mod.TEMPLATES)}")
     try:
         profile = load_profile()
         hf_token = load_secrets().get("HF_TOKEN")
     except (ValueError, ConfigError) as e:
         raise _fail(str(e)) from None
-    if not hf_token:
+    if base == "flux" and not hf_token:  # Qwen-Image is not gated
         raise _fail(
             "HF_TOKEN is missing: FLUX.1-dev is a gated model. Accept the FLUX.1-dev license on "
             "Hugging Face (black-forest-labs/FLUX.1-dev), create a read token and put "
@@ -455,7 +568,7 @@ def lora_train(
     if not all(p.exists() for p in TRAIN_SYNC_PATHS):
         raise _fail("run `cm lora train` from the repository root; missing: pod/")
     try:
-        config_text = lora_mod.render_training_config(profile, version)
+        config_text = lora_mod.render_training_config(profile, version, lora_mod.TEMPLATES[base])
     except ValueError as e:
         raise _fail(str(e)) from None
 

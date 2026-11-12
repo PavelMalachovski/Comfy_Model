@@ -1,0 +1,47 @@
+# Models for `cm bakeoff`, on a temporary volume: `cm pod up --models pod/bakeoff_models.yaml`.
+# Apache 2.0 / MIT candidates only; production models stay in pod/models.yaml.
+models:
+  - file: qwen_image_2512_fp8_e4m3fn.safetensors
+    dest: diffusion_models
+    repo: Comfy-Org/Qwen-Image_ComfyUI
+    path: split_files/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors
+
+  - file: qwen_2.5_vl_7b_fp8_scaled.safetensors
+    dest: text_encoders
+    repo: Comfy-Org/Qwen-Image_ComfyUI
+    path: split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors
+
+  - file: qwen_image_vae.safetensors
+    dest: vae
+    repo: Comfy-Org/Qwen-Image_ComfyUI
+    path: split_files/vae/qwen_image_vae.safetensors
+
+  - file: z_image_bf16.safetensors
+    dest: diffusion_models
+    repo: Comfy-Org/z_image
+    path: split_files/diffusion_models/z_image_bf16.safetensors
+
+  - file: z_image_turbo_bf16.safetensors
+    dest: diffusion_models
+    repo: Comfy-Org/z_image_turbo
+    path: split_files/diffusion_models/z_image_turbo_bf16.safetensors
+
+  - file: qwen_3_4b.safetensors
+    dest: text_encoders
+    repo: Comfy-Org/z_image_turbo
+    path: split_files/text_encoders/qwen_3_4b.safetensors
+
+  - file: ae.safetensors
+    dest: vae
+    repo: Comfy-Org/z_image_turbo
+    path: split_files/vae/ae.safetensors
+
+  - file: hidream_o1_image_bf16.safetensors
+    dest: checkpoints
+    repo: Comfy-Org/HiDream-O1-Image
+    path: checkpoints/hidream_o1_image_bf16.safetensors
+
+  - file: face_yolov8m.pt
+    dest: ultralytics/bbox
+    repo: Bingsu/adetailer
+    path: face_yolov8m.pt

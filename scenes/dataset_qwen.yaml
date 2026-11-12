@@ -1,0 +1,86 @@
+# 30 edit instructions for the Qwen-Image-Edit dataset; a subset of scenes/dataset.yaml.
+# Run with the chosen face and --workflows workflows/qwen.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: front-closeup-neutral
+  prompt: Keep the same woman's face and identity, close-up portrait from the front, neutral expression, soft window light,
+    plain wall background.
+- id: front-closeup-smirk
+  prompt: Keep the same woman's face and identity, close-up portrait from the front, slight smirk, studio softbox light, dark
+    background.
+- id: left-profile-closeup
+  prompt: Keep the same woman's face and identity, left side profile close-up, hair tied in a high ponytail, soft daylight.
+- id: right-profile-closeup
+  prompt: Keep the same woman's face and identity, right side profile close-up, hair down, warm evening light.
+- id: three-quarter-left-portrait
+  prompt: Keep the same woman's face and identity, three-quarter view from the left, head and shoulders, black turtleneck,
+    studio light.
+- id: three-quarter-right-portrait
+  prompt: Keep the same woman's face and identity, three-quarter view from the right, head and shoulders, white shirt, window
+    light.
+- id: looking-down-camera-low
+  prompt: Keep the same woman's face and identity, head and shoulders seen from slightly below, she looks down at the camera,
+    cold expression, plain ceiling behind.
+- id: looking-up-camera-high
+  prompt: Keep the same woman's face and identity, head and shoulders seen from slightly above, she looks up into the camera,
+    soft light.
+- id: half-body-power-suit
+  prompt: Keep the same woman's face and identity, half body, tailored black power suit, arms crossed, modern office, daylight.
+- id: half-body-evening-gown
+  prompt: Keep the same woman's face and identity, half body, black satin evening gown, penthouse at night with city lights
+    behind.
+- id: half-body-leather-trench
+  prompt: Keep the same woman's face and identity, half body, belted black leather trench coat, city street at dusk.
+- id: half-body-cashmere
+  prompt: Keep the same woman's face and identity, half body, beige cashmere sweater, cosy living room, warm lamp light.
+- id: half-body-sportswear
+  prompt: Keep the same woman's face and identity, half body, black sports top and jacket, modern gym, bright even light.
+- id: half-body-white-shirt
+  prompt: Keep the same woman's face and identity, half body, crisp white shirt with sleeves rolled up, kitchen with marble
+    counter, morning light.
+- id: full-body-power-suit-walk
+  prompt: Keep the same woman's face and identity, full body, walking toward the camera in a black power suit and heels, office
+    corridor.
+- id: full-body-gown-stairs
+  prompt: Keep the same woman's face and identity, full body, standing on a marble staircase in a long red evening gown.
+- id: full-body-trench-street
+  prompt: Keep the same woman's face and identity, full body, black leather trench coat and knee-high boots, standing on a
+    night street.
+- id: full-body-desert
+  prompt: Keep the same woman's face and identity, full body, flowing black dress, standing on a desert dune at sunset, wind
+    in her hair.
+- id: full-body-yacht
+  prompt: Keep the same woman's face and identity, full body, white linen trousers and black top, standing on a yacht deck,
+    bright sun, sea behind.
+- id: full-body-armchair
+  prompt: Keep the same woman's face and identity, full body, seated in a large velvet armchair, legs crossed, black dress,
+    dim room.
+- id: swimsuit-pool-edge
+  prompt: Keep the same woman's face and identity, half body, black one-piece swimsuit with both straps visible, sitting at
+    a pool edge, Dubai skyline behind, daylight.
+- id: office-desk
+  prompt: Keep the same woman's face and identity, half body, seated behind a large glass desk, white blouse, skyline window
+    behind.
+- id: gloves-close
+  prompt: Keep the same woman's face and identity, close-up, pulling on black leather gloves, focused expression, dark background.
+- id: sunglasses-street
+  prompt: Keep the same woman's face and identity, head and shoulders, oversized sunglasses, bright Dubai street, midday sun.
+- id: hair-down-studio
+  prompt: Keep the same woman's face and identity, head and shoulders, hair loose over one shoulder, studio grey backdrop,
+    soft light.
+- id: hair-up-evening
+  prompt: Keep the same woman's face and identity, head and shoulders, hair in a sleek bun, pearl earrings, evening light.
+- id: terrace-coffee
+  prompt: Keep the same woman's face and identity, half body, holding a coffee cup on a penthouse terrace, morning sun, silk
+    blouse.
+- id: winter-coat-siberia
+  prompt: Keep the same woman's face and identity, head and shoulders, fur-trimmed winter hood, snowy forest background, cold
+    daylight.
+- id: night-skyline-balcony
+  prompt: Keep the same woman's face and identity, half body, leaning on a balcony rail at night, Dubai skyline lights, black
+    dress.
+- id: laughing-candid
+  prompt: Keep the same woman's face and identity, half body, candid laugh, sitting at a cafe table, daylight, beige blouse.

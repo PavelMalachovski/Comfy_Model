@@ -1,0 +1,31 @@
+# Detail probe: phone-camera look (deep focus, everyday light), then SeedVR2 upscale
+# (`cm lora refine ... --graph workflows/qwen/seedvr.json`) and scripts/phone_finish.py.
+defaults:
+  tier: instagram
+  aspect: '9:16'
+  count: 1
+scenes:
+- id: detail-locker-mirror
+  seed: 9601
+  prompt: mirror selfie in a gym locker room shot on an iPhone, grey fitted cropped t-shirt and black leggings, harsh overhead
+    fluorescent ceiling light, grey lockers and benches behind her, everything in sharp focus, no background blur, face and
+    upper body close to the mirror
+- id: detail-car-closeup
+  seed: 9101
+  aspect: '4:5'
+  prompt: close-up front camera selfie in the driver's seat of a car, wide angle phone lens, flat midday daylight through
+    the windshield, black top, car interior in sharp focus behind her, no background blur, face fills most of the frame
+- id: detail-bathroom-fluorescent
+  seed: 9701
+  aspect: '4:5'
+  prompt: close-up mirror selfie in a hotel bathroom under bright white vanity lights, white robe, hair tied back, phone partly
+    visible, tiles in sharp focus, no background blur, face fills most of the frame
+- id: detail-restaurant-flash
+  seed: 9801
+  aspect: '4:5'
+  prompt: close-up photo taken with direct phone flash at night in a busy restaurant, black silk blouse, people and tables
+    behind her in focus, no background blur, slightly overexposed skin highlights from the flash
+- id: detail-crowd-event
+  seed: 9901
+  prompt: photo at an evening event in a crowd, she looks back over her shoulder at the camera and smiles, black fitted dress,
+    colorful stage lights and people behind her, wide angle phone lens, everything in focus, no background blur

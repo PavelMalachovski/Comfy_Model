@@ -1,0 +1,33 @@
+# Second LoRA round: skin, the low-angle chair and two new looks.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+scenes:
+- id: armchair-from-floor
+  count: 2
+  seed: 8101
+  prompt: photo taken from the floor, extreme low angle looking straight up at her, her crossed legs and black heels large
+    in the foreground, she sits in a deep black leather armchair in her living room at night, black silk blouse and tailored
+    black trousers, warm lamp light, ceiling visible above her, she stares down into the lens with a cold confident gaze
+- id: domina-armchair
+  count: 2
+  seed: 8201
+  prompt: seated in a high-backed dark leather armchair in a dim private study, tailored black leather jacket over a black
+    high-neck dress, long black leather gloves, knee-high leather boots, legs crossed, one hand resting on the armrest, commanding
+    posture, cold confident stare at the camera, warm low lamp light, low camera angle
+- id: home-nightgown-morning
+  count: 2
+  seed: 8301
+  prompt: at home in the early morning, standing by the bedroom window, long opaque black silk nightgown with thin straps
+    and a matching robe loosely on her shoulders, coffee cup in hand, soft daylight, unmade bed behind her, relaxed candid
+    moment, looking at the camera
+- id: glass-desk-office
+  count: 1
+  seed: 8401
+  prompt: sitting behind a large glass desk, white silk blouse, pen in hand, Dubai skyline window behind, looking up at the
+    camera
+- id: yacht-deck-white-linen
+  count: 1
+  seed: 8501
+  prompt: sitting on the deck of a luxury yacht, white linen shirt and black trousers, sunglasses in hand, turquoise sea,
+    bright midday light

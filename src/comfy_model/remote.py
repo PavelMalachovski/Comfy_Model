@@ -18,6 +18,9 @@ def _ssh_opts(connect_timeout: int = 15) -> list[str]:
         "-o", "StrictHostKeyChecking=accept-new",
         "-o", f"UserKnownHostsFile={KNOWN_HOSTS}",
         "-o", f"ConnectTimeout={connect_timeout}",
+        # a vanished pod must end the session, not hang `cm pod up` while billing
+        "-o", "ServerAliveInterval=30",
+        "-o", "ServerAliveCountMax=6",
     ]
 
 
@@ -37,7 +40,7 @@ def rsync_argv(pod: PodInfo, local: list[Path], remote_dir: str) -> list[str]:
     into ``remote_dir`` on the pod."""
     ssh = " ".join(["ssh", *_ssh_opts(), "-p", str(pod.ssh_port)])
     return [
-        "rsync", "-az", "--exclude=__pycache__", "-e", ssh,
+        "rsync", "-rlptDz", "--exclude=__pycache__", "-e", ssh,  # -a without -o -g: the network volume refuses chown
         *(str(Path(p)) for p in local),
         f"root@{pod.ssh_host}:{remote_dir}",
     ]

@@ -1,0 +1,32 @@
+# LoRA verification: run with --workflows workflows/qwen and --lora.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: penthouse-skyline-gown
+  prompt: standing at the floor-to-ceiling window of a Dubai penthouse, black satin evening gown, city skyline at dusk behind
+    her, looking back over her shoulder, camera slightly below eye level
+  seed: 7001
+- id: boardroom-head-of-table
+  prompt: standing at the head of a long boardroom table, tailored black power suit, hands resting on the table, glass walls,
+    cold daylight
+  seed: 14002
+- id: yacht-deck-white-linen
+  prompt: sitting on the deck of a luxury yacht, white linen shirt and black trousers, sunglasses in hand, turquoise sea,
+    bright midday light
+  seed: 21003
+- id: glass-desk-office
+  prompt: sitting behind a large glass desk, white silk blouse, pen in hand, Dubai skyline window behind, looking up at the
+    camera
+  seed: 28004
+- id: mirror-selfie-home
+  prompt: amateur iPhone mirror selfie, half-body shot with the whole face visible, phone in a plain black case with no logos
+    held low to the side, dim bedroom at night, warm bedside lamp, black silk blouse, casual unposed, cold confident gaze,
+    slight grain
+  seed: 35005
+- id: home-armchair-low-angle
+  prompt: seated in a deep black leather armchair in her modern living room at home, legs crossed, black silk blouse and tailored
+    black trousers, warm evening lamp light, camera very low near the floor looking up at her, she looks down into the lens
+    with a cold confident gaze
+  seed: 42006

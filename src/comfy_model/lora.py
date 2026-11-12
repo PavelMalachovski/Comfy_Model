@@ -18,9 +18,13 @@ IMAGE_EXTS = (".png", ".jpg", ".jpeg", ".webp")
 MANIFEST_NAME = "manifest.jsonl"
 DEFAULT_CAPTION = "a photo of a woman"
 TEMPLATE_PATH = Path("training/lora_flux.yaml")
+TEMPLATES: dict[str, Path] = {"flux": TEMPLATE_PATH, "qwen": Path("training/lora_qwen.yaml")}
 # Every scenes/dataset.yaml instruction starts with this Kontext edit phrase; it says
 # nothing about the image, so it is not part of the training caption.
-_KONTEXT_PREFIX = re.compile(r"^keep the same woman's face and identity,\s*", re.IGNORECASE)
+_KONTEXT_PREFIX = re.compile(
+    r"^(?:keep the same woman's face and identity,\s*)?(?:the same [^,]*age, eyes, nose, lips and jawline,\s*)?",
+    re.IGNORECASE,
+)
 
 REMOTE_DATASET_ROOT = "/workspace/dataset"
 REMOTE_TRAINING_DIR = "/workspace/cm/training"
@@ -56,6 +60,18 @@ def _manifest_prompts(src_dir: Path) -> dict[str, str]:
     return out
 
 
+def _strip_profile(caption: str, profile: Profile) -> str:
+    """Drop the trigger/appearance prefix and style suffix a `cm batch photo` prompt carries."""
+    norm = lambda t: " ".join(t.split())  # noqa: E731
+    for head in (f"{profile.trigger}, ", f"{norm(profile.appearance)}, "):
+        if caption.startswith(head):
+            caption = caption[len(head):]
+    tail = f", {norm(profile.style_suffix)}"
+    if caption.endswith(tail):
+        caption = caption[: -len(tail)]
+    return caption
+
+
 def prepare_dataset(src_dir: Path, dest_dir: Path, profile: Profile) -> int:
     """Copy the curated images of ``src_dir`` to ``dest_dir/img_NNN.<ext>`` with a
     ``img_NNN.txt`` caption each. Returns the image count (15-60 or ValueError)."""
@@ -71,7 +87,7 @@ def prepare_dataset(src_dir: Path, dest_dir: Path, profile: Profile) -> int:
             f"found {len(images)} image(s) in {src_dir}; a LoRA dataset needs "
             f"{MIN_IMAGES}-{MAX_IMAGES} (delete more of the weak ones, or generate more)"
         )
-    prompts = _manifest_prompts(src_dir)
+    prompts = {k: _strip_profile(v, profile) for k, v in _manifest_prompts(src_dir).items()}
     dest_dir.mkdir(parents=True, exist_ok=True)
     for old in dest_dir.glob("img_*"):  # earlier run: keep numbering consistent
         if old.is_file():
@@ -102,7 +118,7 @@ def _fill(node: Any, values: dict[str, str], prompts: list[str]) -> Any:
 
 
 def render_training_config(profile: Profile, version: int, template: Path = TEMPLATE_PATH) -> str:
-    """ai-toolkit YAML for ``<trigger>_v<version>``, from ``training/lora_flux.yaml``."""
+    """ai-toolkit YAML for ``<trigger>_v<version>`` from a template in ``training/``."""
     try:
         raw = yaml.safe_load(Path(template).read_text(encoding="utf-8"))
     except FileNotFoundError:

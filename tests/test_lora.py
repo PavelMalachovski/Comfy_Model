@@ -301,7 +301,7 @@ STUB_CURL = '#!/bin/bash\necho "$@" >> "$CM_STUB_CURL_LOG"\n[ -z "$CM_STUB_CURL_
 
 
 def _sim_train(tmp_path, token: str | None = "hf_SIM", fail: bool = False, no_output: bool = False,
-               curl_fail: bool = False, extra_environ: bytes = b""):
+               curl_fail: bool = False, extra_environ: bytes = b"", config: str = "x: 1\n"):
     ws = tmp_path / "ws"
     pod = ws / "cm" / "pod"
     pod.mkdir(parents=True)
@@ -311,7 +311,7 @@ def _sim_train(tmp_path, token: str | None = "hf_SIM", fail: bool = False, no_ou
     (pod / "train_lora.sh").write_text(text)
     shutil.copy(REPO / "pod" / "versions.env", pod / "versions.env")
     (ws / "cm" / "training").mkdir()
-    (ws / "cm" / "training" / "ohwxroxana_v1.yaml").write_text("x: 1\n")
+    (ws / "cm" / "training" / "ohwxroxana_v1.yaml").write_text(config)
     (ws / "dataset" / "ohwxroxana").mkdir(parents=True)
     (ws / "ComfyUI" / "models").mkdir(parents=True)
     bindir = tmp_path / "bin"
@@ -451,3 +451,80 @@ def test_cli_train_state_for_other_pod_is_ignored(tmp_path, monkeypatch, fake_re
     _write_pod_state(tmp_path, 500, pod_id="someone-else")
     r = CliRunner().invoke(app, ["lora", "train"])
     assert r.exit_code == 0, r.output
+
+
+# -- Qwen base ------------------------------------------------------------------
+def test_qwen_training_config():
+    cfg = yaml.safe_load(lora.render_training_config(PROFILE, 1, lora.TEMPLATES["qwen"]))
+    p = cfg["config"]["process"][0]
+    assert p["model"]["name_or_path"] == "Qwen/Qwen-Image-2512" and p["model"]["arch"] == "qwen_image"
+    assert p["model"]["qtype"] == "qfloat8" and p["train"]["steps"] == 2000
+    assert p["trigger_word"] == "ohwxroxana" and "{{" not in yaml.safe_dump(cfg)
+
+
+def test_flux_stays_the_default_template():
+    assert lora.TEMPLATES["flux"] == lora.TEMPLATE_PATH
+
+
+def test_cli_train_qwen_needs_no_hf_token(tmp_path, monkeypatch, fake_remote):
+    _train_cwd(tmp_path, monkeypatch)
+    monkeypatch.setattr(cli, "load_secrets", lambda: Secrets())
+    r = CliRunner().invoke(app, ["lora", "train", "--base", "qwen"])
+    assert r.exit_code == 0, r.output
+    assert any("train_lora.sh" in a[-1] for a in fake_remote if a[0] == "ssh")
+
+
+def test_cli_train_unknown_base_syncs_nothing(tmp_path, monkeypatch, fake_remote):
+    _train_cwd(tmp_path, monkeypatch)
+    r = CliRunner().invoke(app, ["lora", "train", "--base", "sdxl"])
+    assert r.exit_code == 1 and "sdxl" in r.output
+    assert fake_remote == []
+
+
+def test_train_script_skips_hf_check_for_qwen(tmp_path):
+    r, _ = _sim_train(tmp_path, token=None, config="model:\n  name_or_path: Qwen/Qwen-Image-2512\n")
+    assert "HF_TOKEN" not in r.stderr
+
+
+def test_train_script_checks_qwen_imports_before_training():
+    # A broken ai-toolkit environment must fail before the 58 GB download, not after.
+    text = TRAIN_SCRIPT.read_text()
+    check = text.index("extensions_built_in.diffusion_models.qwen_image")
+    assert check < text.index('run.py "$CONFIG_DIR/$name.yaml"')
+
+
+def test_cli_prepare_hint_names_the_base(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+    shutil.copytree(REPO / "character", tmp_path / "character")
+    make_images(tmp_path / "src", 16)
+    r = CliRunner().invoke(app, ["lora", "prepare", "src"])
+    assert r.exit_code == 0, r.output
+    assert "--base" in r.output
+
+
+def test_qwen_guide_covers_retraining():
+    assert "--version 2" in (REPO / "docs" / "guide" / "09-qwen-lora.md").read_text()
+
+
+def test_prepare_strips_the_face_identity_phrase(tmp_path):
+    src = tmp_path / "src"
+    make_images(src, 16)
+    name = sorted(p.name for p in src.iterdir())[0]
+    (src / "manifest.jsonl").write_text(json.dumps({
+        "file": name, "prompt": "the same 37-year-old age, eyes, nose, lips and jawline, close-up portrait, daylight."}) + "\n")
+    dest = tmp_path / "d"
+    lora.prepare_dataset(src, dest, PROFILE)
+    assert (dest / "img_001.txt").read_text() == "ohwxroxana, close-up portrait, daylight."
+
+
+def test_prepare_strips_profile_from_photo_batch_captions(tmp_path):
+    """A `cm batch photo` manifest holds trigger + appearance + scene + style; the
+    caption keeps only the scene so the look binds to the trigger word."""
+    src, dest = tmp_path / "src", tmp_path / "dest"
+    make_images(src, 15)
+    full = PROFILE.photo_prompt("selfie in a car, black top", use_trigger=True)
+    (src / "manifest.jsonl").write_text(
+        json.dumps({"scene_id": "s01", "n": 1, "seed": 1, "prompt": full,
+                    "file": "s01_01.png", "kind": "photo"}) + "\n")
+    lora.prepare_dataset(src, dest, PROFILE)
+    assert (dest / "img_001.txt").read_text() == "ohwxroxana, selfie in a car, black top"

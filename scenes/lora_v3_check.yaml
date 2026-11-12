@@ -1,0 +1,31 @@
+# v3 check: round-5 scenes and seeds, realism profile (lips, hair, skin), then SeedVR2.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: selfie-bed-overhead
+  seed: 9001
+  prompt: close-up selfie taken from above while she lies on grey satin pillows in bed, morning daylight from the window,
+    beige tank top with thin straps, loose hair spread on the pillow, soft natural smile, face fills most of the frame
+- id: selfie-car-daylight
+  seed: 9101
+  prompt: close-up phone selfie in the driver's seat of a luxury car, daylight through the side window, black sunglasses pushed
+    up on her head, black top, relaxed half smile, face fills most of the frame
+- id: selfie-bathroom-mirror-close
+  seed: 9201
+  prompt: close-up mirror selfie in a marble bathroom, soft overhead light, white robe, hair tied back, phone partly visible,
+    face fills most of the frame
+- id: morning-window-close
+  seed: 9301
+  prompt: close-up portrait by a sunny window in the morning, black silk camisole under an open robe, coffee cup near her
+    chin, soft daylight on her face
+- id: gym-mirror-full-body
+  seed: 9401
+  prompt: full-body mirror selfie in a modern gym, black cropped sports top and high-waisted black leggings, white sneakers, camera held at waist height,
+    phone in one hand, dumbbell racks behind her, bright overhead light, head to toe in frame, standing straight showing her slim long legs and toned
+    stomach
+- id: home-mirror-full-body
+  seed: 9501
+  prompt: full-body mirror selfie in a hallway at home next to a tall door, fitted black sleeveless knee-length dress, black heels, camera held at waist height, head to toe in frame, phone in one hand, daylight,
+    standing straight showing her tall slender athletic figure and very long slim legs

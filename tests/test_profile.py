@@ -112,3 +112,22 @@ def test_bible_has_platform_bios():
     for platform in ("Instagram", "X", "Reddit", "Telegram", "Fanvue"):
         bio = re.search(rf"^### {platform}\n(.+?)(?=^### |\Z)", section, flags=re.M | re.S)
         assert bio and "AI-generated" in bio.group(1), platform
+
+
+def test_profile_is_the_chosen_look():
+    from comfy_model.profile import load_profile as lp
+    a = lp().appearance
+    assert a.startswith("37-year-old woman") and "strikingly attractive" in a and "slim oval face" in a
+
+
+def test_profile_style_is_a_real_photo_not_editorial():
+    from comfy_model.profile import load_profile as lp
+    p = lp()
+    assert "editorial" not in p.style_suffix and "photorealistic" not in p.style_suffix
+    assert "pores" in p.style_suffix and "smooth" not in p.appearance
+
+
+def test_profile_has_the_tall_athletic_body():
+    from comfy_model.profile import load_profile as lp
+    a = lp().appearance
+    assert "174 cm" in a and "athletic" in a and "curvy" not in a

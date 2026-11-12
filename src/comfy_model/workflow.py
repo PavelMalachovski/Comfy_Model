@@ -33,7 +33,7 @@ PLACEHOLDERS: dict[str, set[str]] = {
 # Input keys that name a model file inside ComfyUI/models/.
 MODEL_INPUT_KEYS = frozenset({
     "ckpt_name", "unet_name", "vae_name", "clip_name", "clip_name1", "clip_name2",
-    "lora_name", "model_name",
+    "lora_name", "model_name", "model",  # "model": SeedVR2 loaders (links are lists, skipped)
 })
 
 _PLACEHOLDER_RE = re.compile(r"^\{\{([A-Za-z_][A-Za-z0-9_]*)\}\}$")
@@ -227,10 +227,10 @@ def check_urls(specs: list[ModelSpec], hf_token: str | None = None, timeout_s: f
 
 def main(argv: list[str] | None = None) -> int:
     args = sys.argv[1:] if argv is None else argv
-    if args != ["--check-urls"]:
-        print("usage: python -m comfy_model.workflow --check-urls", file=sys.stderr)
+    if not args or args[0] != "--check-urls" or len(args) > 2:
+        print("usage: python -m comfy_model.workflow --check-urls [manifest]", file=sys.stderr)
         return 2
-    results = check_urls(load_manifest(), hf_token=load_secrets().get("HF_TOKEN") or None)
+    results = check_urls(load_manifest(*map(Path, args[1:])), hf_token=load_secrets().get("HF_TOKEN") or None)
     for r in results:
         mark = "ok  " if r.ok else "FAIL"
         status = r.status if r.status is not None else "---"

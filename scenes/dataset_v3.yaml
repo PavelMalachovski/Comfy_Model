@@ -1,0 +1,83 @@
+# LoRA v3 candidates: phone-camera look (deep focus, everyday light), rendered with LoRA v1,
+# then SeedVR2 (`cm lora refine --graph workflows/qwen/seedvr.json`) and scripts/phone_finish.py.
+# Mix: 12 close-ups, 10 half-body, 10 full-body.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+# -- close-ups ---------------------------------------------------------------------
+- id: cu-car-front-camera
+  prompt: close-up front camera selfie in the passenger seat of a car, wide angle phone lens, flat midday daylight, black top, car interior in sharp focus behind her, no background blur
+- id: cu-bathroom-vanity
+  prompt: close-up mirror selfie in a hotel bathroom under bright white vanity lights, white robe, hair tied back, tiles in sharp focus, no background blur
+- id: cu-office-fluorescent
+  prompt: close-up front camera selfie at an office desk under overhead fluorescent lights, navy blazer, desks and monitors in focus behind her, no background blur
+- id: cu-restaurant-flash
+  prompt: close-up photo with direct phone flash at night in a restaurant, black silk blouse, tables and people behind her in focus, slightly overexposed highlights from the flash
+- id: cu-window-overcast
+  prompt: close-up front camera selfie by a window on an overcast day, grey t-shirt, soft flat light, bedroom in focus behind her, no background blur
+- id: cu-elevator-mirror
+  prompt: close-up mirror selfie in a brass elevator under warm overhead spotlights, black turtleneck, phone in hand, elevator panel in focus
+- id: cu-street-sun
+  prompt: close-up front camera selfie on a sunny street with hard midday sun and small shadows under her brows, beige trench coat, buildings in focus behind her
+- id: cu-gym-locker
+  prompt: close-up mirror selfie in a gym locker room under harsh fluorescent ceiling light, grey fitted t-shirt, lockers in focus behind her, no background blur
+- id: cu-cafe-table
+  prompt: close-up front camera selfie at a cafe table, cream knit sweater, daylight from the street window, cafe interior and people in focus behind her
+- id: cu-night-taxi
+  prompt: close-up front camera selfie in the back seat of a taxi at night, city lights through the window, dim interior light on her face, black blazer, slight phone noise
+- id: cu-home-lamp
+  prompt: close-up front camera selfie at home in the evening under a warm ceiling lamp, black silk blouse, living room in focus behind her
+- id: cu-airport-lounge
+  prompt: close-up front camera selfie in an airport lounge under bright mixed lighting, white shirt, seats and windows in focus behind her, no background blur
+# -- half-body ---------------------------------------------------------------------
+- id: hb-kitchen-morning
+  prompt: half-body photo shot on a phone in a modern kitchen in the morning, oversized white shirt, coffee mug in hand, everything in sharp focus, daylight from the window
+- id: hb-hotel-lobby
+  prompt: half-body photo shot on a phone in a marble hotel lobby, black blazer over a white top, warm chandelier light, lobby in sharp focus behind her, no background blur
+- id: hb-rooftop-flash
+  prompt: half-body photo with direct phone flash at a rooftop bar at night, cocktail glass in hand, black satin dress, people behind her in focus
+- id: hb-gym-bench
+  prompt: half-body photo shot on a phone in a gym under bright overhead light, black cropped sports top, towel on her shoulder, toned arms, equipment in sharp focus behind her
+- id: hb-car-driver
+  prompt: half-body photo shot on a phone in the driver's seat of a luxury car, hands on the steering wheel, black top, daylight, interior in sharp focus
+- id: hb-balcony-morning
+  prompt: half-body photo shot on a phone on a glass balcony in the morning, beige knit cardigan, coffee cup, sea and buildings in sharp focus behind her
+- id: hb-bathroom-mirror
+  prompt: half-body mirror selfie in a marble bathroom, white robe tied at the waist, bright overhead light, phone in hand, everything in sharp focus
+- id: hb-shopping-mall
+  prompt: half-body photo shot on a phone in a bright shopping mall, black blazer, paper shopping bag in hand, shop windows in sharp focus behind her
+- id: hb-desk-glasses
+  prompt: half-body photo shot on a phone at a glass desk, thin-framed glasses, white shirt with rolled sleeves, office in sharp focus, cool daylight
+- id: hb-armchair-evening
+  prompt: half-body photo shot on a phone in a black leather armchair at home, legs crossed, black silk blouse, warm evening lamp light, room in sharp focus
+# -- full-body ---------------------------------------------------------------------
+- id: fb-gym-mirror
+  aspect: '9:16'
+  prompt: full-body mirror selfie in a gym under fluorescent light, black cropped sports top and high-waisted black leggings, white sneakers, head to toe in frame, equipment in sharp focus
+- id: fb-hallway-dress
+  aspect: '9:16'
+  prompt: full-body mirror selfie in a hallway at home in daylight, fitted black sleeveless knee-length dress, black heels, head to toe in frame, everything in sharp focus
+- id: fb-street-walking
+  aspect: '9:16'
+  prompt: full-body photo shot on a phone on a sunny sidewalk, white shirt tucked into high-waisted black trousers, black heels, head to toe in frame, street in sharp focus
+- id: fb-hotel-corridor
+  aspect: '9:16'
+  prompt: full-body photo shot on a phone in a hotel corridor, black tailored pantsuit, heels, warm wall lights, head to toe in frame, corridor in sharp focus
+- id: fb-yacht-deck
+  aspect: '9:16'
+  prompt: full-body photo shot on a phone on a yacht deck in bright sun, long white linen dress, sunglasses in hand, sea in sharp focus behind her, head to toe in frame
+- id: fb-penthouse-dusk
+  aspect: '9:16'
+  prompt: full-body photo shot on a phone in a penthouse living room at dusk, black long gown with a high neck, skyline windows behind her in focus, head to toe in frame
+- id: fb-stairs-sitting
+  prompt: full-body photo shot on a phone of her sitting on wide marble stairs, beige trench coat over a black dress, heels, long legs angled to the side, everything in sharp focus
+- id: fb-armchair-low-angle
+  prompt: full-body photo shot on a phone from a low angle near the floor, she sits in a black leather armchair with legs crossed, black silk blouse and tailored black trousers, heels, cold look down at the camera
+- id: fb-beach-promenade
+  aspect: '9:16'
+  prompt: full-body photo shot on a phone on a beach promenade, white crop top and wide white linen trousers, sandals, sunny day, head to toe in frame, everything in sharp focus
+- id: fb-elevator-mirror
+  aspect: '9:16'
+  prompt: full-body mirror selfie in a mirrored elevator under bright overhead light, black knee-length dress, black heels, phone in hand, head to toe in frame

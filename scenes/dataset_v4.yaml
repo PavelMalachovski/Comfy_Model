@@ -1,0 +1,85 @@
+# LoRA v4 candidates in the chosen "phone" look: render with
+#   --profile character/profile_phone.yaml --lora ohwxroxana_v3.safetensors
+# then SeedVR2 and scripts/phone_finish.py --hdr 0.5. Candid expressions, varied hair,
+# clear lip balm, everyday light. Mix: 14 close-ups, 10 half-body, 8 full-body.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+# -- close-ups ---------------------------------------------------------------------
+- id: cu-car-laughing
+  prompt: close-up front camera selfie in the passenger seat of a car in daylight, laughing with teeth visible, eyes slightly squinted, hair down with strands on her face, black top
+- id: cu-car-driver-neutral
+  prompt: close-up front camera selfie in the driver's seat of a parked car, calm neutral face, sunglasses on her head, hair in a loose low ponytail, white t-shirt, midday light
+- id: cu-bathroom-morning
+  prompt: close-up mirror selfie in a bathroom in the morning, white robe, hair clipped up messily with loose strands, tired neutral face, bright vanity lights
+- id: cu-bed-overhead
+  prompt: close-up selfie from above while she lies on white pillows, soft morning daylight, hair spread on the pillow, sleepy half smile, grey t-shirt
+- id: cu-cafe-looking-away
+  prompt: close-up photo at a cafe table taken by a friend, she looks out of the window mid-sentence, cream knit sweater, hair down, daylight
+- id: cu-night-taxi
+  prompt: close-up front camera selfie in the back seat of a taxi at night, city lights through the window, soft smile, hair down, black blazer, slight phone noise
+- id: cu-restaurant-flash
+  prompt: close-up photo with direct phone flash at night in a restaurant, caught mid-laugh turning toward the camera, black silk blouse, hair down, people behind her
+- id: cu-window-overcast
+  prompt: close-up front camera selfie by a window on an overcast day, grey hoodie, hair in a messy bun, slight smile with closed lips
+- id: cu-gym-after-workout
+  prompt: close-up front camera selfie after a workout in a gym, slightly flushed cheeks, hair in a high ponytail with loose strands, black sports top, bright overhead light
+- id: cu-beach-sun
+  prompt: close-up front camera selfie on a beach in bright sun, squinting a little, wind in her loose hair, white linen shirt, sea behind her
+- id: cu-office-desk
+  prompt: close-up front camera selfie at an office desk under fluorescent light, thoughtful look, hair tucked behind one ear, navy blazer
+- id: cu-airport-gate
+  prompt: close-up front camera selfie at an airport gate, relaxed tired smile, hair down, beige sweater, bright mixed lighting
+- id: cu-street-evening
+  prompt: close-up front camera selfie on a city street in the evening, warm street lights, soft smile, hair down, black coat
+- id: cu-kitchen-coffee
+  prompt: close-up photo in a home kitchen in the morning, she sips coffee from a mug looking at the camera, oversized white shirt, hair down and messy
+# -- half-body ---------------------------------------------------------------------
+- id: hb-locker-mirror
+  aspect: '9:16'
+  prompt: mirror selfie in a gym locker room, hair down loose, grey fitted cropped t-shirt and black leggings, bright overhead light, grey lockers behind her, looking at her phone screen
+- id: hb-hotel-lobby
+  prompt: half-body photo taken by a friend in a marble hotel lobby, black blazer over a white top, hair down, mid-laugh, warm chandelier light
+- id: hb-rooftop-flash
+  prompt: half-body photo with direct phone flash at a rooftop bar at night, cocktail glass in hand, black satin dress, hair down, candid smile
+- id: hb-balcony-morning
+  prompt: half-body photo on a glass balcony in the morning, beige knit cardigan over a white top, coffee cup, sea and buildings behind her, hair in a loose bun
+- id: hb-car-driving
+  prompt: half-body photo from the passenger seat of her driving a car, hands on the steering wheel, black top, sunglasses on, daylight, focused look on the road
+- id: hb-shopping-mall
+  prompt: half-body photo in a bright shopping mall, black blazer and white t-shirt, paper shopping bag in hand, hair down, glancing back at the camera
+- id: hb-desk-glasses
+  prompt: half-body photo at a glass desk, thin-framed glasses, white shirt with rolled sleeves, typing on a laptop, hair in a low ponytail, cool daylight
+- id: hb-armchair-evening
+  prompt: half-body photo in a black leather armchair at home, legs crossed, black silk blouse, hair down, warm evening lamp light, calm confident look
+- id: hb-elevator-mirror
+  aspect: '9:16'
+  prompt: mirror selfie in a brass elevator, black turtleneck and black trousers, hair down, warm overhead light, neutral face
+- id: hb-cafe-terrace
+  prompt: half-body photo on a cafe terrace in the sun, white linen shirt, sunglasses pushed up on her head, laughing at something off camera
+# -- full-body ---------------------------------------------------------------------
+- id: fb-gym-mirror
+  aspect: '9:16'
+  prompt: full-body mirror selfie in a gym, black cropped sports top and high-waisted black leggings, white sneakers, toned stomach, hair in a high ponytail, head to toe in frame
+- id: fb-hallway-dress
+  aspect: '9:16'
+  prompt: full-body mirror selfie in a hallway at home in daylight, fitted black sleeveless knee-length dress, black heels, hair down, head to toe in frame
+- id: fb-street-walking
+  aspect: '9:16'
+  prompt: full-body photo taken by a friend on a sunny sidewalk, white shirt tucked into high-waisted black trousers, black heels, hair down, mid-step, head to toe in frame
+- id: fb-yacht-deck
+  aspect: '9:16'
+  prompt: full-body photo on a yacht deck in bright sun, long white linen dress, sunglasses in hand, wind in her hair, sea behind her, head to toe in frame
+- id: fb-penthouse-dusk
+  aspect: '9:16'
+  prompt: full-body photo in a penthouse living room at dusk, black long dress with a high neck, hair down, skyline windows behind her, head to toe in frame
+- id: fb-stairs-sitting
+  prompt: full-body photo of her sitting on wide marble stairs, beige trench coat over a black dress, heels, long legs angled to the side, hair down
+- id: fb-beach-promenade
+  aspect: '9:16'
+  prompt: full-body photo on a beach promenade, white crop top and wide white linen trousers, sandals, sunny day, hair loose in the wind, head to toe in frame
+- id: fb-hotel-corridor
+  aspect: '9:16'
+  prompt: full-body mirror selfie in a hotel room by the door, black tailored pantsuit with a white top, heels, hair down, warm light, head to toe in frame

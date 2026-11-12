@@ -258,3 +258,18 @@ def test_check_urls_main_exit_code(monkeypatch, capsys):
     assert wf_mod.main(["--check-urls"]) == 1
     out = capsys.readouterr().out
     assert "404" in out and "c.pt" in out and "hf_SECRET" not in out
+
+
+def test_check_urls_main_reads_given_manifest(monkeypatch, tmp_path):
+    p = tmp_path / "m.yaml"
+    p.write_text("models:\n  - {file: a.pt, dest: vae, url: 'https://example.com/a.pt'}\n")
+    seen = {}
+
+    def fake(specs, hf_token=None):
+        seen["files"] = [s.file for s in specs]
+        return []
+
+    monkeypatch.setattr(wf_mod, "check_urls", fake)
+    monkeypatch.setattr(wf_mod, "load_secrets", lambda: {})
+    assert wf_mod.main(["--check-urls", str(p)]) == 0
+    assert seen["files"] == ["a.pt"]

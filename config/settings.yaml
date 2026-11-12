@@ -1,5 +1,5 @@
-gpu_type: "NVIDIA GeForce RTX 4090"
-datacenter: "EU-RO-1"
+gpu_type: "NVIDIA GeForce RTX 5090"
+datacenter: "EUR-NO-1"
 image: "runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04"
 idle_timeout_min: 15
 max_runtime_h: 4

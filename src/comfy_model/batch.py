@@ -73,6 +73,7 @@ def run_batch(
     lora: str | None = None,
     lora_strength: float = 0.9,
     on_scene: Callable[[str, int, int, int], None] | None = None,
+    workflows_dir: Path = Path("workflows"),
 ) -> BatchReport:
     """Run every scene of ``scenes_path``; ``on_scene(id, done, skipped, failed)`` fires per scene.
 
@@ -106,7 +107,7 @@ def run_batch(
         if problems:
             raise ValueError("\n".join(problems))
 
-    template = load_template(kind)
+    template = load_template(kind, workflows_dir)
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     ext = _ext(kind)

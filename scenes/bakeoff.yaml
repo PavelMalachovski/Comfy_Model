@@ -1,0 +1,34 @@
+# Model comparison scenes (cm bakeoff): same prompts and seeds for every candidate.
+# Evaluation only. Appearance and suffix come from character/bakeoff_profile.yaml.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: mirror-selfie-home
+  seed: 1001
+  prompt: amateur iPhone mirror selfie, half-body shot with the whole face visible, phone in a plain black case with no logos
+    held low to the side, dim bedroom at night, warm bedside lamp, black silk blouse, casual unposed, cold confident gaze,
+    slight grain
+- id: car-back-seat
+  seed: 2001
+  prompt: amateur iPhone photo taken from the back seat of a luxury car at night, black blazer, city lights through the window,
+    mixed dim light, casual unposed, slight grain
+- id: terrace-coffee
+  seed: 3001
+  prompt: amateur iPhone photo on a Dubai penthouse terrace in morning sunlight, silk blouse, coffee cup, skyline behind,
+    natural daylight, casual unposed, slight grain
+- id: rooftop-flash
+  seed: 4001
+  prompt: amateur iPhone photo with direct phone flash at a Dubai rooftop bar in the evening, black dress, cocktail glass,
+    night skyline behind, casual unposed, slight grain
+- id: latex-dress-penthouse
+  tier: social
+  seed: 5001
+  prompt: standing at a penthouse window at night in a glossy black latex dress, long black opera gloves, skyline behind,
+    camera slightly below
+- id: pov-from-floor
+  tier: social
+  seed: 6001
+  prompt: camera at floor level looking up at her standing over it, black latex dress, thigh-high boots, cold stare, ceiling
+    lights

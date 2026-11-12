@@ -43,6 +43,46 @@ def comfy_busy(base_url: str) -> bool:
         return False
 
 
+def comfy_running_ids(base_url: str) -> tuple | None:
+    """Prompt ids ComfyUI is running (``("pending",)`` if only queued); None if idle or unreachable."""
+    try:
+        with urllib.request.urlopen(base_url.rstrip("/") + "/queue", timeout=5) as r:
+            q = json.load(r)
+        running = tuple(str(item[1]) if isinstance(item, list) and len(item) > 1 else str(item)
+                        for item in q.get("queue_running") or [])
+        if running:
+            return running
+        return ("pending",) if q.get("queue_pending") else None
+    except Exception:
+        return None
+
+
+class StuckGuard:
+    """Busy while ComfyUI runs jobs, but a job that has been running for ``stuck_s`` with
+    no change counts as hung (idle): a client that lost its network must not keep the
+    pod alive until MAX_RUNTIME."""
+
+    def __init__(self, running_ids, now=time.time, stuck_s: float = 1800, log=None):
+        self._ids, self._now, self._stuck_s, self._log = running_ids, now, stuck_s, log
+        self._key, self._since, self._warned = None, 0.0, False
+
+    def __call__(self) -> bool:
+        key = self._ids()
+        t = self._now()
+        if key is None:
+            self._key = None
+            return False
+        if key != self._key:
+            self._key, self._since, self._warned = key, t, False
+            return True
+        if t - self._since > self._stuck_s:
+            if self._log and not self._warned:
+                self._log(f"ComfyUI job {key} unchanged for {t - self._since:.0f}s: treating as hung (idle)")
+                self._warned = True
+            return False
+        return True
+
+
 def ssh_busy(
     path: Path | None = None, now: float | None = None, max_age_s: float = 600
 ) -> bool:
@@ -137,11 +177,13 @@ def main() -> int:
         _log(f"terminating pod {pod_id}: reason={reason}")
         return remove_pod(pod_id)
 
-    _log(f"watchdog started: idle={idle_s:.0f}s max_runtime={max_s:.0f}s comfy={url}")
+    stuck_s = _env_positive("STUCK_JOB_MIN", 30) * 60
+    _log(f"watchdog started: idle={idle_s:.0f}s max_runtime={max_s:.0f}s stuck={stuck_s:.0f}s comfy={url}")
+    comfy = StuckGuard(lambda: comfy_running_ids(url), stuck_s=stuck_s, log=_log)
     run_loop(
         now=time.time,
         sleep=time.sleep,
-        busy=lambda: comfy_busy(url) or ssh_busy(),
+        busy=lambda: comfy() or ssh_busy(),
         terminate=terminate,
         idle_timeout_s=idle_s,
         max_runtime_s=max_s,

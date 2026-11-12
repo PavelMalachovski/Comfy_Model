@@ -1,0 +1,42 @@
+# Extra face close-ups for the Qwen dataset, edited from an approved refined frame.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: face-front-neutral-daylight
+  prompt: Keep the same woman's face and identity, the same 37-year-old age, eyes, nose, lips and jawline, close-up portrait
+    from the front, neutral calm expression, soft daylight, plain wall.
+- id: face-front-cold-stare
+  prompt: Keep the same woman's face and identity, the same 37-year-old age, eyes, nose, lips and jawline, close-up portrait
+    from the front, cold confident stare, dark background, soft side light.
+- id: face-three-quarter-left-smirk
+  prompt: Keep the same woman's face and identity, the same 37-year-old age, eyes, nose, lips and jawline, close-up three-quarter
+    view from the left, slight smirk, warm window light.
+- id: face-three-quarter-right-neutral
+  prompt: Keep the same woman's face and identity, the same 37-year-old age, eyes, nose, lips and jawline, close-up three-quarter
+    view from the right, neutral expression, soft daylight.
+- id: face-profile-left
+  prompt: Keep the same woman's face and identity, the same 37-year-old age, eyes, nose, lips and jawline, left side profile
+    close-up, hair tied back, soft daylight, plain background.
+- id: face-profile-right
+  prompt: Keep the same woman's face and identity, the same 37-year-old age, eyes, nose, lips and jawline, right side profile
+    close-up, hair tied back, warm evening light.
+- id: face-over-shoulder
+  prompt: Keep the same woman's face and identity, the same 37-year-old age, eyes, nose, lips and jawline, close-up looking
+    back over her shoulder at the camera, evening light.
+- id: face-chin-raised
+  prompt: Keep the same woman's face and identity, the same 37-year-old age, eyes, nose, lips and jawline, close-up with chin
+    slightly raised, looking down at the camera, cold expression, dim warm lamp light.
+- id: face-looking-down
+  prompt: Keep the same woman's face and identity, the same 37-year-old age, eyes, nose, lips and jawline, close-up with eyes
+    open looking slightly down and to the side, soft window light.
+- id: face-soft-smile
+  prompt: Keep the same woman's face and identity, the same 37-year-old age, eyes, nose, lips and jawline, close-up from the
+    front, soft closed-lip smile, natural daylight.
+- id: face-hair-down
+  prompt: Keep the same woman's face and identity, the same 37-year-old age, eyes, nose, lips and jawline, close-up from the
+    front, long dark hair down, soft daylight.
+- id: face-low-bun
+  prompt: Keep the same woman's face and identity, the same 37-year-old age, eyes, nose, lips and jawline, close-up three-quarter
+    view, hair in a low bun, gold earrings, dim warm light.

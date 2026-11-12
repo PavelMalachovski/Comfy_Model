@@ -1,0 +1,32 @@
+# Qwen-Image 2512 and its edit model: dataset and LoRA verification.
+# `cm pod up --models pod/qwen_models.yaml`. Apache 2.0 weights only.
+models:
+- file: qwen_image_2512_fp8_e4m3fn.safetensors
+  dest: diffusion_models
+  repo: Comfy-Org/Qwen-Image_ComfyUI
+  path: split_files/diffusion_models/qwen_image_2512_fp8_e4m3fn.safetensors
+- file: qwen_image_edit_2511_fp8mixed.safetensors
+  dest: diffusion_models
+  repo: Comfy-Org/Qwen-Image-Edit_ComfyUI
+  path: split_files/diffusion_models/qwen_image_edit_2511_fp8mixed.safetensors
+- file: qwen_2.5_vl_7b_fp8_scaled.safetensors
+  dest: text_encoders
+  repo: Comfy-Org/Qwen-Image_ComfyUI
+  path: split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors
+- file: qwen_image_vae.safetensors
+  dest: vae
+  repo: Comfy-Org/Qwen-Image_ComfyUI
+  path: split_files/vae/qwen_image_vae.safetensors
+- file: face_yolov8m.pt
+  dest: ultralytics/bbox
+  repo: Bingsu/adetailer
+  path: face_yolov8m.pt
+# SeedVR2 detail upscaler (workflows/qwen/seedvr.json), Apache 2.0: numz/SeedVR2_comfyUI.
+- file: seedvr2_ema_7b_sharp_fp16.safetensors
+  dest: SEEDVR2
+  repo: numz/SeedVR2_comfyUI
+  path: seedvr2_ema_7b_sharp_fp16.safetensors
+- file: ema_vae_fp16.safetensors
+  dest: SEEDVR2
+  repo: numz/SeedVR2_comfyUI
+  path: ema_vae_fp16.safetensors

@@ -1,0 +1,103 @@
+# LoRA v2 candidates: rendered with LoRA v1 + the round-5 profile, operator culls,
+# survivors go through `cm lora prepare` (captions keep only the scene text).
+# Mix: ~14 close-ups, ~14 half-body, ~12 full-body; varied light, angle, expression.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+# -- close-ups ---------------------------------------------------------------------
+- id: cu-front-window-daylight
+  prompt: close-up portrait from the front by a window, soft daylight, calm direct gaze, black top, plain light wall behind
+- id: cu-three-quarter-left
+  prompt: close-up three-quarter view facing left, warm afternoon sun on her face, white shirt, blurred living room behind
+- id: cu-profile-right
+  prompt: close-up side profile facing right, golden hour light, small gold hoop earrings, city skyline blurred behind
+- id: cu-looking-down-phone
+  prompt: close-up selfie from slightly above, she looks down into the lens, cream knit sweater, cafe interior behind
+- id: cu-soft-smile-terrace
+  prompt: close-up selfie on a sunny terrace, soft closed-mouth smile, sunglasses pushed up on her head, white linen shirt
+- id: cu-laughing-car
+  prompt: close-up selfie in the passenger seat of a car at daytime, laughing with teeth visible, black blazer
+- id: cu-serious-night-flash
+  prompt: close-up phone photo at night with direct flash, serious cold expression, black silk blouse, dark restaurant behind
+- id: cu-hair-down-bedroom
+  prompt: close-up selfie in a bedroom in the morning, hair down loose over her shoulders, grey t-shirt, soft window light
+- id: cu-elevator-mirror
+  prompt: close-up mirror selfie in a brass elevator, warm overhead light, black turtleneck, phone in hand
+- id: cu-overcast-street
+  prompt: close-up selfie on a city street on an overcast day, beige trench coat, neutral expression, buildings behind
+- id: cu-hand-on-cheek
+  prompt: close-up portrait with one hand resting on her cheek, manicured nails visible, black dress, warm lamp light
+- id: cu-low-angle-chin-up
+  prompt: close-up from a slightly low angle, chin raised, confident look down at the camera, black blazer, white ceiling behind
+- id: cu-sunset-backlight
+  prompt: close-up selfie at sunset with warm backlight in her hair, beach promenade behind, white top
+- id: cu-office-daylight
+  prompt: close-up portrait at a modern office desk, cool daylight, navy blazer, laptop blurred in front of her
+# -- half-body ---------------------------------------------------------------------
+- id: hb-cafe-table
+  prompt: half-body photo sitting at a cafe table, cappuccino in front of her, cream blouse, daylight from the street window
+- id: hb-penthouse-window
+  prompt: half-body photo standing at a penthouse window at dusk, black silk blouse, Dubai skyline lights behind
+- id: hb-restaurant-dinner
+  prompt: half-body photo at a dinner table in an upscale restaurant, glass of red wine, black dress with thin straps, candle light
+- id: hb-yacht-deck
+  prompt: half-body photo on a yacht deck, white linen shirt open at the collar, sea and sky behind, bright sun
+- id: hb-gym-bench
+  prompt: half-body photo sitting on a gym bench, black cropped sports top, towel on her shoulder, toned arms, bright gym light
+- id: hb-kitchen-morning
+  prompt: half-body photo in a modern kitchen in the morning, oversized white shirt, holding a coffee mug, daylight
+- id: hb-hotel-lobby
+  prompt: half-body photo in a marble hotel lobby, tailored black blazer over a white top, warm chandelier light
+- id: hb-car-driver
+  prompt: half-body photo in the driver's seat of a luxury car, hands on the steering wheel, black top, daylight
+- id: hb-armchair-reading
+  prompt: half-body photo sitting in a deep black leather armchair, legs crossed, black silk blouse, warm evening lamp light
+- id: hb-balcony-coffee
+  prompt: half-body photo leaning on a glass balcony railing with coffee, beige knit cardigan, morning sea view behind
+- id: hb-bathroom-mirror
+  prompt: half-body mirror selfie in a marble bathroom, white robe tied at the waist, hair in a ponytail, soft light
+- id: hb-shopping-mall
+  prompt: half-body photo in a luxury shopping mall holding a paper shopping bag, black blazer, bright interior
+- id: hb-rooftop-bar
+  prompt: half-body photo at a rooftop bar in the evening, cocktail glass in hand, black satin dress, phone flash
+- id: hb-desk-glasses
+  prompt: half-body photo at a glass desk, thin-framed glasses, white shirt with rolled sleeves, notebook and pen
+# -- full-body ---------------------------------------------------------------------
+- id: fb-gym-mirror-leggings
+  aspect: '9:16'
+  prompt: full-body mirror selfie in a modern gym, black cropped sports top and high-waisted black leggings, white sneakers, head to toe in frame
+- id: fb-hallway-dress
+  aspect: '9:16'
+  prompt: full-body mirror selfie in a hallway next to a tall door, fitted black sleeveless knee-length dress, black heels, head to toe in frame
+- id: fb-street-walking
+  aspect: '9:16'
+  prompt: full-body photo walking on a sunny city sidewalk, white shirt tucked into high-waisted black trousers, black heels, head to toe in frame
+- id: fb-yacht-standing
+  aspect: '9:16'
+  prompt: full-body photo standing on a yacht deck, long white linen dress, sunglasses in hand, sea behind, head to toe in frame
+- id: fb-hotel-corridor
+  aspect: '9:16'
+  prompt: full-body photo walking down a hotel corridor, black tailored pantsuit, heels, warm wall lights, head to toe in frame
+- id: fb-penthouse-standing
+  aspect: '9:16'
+  prompt: full-body photo standing in a penthouse living room at dusk, black long gown with a high neck, skyline windows behind, head to toe in frame
+- id: fb-stairs-sitting
+  aspect: '4:5'
+  prompt: full-body photo sitting on wide marble stairs, beige trench coat over a black dress, heels, long legs angled to the side
+- id: fb-armchair-low-angle
+  aspect: '4:5'
+  prompt: full-body photo from a low angle near the floor, she sits in a black leather armchair with legs crossed, black silk blouse and tailored black trousers, heels, cold look down at the camera
+- id: fb-beach-promenade
+  aspect: '9:16'
+  prompt: full-body photo on a beach promenade, white crop top and wide white linen trousers, sandals, sunny day, head to toe in frame
+- id: fb-elevator-mirror
+  aspect: '9:16'
+  prompt: full-body mirror selfie in a mirrored elevator, black knee-length dress, black heels, phone in hand, head to toe in frame
+- id: fb-desert-evening
+  aspect: '9:16'
+  prompt: full-body photo standing on desert dunes at golden hour, long flowing black dress, wind in her hair, head to toe in frame
+- id: fb-gym-standing-side
+  aspect: '9:16'
+  prompt: full-body side view in a gym, black sports top and black leggings, standing tall, toned stomach and long legs, head to toe in frame

@@ -80,6 +80,13 @@ supervise() {
         echo "$AI_TOOLKIT_COMMIT" >"$venv_stamp"
     fi
 
+    if grep -q 'name_or_path: Qwen/' "$CONFIG_DIR/$name.yaml"; then
+        # Fail fast: ai-toolkit expects a newer torch than the image ships.
+        if ! (cd "$AIT_DIR" && "$AIT_VENV/bin/python" -c 'import extensions_built_in.diffusion_models.qwen_image, toolkit.util.quantize'); then
+            log "FAILED: ai-toolkit cannot load Qwen in this environment"
+            return 1
+        fi
+    fi
     log "training $name (config $CONFIG_DIR/$name.yaml)"
     (cd "$AIT_DIR" && "$AIT_VENV/bin/python" run.py "$CONFIG_DIR/$name.yaml") || rc=$?
     if [ "$rc" -ne 0 ]; then
@@ -110,8 +117,10 @@ NAME="$1"
 TRIGGER="$2"
 [[ "$NAME" =~ ^[A-Za-z0-9_.-]+$ && "$TRIGGER" =~ ^[A-Za-z0-9_.-]+$ ]] || die "invalid name or trigger"
 
-[ -n "${HF_TOKEN:-}" ] || die "HF_TOKEN is not set on the pod. FLUX.1-dev is gated: accept its license on Hugging Face, put HF_TOKEN in .env, and recreate the pod (cm pod down; cm pod up)"
 [ -f "$CONFIG_DIR/$NAME.yaml" ] || die "training config $CONFIG_DIR/$NAME.yaml missing (run via cm lora train)"
+# Qwen-Image is not gated; every other base (FLUX.1-dev) needs the token.
+grep -q 'name_or_path: Qwen/' "$CONFIG_DIR/$NAME.yaml" || [ -n "${HF_TOKEN:-}" ] \
+    || die "HF_TOKEN is not set on the pod. FLUX.1-dev is gated: accept its license on Hugging Face, put HF_TOKEN in .env, and recreate the pod (cm pod down; cm pod up)"
 [ -d "$WS/dataset/$TRIGGER" ] || die "dataset $WS/dataset/$TRIGGER missing (run via cm lora train)"
 [ -d "$WS/ComfyUI/models" ] || die "ComfyUI not installed on the pod (run cm pod up first)"
 mkdir -p "$STATE_DIR"

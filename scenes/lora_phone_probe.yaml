@@ -1,0 +1,26 @@
+# De-glam probe (character/profile_phone.yaml): candid expressions, loose hair, soft red lips,
+# flat phone light. Run with --profile character/profile_phone.yaml, then SeedVR2 + finish.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: phone-locker-mirror-hair-down
+  seed: 9601
+  aspect: '9:16'
+  prompt: mirror selfie in a gym locker room, hair down loose over her shoulders, grey fitted cropped t-shirt and black leggings, bright overhead light, grey lockers behind her, small relaxed smile, looking at her phone screen
+- id: phone-car-laughing
+  seed: 9101
+  prompt: close-up front camera selfie in the passenger seat of a car in daylight, laughing with teeth visible, eyes slightly squinted, hair in a loose ponytail with strands falling on her face, black top
+- id: phone-cafe-looking-away
+  seed: 10101
+  prompt: close-up photo at a cafe table taken by a friend, she looks away out of the window, mid-sentence, cream knit sweater, hair down, daylight from the street
+- id: phone-bathroom-no-pose
+  seed: 9701
+  prompt: close-up mirror selfie in a hotel bathroom, white robe, hair clipped up messily with loose strands, neutral tired morning face, bright vanity lights
+- id: phone-night-taxi-smile
+  seed: 10201
+  prompt: close-up front camera selfie in the back seat of a taxi at night, city lights through the window, soft smile, hair down, black blazer, slight phone noise
+- id: phone-restaurant-flash-surprised
+  seed: 9801
+  prompt: close-up photo with direct phone flash at night in a restaurant, caught mid-laugh turning toward the camera, black silk blouse, hair down, people and tables behind her

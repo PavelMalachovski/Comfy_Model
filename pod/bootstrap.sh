@@ -12,7 +12,7 @@
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MANIFEST="$HERE/models.yaml"
+MANIFEST="${CM_MANIFEST:-$HERE/models.yaml}"
 WS=/workspace
 CM_DIR="$WS/cm"
 STATE_DIR="$WS/.cm"
@@ -148,6 +148,8 @@ ensure_repo "$COMFY_DIR/custom_nodes/ComfyUI-Impact-Pack" \
     https://github.com/ltdrdata/ComfyUI-Impact-Pack "$IMPACT_PACK_COMMIT"
 ensure_repo "$COMFY_DIR/custom_nodes/ComfyUI-Impact-Subpack" \
     https://github.com/ltdrdata/ComfyUI-Impact-Subpack "$IMPACT_SUBPACK_COMMIT"
+ensure_repo "$COMFY_DIR/custom_nodes/seedvr2_videoupscaler" \
+    https://github.com/numz/ComfyUI-SeedVR2_VideoUpscaler "$SEEDVR2_COMMIT"
 
 if ! "$VENV/bin/python" -c 'import yaml' 2>/dev/null; then
     "${PIP[@]}" pyyaml
