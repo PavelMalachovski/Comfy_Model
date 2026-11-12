@@ -1,0 +1,12 @@
+# Days 3-4 Telegram frames (t03, t04), hero-opt 40 settings, render after t02.
+defaults:
+  tier: social
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: t03-studio-water-break
+  seed: 8401
+  prompt: half-body photo taken by a friend in a bright pilates studio in Dubai in the morning, white walls, oak floor, reformer machines, soft daylight from big windows, after her class, she sits on the edge of a reformer and drinks from a clear water bottle held in one hand, her other hand resting on the reformer frame, flushed cheeks, a light sheen of sweat on her collarbones, looking at the camera over the bottle with smiling eyes, fitted black sports top and high-waisted black leggings, high ponytail with loose strands, natural skin texture, light everyday makeup, candid phone photo
+- id: t04-dress-evening-bed
+  seed: 8411
+  prompt: half-body photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, evening, the bedside lamp is on with warm light, she sits on the edge of the bed in a fitted beige ribbed long-sleeve midi dress, leaning back on both hands on the white sheets, her head tilted, soft knowing smile at the camera, hair down, small gold hoop earrings, city lights outside the window, natural skin texture, light everyday makeup, candid phone photo

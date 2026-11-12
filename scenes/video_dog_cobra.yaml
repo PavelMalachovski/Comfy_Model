@@ -1,0 +1,12 @@
+# Video "slow dog-to-cobra", living room, start frame v03b (plank). Two runs:
+#   fast: --workflows workflows/wan22-i2v-14b     --out out/dev/video-dog-cobra
+#   HQ:   --workflows workflows/wan22-i2v-14b-hq  --out out/dev/video-dog-cobra-hq
+defaults:
+  tier: instagram
+  aspect: '9:16'
+  count: 1
+scenes:
+- id: v03-dog-to-cobra
+  seed: 20300
+  image: ../out/dev/video-dog-cobra-start/v03b-downdog-start_01.png
+  prompt: slow controlled yoga flow on the mat, she pushes her hips up and back into downward dog pose and holds it for a breath, then slowly flows forward, lowers her hips toward the mat and lifts her chest into cobra pose with straight arms, looking up and smiling, ponytail swings gently, calm breathing, soft daylight from the window, static handheld phone video, realistic motion

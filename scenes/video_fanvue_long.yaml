@@ -1,0 +1,30 @@
+# Fanvue long clips (12-14 s), OPERATOR ONLY (Mac or a separate vast instance destroyed afterwards; never RunPod).
+# Adult 40-year-old woman, alone, no sex acts, no toys. Pose references: only the DWPose skeleton is used, never the person.
+#   scripts/fanvue_video.sh   (rents its own instance on port 8192, renders keys, then the videos)
+videos:
+- id: fv01-wild-thing-orbit
+  tier: fanvue
+  base:
+    seed: 22000
+    pose: out/dev/pose-refs/wild-thing.png
+    prompt: full-body side view photo in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, soft morning daylight, she does a deep yoga backbend on a grey mat, one hand on the mat, chest and hips lifted high toward the ceiling, one leg extended straight up into the air with a pointed foot, the other foot on the mat, head relaxed back, she is topless with bare breasts and nipples visible, wearing only black cotton panties, high ponytail, athletic toned body of a 40-year-old woman, she is alone in the room, natural skin texture, light everyday makeup, candid phone photo
+  keys:
+  - edit: "Keep the same woman, her pose, her black panties, the same room and light. Change only the camera position: the camera is now behind her, low, showing her from behind, her round buttocks in black panties and her back toward the camera, her raised leg above."
+  - base
+  - edit: "Keep the same woman, her pose, her black panties, the same room and light. Change only the camera position: the camera is now in front of her chest, showing her topless from the front, bare breasts and nipples visible, her face upside down with a soft smile toward the camera."
+  segments:
+  - prompt: slow smooth orbit camera movement, the camera circles around her from behind to the side while she holds the yoga backbend with one leg raised high, steady breathing, her ponytail hangs down, realistic motion, smooth gimbal video
+  - prompt: the slow orbit continues from her side to the front of her chest, she holds the backbend with one leg raised, topless with bare breasts, breathing slowly, soft smile, realistic motion, smooth gimbal video
+- id: fv02-lotus-orbit
+  tier: fanvue
+  base:
+    seed: 22100
+    pose: out/dev/pose-refs/lotus.png
+    prompt: full-body front view photo in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, soft morning daylight, she sits in lotus pose on a grey yoga mat, hands resting on her knees in a mudra, back straight, eyes closed, serene soft smile, she is topless with bare breasts and nipples visible, wearing only black cotton panties, long dark hair loose over her shoulders and back, athletic toned body of a 40-year-old woman, she is alone in the room, natural skin texture, light everyday makeup, candid phone photo
+  keys:
+  - edit: "Keep the same woman, her lotus pose, her black panties, the same room and light. Change only the camera position: the camera is now directly behind her, showing her bare back, her long hair and her buttocks in black panties on the mat, the window and the marina in front of her."
+  - edit: "Keep the same woman, her lotus pose, her black panties, the same room and light. Change only the camera position: the camera is now at her side, showing her in profile, topless, bare breast visible from the side, eyes closed."
+  - base
+  segments:
+  - prompt: slow smooth orbit camera movement, the camera circles around her from behind to her side while she sits still in lotus pose meditating, slow breathing, her hair moves slightly, realistic motion, smooth gimbal video
+  - prompt: the slow orbit continues from her side to the front, she sits in lotus pose topless with bare breasts, eyes closed, then opens her eyes and gives a soft smile to the camera, realistic motion, smooth gimbal video

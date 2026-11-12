@@ -1,0 +1,239 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "_meta": {
+   "title": "Wan 2.2 I2V 14B high noise"
+  },
+  "inputs": {
+   "unet_name": "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "UNETLoader",
+  "_meta": {
+   "title": "Wan 2.2 I2V 14B low noise"
+  },
+  "inputs": {
+   "unet_name": "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "5": {
+  "class_type": "ModelSamplingSD3",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "shift": 8.0
+  }
+ },
+ "6": {
+  "class_type": "ModelSamplingSD3",
+  "inputs": {
+   "model": [
+    "2",
+    0
+   ],
+   "shift": 8.0
+  }
+ },
+ "7": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "umt5_xxl_fp8_e4m3fn_scaled.safetensors",
+   "type": "wan"
+  }
+ },
+ "8": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "wan_2.1_vae.safetensors"
+  }
+ },
+ "9": {
+  "class_type": "LoadImage",
+  "_meta": {
+   "title": "Start frame"
+  },
+  "inputs": {
+   "image": "{{image}}"
+  }
+ },
+ "10": {
+  "class_type": "CLIPTextEncode",
+  "_meta": {
+   "title": "Positive prompt"
+  },
+  "inputs": {
+   "text": "{{prompt}}",
+   "clip": [
+    "7",
+    0
+   ]
+  }
+ },
+ "11": {
+  "class_type": "CLIPTextEncode",
+  "_meta": {
+   "title": "Negative prompt"
+  },
+  "inputs": {
+   "text": "{{negative}}",
+   "clip": [
+    "7",
+    0
+   ]
+  }
+ },
+ "12": {
+  "class_type": "WanImageToVideo",
+  "inputs": {
+   "positive": [
+    "10",
+    0
+   ],
+   "negative": [
+    "11",
+    0
+   ],
+   "vae": [
+    "8",
+    0
+   ],
+   "start_image": [
+    "9",
+    0
+   ],
+   "width": "{{width}}",
+   "height": "{{height}}",
+   "length": "{{length}}",
+   "batch_size": 1
+  }
+ },
+ "13": {
+  "class_type": "KSamplerAdvanced",
+  "_meta": {
+   "title": "High noise, steps 0-10"
+  },
+  "inputs": {
+   "model": [
+    "5",
+    0
+   ],
+   "add_noise": "enable",
+   "noise_seed": "{{seed}}",
+   "steps": 20,
+   "cfg": 3.5,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "positive": [
+    "12",
+    0
+   ],
+   "negative": [
+    "12",
+    1
+   ],
+   "latent_image": [
+    "12",
+    2
+   ],
+   "start_at_step": 0,
+   "end_at_step": 10,
+   "return_with_leftover_noise": "enable"
+  }
+ },
+ "14": {
+  "class_type": "KSamplerAdvanced",
+  "_meta": {
+   "title": "Low noise, steps 10-20"
+  },
+  "inputs": {
+   "model": [
+    "6",
+    0
+   ],
+   "add_noise": "disable",
+   "noise_seed": "{{seed}}",
+   "steps": 20,
+   "cfg": 3.5,
+   "sampler_name": "euler",
+   "scheduler": "simple",
+   "positive": [
+    "12",
+    0
+   ],
+   "negative": [
+    "12",
+    1
+   ],
+   "latent_image": [
+    "13",
+    0
+   ],
+   "start_at_step": 10,
+   "end_at_step": 10000,
+   "return_with_leftover_noise": "disable"
+  }
+ },
+ "15": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "14",
+    0
+   ],
+   "vae": [
+    "8",
+    0
+   ]
+  }
+ },
+ "16": {
+  "class_type": "CreateVideo",
+  "inputs": {
+   "images": [
+    "19",
+    0
+   ],
+   "fps": 32
+  }
+ },
+ "17": {
+  "class_type": "SaveVideo",
+  "inputs": {
+   "video": [
+    "16",
+    0
+   ],
+   "filename_prefix": "{{filename_prefix}}",
+   "format": "mp4",
+   "codec": "h264"
+  }
+ },
+ "18": {
+  "class_type": "FrameInterpolationModelLoader",
+  "inputs": {
+   "model_name": "film_net_fp16.safetensors"
+  }
+ },
+ "19": {
+  "class_type": "FrameInterpolate",
+  "_meta": {
+   "title": "FILM x2: 16 -> 32 fps"
+  },
+  "inputs": {
+   "interp_model": [
+    "18",
+    0
+   ],
+   "images": [
+    "15",
+    0
+   ],
+   "multiplier": 2
+  }
+ }
+}

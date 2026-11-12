@@ -1,0 +1,13 @@
+# Skin realism test on one scene (operator reference 31: pose and mood only, never her look).
+# Same seeds in all three modes so the frames compare 1:1:
+#   A fast graph + anti-gloss prompt   -> out/dev/mac-skin-test/fast
+#   B A + tiled skin pass (x1.5)       -> out/dev/mac-skin-test/skin
+#   C hero: workflows/qwen-mac, 50 steps cfg 4, count 1 -> out/dev/mac-skin-test/hero
+defaults:
+  tier: social
+  aspect: '9:16'
+  count: 2
+  seed: 7391
+scenes:
+- id: st-boat-bow-towel
+  prompt: candid phone photo taken by a friend standing in front of her on a small white motorboat anchored in a bay, she sits cross-legged on a crumpled royal blue terry towel on the bow, one hand raised flat against her forehead shading her eyes from the sun, her eyes visible in the shadow of her hand, the other hand resting on her knee, wet hair slicked back, two-tone dark brown and cream bikini, thin pearl bead necklace, red string bracelet on her wrist, a clear plastic food box with a boiled egg and cherry tomatoes on the towel in front of her, real skin with visible pores, faint tan lines, a few small moles, fine hair on her arms and thighs, slight redness on her shoulders from the sun, uneven natural skin tone, a few water drops, harsh midday sun with hard shadows, turquoise water, another white motorboat behind her, steep pine-covered rocky cliffs, deep blue sky, slightly overexposed

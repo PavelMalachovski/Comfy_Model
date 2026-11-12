@@ -1,0 +1,15 @@
+# Two bathroom frames in lingerie for Fanvue / paid content (tier fanvue: no nudity, lingerie allowed).
+# Local Mac only (RunPod ToS: keep cloud renders non-explicit).
+#   CM_WAIT_TIMEOUT_S=3600 .venv/bin/cm batch photo scenes/mac_lingerie_bath.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-fast --out out/dev/mac-lingerie --url http://127.0.0.1:8188
+defaults:
+  tier: fanvue
+  aspect: '9:16'
+  count: 1
+  seed: 7311
+scenes:
+- id: ml-bath-mirror-full
+  prompt: full-length mirror selfie in her bathroom in the evening, the whole mirror reflection from her head down to her bare feet on the travertine floor, travertine walls, brass fixtures, freestanding stone tub and a sea-view window behind her, matching black satin lingerie set with a lace trim bra and high-waisted briefs, open black silk robe off her shoulders, hair down, calm confident look, phone in hand, warm vanity light
+- id: ml-bath-vanity-halfbody
+  prompt: half-body photo taken by a friend in her bathroom, she leans on the travertine vanity with both hands, brass tap and round mirror behind her, champagne satin lingerie set with a lace bra, hair clipped up with loose strands, chin slightly raised, cool calm look at the camera, soft warm light

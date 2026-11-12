@@ -1,0 +1,101 @@
+# LoRA v5 dataset draft (docs/guide/12-lora-v5.md): same face and figure, varied expressions,
+# head angles and hair so the LoRA stops baking in one calm straight look. Instagram tier: the
+# dataset is rendered and trained on RunPod. Draft, not rendered yet.
+# Render (on a pod, operator's go): --profile character/profile_phone.yaml
+#   --lora ohwxroxana_v4.safetensors --strength 0.7, then SeedVR2 and phone_finish --hdr 0.5.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 3
+scenes:
+# Close-ups: expression and head angle are the point
+- id: v5-cu-laugh-eyes-closed
+  prompt: close-up photo taken by a friend at a beach cafe, head tilted to the left, laughing with her eyes closed and her teeth showing, hair in a low ponytail with loose strands, white linen shirt, hard midday sun
+- id: v5-cu-mid-sentence-profile
+  prompt: close-up photo in profile at a dinner table, she talks mid-sentence to someone off camera, hair tucked behind her ear, small gold hoop earrings, black top, warm candle light
+- id: v5-cu-squint-sun
+  prompt: close-up photo on a boat deck, she squints against the bright sun with one hand shading her eyes, chin slightly down, wet hair slicked back, black swimsuit straps, harsh sunlight
+- id: v5-cu-pout-chin-up
+  prompt: close-up photo taken by a friend from the driver's seat of a parked car, she sits in the passenger seat, chin raised, lips pushed into a playful pout, sunglasses pushed up on her head, hair down, beige knit top, daylight through the windshield
+- id: v5-cu-serious-looking-up
+  prompt: close-up photo from slightly below in an office corridor, serious cold look up past the camera, hair in a tight sleek bun, black blazer, cool overhead light
+- id: v5-cu-thoughtful-window
+  prompt: close-up photo of her by a rainy window in the evening, looking away out of the glass, chin resting on her hand, hair in a loose bun, grey sweater, soft lamp light
+- id: v5-cu-closed-smile-over-shoulder
+  prompt: close-up photo taken from behind as she looks back over her shoulder with a small closed-mouth smile, hair down and windswept, white tank top, golden hour sun
+- id: v5-cu-flash-night
+  prompt: close-up photo with direct phone flash at night on a street, head turned three-quarters, surprised half laugh with her mouth slightly open, hair in a messy high ponytail, black leather jacket
+- id: v5-cu-braid-wide-smile
+  prompt: close-up photo in a cafe, wide smile showing her teeth, head tilted to the right, hair in one thick braid over her shoulder, cream turtleneck, warm evening light
+- id: v5-cu-wet-hair-pool
+  prompt: close-up photo at the edge of a pool, her arms folded on the pool edge, chin on her forearms, calm sleepy look, wet hair, water drops on her face, bright sun
+# Half-body: hands and gestures
+- id: v5-hb-coffee-both-hands
+  prompt: half-body photo in her kitchen in the morning, both hands around a coffee cup near her chin, looking down at the cup, hair clipped up, oversized grey t-shirt, soft daylight
+- id: v5-hb-phone-call-walk
+  prompt: half-body photo taken by a friend on a city street, she walks while talking on the phone, looking away to the side, hair in the wind, black trench coat, overcast light
+- id: v5-hb-adjusting-earring
+  prompt: half-body photo in a hotel room, she adjusts an earring with one hand, head tilted, eyes looking down, hair pinned up, black satin dress with thin straps, warm lamp light
+- id: v5-hb-steering-wheel-laugh
+  prompt: half-body photo from the passenger seat, she laughs at something with her head thrown back, both hands on the steering wheel, sunglasses on, hair down, white shirt, daylight
+- id: v5-hb-gym-tired
+  prompt: half-body photo in a gym after a workout, slightly out of breath, flushed cheeks, eyes half closed, hair in a high ponytail with loose strands, black sports top, bright overhead light
+- id: v5-hb-reading-glasses
+  prompt: half-body photo at a desk, thin-framed glasses, frowning slightly while reading a document, pen in her hand, hair in a low ponytail, white shirt, cool daylight
+# Full-body: body angles
+- id: v5-fb-walk-away-look-back
+  prompt: full-body photo taken from behind on a beach promenade, she walks away and glances back over her shoulder, hair in a ponytail swinging, white linen dress, sandals, sunset light, head to toe in frame
+- id: v5-fb-sitting-steps-profile
+  prompt: full-body photo in profile, she sits on stone steps with her knees up and arms around them, looking ahead, hair down, black jeans and a white t-shirt, afternoon shade, head to toe in frame
+- id: v5-fb-stretch-arms-up
+  prompt: full-body photo in her living room in the morning, she stretches with both arms above her head and her eyes closed, yawning, hair messy, grey lounge set, soft daylight, head to toe in frame
+- id: v5-fb-leaning-railing-wind
+  prompt: full-body photo on a yacht deck, she leans back on the railing with her face turned up to the sun, eyes closed, hair blown by the wind, beige linen trousers and a white top, bright sun, head to toe in frame
+# Taken by a friend, full body, both hands busy: teaches "no selfie arm, exactly two arms"
+- id: v5-fr-marina-walk-bag
+  prompt: full-body photo taken by a friend standing a few meters away on the Dubai Marina promenade, she walks toward the camera holding a small leather bag in one hand and sunglasses in the other, laughing, hair down in the wind, white linen shirt and light blue jeans, sandals, golden hour, head to toe in frame
+- id: v5-fr-studio-mat-roll
+  prompt: full-body photo taken by a friend in a bright pilates studio, she stands holding a rolled yoga mat under one arm and a water bottle in the other hand, tired happy smile, hair in a high ponytail, black fitted sports top and black leggings, white wall, head to toe in frame
+- id: v5-fr-desert-hat
+  prompt: full-body photo taken by a friend in the desert at sunset, she stands on a sand dune holding her wide straw hat on her head with one hand, the other hand in the pocket of her trousers, squinting into the wind, hair blowing, beige linen trousers and a white top, head to toe in frame
+- id: v5-fr-cafe-standing-cup
+  prompt: full-body photo taken by a friend outside a cafe, she stands by the door with a coffee cup in one hand and her phone held down by her side in the other, looking away down the street, hair in a low bun, cream knit sweater and wide grey trousers, white sneakers, overcast light, head to toe in frame
+- id: v5-fr-car-door
+  prompt: full-body photo taken by a friend in a parking lot, she leans on the open door of a white car with one hand on the door and car keys in the other hand, smirking at the camera, sunglasses on her head, black blazer over a white t-shirt, blue jeans, heels, afternoon sun, head to toe in frame
+- id: v5-fr-beach-towel-shoulder
+  prompt: full-body photo taken by a friend on a morning beach, she walks along the waterline with a towel over her shoulder held with one hand and her sandals in the other hand, eyes half closed against the sun, wet hair slicked back, black one-piece swimsuit, head to toe in frame
+- id: v5-fr-stairs-railing
+  prompt: full-body photo taken by a friend from below on outdoor stone stairs, she walks down with one hand on the railing and a shopping bag in the other, serious look past the camera, hair tucked behind her ear, beige trench coat, black trousers, loafers, head to toe in frame
+- id: v5-fr-kitchen-counter
+  prompt: full-body photo taken by a friend in a bright kitchen, she leans back against the counter with both hands resting on the edge behind her, ankles crossed, wide smile with teeth, hair clipped up, oversized grey t-shirt and black bike shorts, white socks, morning daylight, head to toe in frame
+- id: v5-fr-balcony-arms-crossed
+  prompt: full-body photo taken by a friend on a high glass balcony, she stands with her arms crossed and her weight on one leg, calm thoughtful look out at the skyline, hair in one braid over her shoulder, black ribbed tank top and wide white trousers, evening light, head to toe in frame
+- id: v5-fr-street-flash-night
+  prompt: full-body photo taken by a friend with direct phone flash at night on a street, she walks toward the camera with both hands in the pockets of her black leather jacket, surprised half laugh, messy high ponytail, black jeans, ankle boots, head to toe in frame
+# Hand close-ups: clean fingers, oxblood nails
+- id: v5-hand-coffee-cup
+  prompt: close-up photo of her hands around a white coffee cup on a wooden table, oxblood nails, thin gold ring, part of her cream sweater sleeves, soft morning window light
+- id: v5-hand-phone-scroll
+  prompt: close-up photo of her hand holding a phone and her thumb scrolling the screen, oxblood nails, thin gold bracelet, blurred cafe background, daylight
+- id: v5-hand-steering-wheel
+  prompt: close-up photo of her hands on the steering wheel of a car, oxblood nails, thin gold bracelet, sunlight through the windshield
+- id: v5-hand-hair-tie
+  prompt: close-up photo from behind of her hands tying her dark brown hair into a ponytail, oxblood nails, bare shoulders and a black sports top strap, bright gym light
+- id: v5-hand-earring
+  prompt: close-up photo of her face in profile and her hand putting on a small gold hoop earring, oxblood nails, hair tucked behind her ear, warm lamp light
+- id: v5-hand-mat-plank
+  prompt: close-up photo of her hands flat on a grey yoga mat during a plank, oxblood nails, thin gold bracelet, part of her forearms, natural studio light
+# Half-body by a friend, smiling, different poses
+- id: v5-hb-fr-terrace-laugh
+  prompt: half-body photo taken by a friend on her phone at a cafe terrace, she sits back in the chair laughing with her head tilted, one hand on her chest, the other on the table, hair down, white linen shirt, sunny afternoon
+- id: v5-hb-fr-yacht-railing-smile
+  prompt: half-body photo taken by a friend on her phone on a yacht deck, she leans with both forearms on the railing and turns to the camera with a wide smile, wind in her hair, white tank top, bright sun, sea behind her
+- id: v5-hb-fr-market-fruit
+  prompt: half-body photo taken by a friend on her phone at an outdoor market, she holds a mango up in one hand and laughs, a woven basket on her other arm, hair in a low ponytail, beige shirt, warm daylight
+# Far away, small in frame: she is part of the place
+- id: v5-far-beach-walk
+  prompt: wide photo taken by a friend on her phone from far away on an empty morning beach, she is small in the frame walking along the waterline and turns to wave with a smile, white linen dress, soft sunrise light, head to toe in frame
+- id: v5-far-desert-dune
+  prompt: wide photo taken by a friend on her phone from far away in the desert at sunset, she stands on top of a dune with both arms spread out and smiles, beige linen trousers and a white top, long shadows, head to toe in frame
+- id: v5-far-old-town-alley
+  prompt: wide photo taken by a friend on her phone from far away in a narrow sandstone alley of old Dubai, she walks toward the camera smiling, a tote bag on her shoulder, cream dress, sandals, warm late afternoon light, head to toe in frame

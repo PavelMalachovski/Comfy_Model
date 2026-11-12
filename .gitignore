@@ -10,3 +10,7 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 export/
+.vast_session
+.vast_session*
+# third-party course materials and screenshots of real people's chats: never commit
+/Documents/

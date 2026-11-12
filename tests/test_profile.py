@@ -82,9 +82,10 @@ def test_non_string_value_rejected(tmp_path: Path):
 
 
 BIBLE = Path("character/bible.md")
-POST_TIERS = {"Instagram": "instagram", "X": "social", "Reddit": "social",
-              "Telegram (бесплатный)": "instagram", "Telegram (платный)": "social"}
-MIN_POSTS = {"Instagram": 5, "X": 3, "Reddit": 2, "Telegram (бесплатный)": 2, "Telegram (платный)": 2}
+POST_TIERS = {"Instagram": "instagram", "Threads": "instagram", "X": "social",
+              "Telegram (бесплатный)": "instagram", "Telegram (платный)": "social", "Fanvue": "fanvue"}
+MIN_POSTS = {"Instagram": 5, "Threads": 2, "X": 3, "Telegram (бесплатный)": 2, "Telegram (платный)": 2,
+             "Fanvue": 2}
 
 
 def _posts_by_platform() -> dict[str, list[str]]:
@@ -109,7 +110,7 @@ def test_bible_example_posts_pass_their_tier():
 def test_bible_has_platform_bios():
     text = BIBLE.read_text(encoding="utf-8")
     section = text.split("## Шаблоны bio", 1)[1].split("\n## ", 1)[0]
-    for platform in ("Instagram", "X", "Reddit", "Telegram", "Fanvue"):
+    for platform in ("Instagram", "Threads", "X", "Telegram", "Fanvue"):
         bio = re.search(rf"^### {platform}\n(.+?)(?=^### |\Z)", section, flags=re.M | re.S)
         assert bio and "AI-generated" in bio.group(1), platform
 
@@ -131,3 +132,17 @@ def test_profile_has_the_tall_athletic_body():
     from comfy_model.profile import load_profile as lp
     a = lp().appearance
     assert "174 cm" in a and "athletic" in a and "curvy" not in a
+
+
+def test_front_camera_selfie_hides_the_phone():
+    from comfy_model.profile import NO_PHONE_IN_FRAME, Profile
+    p = Profile(name="n", trigger="trg", appearance="A", style_suffix="S", video_negative="V")
+    out = p.photo_prompt("close-up front camera selfie in a car", use_trigger=False)
+    assert out == f"A, close-up front camera selfie in a car, {NO_PHONE_IN_FRAME}, S"
+
+
+def test_mirror_selfie_and_non_selfie_keep_their_prompt():
+    from comfy_model.profile import Profile
+    p = Profile(name="n", trigger="trg", appearance="A", style_suffix="S", video_negative="V")
+    assert p.photo_prompt("full-body mirror selfie in a gym", use_trigger=False) == "A, full-body mirror selfie in a gym, S"
+    assert p.photo_prompt("photo taken by a friend", use_trigger=False) == "A, photo taken by a friend, S"

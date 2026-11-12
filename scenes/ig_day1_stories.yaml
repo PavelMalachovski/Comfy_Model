@@ -1,0 +1,12 @@
+# Instagram stories for day 1 (fast mode, LoRA v5 0.8), 9:16.
+defaults:
+  tier: instagram
+  aspect: '9:16'
+  count: 1
+scenes:
+- id: s01a-mat-living-room
+  seed: 7851
+  prompt: photo looking down at a grey yoga mat rolled out on an oak herringbone floor in a modern living room at 6 am, her legs in black leggings and white socks at the edge of the mat, a white coffee cup on the floor next to the mat, a low cream sofa and a floor-to-ceiling window with marina towers in soft blue dawn light, candid phone photo
+- id: s01b-hands-coffee
+  seed: 7861
+  prompt: close-up photo of her hands around a white coffee cup, oxblood nails, thin gold ring, the sleeves of an oversized white shirt, a floor-to-ceiling window with light white linen curtains and blurred marina towers behind, soft morning daylight, candid phone photo

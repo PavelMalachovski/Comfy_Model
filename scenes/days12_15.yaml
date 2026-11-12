@@ -1,0 +1,167 @@
+# Days 12-15 SFW (16-a-day norm), generated from the shot list in docs/guide/16-posts-30-days.md.
+#   scripts/vast_batch.sh scenes/days12_15.yaml out/dev/days12_15   (hero-opt 40 settings)
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: p12a-side-plank
+  seed: 11200
+  prompt: full-body side view photo taken by a friend in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, she holds a side plank on a grey mat, body in a straight line, top arm reaching up, fitted burgundy sports top and high-waisted burgundy leggings, grey grip socks, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: p12b-ring-squeeze
+  seed: 11202
+  prompt: half-body photo taken by a friend in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, she sits on a reformer carriage and squeezes a pilates ring between her palms at chest height, focused face, fitted burgundy sports top and high-waisted burgundy leggings, grey grip socks, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: p12c-reformer-straps
+  seed: 11204
+  prompt: side view photo taken by a friend in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, she lies on her back on a reformer carriage with her legs in the straps stretched up, fitted burgundy sports top and high-waisted burgundy leggings, grey grip socks, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: p12d-plank-face
+  seed: 11206
+  prompt: close-up photo of her face during a side plank in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, focused look, a light sheen of sweat, fitted burgundy sports top and high-waisted burgundy leggings, grey grip socks, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: p12e-ring-laugh-mat
+  seed: 11208
+  prompt: photo taken by a friend in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, she sits on a grey mat with a pilates ring hanging on her forearm and laughs, fitted burgundy sports top and high-waisted burgundy leggings, grey grip socks, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: s12a-studio-flushed-selfie
+  seed: 11210
+  aspect: '9:16'
+  prompt: close selfie in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, after a side plank, flushed cheeks, loose strands from the ponytail, fitted burgundy sports top and high-waisted burgundy leggings, grey grip socks, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: s12b-ring-mirror-selfie
+  seed: 11212
+  aspect: '9:16'
+  prompt: mirror selfie in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, she holds her phone in one hand and a pilates ring in the other, fitted burgundy sports top and high-waisted burgundy leggings, grey grip socks, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: th12-ring-near-face
+  seed: 11214
+  prompt: half-body photo taken by a friend in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, she holds a pilates ring up next to her face and smiles at the camera, fitted burgundy sports top and high-waisted burgundy leggings, grey grip socks, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: t12-bench-ponytail
+  seed: 11216
+  prompt: half-body photo taken by a friend in a pilates studio changing room with light wood lockers, she sits on a bench and pulls the band out of her ponytail, an oversized white shirt open over her burgundy sports top, small smile, natural skin texture, light everyday makeup, candid phone photo
+- id: t12b-studio-window-selfie
+  seed: 11218
+  prompt: close selfie by a big window in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, soft daylight on her face, soft smile, fitted burgundy sports top and high-waisted burgundy leggings, grey grip socks, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: x12-reformer-legs-up
+  seed: 11220
+  tier: social
+  prompt: photo taken by a friend in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, she lies on her back on a reformer carriage with her long legs up in the straps, tight black bike shorts and a black cropped sports top, high ponytail, toned legs, looking at the camera, natural skin texture, light everyday makeup, candid phone photo
+- id: x12b-reformer-end-view
+  seed: 11222
+  tier: social
+  prompt: photo taken by a friend from the foot of a reformer in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, she lies on the carriage with her legs in the straps open in a wide V, tight black bike shorts and a black cropped sports top, high ponytail, playful smile, natural skin texture, light everyday makeup, candid phone photo
+- id: p13a-mirror-cream
+  seed: 11300
+  prompt: half-body photo taken by a friend in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, evening, she stands at the mirror and pats cream on her cheek, a white waffle cotton bathrobe tied at the waist, hair wrapped in a white towel, warm light, natural skin texture, light everyday makeup, candid phone photo
+- id: p13b-shelf-bottles-hand
+  seed: 11302
+  prompt: close-up photo of a few simple skincare bottles on a travertine shelf in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, her hand taking one, oxblood nail polish, warm light, natural skin texture, light everyday makeup, candid phone photo
+- id: p13c-tub-edge-water
+  seed: 11304
+  prompt: photo taken by a friend in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, evening, she sits on the edge of the white stone bathtub and tests the running water with her hand, a white waffle cotton bathrobe tied at the waist, hair down, warm light, natural skin texture, light everyday makeup, candid phone photo
+- id: p13d-dewy-face-towel
+  seed: 11306
+  prompt: close-up portrait photo taken by a friend in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, evening, her hair wrapped in a white towel, no makeup, dewy clean skin, soft smile, warm light, natural skin texture, candid phone photo
+- id: p13e-candle-light
+  seed: 11308
+  prompt: half-body photo taken by a friend in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, evening, she lights a candle on the edge of the bathtub with a long match, a white waffle cotton bathrobe tied at the waist, hair down, warm candle light, natural skin texture, light everyday makeup, candid phone photo
+- id: s13a-sheet-mask-selfie
+  seed: 11310
+  aspect: '9:16'
+  prompt: close selfie in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, she wears a white sheet face mask and her eyes are smiling, her hair wrapped in a white towel, warm light, candid phone photo
+- id: s13b-shelf-closeup
+  seed: 11312
+  aspect: '9:16'
+  prompt: close-up photo of skincare bottles and a small candle on a travertine shelf in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, her hand at the edge of the frame, oxblood nail polish, warm light, natural skin texture, light everyday makeup, candid phone photo
+- id: th13-cream-dot-laugh
+  seed: 11314
+  prompt: half-body photo taken by a friend in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, evening, a dot of white cream on her nose, she laughs at the mirror, a white waffle cotton bathrobe tied at the waist, hair wrapped in a white towel, warm light, natural skin texture, light everyday makeup, candid phone photo
+- id: t13-bath-oil-pour
+  seed: 11316
+  prompt: half-body photo taken by a friend in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, evening, she pours bath oil from a small glass bottle into the running bathtub, candles on the edge, a white waffle cotton bathrobe tied at the waist, hair down, warm candle light, natural skin texture, light everyday makeup, candid phone photo
+- id: t13b-robe-candle-selfie
+  seed: 11318
+  prompt: close selfie in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, evening, candlelight on her face, a white waffle cotton bathrobe tied at the waist, hair down, calm smile, natural skin texture, light everyday makeup, candid phone photo
+- id: x13-bubble-bath
+  seed: 11320
+  tier: social
+  prompt: photo taken by a friend in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, evening, she lies in the white stone bathtub full of bubbles, her shoulders and knees above the foam, head resting on the rim, hair up, candles, warm light, natural skin texture, light everyday makeup, candid phone photo
+- id: x13b-bubbles-arm
+  seed: 11322
+  tier: social
+  prompt: photo taken by a friend from above in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, evening, she lies in the bathtub, the bubbles thinning, one arm across her chest, looking up at the camera, hair up, candles, warm light, natural skin texture, light everyday makeup, candid phone photo
+- id: p14a-rug-tea-dates
+  seed: 11400
+  prompt: photo taken by a friend on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she sits on a woven rug on a dune with a brass teapot, small tea glasses and a plate of dates, smiling at the camera, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, natural skin texture, light everyday makeup, candid phone photo
+- id: p14b-dune-walk-sandals
+  seed: 11402
+  prompt: full-body photo taken by a friend on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she walks up the crest of a dune holding her sandals in one hand, the dress moving in the wind, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, natural skin texture, light everyday makeup, candid phone photo
+- id: p14c-tea-pour
+  seed: 11404
+  prompt: close-up photo on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around of her hands pouring tea from a brass teapot into a small glass on a woven rug, oxblood nail polish, golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: p14d-rug-lying-laugh
+  seed: 11406
+  prompt: photo taken by a friend from above on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she lies on her back on a woven rug on the sand, hair spread out, laughing, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: p14e-dune-silhouette
+  seed: 11408
+  prompt: full-body photo taken by a friend on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she stands on top of a dune against the low sun, the long dress and her hair blowing in the wind, near silhouette, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, natural skin texture, light everyday makeup, candid phone photo
+- id: s14a-dune-selfie
+  seed: 11410
+  aspect: '9:16'
+  prompt: close selfie on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, dunes behind her, wind in her hair, golden light on her face, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, natural skin texture, light everyday makeup, candid phone photo
+- id: s14b-sunset-far
+  seed: 11412
+  aspect: '9:16'
+  prompt: wide photo taken by a friend on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she stands small on a distant dune crest, the sun setting behind the dunes, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, natural skin texture, light everyday makeup, candid phone photo
+- id: th14-hug-knees-horizon
+  seed: 11414
+  prompt: half-body photo taken by a friend on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she sits on the sand hugging her knees and looks at the horizon, calm face, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: t14-rug-tea-glass
+  seed: 11416
+  prompt: half-body photo taken by a friend on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she sits on a woven rug holding a small glass of tea and smiles at the camera, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: t14b-golden-face
+  seed: 11418
+  prompt: close-up portrait photo taken by a friend on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, warm golden light on her face, wind in her hair, soft smile, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, natural skin texture, light everyday makeup, candid phone photo
+- id: x14-strap-off-look-back
+  seed: 11420
+  tier: social
+  prompt: photo taken by a friend from behind on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, one thin strap of her terracotta linen dress slipped off her shoulder, she looks back over her bare shoulder at the camera, hair down in the wind, golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: x14b-rug-legs
+  seed: 11422
+  tier: social
+  prompt: photo taken by a friend on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she lies on her side on a woven rug, the terracotta linen dress pulled above her knees, long bare legs, head propped on her hand, golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: p15a-marina-walk
+  seed: 11500
+  prompt: full-body photo taken by a friend on a waterfront promenade in Dubai Marina at sunset, palm trees, yachts and glass towers, warm golden light, she walks toward the camera with a relaxed smile, a fitted white ribbed tank top, high-waisted light blue straight jeans, white sneakers, sunglasses pushed up on her head, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: p15b-railing-glow
+  seed: 11502
+  prompt: half-body photo taken by a friend on a waterfront promenade in Dubai Marina at sunset, palm trees, yachts and glass towers, warm golden light, she leans on the railing with yachts behind her, golden light on her face, a fitted white ribbed tank top, high-waisted light blue straight jeans, white sneakers, sunglasses pushed up on her head, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: p15c-bench-iced-coffee
+  seed: 11504
+  prompt: photo taken by a friend on a waterfront promenade in Dubai Marina at sunset, palm trees, yachts and glass towers, warm golden light, she sits on a bench holding a clear cup of iced coffee and smiles at the camera, a fitted white ribbed tank top, high-waisted light blue straight jeans, white sneakers, sunglasses pushed up on her head, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: p15d-golden-portrait
+  seed: 11506
+  prompt: close-up portrait photo taken by a friend on a waterfront promenade in Dubai Marina at sunset, palm trees, yachts and glass towers, warm golden light, golden hour light, soft smile, a fitted white ribbed tank top, high-waisted light blue straight jeans, white sneakers, sunglasses pushed up on her head, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: p15e-blue-hour-back
+  seed: 11508
+  prompt: photo taken by a friend from behind on a waterfront promenade in Dubai Marina at blue hour, the towers lit up, she looks at the water, a fitted white ribbed tank top, high-waisted light blue straight jeans, white sneakers, sunglasses pushed up on her head, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: s15a-marina-sunset-selfie
+  seed: 11510
+  aspect: '9:16'
+  prompt: close selfie on a waterfront promenade in Dubai Marina at sunset, palm trees, yachts and glass towers, warm golden light, the sunset and towers behind her, a fitted white ribbed tank top, high-waisted light blue straight jeans, white sneakers, sunglasses pushed up on her head, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: s15b-towers-profile
+  seed: 11512
+  aspect: '9:16'
+  prompt: photo taken by a friend on a waterfront promenade in Dubai Marina at blue hour, she stands in profile with the lit towers behind her, a fitted white ribbed tank top, high-waisted light blue straight jeans, white sneakers, sunglasses pushed up on her head, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: th15-railing-pensive
+  seed: 11514
+  prompt: half-body photo taken by a friend on a waterfront promenade in Dubai Marina at sunset, palm trees, yachts and glass towers, warm golden light, she rests her arms on the railing and looks at the water, pensive calm face, a fitted white ribbed tank top, high-waisted light blue straight jeans, white sneakers, sunglasses pushed up on her head, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: t15-balcony-wine-sunset
+  seed: 11516
+  prompt: half-body photo taken by a friend on the balcony of her high-rise apartment in Dubai Marina, glass railing, marina towers and the sea behind her, sunset, she holds a glass of white wine and smiles at the camera, a fitted white ribbed tank top, high-waisted light blue straight jeans, white sneakers, sunglasses pushed up on her head, small gold hoop earrings, hair down, warm golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: t15b-bedroom-mirror-evening
+  seed: 11518
+  prompt: mirror selfie in a tall floor mirror in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, evening, warm lamp light, a fitted white ribbed tank top, high-waisted light blue straight jeans, white sneakers, sunglasses pushed up on her head, small gold hoop earrings, hair down, soft smile, natural skin texture, light everyday makeup, candid phone photo
+- id: x15-shirt-lace-bed
+  seed: 11520
+  tier: social
+  prompt: photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, evening, warm lamp light, she sits on the edge of the bed in an oversized white shirt open over a black lace bralette, small gold hoop earrings, hair down, bare legs, calm confident look, natural skin texture, light everyday makeup, candid phone photo
+- id: x15b-lace-lying-lamp
+  seed: 11522
+  tier: social
+  prompt: photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, evening, warm lamp light, she lies on her side on the bed in a black lace bralette and matching black lace briefs, head on her hand, soft smile, natural skin texture, light everyday makeup, candid phone photo

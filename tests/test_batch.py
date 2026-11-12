@@ -279,6 +279,13 @@ def test_wait_timeout_per_kind(tmp_path, kind, expected):
     assert client.waits and set(client.waits) == {expected}
 
 
+def test_wait_timeout_env_override(tmp_path, monkeypatch):
+    monkeypatch.setenv("CM_WAIT_TIMEOUT_S", "3600")
+    client = FakeClient()
+    run_batch("photo", write_scenes(tmp_path, DESK), client, PROFILE, tmp_path / "o", lora="l")
+    assert client.waits and set(client.waits) == {3600}
+
+
 TWO_SCENES = DESK + "  - id: cafe\n    prompt: in a cafe\n    count: 2\n"
 
 
@@ -386,7 +393,7 @@ def test_cli_batch_default_out_is_date_and_scene_file(tmp_path, monkeypatch):
     res = CliRunner().invoke(app, ["batch", "photo", str(scenes), "--lora", "l.safetensors",
                                    "--url", "http://pod:8188"])
     assert res.exit_code == 0, res.output
-    out = Path("out") / "2026-10-20-instagram"
+    out = Path("out") / "dev" / "2026-10-20-instagram"
     assert (tmp_path / out / "desk_01.png").exists()
     first = res.output.splitlines()[0]
     assert str(out) in first and "--out" in first  # printed before any work: resumable after midnight

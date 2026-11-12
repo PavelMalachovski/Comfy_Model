@@ -1,0 +1,114 @@
+# Content plan, 50 posts: the 40 Instagram posts (docs/guide/10-content-plan.md).
+# Roxana is a 40-year-old pilates and yoga teacher in Dubai (character/bible.md, 16 Nov 2026).
+# Ids are p<day>-<pillar>-<shot>; pillars h = home and mornings, f = pilates and yoga,
+# d = Dubai life (beach, desert, city, friends).
+# count: 2 for a single post (pick 1), 6 for a carousel (pick 3-5 that match).
+# Render on the Mac (fast mode, ~11 min per frame), ~3 nights:
+#   CM_WAIT_TIMEOUT_S=3600 .venv/bin/cm batch photo scenes/plan50_instagram.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-fast --out out/dev/plan50-ig --url http://127.0.0.1:8188
+# then scripts/phone_finish.py out/dev/plan50-ig out/dev/plan50-ig-final --hdr 0.5
+# Home shots describe her fixed rooms (rooms/bedroom.png, bathroom.png, living-room.png);
+# a cloud background swap (cm lora refine --graph workflows/qwen/room.json --room rooms/...)
+# can lock them exactly if the prompt alone drifts.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 2
+scenes:
+- id: p01-h-morning-coffee-window
+  prompt: half-body photo taken by a friend in her bedroom in the morning, she stands by the floor-to-ceiling window with light white linen curtains holding a coffee cup, Dubai Marina towers outside, oversized white shirt, messy hair down, white boucle bed and olive tree in a white pot behind her, soft daylight
+- id: p02-f-beach-class-sunrise
+  count: 6
+  prompt: full-body photo taken by a friend on an empty Dubai beach at sunrise, she stands in front of a row of empty yoga mats before her class, fitted sand-colored sports top and matching leggings, high ponytail, standing on the sand, warm low sun, Marina towers far behind, head to toe in frame
+- id: p03-f-studio-mirror
+  prompt: full-body mirror selfie in a bright pilates studio in the morning, reformer machines behind her, fitted black sports top and high-waisted black leggings, grip socks, high ponytail, phone in hand, calm look, head to toe in frame
+- id: p04-h-bedroom-mirror-outfit
+  count: 6
+  prompt: full-body mirror selfie in her bedroom, white boucle bed with a grey throw and travertine bedside table with a brass lamp behind her, olive tree in a white pot, herringbone oak floor, fitted beige ribbed long-sleeve midi dress, white sneakers, hair down, phone in hand, head to toe in frame, daylight
+- id: p06-d-matcha-cafe
+  prompt: half-body photo taken by a friend at a small outdoor cafe table in Dubai in the morning, she holds an iced matcha, white linen shirt over a black sports top, sunglasses pushed up on her head, hair in a low ponytail, palm shadows, warm daylight, relaxed half smile
+- id: p07-f-pilates-reformer
+  count: 6
+  prompt: full-body photo taken by a friend in a bright pilates studio at 7 am, fitted grey sports top and grey leggings, hair in a bun, holding a long plank on a reformer machine, focused calm face, natural light, head to toe in frame
+- id: p08-h-bathroom-robe
+  prompt: close-up mirror selfie in her bathroom in the morning, travertine walls, brass fixtures, freestanding stone tub and a sea-view window behind her, white robe, hair clipped up with loose strands, tired neutral face, phone in hand
+- id: p09-d-beach-club-friends
+  count: 6
+  prompt: half-body photo taken by a friend at a beach club daybed in Dubai, she laughs with sunglasses on, white linen shirt open over a black one-piece swimsuit, hair down and a little salty, sea and parasols behind her, two friends blurred at the edge of the frame, bright afternoon sun
+- id: p11-f-running-promenade
+  prompt: full-body photo on a beach promenade at sunrise, black running shorts and a fitted white sports tank top, running shoes, hair in a ponytail, slightly out of breath, Dubai Marina towers behind her, head to toe in frame
+- id: p12-h-living-room-evening
+  count: 6
+  prompt: full-body photo taken by a friend in her living room in the evening, she sits on a cream sofa with legs tucked under her, warm lamp light, floor-to-ceiling window with Marina lights outside, round travertine coffee table with a cup of tea, soft grey knit lounge set, hair down, calm look
+- id: p13-d-old-dubai-abra
+  prompt: half-body photo taken by a friend on a wooden abra boat crossing Dubai Creek in the late afternoon, loose white linen dress, straw hat in her hand, hair down in the wind, old Dubai buildings and water behind her, golden light
+- id: p14-f-side-plank-studio
+  prompt: full-body photo taken by a friend in a bright pilates studio, side profile, she holds a side plank on a mat with one arm raised, fitted black sports top and black leggings, high ponytail, steady calm face, head to toe in frame
+- id: p16-h-kitchen-breakfast
+  prompt: half-body photo in a modern home kitchen in the morning, she stands at a marble island with a bowl of yogurt, berries and granola and a matcha, oversized grey t-shirt, hair in a messy bun, glancing at the camera
+- id: p17-d-desert-picnic
+  count: 6
+  prompt: full-body photo taken by a friend on a desert dune in the late afternoon, she sits on a woven rug with a thermos of tea and dates, loose cream linen trousers and a white top, hair down, warm golden light on the sand, head to toe in frame
+- id: p18-f-tree-pose-palms
+  prompt: full-body photo in a quiet park with palm trees in the morning, she stands in tree pose on a yoga mat, fitted olive green sports top and olive leggings, hair in a high ponytail, eyes closed, soft light, head to toe in frame
+- id: p19-h-bed-reading
+  count: 6
+  prompt: half-body photo on her white boucle bed on a Sunday morning, she reads a book against white pillows, grey t-shirt, hair down, olive tree and floor-to-ceiling window with linen curtains behind her, soft daylight
+- id: p21-d-souk-spices
+  prompt: half-body photo taken by a friend in an old Dubai spice souk, she smells a handful of dried rose petals, white linen shirt, sunglasses on her head, hair down, colorful sacks of spices around her, warm shade light
+- id: p22-f-beach-yoga
+  count: 6
+  prompt: full-body photo on an empty beach at sunrise, she stretches on a yoga mat in a low lunge with arms raised, fitted beige cropped sports top and beige leggings, hair in a high ponytail, calm face, sea behind her, head to toe in frame
+- id: p23-h-bathroom-skincare
+  prompt: close-up photo in her bathroom, she applies face cream in front of the mirror, white towel on her shoulders, hair clipped up, travertine walls and brass tap behind her, bright morning light
+- id: p24-d-marina-walk-sunset
+  count: 6
+  prompt: full-body photo taken by a friend on the Dubai Marina walk at sunset, she walks with an iced coffee, fitted white t-shirt and loose beige linen trousers, white sneakers, hair down, towers and yachts behind her, golden light, head to toe in frame
+- id: p26-f-after-class-selfie
+  prompt: close-up photo at arm's length and eye level after a pilates class, she holds a water bottle with both hands, slightly flushed cheeks, hair in a high ponytail with loose strands, black sports top, bright studio light, small tired smile
+- id: p27-h-balcony-morning
+  count: 6
+  prompt: half-body photo on her glass balcony in the morning, beige knit cardigan over a white top, coffee cup in hand, Dubai Marina towers and sea behind her, hair in a loose bun
+- id: p28-d-farmers-market
+  prompt: half-body photo taken by a friend at an outdoor weekend market in Dubai, she holds a paper bag with fresh herbs and figs, white linen shirt, sunglasses, hair down, stalls and string lights behind her, morning light
+- id: p29-f-pool-laps
+  prompt: full-body photo by a rooftop pool in bright sun, black one-piece swimsuit, swim cap in her hand, hair wet and slicked back, standing on the pool deck, head to toe in frame
+- id: p31-h-hallway-ready
+  prompt: full-body mirror selfie in her apartment hallway, putting on white sneakers, fitted black long-sleeve top and black wide trousers, yoga mat bag on her shoulder, hair in a ponytail, phone in hand, morning light, head to toe in frame
+- id: p32-d-dinner-friends
+  count: 6
+  prompt: half-body photo with direct phone flash at a dinner with friends in a small Dubai restaurant at night, she laughs holding a glass of white wine, black silk blouse, hair down, candles and plates on the table, friends blurred around her
+- id: p33-f-wall-pilates
+  prompt: full-body photo in her living room, she lies on a mat with her legs up the wall in a pilates bridge, fitted grey sports top and grey leggings, hair spread on the mat, cream sofa and window light, calm face, head to toe in frame
+- id: p34-h-bedroom-evening
+  count: 6
+  prompt: half-body photo in her bedroom in the evening, she sits on the edge of the white boucle bed, brass bedside lamp on, olive tree in shadow, floor-to-ceiling window with Marina lights outside, champagne silk pajama shirt, hair down, calm look at the camera
+- id: p36-d-sea-swim
+  prompt: half-body photo taken by a friend in calm turquoise sea in the morning, she stands waist-deep in a black one-piece swimsuit, hair wet and slicked back, water drops on her shoulders, squinting in the sun, Dubai skyline far behind
+- id: p37-f-desert-yoga
+  count: 6
+  prompt: full-body photo taken by a friend on a desert dune at sunrise, she holds warrior two pose on a yoga mat, fitted khaki sports top and black leggings, hair in a ponytail, warm low sun on her face, head to toe in frame
+- id: p38-h-car-coffee-selfie
+  prompt: close-up photo at arm's length and eye level in the driver's seat of a parked car in the morning, she holds a takeaway coffee cup with both hands near her chin, calm look into the lens, hair down, oversized grey hoodie, soft daylight through the windshield
+- id: p39-d-airport-travel
+  prompt: full-body photo at an airport terminal, soft beige knit travel set, white sneakers, rolled yoga mat strapped to a carry-on suitcase, passport in hand, hair down, sunglasses on her head, big windows with planes behind her, head to toe in frame
+- id: p41-f-living-room-stretch
+  prompt: full-body photo in her living room in the morning, she stretches on a yoga mat in a seated forward fold on the herringbone oak floor, fitted grey sports top and grey leggings, cream sofa and floor-to-ceiling window with Marina towers behind her, hair in a bun
+- id: p42-h-weekend-brunch
+  count: 6
+  prompt: half-body photo at her kitchen island on a weekend late morning, fruit, croissants and coffee, phone lying face down on the marble, oversized white shirt, hair down, soft smile, daylight
+- id: p43-d-sunset-dhow
+  prompt: half-body photo taken by a friend on a wooden dhow boat at sunset, she leans on the rail with a glass of juice, loose white linen dress, hair down in the wind, Dubai skyline in warm haze behind her
+- id: p44-f-pilates-ring
+  count: 6
+  prompt: full-body photo taken by a friend in a bright pilates studio, she lies on a mat squeezing a pilates ring between her knees, fitted black cropped sports top and black leggings, grip socks, high ponytail, focused look, head to toe in frame
+- id: p46-h-bathroom-ready
+  prompt: full-body mirror selfie in her bathroom before going out, travertine walls, brass fixtures, freestanding stone tub behind her, fitted emerald satin midi dress, flat sandals, hair down, phone in hand, warm vanity light
+- id: p47-d-yacht-day
+  prompt: half-body photo on a yacht deck in Dubai Marina, she sits with her knees up and a glass of water, white linen shirt over a black swimsuit, sunglasses on, hair in the wind, marina towers behind her, bright sun
+- id: p48-f-beach-walk
+  prompt: full-body photo on a quiet beach in the late afternoon, black one-piece swimsuit and a long white linen shirt open over it, rolled yoga mat under her arm, hair loose in the wind, walking along the waterline, head to toe in frame
+- id: p49-h-living-room-sunset
+  count: 6
+  prompt: full-body photo taken by a friend in her living room at sunset, she stands by the floor-to-ceiling window with a glass of white wine, golden light, Marina towers outside, cream sofa behind her, fitted black knit midi dress, hair down, head to toe in frame

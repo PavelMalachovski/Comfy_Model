@@ -1,0 +1,13 @@
+# Bed scenes for Fanvue (15 Nov 2026), within the approved fanvue rules: implied topless
+# (breasts fully covered) and rear nudity from behind (nothing but the back and buttocks).
+# Fanvue tier, Mac only; cull anything that shows more. Fast mode first, picks go to hero-opt.
+defaults:
+  tier: fanvue
+  aspect: '9:16'
+  count: 2
+  seed: 7601
+scenes:
+- id: bed-selfie-topless-covered
+  prompt: high-angle front camera photo from above at arm's length, her arm reaching toward the lens is cut off by the edge of the frame, no phone visible, she lies on her back on a white bed with rumpled white sheets and pillows in the morning, topless, her other forearm held across her chest fully covering her breasts, the white sheet pulled up to her waist, bare shoulders and collarbones, long dark brown hair spread messy over the pillow, sleepy half smile, eyes looking up into the lens, soft morning window light, real skin with visible pores, faint tan lines, a few small moles, natural skin texture
+- id: bed-rear-lying-look-back
+  prompt: photo taken by a friend standing at the foot of the bed, she lies on her stomach on a white bed with rumpled white sheets in the morning, her arms folded under the pillow, she turns her head and looks back over her shoulder at the camera with a lazy teasing smile, bare back with faint tan lines, bare round toned buttocks, the white sheet bunched around her thighs, long dark brown hair messy across her shoulders, soft morning window light, real skin with visible pores, natural skin texture

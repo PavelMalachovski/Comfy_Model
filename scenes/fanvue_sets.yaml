@@ -1,0 +1,81 @@
+# Fanvue launch vault: 5 paid sets, 25 scenes x 2 = 50 frames (docs/guide/13-promo-strategy.md).
+# Tier fanvue (16 Nov 2026): full nudity allowed, sexual acts banned. MAC ONLY (RunPod ToS).
+# Cull to rejected/ any frame with broken anatomy, extra fingers, a different face, or
+# anything that reads as younger than 40.
+# Ids are fv-<set>-<shot>: flow = morning nude yoga, beach = beach at 6 am,
+# feet = feet & oxblood, bath = bath & robe, bed = bedroom stretch.
+# Render (~11 min per frame, ~9 hours, 2-3 nights):
+#   CM_WAIT_TIMEOUT_S=3600 .venv/bin/cm batch photo scenes/fanvue_sets.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-fast --out out/dev/fanvue-sets --url http://127.0.0.1:8188
+# then scripts/phone_finish.py out/dev/fanvue-sets out/dev/fanvue-sets-final --hdr 0.5
+# Best picks per set can be re-rendered in workflows/qwen-mac-hero-opt.
+defaults:
+  tier: fanvue
+  aspect: '4:5'
+  count: 2
+  seed: 8101
+scenes:
+# --- Set 1: Morning flow (nude yoga at the window) -------------------------------
+- id: fv-flow-mountain-window
+  prompt: full-body photo taken by a friend in her living room at sunrise, she stands nude in mountain pose on a beige yoga mat on the herringbone oak floor, arms raised overhead, eyes closed, floor-to-ceiling window with Dubai Marina towers and soft pink sky behind her, long dark hair in a high ponytail, oxblood nails, warm low side light on her body, real skin with visible pores, faint tan lines, natural skin texture, head to toe in frame
+- id: fv-flow-downward-dog
+  prompt: full-body side view photo in her living room in the morning, she holds downward dog nude on a beige yoga mat, long toned legs, heels pressing down, hair in a high ponytail hanging down, cream sofa and window light behind her, calm focused face, real skin with visible pores, natural skin texture, head to toe in frame
+- id: fv-flow-seated-twist
+  prompt: photo taken by a friend in her living room in the morning, she sits nude cross-legged on a yoga mat in a gentle seated twist, looking over her shoulder at the camera with a soft smile, bare breasts, toned stomach, hair in a loose bun, window light from the side, olive tree in the corner, real skin with visible pores, natural skin texture
+- id: fv-flow-cobra
+  prompt: photo from a low angle in front of her in her living room at sunrise, she lies nude on her stomach on a yoga mat and lifts her chest into cobra pose, bare breasts, looking into the camera with a calm half smile, hair falling over one shoulder, warm window light, real skin with visible pores, natural skin texture
+- id: fv-flow-warrior-back
+  aspect: '9:16'
+  prompt: full-body photo from behind in her living room at sunrise, she holds warrior two nude on a yoga mat facing the floor-to-ceiling window, bare back and bare round toned buttocks, arms extended, Dubai Marina towers and soft light outside, hair in a high ponytail, real skin with visible pores, natural skin texture, head to toe in frame
+
+# --- Set 2: Beach at 6 am --------------------------------------------------------
+- id: fv-beach-swimsuit-start
+  prompt: full-body photo taken by a friend on an empty beach at sunrise, black high-cut one-piece swimsuit, she stands at the waterline with her hair down in the wind, warm low sun, calm sea, faint smile, real skin with visible pores, natural skin texture, head to toe in frame
+- id: fv-beach-straps-down
+  prompt: half-body photo on an empty beach at sunrise, she pulls the straps of her black one-piece swimsuit down off her shoulders, looking at the camera with a teasing smile, wet hair slicked back, water drops on her collarbones, warm low sun, real skin with visible pores, natural skin texture
+- id: fv-beach-topless-sea
+  prompt: half-body photo taken by a friend, she stands waist-deep in calm sea at sunrise, topless, bare breasts, wet hair slicked back, water drops on her skin, squinting softly at the camera, black swimsuit rolled down to her hips under the water, golden light, real skin with visible pores, natural skin texture
+- id: fv-beach-rear-walk
+  aspect: '9:16'
+  prompt: full-body photo from behind on an empty beach at sunrise, she walks nude toward the sea carrying her black swimsuit in one hand, bare back and bare round toned buttocks, hair loose in the wind, footprints in the wet sand, warm low sun, head to toe in frame, real skin with visible pores, natural skin texture
+- id: fv-beach-towel-lying
+  prompt: photo from above, she lies nude on her back on a white beach towel on the sand at sunrise, one knee raised, bare breasts, hair spread on the towel, sunglasses in her hand, warm low light, sleepy smile, real skin with visible pores, faint tan lines, natural skin texture
+
+# --- Set 3: Feet & oxblood -------------------------------------------------------
+- id: fv-feet-soles-mat
+  prompt: close-up photo of her bare soles toward the camera as she lies on her stomach on a beige yoga mat, ankles crossed, oxblood pedicure, her face resting on her hands and smiling softly out of focus behind her feet, soft morning window light, real skin texture
+- id: fv-feet-sofa-crossed
+  prompt: photo of her sitting on a cream sofa in a white oversized shirt, bare legs stretched toward the camera, bare feet crossed at the ankles on the round travertine coffee table, oxblood pedicure and oxblood nails, she looks at the camera over her knees, warm lamp light
+- id: fv-feet-pointe-bed
+  prompt: close-up photo of her bare feet in a pointed stretch on white rumpled sheets, toes pointed, oxblood pedicure, her toned calves, soft morning light, her hand with oxblood nails resting on her ankle
+- id: fv-feet-sand
+  prompt: close-up photo of her bare feet in wet sand at the waterline at sunrise, a small wave washing over her toes, oxblood pedicure, the edge of a black swimsuit and her hand holding sunglasses at the top of the frame, golden light
+- id: fv-feet-bath-edge
+  prompt: close-up photo of her bare foot resting on the edge of a freestanding stone bathtub, water drops on her skin, oxblood pedicure, travertine wall and brass tap behind, steam, her bare wet leg in frame, soft warm light
+
+# --- Set 4: Bath & robe ----------------------------------------------------------
+- id: fv-bath-robe-mirror
+  prompt: half-body mirror selfie in her bathroom in the morning, white robe open and sliding off her shoulders, bare breasts, hair clipped up with loose strands, travertine walls and brass fixtures, steam on the edge of the mirror, phone in hand, calm look, real skin with visible pores, natural skin texture
+- id: fv-bath-robe-drop
+  aspect: '9:16'
+  prompt: full-body photo from behind in her bathroom, the white robe falling from her shoulders to the floor, bare back and bare round toned buttocks, she glances back over her shoulder at the camera, freestanding stone tub with steam ahead of her, warm light, head to toe in frame, real skin with visible pores, natural skin texture
+- id: fv-bath-in-tub
+  prompt: photo taken from the side of a freestanding stone bathtub, she lies nude in clear bath water with her arms on the rim, bare breasts at the waterline, wet hair clipped up, candles and a sea-view window behind her, relaxed half smile at the camera, warm light, real skin with visible pores, natural skin texture
+- id: fv-bath-shower-glass
+  prompt: half-body photo through a glass shower door with water drops, she stands nude under the rain shower with her eyes closed and her hands in her wet hair, bare breasts, travertine tiles, soft steam, warm light, real skin with visible pores, natural skin texture
+- id: fv-bath-towel-dry
+  prompt: full-body mirror selfie in her bathroom after a shower, nude, holding a white towel loosely at her side, wet hair down, water drops on her skin, travertine walls and brass fixtures, phone in hand, calm confident look, head to toe in frame, real skin with visible pores, natural skin texture
+
+# --- Set 5: Bedroom stretch ------------------------------------------------------
+- id: fv-bed-resting-pose
+  prompt: photo from the side on her white boucle bed in the morning, she kneels nude and folds forward with her forehead on the rumpled white sheets, arms stretched forward, bare back and bare round toned buttocks, hair spilling over the pillow, olive tree and linen curtains with soft window light behind, real skin with visible pores, natural skin texture
+- id: fv-bed-pigeon
+  prompt: photo taken by a friend in her bedroom in the morning, she holds pigeon pose nude on the white bed, chest lifted, bare breasts, looking toward the window with a calm face, hair down her back, floor-to-ceiling window with Dubai Marina outside, soft light, real skin with visible pores, natural skin texture
+- id: fv-bed-hamstring
+  prompt: photo of her lying nude on her back on white rumpled sheets, one long leg raised straight up in a hamstring stretch, her hands holding her ankle, oxblood pedicure, bare breasts, hair spread over the pillow, soft morning light, real skin with visible pores, natural skin texture
+- id: fv-bed-stomach-look-back
+  prompt: photo taken by a friend standing at the foot of the bed, she lies nude on her stomach on the white boucle bed, feet up and crossed in the air, oxblood pedicure, bare back and bare round toned buttocks, she looks back over her shoulder with a lazy smile, warm evening lamp light, real skin with visible pores, natural skin texture
+- id: fv-bed-window-silhouette
+  aspect: '9:16'
+  prompt: full-body photo in her bedroom at sunset, she stands nude by the floor-to-ceiling window with light linen curtains, one arm raised holding the curtain, side profile, bare breasts, golden backlight outlining her toned body, Dubai Marina towers outside, hair down, head to toe in frame, real skin with visible pores, natural skin texture

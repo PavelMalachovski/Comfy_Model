@@ -12,7 +12,7 @@
 ## 1. Подготовка датасета
 
 ```bash
-uv run cm lora prepare out/<дата>-dataset
+uv run cm lora prepare out/dev/<дата>-dataset
 ```
 
 Команда нумерует оставшиеся картинки и пишет подписи в `dataset/ohwxroxana/`.

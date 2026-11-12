@@ -1,0 +1,68 @@
+# Content plan, 50 days: X photo posts (docs/guide/15-parallel-plan.md).
+# Tier `social`: more erotic than Instagram (lingerie, thongs, wet swimsuits, feet, robes,
+# yoga from behind in tight leggings) but no nudity; nudity words are blocked by the filter.
+# On X every media post is marked sensitive. From day 15 X also gets blurred or cropped
+# frames from scenes/fanvue_sets.yaml with the Fanvue link.
+# Ids are x<nn>-<shot>. Render on the Mac (~11 min per frame, 48 frames ~9 hours):
+#   CM_WAIT_TIMEOUT_S=3600 .venv/bin/cm batch photo scenes/plan50_x.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-fast --out out/dev/plan50-x --url http://127.0.0.1:8188
+# then scripts/phone_finish.py out/dev/plan50-x out/dev/plan50-x-final --hdr 0.5
+defaults:
+  tier: social
+  aspect: '4:5'
+  count: 2
+  seed: 8201
+scenes:
+- id: x01-lace-morning-window
+  prompt: half-body photo taken by a friend in her bedroom in the morning, white lace bra and matching briefs, she stands by the floor-to-ceiling window with linen curtains holding a coffee cup, Dubai Marina outside, messy hair down, sleepy half smile, soft daylight, real skin with visible pores, natural skin texture
+- id: x02-thong-mirror-rear
+  aspect: '9:16'
+  prompt: full-body mirror selfie in her bedroom, seen from behind, black lace thong and an oversized white shirt lifted at the back, she looks at the phone over her shoulder, white boucle bed behind, morning light, head to toe in frame, real skin with visible pores
+- id: x03-wet-swimsuit-pool
+  prompt: full-body photo by a rooftop pool, she climbs out of the water in a white high-cut one-piece swimsuit, wet hair slicked back, water running down her toned legs, bright sun, head to toe in frame, real skin with visible pores
+- id: x04-bikini-beach-stretch
+  prompt: full-body photo taken by a friend on an empty beach at sunrise, small black triangle bikini, she does a standing side stretch with one arm over her head, hair in a high ponytail, warm low sun, head to toe in frame, real skin with visible pores, faint tan lines
+- id: x05-sports-bra-sweat
+  prompt: close-up photo at arm's length after a hot pilates class, black sports bra, glistening sweat on her chest and stomach, flushed cheeks, hair in a messy ponytail, she bites her lip slightly, bright studio light, real skin with visible pores
+- id: x06-leggings-down-dog-rear
+  prompt: full-body photo from behind in a bright pilates studio, she holds downward dog in tight beige leggings and a beige cropped sports top, toned legs and hips, she looks back between her legs at the camera with a smile, head to toe in frame
+- id: x07-silk-robe-bed-legs
+  prompt: photo of her sitting on the edge of her white boucle bed in the evening, short black silk robe loosely tied, long bare legs crossed, oxblood pedicure, hair down, calm look at the camera, warm brass lamp light, real skin with visible pores
+- id: x08-feet-soles-sofa
+  prompt: close-up photo of her bare soles toward the camera as she lies on a cream sofa, ankles crossed, oxblood pedicure, her face smiling softly out of focus behind her feet, grey knit lounge shorts, warm lamp light
+- id: x09-lace-bodysuit-mirror
+  aspect: '9:16'
+  prompt: full-body mirror selfie in her bedroom in the evening, black lace bodysuit with long sleeves, hair down, one hand on her hip, white boucle bed and brass lamp behind, calm confident look, head to toe in frame, real skin with visible pores
+- id: x10-towel-after-shower
+  prompt: half-body mirror selfie in her bathroom after a shower, small white towel wrapped low around her body, wet hair, water drops on her shoulders and collarbones, steam on the mirror, travertine walls, phone in hand, real skin with visible pores
+- id: x11-sheets-bare-shoulders
+  prompt: high-angle front camera photo from above, she lies in bed wrapped in a white sheet up to her chest, bare shoulders, hair spread on the pillow, sleepy teasing smile into the lens, soft morning light, real skin with visible pores, natural skin texture
+- id: x12-bikini-yacht
+  prompt: full-body photo on a yacht deck in Dubai Marina, she lies on her side on a white cushion in a small white bikini, sunglasses on her head, one knee bent, marina towers behind, bright sun, head to toe in frame, real skin with visible pores, faint tan lines
+- id: x13-lace-bed-stretch
+  prompt: photo taken by a friend on her white bed in the morning, she does a seated side stretch in a white lace bra and briefs, one arm over her head, hair in a loose bun, soft window light, real skin with visible pores
+- id: x14-open-shirt-balcony
+  prompt: half-body photo on her glass balcony in the morning, unbuttoned oversized white shirt over a black lace bra, coffee in her hand, hair blowing, Dubai Marina and sea behind her, soft smile, real skin with visible pores
+- id: x15-feet-pedicure-close
+  prompt: close-up photo of her bare feet on white sheets, toes curled slightly, fresh oxblood pedicure, her hand with oxblood nails resting on her ankle, soft morning light, real skin texture
+- id: x16-leggings-squat-mirror
+  prompt: full-body mirror selfie in a pilates studio, side profile, she squats low in tight black leggings and a black sports bra, phone in hand, hair in a high ponytail, toned legs, head to toe in frame
+- id: x17-bubble-bath
+  prompt: photo from the side of a freestanding stone bathtub, she relaxes in a bubble bath with thick foam up to her collarbones, one bare leg raised over the foam, oxblood pedicure, wet hair clipped up, candles, warm light, real skin with visible pores
+- id: x18-thong-swimsuit-sea-rear
+  aspect: '9:16'
+  prompt: full-body photo from behind on an empty beach at sunrise, black thong one-piece swimsuit, she walks into the sea and glances back over her shoulder, hair loose in the wind, warm low sun, head to toe in frame, real skin with visible pores
+- id: x19-oxblood-lace-evening
+  prompt: half-body photo in her bedroom in the evening, oxblood red lace bra matching her nails, hair down over one shoulder, she sits on the bed and looks at the camera with a slow smile, warm brass lamp light, real skin with visible pores
+- id: x20-splits-bed-lingerie
+  prompt: full-body photo on her white boucle bed, she sits in front splits in a black lace bra and briefs, back straight, hands on the sheets, playful look at the camera, morning light, head to toe in frame, real skin with visible pores
+- id: x21-reformer-shorts
+  prompt: full-body photo in a pilates studio, she lies on a reformer machine in tiny black bike shorts and a black bra top, legs in straps raised toward the ceiling, hair in a ponytail, focused face, head to toe in frame
+- id: x22-feet-wet-sand
+  prompt: close-up photo of her bare feet and ankles in wet sand at sunrise, a small wave covering her toes, oxblood pedicure, the edge of a black bikini and her bare legs at the top of the frame, golden light
+- id: x23-bodysuit-window-silhouette
+  aspect: '9:16'
+  prompt: full-body photo in her bedroom at sunset, black high-cut swimsuit-style bodysuit, she stands by the window holding the linen curtain, side profile, golden backlight on her toned body, hair down, head to toe in frame
+- id: x24-kitchen-tshirt-briefs
+  prompt: half-body photo in her kitchen in the morning, oversized grey t-shirt and white cotton briefs, she leans on the marble island with a matcha, messy bun, bare legs, sleepy smile, daylight, real skin with visible pores

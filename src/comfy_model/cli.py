@@ -81,7 +81,7 @@ def batch(
     kind: str = typer.Argument(..., help="face | dataset | photo | video"),
     scenes: Path = typer.Argument(..., help="Scene YAML file."),
     out: Optional[Path] = typer.Option(
-        None, "--out", help="Output dir (default out/<date>-<scene file name>, e.g. out/2026-10-20-instagram)."),
+        None, "--out", help="Output dir (default out/dev/<date>-<scene file name>, e.g. out/dev/2026-10-20-instagram)."),
     ref: Optional[Path] = typer.Option(None, "--ref", help="Reference image (dataset)."),
     lora: Optional[str] = typer.Option(None, "--lora", help="LoRA file name on the pod (photo)."),
     strength: float = typer.Option(0.9, "--strength", help="LoRA strength (photo)."),
@@ -96,7 +96,7 @@ def batch(
     base = _resolve_url(url)
     if base is None:
         raise _fail(NO_POD)
-    out_dir = out or Path("out") / f"{date.today().isoformat()}-{scenes.stem}"
+    out_dir = out or Path("out") / "dev" / f"{date.today().isoformat()}-{scenes.stem}"
     # Printed first: an interrupted batch resumes only into the same dir (e.g. after midnight).
     typer.echo(f"output: {out_dir}  (to resume later: --out {out_dir})")
 
@@ -137,7 +137,7 @@ def batch(
 
 bakeoff_app = typer.Typer(help="Compare base models blind on identical prompts.", no_args_is_help=True)
 app.add_typer(bakeoff_app, name="bakeoff")
-BAKEOFF_OUT = Path("out/bakeoff")
+BAKEOFF_OUT = Path("out/dev/bakeoff")
 
 
 @bakeoff_app.command("run")
@@ -491,10 +491,12 @@ def _pod_age_min(pod_id: str) -> float | None:
 def lora_prepare(
     src: Path = typer.Argument(..., help="Dataset batch output dir, after deleting the bad images."),
     to: Optional[Path] = typer.Option(None, "--to", help="Destination (default dataset/<trigger>)."),
+    profile_path: Path = typer.Option(Path("character/profile.yaml"), "--profile",
+                                      help="Persona profile YAML the dataset was rendered with."),
 ) -> None:
     """Number the surviving images and write caption files for training."""
     try:
-        profile = load_profile()
+        profile = load_profile(profile_path)
         dest = to or Path("dataset") / profile.trigger
         count = lora_mod.prepare_dataset(src, dest, profile)
     except (ValueError, OSError) as e:
@@ -516,6 +518,8 @@ def lora_refine(
     url: Optional[str] = typer.Option(None, "--url", help="ComfyUI URL (default: running pod)."),
     graph: Path = typer.Option(Path("workflows/qwen/refine.json"), "--graph",
                                help="Per-image graph, e.g. workflows/qwen/seedvr.json for the detail upscale."),
+    room: Optional[Path] = typer.Option(None, "--room",
+                                        help="Location plate for workflows/qwen/room.json (fixed background)."),
 ) -> None:
     """Restore skin texture on a culled dataset with a low-denoise Qwen pass (or another --graph)."""
     base = _resolve_url(url)
@@ -523,7 +527,7 @@ def lora_refine(
         raise _fail(NO_POD)
     client = _make_client(base)
     try:
-        report = refine_dataset(src, out, client, on_item=typer.echo, graph_path=graph)
+        report = refine_dataset(src, out, client, on_item=typer.echo, graph_path=graph, room=room)
     except ValueError as e:
         raise _fail(str(e)) from None
     except ComfyError as e:
@@ -546,12 +550,14 @@ def lora_train(
     version: int = typer.Option(1, "--version", min=1, help="LoRA version; output is <trigger>_v<N>."),
     force: bool = typer.Option(False, "--force", help=f"Train even if the pod is older than {MAX_POD_AGE_MIN} min."),
     base: str = typer.Option("flux", "--base", help="Base model: flux or qwen."),
+    profile_path: Path = typer.Option(Path("character/profile.yaml"), "--profile",
+                                      help="Persona profile YAML the dataset was rendered with."),
 ) -> None:
     """Upload dataset + config, start ai-toolkit training detached on the pod (~2 h)."""
     if base not in lora_mod.TEMPLATES:
         raise _fail(f"unknown base {base!r}; expected one of: {', '.join(lora_mod.TEMPLATES)}")
     try:
-        profile = load_profile()
+        profile = load_profile(profile_path)
         hf_token = load_secrets().get("HF_TOKEN")
     except (ValueError, ConfigError) as e:
         raise _fail(str(e)) from None

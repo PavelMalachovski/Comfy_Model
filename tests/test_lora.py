@@ -522,9 +522,9 @@ def test_prepare_strips_profile_from_photo_batch_captions(tmp_path):
     caption keeps only the scene so the look binds to the trigger word."""
     src, dest = tmp_path / "src", tmp_path / "dest"
     make_images(src, 15)
-    full = PROFILE.photo_prompt("selfie in a car, black top", use_trigger=True)
+    full = PROFILE.photo_prompt("photo in a car, black top", use_trigger=True)
     (src / "manifest.jsonl").write_text(
         json.dumps({"scene_id": "s01", "n": 1, "seed": 1, "prompt": full,
                     "file": "s01_01.png", "kind": "photo"}) + "\n")
     lora.prepare_dataset(src, dest, PROFILE)
-    assert (dest / "img_001.txt").read_text() == "ohwxroxana, selfie in a car, black top"
+    assert (dest / "img_001.txt").read_text() == "ohwxroxana, photo in a car, black top"

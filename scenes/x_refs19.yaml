@@ -1,0 +1,92 @@
+# X / Telegram set 2 from 19 user pose references (21 Nov 2026), 3 variants each, clothed (social tier).
+# Only the DWPose skeleton comes from each reference (out/dev/pose-refs/x19/refNN.jpg, real people): never their faces,
+# clothes, tattoos, logos or watermarks. Home shots stay in the fixed Dubai Marina rooms (scenes/rooms.yaml).
+# Adapted: ref04 drops the heart sunglasses (a known underage-coded image), ref12 is a backless gown instead of
+# topless, ref13 is her alone. Feet-only refs (07, 08, 09, 11) have no body to read a skeleton from: prompt only,
+# with a feet-only `appearance` so the face description does not pull her face into the frame.
+# The operator runs it on the open session: scripts/fanvue_inpaint.sh refs2
+tier: social
+count: 3
+scenes:
+- id: y01-bikini-bed-arms-up
+  ref: out/dev/pose-refs/x19/ref01.jpg
+  crop: [0.0, 0.0, 1.0, 0.5]
+  seed: 18010
+  prompt: side view across the bed, she lies on her back on rumpled white linen in her Dubai Marina bedroom with both arms folded behind her head, her head turned to the lens with a sleepy heavy-lidded look, a black triangle bikini, toned stomach, one knee raised, warm bedside lamp light at night, a little grainy
+- id: y02-bodysuit-sofa-rear
+  ref: out/dev/pose-refs/x19/ref02.jpg
+  seed: 18020
+  prompt: she kneels on the low cream sofa in her Dubai Marina living room seen from the side and behind, her forearm resting on the sofa arm, her cheek on her hand, looking back over her shoulder into the lens, a black sleeveless high-neck bodysuit with a high-cut leg, round toned hips, long voluminous dark brunette waves, warm low evening sun across the room
+- id: y03-grey-bodysuit-bed-hands-hair
+  ref: out/dev/pose-refs/x19/ref03.jpg
+  seed: 18030
+  prompt: low angle from the foot of the bed, she lies back against crumpled white muslin pillows on her bed in her Dubai Marina bedroom, both hands pushing into her hair, eyes closed, lips parted, a soft grey scoop-neck bodysuit, her thighs in the foreground, plain warm beige wall above, soft overcast daylight
+- id: y04-popsicle-fur-rug
+  ref: out/dev/pose-refs/x19/ref04.jpg
+  seed: 18040
+  prompt: close photo from above, she lies on her stomach on a white sheepskin rug on the oak herringbone floor of her Dubai Marina living room, black cat-eye sunglasses, a red watermelon popsicle at her lips, a black halter bikini top, gold rings and a dark manicure on her hand, playful summer mood, bright daylight
+- id: y05-white-bodysuit-legs-up-wall
+  ref: out/dev/pose-refs/x19/ref05.jpg
+  seed: 18050
+  prompt: high-angle photo from above, she lies on her back on a white studio floor with both legs raised straight up against the white wall in a wide V, one hand on her hip, the other arm thrown back, eyes closed, a white ribbed tank bodysuit, grey ribbed crew socks and chunky white sneakers, hard diagonal stripes of sunlight and deep shadow
+- id: y06-mat-knees-up-smile
+  ref: out/dev/pose-refs/x19/ref06.jpg
+  seed: 18060
+  prompt: low eye-level phone photo, she sits on a black yoga mat on the oak herringbone floor of her Dubai Marina living room with her knees drawn up and her cheek resting on them, barefoot with her feet toward the lens, a soft pale pink pedicure, smiling into the lens, a black fitted short-sleeve tee and black high-waisted leggings, a black velvet bow in her half-up hair, soft daylight
+- id: y07-feet-wine-glass
+  seed: 18070
+  size: [960, 1248]
+  appearance: warm olive skin, slim elegant feet with a glossy black pedicure
+  prompt: very low close-up at floor level, only her bare feet and lower legs in frame, she sits on a chair at her dining table and holds the stem of a wine glass of white wine with a grapefruit slice between the soles of her feet, glossy black toenails, condensation drops on the glass, a light oak floor, dark kitchen cabinets behind, warm evening light
+- id: y08-red-sandal-dangling
+  seed: 18080
+  size: [800, 1264]
+  appearance: warm olive skin, slim elegant feet with a glossy oxblood pedicure
+  prompt: low close-up, only her legs and feet in frame, she sits on the edge of her bed in her Dubai Marina bedroom with her legs crossed, a red patent strappy stiletto sandal dangling from the toes of her raised foot, the other foot in the matching sandal on the floor, a thin silver anklet, white linen behind, soft daylight
+- id: y09-feet-red-mesh
+  seed: 18090
+  size: [960, 1264]
+  appearance: warm olive skin, slim elegant feet with a glossy red pedicure
+  prompt: studio close-up from the side, only her bare feet and ankles in frame, one foot resting on top of the other in the air, a red fishnet lace thong hanging from the toes of the lower foot, glossy red toenails, a fine gold anklet with a tiny ruby, plain slate grey seamless backdrop, soft studio light
+- id: y10-armchair-stretch-night-bw
+  ref: out/dev/pose-refs/x19/ref10.jpg
+  seed: 18100
+  prompt: black and white photo from above at night, she lies back across the black leather armchair in her Dubai Marina living room with both arms stretched up over the backrest, eyes closed, lips parted, a white ribbed knit cropped halter top, high-cut white briefs, toned stomach, oak herringbone floor, a single lamp and deep shadows
+- id: y11-foot-bath-stream
+  seed: 18110
+  size: [768, 1344]
+  appearance: warm olive skin, slim elegant feet with a glossy oxblood pedicure
+  prompt: moody phone photo looking down, only her lower legs and feet in frame, she lies in the freestanding white stone bathtub of her Dubai Marina bathroom with one foot raised against the tub wall under a thin stream from the brass hand shower, glossy oxblood toenails, water droplets on the white tub, bath foam below, dim warm evening light
+- id: y12-backless-gown-over-shoulder-bw
+  ref: out/dev/pose-refs/x19/ref12.jpg
+  seed: 18120
+  prompt: grainy black and white flash photo, she sits sideways on a chair at a candlelit restaurant table with her back to the lens, a backless black velvet gown slipping off one shoulder, her bare back, looking over her shoulder with dark smoky eyes and parted lips, her hair in voluminous glamorous waves, long crystal drop earrings, blurred champagne glasses behind
+- id: y13-satin-slip-closet-rear
+  ref: out/dev/pose-refs/x19/ref13.jpg
+  seed: 18130
+  prompt: dim night phone photo from behind, she leans forward into the walk-in closet of her Dubai Marina bedroom reaching for a hanger, alone in frame, a white silk satin slip dress with thin straps clinging to her hips, her bare shoulders and back, long dark brunette hair falling forward, rows of hanging clothes, a single warm closet light
+- id: y14-padel-court-bend
+  ref: out/dev/pose-refs/x19/ref14.jpg
+  seed: 18140
+  prompt: on an outdoor padel court in Dubai at golden hour, she bends forward at the net to pick up a ball with her padel racket, looking back into the lens over her shoulder, a pale butter yellow tennis dress with a pleated mini skirt, white crew socks and white sneakers, three yellow balls on the green turf, glass walls and palms behind, warm film tone
+- id: y15-indoor-pool-rear
+  ref: out/dev/pose-refs/x19/ref15.jpg
+  seed: 18150
+  prompt: photo from behind, she walks barefoot along the edge of a long indoor hotel pool in Dubai with white colonnades and a skylight roof, one hand raised lightly at her side, a black string thong bikini, long dark brunette hair down her back, sun beams on the teal water, grey loungers with rolled white towels
+- id: y16-pilates-reformer-ball
+  ref: out/dev/pose-refs/x19/ref16.jpg
+  seed: 18160
+  prompt: in a bright pilates studio with light white linen curtains, she balances on a wooden pilates reformer in a deep side stretch, one hand on the bar, the other arm reaching up holding a small grey ball, one knee on the carriage, a taupe seamless long-sleeve unitard with a cream cropped knit cardigan off one shoulder, cream leg warmers, long dark brunette waves, soft daylight
+- id: y17-dumbbell-bench-rear
+  ref: out/dev/pose-refs/x19/ref17.jpg
+  seed: 18170
+  prompt: photo from behind and to the side in a minimal white gym, she sits astride a black weight bench holding one dumbbell overhead with both hands for a triceps press, a black scoop-back jumpsuit with thin straps, her toned back and shoulders, a black headband and a sleek high ponytail, a black gym bag on the concrete floor, soft white daylight
+- id: y18-crystal-dress-sofa-heels
+  ref: out/dev/pose-refs/x19/ref18.jpg
+  crop: [0.0, 0.0, 1.0, 0.5]
+  seed: 18180
+  prompt: low side view, she reclines on a white boucle sofa against a black paneled wall, her head tipped back, one knee raised, her hand resting at her ankle, a black halter maxi dress covered in silver crystals with a high leg slit, glossy black pointed patent stiletto pumps, stacked silver bangles and a large diamond ring, dark manicure, soft studio light
+- id: y19-car-mirror-lace-glove
+  ref: out/dev/pose-refs/x19/ref19.jpg
+  seed: 18190
+  prompt: photo framed through the rearview mirror of a car, she sits in the back seat on tan leather, her fingertips touching her lower lip, looking into the mirror, a black lace fingerless glove, a black strapless bustier top, bare shoulders, long dark brunette hair, the dark car roof framing the mirror, soft dusk light, shallow depth of field

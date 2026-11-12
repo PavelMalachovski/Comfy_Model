@@ -3,7 +3,7 @@
 # reference photo into a new angle / framing / outfit / setting / light while keeping her.
 # No lingerie or latex here (dataset prompts follow the instagram tier rules).
 # Run with the chosen face reference image (see scenes/face.yaml):
-#   cm batch dataset scenes/dataset.yaml --ref out/<date>-face/face-window-light_01.png
+#   cm batch dataset scenes/dataset.yaml --ref out/dev/<date>-face/face-window-light_01.png
 defaults:
   tier: "instagram"
   aspect: "4:5"

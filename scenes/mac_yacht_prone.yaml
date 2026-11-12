@@ -1,0 +1,14 @@
+# Rear nudity lying face down on a yacht, top-down view, Fanvue only.
+# Chest pressed into the cushion and legs together: only back and buttocks visible.
+# Mac only (RunPod ToS); cull any frame where anything else shows -> rejected/.
+#   CM_WAIT_TIMEOUT_S=3600 .venv/bin/cm batch photo scenes/mac_yacht_prone.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-fast --out out/dev/mac-yacht-prone --url http://127.0.0.1:8188
+defaults:
+  tier: fanvue
+  aspect: '4:5'
+  count: 2
+  seed: 7361
+scenes:
+- id: myp-yacht-prone-above
+  prompt: photo from directly above taken by a friend standing over her on the sun deck of a white yacht at sea, she lies flat face down on thick cream sunbed cushions, topless and bottomless, her chest pressed flat into the cushion and hidden, smooth tanned bare back, bare round firm buttocks, legs straight and pressed together, arms folded under her head, her face turned to the side resting on her forearm with a calm look toward the camera, long dark brown hair spread over her shoulders, hard midday sun with sharp shadows and a sheen on her skin, teak deck and turquoise sea at the edges of the frame

@@ -1,0 +1,47 @@
+# Fanvue set (20 Nov 2026): 6 nude breast close-ups from different angles + 6 rear self-shots on the bed.
+# Fixed Dubai Marina bedroom (scenes/rooms.yaml room-bedroom). Adult 40, alone, no acts, no toys.
+# The operator runs it on a fresh vast instance that is destroyed afterwards:
+#   scripts/fanvue_bed_closeups.sh
+defaults:
+  tier: fanvue
+  aspect: '4:5'
+  count: 2
+scenes:
+# --- breasts, close, six angles ---
+- id: b01-breasts-front-close
+  seed: 14000
+  prompt: close-up photo of her bare breasts and collarbones, fully nude from the waist up, natural full breasts with visible nipples and areolas, natural body of a fit 40-year-old woman, framed from her chin to her navel, front view at chest height, she sits on the edge of her low white boucle bed with crisp white linen in her Dubai Marina bedroom, long dark brown hair falling over one shoulder, soft morning window light through white linen curtains, real skin with visible pores, faint tan lines, a few small moles, natural skin texture, candid phone photo
+- id: b02-breasts-high-selfie
+  seed: 14002
+  prompt: high-angle front camera selfie from above at arm's length, her arm reaching toward the lens is cut off by the edge of the frame, no phone visible, close on her bare breasts, fully nude, natural full breasts with visible nipples, natural body of a fit 40-year-old woman, she lies on her back on rumpled white linen on her bed in her Dubai Marina bedroom, her chin and lips at the top of the frame with a soft smile, long dark brown hair spread over the pillow, soft morning window light, real skin with visible pores, faint tan lines, natural skin texture, candid phone photo
+- id: b03-breasts-side-profile
+  seed: 14004
+  prompt: close side-profile photo of her bare chest, fully nude from the waist up, the curve of her natural breast and nipple in profile against the bright window, natural body of a fit 40-year-old woman, she kneels upright on her white bed in her Dubai Marina bedroom, her arms lifted gathering her long dark brown hair on top of her head, her face in profile at the top of the frame with eyes closed, soft backlight through white linen curtains, real skin with visible pores, fine hair on her arms, natural skin texture, candid phone photo
+- id: b04-breasts-three-quarter
+  seed: 14006
+  prompt: three-quarter close-up of her bare breasts and shoulder, fully nude from the waist up, natural full breasts with visible nipples, natural body of a fit 40-year-old woman, she leans back on one hand on her white bed with crisp white linen in her Dubai Marina bedroom, her face partly in frame at the top with a teasing half smile looking into the lens, a thin gold chain necklace resting between her breasts, warm late afternoon window light, real skin with visible pores, faint tan lines, a few small moles, natural skin texture, candid phone photo
+- id: b05-breasts-low-angle
+  seed: 14008
+  prompt: low-angle close-up looking up at her bare breasts, fully nude from the waist up, natural full breasts with visible nipples, natural body of a fit 40-year-old woman, she stands next to her bed in her Dubai Marina bedroom, her face above looking down into the lens with a confident smile, long dark brown hair falling forward over her shoulders, a brass bedside lamp and white linen curtains behind her, soft morning daylight, real skin with visible pores, faint tan lines, natural skin texture, candid phone photo
+- id: b06-breasts-lying-side
+  seed: 14010
+  prompt: close-up of her bare breasts as she lies on her side on her white bed, fully nude, natural full breasts resting together with visible nipples, natural body of a fit 40-year-old woman, camera at mattress level, rumpled white linen and a grey knit throw around her hips, her head on the pillow at the top of the frame with sleepy eyes looking into the lens, long dark brown hair messy on the pillow, her Dubai Marina bedroom, soft morning window light, real skin with visible pores, a few small moles, natural skin texture, candid phone photo
+# --- rear, she photographs herself from behind on the bed ---
+- id: r01-rear-arm-over-shoulder
+  seed: 14100
+  prompt: selfie from behind, she holds the camera up over her shoulder at arm's length and shoots down along her back, her arm cut off by the edge of the frame, no phone visible, fully nude, she lies on her stomach on her white bed with rumpled white linen in her Dubai Marina bedroom, bare back and bare round toned buttocks, her thighs slightly apart with her labia just barely visible between them, natural body of a fit 40-year-old woman, her face turned back over her shoulder at the lens with a teasing smile, soft morning window light, real skin with visible pores, faint tan lines, natural skin texture, candid phone photo
+- id: r02-rear-wardrobe-mirror
+  seed: 14102
+  prompt: mirror photo from behind, a tall mirror at the foot of the bed reflects her, she holds the phone at her face in the reflection, fully nude, she kneels on all fours on her white bed with her back to the camera, bare round toned buttocks toward the lens, her labia just barely visible between her thighs, natural body of a fit 40-year-old woman, looking back over her shoulder, her Dubai Marina bedroom with white linen curtains and a brass bedside lamp, soft morning daylight, real skin with visible pores, faint tan lines, natural skin texture, candid phone photo
+- id: r03-rear-timer-foot-of-bed
+  seed: 14104
+  prompt: photo from a phone propped on the footboard of the bed on a timer, low camera at mattress level behind her, fully nude, she lies on her stomach with her knees bent and her calves up in the air, bare round toned buttocks in the foreground, her labia just barely visible between her thighs, natural body of a fit 40-year-old woman, her chin on her folded arms on the pillow, glancing back at the camera, rumpled white linen, her Dubai Marina bedroom, soft morning window light, real skin with visible pores, faint tan lines, natural skin texture, candid phone photo
+- id: r04-rear-arch-over-shoulder
+  seed: 14106
+  prompt: selfie from behind, her raised arm holds the camera above her shoulder and shoots down her body, arm cut off by the edge of the frame, no phone visible, fully nude, she kneels on her white bed with her back to the camera and arches her lower back, bare round toned buttocks, her labia just barely visible from behind, natural body of a fit 40-year-old woman, long dark brown hair down her back, her face in profile looking back, her Dubai Marina bedroom, warm late afternoon window light, real skin with visible pores, faint tan lines, natural skin texture, candid phone photo
+- id: r05-rear-side-lying-mirror
+  seed: 14108
+  prompt: mirror photo, a tall mirror beside the bed reflects her from behind, the phone visible in her hand in the reflection, fully nude, she lies on her side facing away with her top knee bent forward, bare round toned buttocks toward the mirror, her labia just barely visible between her thighs, natural body of a fit 40-year-old woman, looking back at the mirror over her shoulder with a lazy smile, rumpled white linen and a grey knit throw, her Dubai Marina bedroom, soft morning daylight, real skin with visible pores, natural skin texture, candid phone photo
+- id: r06-rear-high-angle-down
+  seed: 14110
+  prompt: high-angle selfie from behind, she holds the camera high above her back with an outstretched arm cut off by the edge of the frame, no phone visible, fully nude, she lies on her stomach on her white bed with her legs slightly apart, bare back and bare round toned buttocks filling the frame, her labia just barely visible between her thighs, natural body of a fit 40-year-old woman, her head turned to the side on the pillow with long dark brown hair spread out, her Dubai Marina bedroom, soft morning window light, real skin with visible pores, faint tan lines, a few small moles, natural skin texture, candid phone photo

@@ -1,0 +1,23 @@
+# Days 5-6 (docs/guide/15-parallel-plan.md), Instagram carousels, hero-opt 40 settings:
+#   --profile character/profile_phone_40.yaml --lora ohwxroxana_v5.safetensors --strength 0.8 --workflows workflows/qwen-mac-hero-opt-v5-40
+# Day 5: "Little Dubai", iced matcha morning at a promenade cafe. Day 6: yoga at home in the living room (p06b tree pose is in days5_6_skel.yaml).
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: p05a-matcha-cafe-table
+  seed: 8501
+  prompt: half-body photo taken by a friend sitting across the table at an outdoor cafe on a waterfront promenade in Dubai Marina in the morning, small marble table, she holds a tall glass of iced matcha latte with a paper straw in one hand, her other hand resting on the table, warm smile at the camera, light white linen sleeveless dress, small gold hoop earrings, hair down, sunglasses pushed up on her head, palm trees and marina towers softly blurred behind her, bright morning sun, natural skin texture, light everyday makeup, candid phone photo
+- id: p05b-matcha-hands-close
+  seed: 8511
+  prompt: close-up photo from above of her hands holding a tall glass of iced matcha latte with a paper straw on a small white marble cafe table, oxblood nail polish, a thin gold bracelet, a phone and sunglasses on the table, part of her white linen dress visible, the waterfront promenade blurred in the background, bright morning sun with hard shadows, natural skin texture, light everyday makeup, candid phone photo
+- id: p05c-promenade-walk
+  seed: 8521
+  prompt: three-quarter photo taken by a friend on a waterfront promenade in Dubai Marina in the morning, she walks toward the camera holding a tall glass of iced matcha latte, light white linen sleeveless midi dress moving in the breeze, flat tan leather sandals, small gold hoop earrings, sunglasses on, laughing and looking slightly to the side, palm trees, yachts and marina towers behind her, bright morning sun, natural skin texture, light everyday makeup, candid phone photo
+- id: p06a-living-room-stretch
+  seed: 8601
+  prompt: photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she is in a low lunge stretch on a grey yoga mat by the window, arms raised overhead, chest open, eyes half closed, fitted sage green sports top and high-waisted sage green leggings, high ponytail, soft morning daylight on her face, natural skin texture, light everyday makeup, candid phone photo
+- id: p06c-mat-tea-laugh
+  seed: 8611
+  prompt: half-body photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she sits cross-legged on a grey yoga mat by the window holding a white ceramic mug with a handle in both hands, laughing with her eyes crinkled, fitted sage green sports top and high-waisted sage green leggings, loose high ponytail with strands around her face, soft morning daylight, natural skin texture, light everyday makeup, candid phone photo

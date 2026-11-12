@@ -6,6 +6,18 @@ from pathlib import Path
 
 import yaml
 
+# A selfie shows the phone only in a mirror; otherwise the phone is the camera.
+NO_PHONE_IN_FRAME = ("her arm reaches toward the camera holding the phone out of frame, "
+                     "no phone visible in the picture")
+
+
+def selfie_phone_rule(scene_prompt: str) -> str:
+    """Append NO_PHONE_IN_FRAME to non-mirror selfie scenes."""
+    low = scene_prompt.lower()
+    if "selfie" in low and "mirror" not in low:
+        return f"{scene_prompt}, {NO_PHONE_IN_FRAME}"
+    return scene_prompt
+
 
 @dataclass(frozen=True)
 class Profile:
@@ -18,7 +30,7 @@ class Profile:
     def photo_prompt(self, scene_prompt: str, use_trigger: bool) -> str:
         """``[trigger, ]appearance, scene, style_suffix``; trigger only when the LoRA is loaded."""
         prefix = f"{self.trigger}, " if use_trigger else ""
-        return f"{prefix}{self.appearance}, {scene_prompt}, {self.style_suffix}"
+        return f"{prefix}{self.appearance}, {selfie_phone_rule(scene_prompt)}, {self.style_suffix}"
 
 
 def load_profile(path: Path = Path("character/profile.yaml")) -> Profile:

@@ -1,0 +1,14 @@
+# Operator reference (blonde on a boat ladder, top view): pose and mood only, never her look.
+# Skin wording is anti-gloss on purpose (matte texture, pores, tan lines) - the fast graph
+# turns "glistening/smooth/tanned" skin into plastic. Mac only.
+#   CM_WAIT_TIMEOUT_S=3600 .venv/bin/cm batch photo scenes/mac_yacht_ladder_ref.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-fast --out out/dev/mac-yacht-ladder --url http://127.0.0.1:8188
+defaults:
+  tier: social
+  aspect: '4:5'
+  count: 2
+  seed: 7381
+scenes:
+- id: yl-ladder-laugh-above
+  prompt: candid phone photo taken from directly above by a friend leaning over the side of a small wooden boat with a blue and orange painted edge, she is in the clear green water next to the boat holding the steel swim ladder wrapped in old rope with both outstretched arms, her body stretched diagonally away from the boat just under the surface, her bottom and the back of her legs out of the water, she looks up at the camera laughing with her eyes squeezed shut and a wide open smile showing her teeth, wet dark brown hair down her shoulders, red white and blue striped string bikini with a cheeky back tied in bows at the hips, real skin with visible pores, faint tan lines, a few small moles on her shoulders, fine hair on her arms, uneven natural skin tone, a few water drops, harsh midday sun with hard shadows, bright sun ripples and caustics on the water, slightly overexposed

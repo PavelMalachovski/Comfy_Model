@@ -1,0 +1,57 @@
+# Faceless Fanvue body frames on plain SDXL (RealVisXL V5.0), 21 Nov 2026: 5 on the yoga mat, 5 in the bathroom,
+# 5 on the bed. No persona LoRA: the build comes from character/profile_body_40.yaml, the face is always out of frame.
+# Fixed Dubai Marina rooms. Adult 40, alone, no acts, no toys. The operator runs it: scripts/fanvue_inpaint.sh gen
+checkpoint: RealVisXL_V5.0_fp16.safetensors
+defaults:
+  count: 2
+  width: 896
+  height: 1152
+scenes:
+# --- yoga mat, living room ---
+- id: s01-mat-lying-back
+  seed: 15000
+  prompt: headless crop at the neck, no head in frame, view from above of a nude 40-year-old adult woman lying on her back on a grey yoga mat, natural full breasts with visible nipples, softly toned stomach, one knee bent, natural pubic area neatly trimmed, oak herringbone floor around the mat, soft morning daylight
+- id: s02-mat-side-lying
+  seed: 15010
+  prompt: headless crop, her head out of frame, a nude 40-year-old adult woman lying on her side on a grey yoga mat, the curve of her waist and hip, natural breasts with visible nipples, round toned buttocks, legs stacked, oak herringbone floor, a low cream sofa blurred behind, warm afternoon window light
+- id: s03-mat-child-pose-rear
+  seed: 15020
+  prompt: view from behind of a nude 40-year-old adult woman in a yoga resting pose on a grey yoga mat, knees apart, hips back, her head and shoulders out of frame, bare round toned buttocks and natural adult vulva with labia visible from behind, oak herringbone floor, soft morning daylight
+- id: s04-mat-stomach-rear
+  seed: 15030
+  prompt: low view from behind at floor level of a nude 40-year-old adult woman lying on her stomach on a grey yoga mat, her upper back and head out of frame, bare round toned buttocks, legs slightly apart, natural adult vulva just visible between her thighs, oak herringbone floor, a floor-to-ceiling window with sea view blurred behind, soft daylight
+- id: s05-mat-seated-stretch
+  seed: 15040
+  prompt: headless crop at the shoulders, a nude 40-year-old adult woman sits on a grey yoga mat in a wide-legged stretch, leaning back on her hands, natural full breasts with visible nipples, softly toned stomach, natural adult vulva neatly trimmed, oak herringbone floor, round travertine coffee table blurred behind, warm afternoon light
+# --- bathroom ---
+- id: s06-bath-tub-breasts
+  seed: 15050
+  prompt: headless crop at the neck, a nude 40-year-old adult woman sits in a freestanding white stone bathtub, water up to her waist, natural full wet breasts with visible nipples, water droplets on her skin, warm beige travertine tiles, brushed brass fixtures, bright warm light
+- id: s07-bath-shower-rear
+  seed: 15060
+  prompt: view from behind through an open frameless glass shower, a nude 40-year-old adult woman stands under the shower, her head out of frame above, wet back and bare round toned buttocks, water running down her skin, warm beige travertine tiles, brushed brass shower head, steam, bright warm light
+- id: s08-bath-towel-rail-front
+  seed: 15070
+  prompt: headless crop at the shoulders, front view of a nude 40-year-old adult woman standing by a brass towel rail in a luxury bathroom, natural full breasts with visible nipples, softly toned stomach, natural adult vulva neatly trimmed, damp skin, a white towel in one hand at her side, warm beige travertine tiles, tall window, bright morning light
+- id: s09-bath-tub-edge-rear
+  seed: 15080
+  prompt: view from behind of a nude 40-year-old adult woman kneeling on the wide edge of a white stone bathtub, leaning forward on her hands, her head out of frame, bare round toned wet buttocks and natural adult vulva with labia visible from behind, water droplets, warm beige travertine tiles, bright warm light
+- id: s10-bath-tub-legs
+  seed: 15090
+  prompt: view from above down her body, her face out of frame, a nude 40-year-old adult woman lies back in a white stone bathtub full of clear water, natural breasts with visible nipples above the waterline, softly toned stomach and natural adult vulva under the clear water, one knee raised, brushed brass faucet, warm light
+# --- bed ---
+- id: s11-bed-back-legs-apart
+  seed: 15100
+  prompt: view from the foot of the bed, her head out of frame beyond her breasts, a nude 40-year-old adult woman lies on her back on rumpled white linen with her knees bent and apart, natural adult vulva with labia visible, neatly trimmed, natural full breasts with visible nipples, inner thighs, soft morning window light
+- id: s12-bed-side-breasts
+  seed: 15110
+  prompt: headless crop at the neck, a nude 40-year-old adult woman lies on her side on a white boucle bed with crisp white linen, natural full breasts resting together with visible nipples, her waist and hip curve, a grey knit throw behind her, soft morning window light
+- id: s13-bed-all-fours-rear
+  seed: 15120
+  prompt: close view from behind of a nude 40-year-old adult woman on all fours on a white bed, back arched, her head out of frame, bare round toned buttocks and natural adult vulva with labia visible between her thighs, rumpled white linen, warm late afternoon window light
+- id: s14-bed-kneeling-front
+  seed: 15130
+  prompt: headless crop at the shoulders, front view of a nude 40-year-old adult woman kneeling upright on a white bed with her knees slightly apart, natural full breasts with visible nipples, softly toned stomach, natural adult vulva neatly trimmed, white linen curtains behind, soft backlight
+- id: s15-bed-stomach-rear
+  seed: 15140
+  prompt: view from behind and above of a nude 40-year-old adult woman lying on her stomach on rumpled white linen, her head out of frame, bare back with two dimples above round toned buttocks, legs slightly apart, natural adult vulva just visible between her thighs, faint tan lines, soft morning window light

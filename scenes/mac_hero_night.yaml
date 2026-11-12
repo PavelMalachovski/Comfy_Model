@@ -1,0 +1,22 @@
+# Overnight hero-opt picks (16 Nov 2026), Mac only (fanvue frames never go to RunPod).
+# Graph workflows/qwen-mac-hero-opt-v5 (hero-opt + "selfie / extra arm" negative), LoRA v4 0.8.
+# The Dubai car frame is rendered separately by the pose-skeleton script (ControlNet).
+defaults:
+  tier: fanvue
+  aspect: '9:16'
+  count: 1
+scenes:
+# First Instagram post (scenes/plan50_instagram.yaml p01)
+- id: hero-p01-morning-coffee-window
+  tier: instagram
+  aspect: '4:5'
+  seed: 7801
+  prompt: half-body photo taken by a friend in her bedroom in the morning, she stands by the floor-to-ceiling window with light white linen curtains holding a coffee cup with both hands, Dubai Marina towers outside, oversized white shirt, messy hair down, soft sleepy smile, the low warm white boucle bed with crisp white linen and a grey knit throw, a travertine bedside table with a brass lamp and a tall olive tree in a white stone pot behind her, oak herringbone floor, soft morning daylight, real skin with visible pores, natural skin texture
+# Bed, rear: buttocks clearly in frame, chest hidden against the bed
+- id: hero-bed-rear-buttocks
+  seed: 7601
+  prompt: photo taken by a friend standing beside the bed near her hips, camera at mattress height, she lies on her stomach on the bed in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass lamp, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, rumpled white sheets, morning, her chest pressed flat into the pillow, her arms folded under the pillow, she turns her head and looks back over her shoulder at the camera with a lazy teasing smile, bare back with faint tan lines, bare round toned buttocks clearly in the middle of the frame, her legs together, the white sheet bunched around her calves, long dark brown hair messy across her shoulders, soft morning window light, real skin with visible pores, natural skin texture
+# Flash + jeans, new prompt, softer stomach
+- id: hero-flash-jeans
+  seed: 7511
+  prompt: half-body photo with direct phone flash taken by a friend standing in front of her at night in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass lamp, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and the lit marina towers outside in the dark, the brass bedside lamp on, both of her hands on the open waistband of unbuttoned light blue jeans low on her hips, clothes thrown on the bed behind her, black lace bralette, black lace thong straps high on her hips above the jeans, softly toned stomach with no visible abs, slim soft arms, thin gold chain with a small round gold pendant, gold bracelet, her head tilted to one side and turned slightly away, laughing mid-word with her eyes half closed, dark brown hair pushed back on one side and tucked behind her ear, a few loose strands across her cheek, hard flash light with dark falloff, real skin with visible pores, fine hair on her arms, natural skin texture

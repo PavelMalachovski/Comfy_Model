@@ -1,0 +1,26 @@
+# Content plan, 50 posts: the 8 Telegram photo posts (days 10 and 30 are text only).
+# Free Telegram channel, tier `social`: softer and more private than Instagram (robe,
+# towel, swimsuit, lingerie, bare feet) but nothing explicit; these are teasers for the
+# paid sets. Same render recipe as plan50_instagram.yaml, --out out/dev/plan50-tg.
+defaults:
+  tier: social
+  aspect: '4:5'
+  count: 2
+scenes:
+- id: p05-tg-welcome-bed
+  prompt: half-body photo taken by a friend in her bedroom in the morning, she sits cross-legged on the white boucle bed in an oversized white shirt slipping off one shoulder, hair down and messy, coffee cup in her hands, warm sleepy smile, floor-to-ceiling window with linen curtains behind her
+- id: p15-tg-towel-mirror
+  prompt: half-body mirror selfie in her bathroom after a shower, white towel wrapped around her body, wet hair, travertine walls and brass fixtures, steam on the edge of the mirror, phone in hand, calm look
+- id: p20-tg-feet-mat
+  prompt: close-up photo from above of her bare feet on a beige yoga mat on a herringbone oak floor, oxblood pedicure, ankles crossed, the hem of grey leggings, soft morning window light
+- id: p25-tg-lingerie-teaser
+  aspect: '9:16'
+  prompt: full-body mirror selfie in her bedroom in the evening, black lace bra and matching high-waisted briefs, white boucle bed and brass lamp behind her, hair down, calm confident look, phone in hand, warm lamp light, head to toe in frame
+- id: p35-tg-swimsuit-rear
+  prompt: full-body photo taken by a friend on an empty beach at sunrise, seen from behind as she walks into the sea, black high-cut one-piece swimsuit, hair in a loose ponytail, she glances back over her shoulder, warm low sun, head to toe in frame
+- id: p40-tg-robe-stretch
+  prompt: full-body photo in her living room in the morning, she stretches on a yoga mat in a loose silk robe tied at the waist, bare legs, barefoot, oxblood pedicure, hair in a bun, cream sofa and window light, eyes closed
+- id: p45-tg-bed-legs
+  prompt: photo of her lying on her stomach on the white boucle bed, feet up and crossed in the air, oxblood pedicure, champagne silk pajama shorts and top, chin on her hands, smiling at the camera, warm evening lamp light
+- id: p50-tg-closing-balcony
+  prompt: full-body photo taken by a friend on her glass balcony at sunset, white linen shirt as a dress, bare legs, barefoot, hair down in the wind, Dubai Marina towers and sea behind her, she looks straight at the camera with a soft smile, head to toe in frame

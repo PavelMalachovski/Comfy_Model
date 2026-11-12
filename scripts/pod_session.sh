@@ -34,6 +34,11 @@ for i in $(seq 1 "$TRIES"); do
         sleep 60
         continue
     fi
+    if echo "$out" | grep -q -E "ConnectionError|NameResolution|timed out|Temporary failure"; then
+        echo "[session] try $i: network error, retrying"
+        sleep 60
+        continue
+    fi
     echo "$out" | grep -v "HTTP Request" | tail -4
     if "$CM" pod status 2>&1 | grep -q "ComfyUI: .*(up)"; then up=1; fi
     break

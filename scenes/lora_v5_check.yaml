@@ -1,0 +1,19 @@
+# LoRA v5 vs v4 check (17 Nov 2026), Mac fast mode, same seeds for both LoRAs, strength 0.8.
+# New scenes (not in the v5 dataset): friend shots, smile, full body, far, close-up.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: chk-friend-fullbody-jbr
+  seed: 9101
+  prompt: full-body photo taken by a friend on her phone a few meters away on the JBR beach walk in Dubai, she walks toward the camera with an iced coffee in one hand and a small straw bag in the other, wide smile with her teeth showing, hair down in the wind, white linen shirt over a beige top, light blue jeans, sandals, late afternoon sun, head to toe in frame, real skin with visible pores
+- id: chk-halfbody-laugh-brunch
+  seed: 9102
+  prompt: half-body photo taken by a friend on her phone across the table at a brunch in Dubai, she laughs with her head tilted and one hand touching her collarbone, her other hand holding a glass of orange juice, hair in a low ponytail, black ribbed tank top, thin gold chain, bright daylight, real skin with visible pores
+- id: chk-closeup-smirk
+  seed: 9103
+  prompt: close-up photo taken by a friend in a car at night lit by street lights, she smirks at the camera with one eyebrow raised, hair tucked behind her ear, small gold hoop earrings, black leather jacket, real skin with visible pores, slight sensor noise
+- id: chk-far-marina
+  seed: 9104
+  prompt: wide photo taken by a friend on her phone from far away on the Dubai Marina promenade at sunset, she is small in the frame leaning on the railing and turns to the camera with a smile, white summer dress, glass towers and yachts behind her, head to toe in frame

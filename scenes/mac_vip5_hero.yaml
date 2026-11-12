@@ -1,0 +1,15 @@
+# Hero-opt re-renders of the picked fast frames (15 Nov 2026), same seed as the fast _01 frames.
+# Fanvue tier, Mac only. Pier: bikini instead of the t-shirt (operator's change).
+#   CM_WAIT_TIMEOUT_S=14400 .venv/bin/cm batch photo scenes/mac_vip5_hero.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-hero-opt --out out/dev/mac-vip5-hero --url http://127.0.0.1:8188
+defaults:
+  tier: fanvue
+  aspect: '9:16'
+  count: 1
+  seed: 7511
+scenes:
+- id: hero-pier-thong-bikini
+  prompt: full-length photo taken from behind on a beach under an old wooden pier, she leans one hand on a weathered crossed timber pillar with rusty bolts and looks back over her shoulder at the camera, white string triangle bikini top tied at her back, white thong bikini bottoms, bare round toned buttocks, long dark brown hair loose and windswept, cool teasing look, sand and pier pillars around her, soft overcast daylight, real skin with visible pores, faint tan lines, natural skin texture
+- id: hero-silk-shirt-lean
+  prompt: three-quarter photo from slightly above in a bare studio with a grey wall and a wooden floor, she leans forward toward the camera with her hands on her thighs, black satin button-up shirt fully unbuttoned and worn open over bare skin with nothing underneath, the shirt fronts covering her breasts, a narrow strip of bare skin from her collarbone down to her navel, gold chain necklace with a small letter R pendant, high-waisted grey plaid tailored trousers, long dark brown hair falling forward over one shoulder, soft knowing smile, soft window daylight, real skin with visible pores, natural skin texture

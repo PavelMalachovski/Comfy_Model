@@ -1,4 +1,4 @@
-"""Copy the trained persona LoRAs from the running pod to out/loras/ (git-ignored backup).
+"""Copy the trained persona LoRAs from the running pod to out/dev/loras/ (git-ignored backup).
 
     .venv/bin/python scripts/fetch_loras.py
 """
@@ -12,7 +12,7 @@ from comfy_model import remote
 from comfy_model.runpod_pod import current_pod
 
 REMOTE = "/workspace/ComfyUI/models/loras/"
-DEST = Path("out/loras")
+DEST = Path("out/dev/loras")
 
 
 def main() -> int:

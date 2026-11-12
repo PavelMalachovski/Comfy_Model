@@ -1,0 +1,39 @@
+# Fanvue faceless body set (20 Nov 2026): Roxana on the bed, face out of frame, detail on breasts, buttocks, vulva.
+# Fixed Dubai Marina bedroom. Adult 40, alone, no acts, no toys. Every frame is cropped below the chin or from behind.
+# The operator runs it on a fresh vast instance that is destroyed afterwards:
+#   scripts/fanvue_bed_body.sh
+defaults:
+  tier: fanvue
+  aspect: '4:5'
+  count: 2
+scenes:
+# --- breasts ---
+- id: n01-body-breasts-lying
+  seed: 14200
+  prompt: faceless photo cropped just below her chin, her face out of frame, fully nude, a fit 40-year-old adult woman lies on her back on rumpled white linen on her bed, close detailed view of her natural full breasts with visible nipples and areolas, slightly uneven, soft natural weight, faint tan lines, collarbones and a thin gold chain necklace, her Dubai Marina bedroom, soft morning window light, real skin with visible pores, fine goosebumps, a few small moles, natural skin texture, candid phone photo
+- id: n02-body-breasts-sitting
+  seed: 14202
+  prompt: faceless photo framed from her shoulders to her hips, her face out of frame above, fully nude, a fit 40-year-old adult woman sits on the edge of her low white boucle bed, close detailed view of her natural full breasts with visible nipples and areolas, one hand resting on her thigh, soft stomach with a navel, faint tan lines, her Dubai Marina bedroom with white linen curtains, warm late afternoon window light, real skin with visible pores, a few small moles, natural skin texture, candid phone photo
+- id: n03-body-breasts-side
+  seed: 14204
+  prompt: faceless photo cropped below her chin, fully nude, a fit 40-year-old adult woman lies on her side on her white bed, close detailed view of her natural full breasts resting together with visible nipples, her arm above her head, her waist and hip curve in frame, rumpled white linen and a grey knit throw behind her, her Dubai Marina bedroom, soft morning window light, real skin with visible pores, faint tan lines, natural skin texture, candid phone photo
+# --- buttocks ---
+- id: n04-body-buttocks-stomach
+  seed: 14206
+  prompt: faceless photo from behind and slightly above, her head out of frame, fully nude, a fit 40-year-old adult woman lies on her stomach on rumpled white linen on her bed, close detailed view of her bare round toned buttocks and lower back with two dimples above them, faint tan lines, the backs of her thighs, her Dubai Marina bedroom, soft morning window light, real skin with visible pores, faint skin creases, natural skin texture, candid phone photo
+- id: n05-body-buttocks-kneeling
+  seed: 14208
+  prompt: faceless photo from behind at hip height, her head out of frame, fully nude, a fit 40-year-old adult woman kneels upright on her white bed with her back to the camera, close detailed view of her bare round toned buttocks, waist and lower back, her hands resting on her heels, faint tan lines, her Dubai Marina bedroom with white linen curtains, warm late afternoon window light, real skin with visible pores, natural skin texture, candid phone photo
+- id: n06-body-buttocks-all-fours
+  seed: 14210
+  prompt: faceless photo from behind, her head out of frame, fully nude, a fit 40-year-old adult woman on all fours on her white bed with her back arched, close detailed view of her bare round toned buttocks and her vulva with labia visible between her thighs, natural adult anatomy, faint tan lines, rumpled white linen, her Dubai Marina bedroom, soft morning window light, real skin with visible pores, natural skin texture, candid phone photo
+# --- vulva ---
+- id: n07-body-front-lying
+  seed: 14212
+  prompt: faceless photo looking down her body from her breasts to her knees, her face out of frame, fully nude, a fit 40-year-old adult woman lies on her back on her white bed with her legs slightly apart and knees bent, detailed view of her natural full breasts with visible nipples, soft stomach, and her vulva with labia visible, neatly trimmed, natural adult anatomy, rumpled white linen, her Dubai Marina bedroom, soft morning window light, real skin with visible pores, natural skin texture, candid phone photo
+- id: n08-body-vulva-close
+  seed: 14214
+  prompt: faceless close-up between her thighs, nothing above her navel in frame, fully nude, a fit 40-year-old adult woman lies on her back on white linen on her bed with her knees bent and apart, close detailed view of her vulva with labia visible, neatly trimmed, natural adult anatomy, her inner thighs and lower stomach, soft morning window light, real skin with visible pores, natural skin texture, candid phone photo
+- id: n09-body-rear-legs-apart
+  seed: 14216
+  prompt: faceless photo from behind at mattress level, her head out of frame, fully nude, a fit 40-year-old adult woman lies on her stomach on her white bed with her legs apart, close detailed view of her bare round toned buttocks and her vulva with labia visible between her thighs, natural adult anatomy, faint tan lines, rumpled white linen, her Dubai Marina bedroom, warm late afternoon window light, real skin with visible pores, natural skin texture, candid phone photo

@@ -1,0 +1,13 @@
+# Operator reference (white cape blazer on a red vintage convertible): pose and mood only.
+# Implied topless (blazer over bare skin) -> fanvue only, Mac only; cull anything showing.
+# Speed test, same seed in both modes (see docs/guide/11-render.md):
+#   hero-lite: workflows/qwen-mac-hero   (30 + 12 steps cfg 4, Lightning face)  -> out/dev/mac-car/hero
+#   hybrid:    workflows/qwen-mac-hybrid (Lightning base, 16 full-model hires steps) -> out/dev/mac-car/hybrid
+defaults:
+  tier: fanvue
+  aspect: '9:16'
+  count: 1
+  seed: 7401
+scenes:
+- id: car-blazer-hood
+  prompt: full-length fashion photo taken by a photographer crouching in front of her in the driveway of a villa in Dubai, the whole body from her head to her heels on the concrete in frame, she sits on the front edge of the hood of a red 1950s convertible sports car with a chrome grille and round headlights and a blank licence plate, one hand resting on the hood behind her, legs wide apart, white cape blazer with sharp structured shoulders worn open over bare skin with nothing underneath, the blazer lapels covering her breasts, a narrow strip of bare skin from her collarbone down to her navel, layered thin gold necklaces with small pendants, stacked gold bracelets and a gold watch, high-waisted white wide-leg trousers, white pointed heels, long dark brown hair in loose waves, chin slightly raised, cold confident look at the camera, warm teak slat fence, potted plants, palm and banana leaves, warm late afternoon sun with dappled leaf shadows, real skin with visible pores, faint tan lines, a few small moles, uneven natural skin tone

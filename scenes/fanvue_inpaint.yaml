@@ -1,0 +1,61 @@
+# Masked SDXL repair of fanvue-bed-body-v2 frames (21 Nov 2026). Boxes are x0, y0, x1, y1 as fractions of the frame.
+# The operator runs it: scripts/fanvue_inpaint.sh up / model / fix / down. Originals stay untouched.
+checkpoint: RealVisXL_V5.0_fp16.safetensors
+fixes:
+# m01: nipples came out as glossy oxblood beads (the nail colour bled in); redraw each nipple
+- image: out/dev/fanvue-bed-body-v2/m01-torso-breasts-lying_01.png
+  box: [0.09, 0.51, 0.23, 0.63]
+  prompt: photo, close-up of a natural adult woman's breast, soft matte brown nipple and areola, real skin texture with pores, soft daylight
+  denoise: 0.55
+- image: out/dev/fanvue-bed-body-v2/m01-torso-breasts-lying_01.png
+  box: [0.76, 0.51, 0.90, 0.63]
+  prompt: photo, close-up of a natural adult woman's breast, soft matte brown nipple and areola, real skin texture with pores, soft daylight
+  denoise: 0.55
+- image: out/dev/fanvue-bed-body-v2/m01-torso-breasts-lying_02.png
+  box: [0.10, 0.52, 0.24, 0.64]
+  prompt: photo, close-up of a natural adult woman's breast, soft matte brown nipple and areola, real skin texture with pores, soft daylight
+  denoise: 0.55
+- image: out/dev/fanvue-bed-body-v2/m01-torso-breasts-lying_02.png
+  box: [0.74, 0.52, 0.88, 0.64]
+  prompt: photo, close-up of a natural adult woman's breast, soft matte brown nipple and areola, real skin texture with pores, soft daylight
+  denoise: 0.55
+# m02: a dark underwear-like shadow at the crotch; make it nude
+- image: out/dev/fanvue-bed-body-v2/m02-torso-breasts-sitting_01.png
+  box: [0.33, 0.70, 0.55, 0.82]
+  prompt: photo of a nude adult woman sitting with her thighs together, natural pubic area, neatly trimmed, real skin texture, soft daylight
+  denoise: 0.6
+# m06: vulva from behind rendered as a blur or malformed
+- image: out/dev/fanvue-bed-body-v2/m06-rear-all-fours_01.png
+  box: [0.33, 0.46, 0.62, 0.66]
+  prompt: photo from behind of a nude adult woman on all fours, natural adult vulva with labia between her thighs, natural anatomy, real skin texture with pores, soft daylight
+  denoise: 0.6
+- image: out/dev/fanvue-bed-body-v2/m06-rear-all-fours_02.png
+  box: [0.40, 0.10, 0.66, 0.44]
+  prompt: photo from behind of a nude adult woman on all fours, natural adult vulva with labia between her thighs, natural anatomy, real skin texture with pores, soft daylight
+  denoise: 0.6
+# m08: thighs together, the vulva came out smooth and blank; draw it in between the thighs
+- image: out/dev/fanvue-bed-body-v2/m08-front-vulva-close_01.png
+  box: [0.40, 0.62, 0.60, 0.78]
+  prompt: photo of a nude adult woman lying on her back seen from her knees, natural adult vulva with labia between her thighs, neatly trimmed, natural anatomy, real skin texture with pores, soft daylight
+  denoise: 0.65
+# --- fanvue-body-v3 (21 Nov 2026): anatomy zones; face crops are done locally afterwards ---
+- image: out/dev/fanvue-body-v3/v11-bed-back-legs-apart_02.png
+  box: [0.40, 0.28, 0.60, 0.44]
+  prompt: photo of a nude adult woman lying on her back seen from her feet, natural adult vulva with labia between her thighs, neatly trimmed, natural anatomy, real skin texture with pores, soft daylight
+  denoise: 0.6
+- image: out/dev/fanvue-body-v3/v13-bed-all-fours-rear_01.png
+  box: [0.38, 0.52, 0.62, 0.72]
+  prompt: photo from behind of a nude adult woman on all fours, natural adult vulva with labia between her thighs, natural anatomy, real skin texture with pores, soft daylight
+  denoise: 0.6
+- image: out/dev/fanvue-body-v3/v13-bed-all-fours-rear_02.png
+  box: [0.40, 0.55, 0.60, 0.74]
+  prompt: photo from behind of a nude adult woman on all fours, natural adult vulva with labia between her thighs, natural anatomy, real skin texture with pores, soft daylight
+  denoise: 0.6
+- image: out/dev/fanvue-body-v3/v14-bed-kneeling-front_01.png
+  box: [0.40, 0.78, 0.60, 0.92]
+  prompt: photo of a nude adult woman kneeling upright with her knees apart, natural adult vulva neatly trimmed, natural anatomy, real skin texture with pores, soft backlight
+  denoise: 0.6
+- image: out/dev/fanvue-body-v3/v14-bed-kneeling-front_02.png
+  box: [0.40, 0.64, 0.60, 0.78]
+  prompt: photo of a nude adult woman kneeling upright with her knees apart, natural adult vulva neatly trimmed, natural anatomy, real skin texture with pores, soft backlight
+  denoise: 0.6

@@ -1,0 +1,9 @@
+# x11b re-render: the first one had a second woman in the background (rejected/days8_11).
+defaults:
+  tier: social
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: x11b-tshirt-window-back
+  seed: 11177
+  prompt: photo taken by a friend from behind in the open kitchen of her Dubai Marina apartment with a white marble island, light oak cabinets, brass pendant lights, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she is alone in the room, nobody else in the frame, she stands on her tiptoes at the open shelf reaching for a cup, only an oversized white t-shirt, bare legs, messy hair down, the t-shirt riding up her thighs, she looks back over her shoulder at the camera, soft daylight, natural skin texture, light everyday makeup, candid phone photo

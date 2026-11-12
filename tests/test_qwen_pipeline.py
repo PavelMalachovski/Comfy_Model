@@ -37,7 +37,7 @@ def test_links_valid(kind):
 
 
 def test_manifest_covers_exactly_the_graphs():
-    extra = [json.loads(Path(f"workflows/qwen/{n}.json").read_text()) for n in ("refine", "seedvr")]
+    extra = [json.loads(Path(f"workflows/qwen/{n}.json").read_text()) for n in ("refine", "seedvr", "room")]
     used = {v.split("/")[-1] for g in [_graph(k) for k in KINDS] + extra for v in model_files(g)}
     assert used == {m.file for m in load_manifest(QWEN_MANIFEST)}
 

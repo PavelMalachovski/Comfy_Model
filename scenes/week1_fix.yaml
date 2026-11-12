@@ -1,0 +1,22 @@
+# Week 1 re-renders (19.11.2026): p04d, s03a, x03b, x05b - new seeds and clearer composition. 2 variants each.
+#   same hero-opt 40 settings as scenes/week1_ig.yaml
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 2
+scenes:
+- id: p04d-balm-mirror
+  seed: 9421
+  prompt: half-body photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, evening, warm lamp light, she stands sideways in front of a round wall mirror and puts on tinted lip balm with one hand, both of her hands are empty except the lip balm, no phone, her face in profile and its reflection in the mirror, fitted beige ribbed long-sleeve midi dress, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: s03a-springs-towel
+  seed: 9325
+  aspect: '9:16'
+  prompt: photo taken by a friend from above in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, morning, she sits on the edge of a reformer machine and changes the colored springs with both hands, looking down at the springs, a small white towel over her shoulder, fitted black sports top and high-waisted black leggings, high ponytail, the reformer frame and colored springs in the foreground, natural skin texture, light everyday makeup, candid phone photo
+- id: x03b-glute-bridge-shorts
+  tier: social
+  seed: 9371
+  prompt: full-body side view photo taken by a friend from low on the floor in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, morning, she lies on her back on a grey mat and lifts her hips high in a glute bridge, shoulders and feet on the mat, knees bent, body forming a straight line from knees to shoulders, arms flat beside her, head on the mat turned to the camera, tight black bike shorts and a black cropped sports top, toned legs, natural skin texture, light everyday makeup, candid phone photo
+- id: x05b-shirt-sofa-legs
+  tier: social
+  seed: 9571
+  prompt: full-body photo taken by a friend from the other side of the room in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, afternoon, she reclines on the low cream sofa in only an oversized white linen shirt with the top buttons open, her long bare legs stretched out along the sofa and crossed at the ankles, the whole body from head to toes in the frame, soft smile at the camera, sunlight, natural skin texture, light everyday makeup, candid phone photo

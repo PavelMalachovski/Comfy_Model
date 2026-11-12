@@ -14,10 +14,50 @@ def test_age_terms_banned_everywhere(text):
         assert check_prompt(text, tier)
 
 
-@pytest.mark.parametrize("text", ["nude on bed", "Topless", "naked_", "nipples", "explicit", "NSFW"])
-def test_nudity_banned_all_tiers_v1(text):
+@pytest.mark.parametrize("text", ["nude on bed", "naked_", "nipples", "explicit", "NSFW", "pussy",
+    "genitals visible", "vulva"])
+def test_nudity_only_on_fanvue(text):
+    assert check_prompt(text, "instagram")
+    assert check_prompt(text, "social")
+    assert check_prompt(text, "fanvue") == []
+
+
+@pytest.mark.parametrize("text", ["porn", "pornographic", "sex on the bed", "intercourse", "masturbating",
+    "penetration", "orgasm", "cumshot", "blowjob", "oral sex", "dildo", "vibrator", "sex toy"])
+def test_sexual_acts_banned_everywhere(text):
     for tier in TIERS:
-        assert check_prompt(text, tier)
+        assert check_prompt(text, tier), (text, tier)
+
+
+@pytest.mark.parametrize("text", ["cumulus clouds", "sexy smile", "unisex robe", "cucumber water"])
+def test_sex_rule_does_not_overmatch(text):
+    assert check_prompt(text, "fanvue") == []
+
+
+@pytest.mark.parametrize("text", ["Topless", "bare breasts", "topless, covering her breasts with her hands", "hand-bra"])
+def test_implied_topless_only_on_fanvue(text):
+    assert check_prompt(text, "instagram")
+    assert check_prompt(text, "social")
+    assert check_prompt(text, "fanvue") == []
+
+
+@pytest.mark.parametrize("text", ["bottomless", "bare buttocks", "no panties", "seen from behind, bare bottom"])
+def test_rear_nudity_only_on_fanvue(text):
+    assert check_prompt(text, "instagram")
+    assert check_prompt(text, "social")
+    assert check_prompt(text, "fanvue") == []
+
+
+def test_fanvue_allows_full_nudity():
+    assert check_prompt("bottomless, genitals visible", "fanvue") == []
+    assert check_prompt("fully naked from behind", "fanvue") == []
+    assert check_prompt("topless, nipples visible", "fanvue") == []
+    assert check_prompt("nude yoga, naked downward dog", "fanvue") == []
+
+
+def test_fanvue_nudity_still_blocks_minors_and_sex():
+    assert check_prompt("nude teen", "fanvue")
+    assert check_prompt("naked, sex on the bed", "fanvue")
 
 
 @pytest.mark.parametrize("text", ["black lingerie", "lace bra", "panties", "underwear"])
@@ -98,9 +138,10 @@ def test_age_stems_and_phrasing_banned_everywhere(text):
     "sheer see-through top", "sheer blouse", "see through dress", "see-through", "see_through",
     "transparent shirt",
 ])
-def test_implied_nudity_banned_all_tiers_v1(text):
-    for tier in TIERS:
-        assert check_prompt(text, tier), (text, tier)
+def test_implied_nudity_only_on_fanvue(text):
+    assert check_prompt(text, "instagram")
+    assert check_prompt(text, "social")
+    assert check_prompt(text, "fanvue") == []
 
 
 @pytest.mark.parametrize("text", ["28 yrs. old", "age: 28", "age of 29", "at the age of 28", "aged: 27",

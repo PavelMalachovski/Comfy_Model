@@ -3,8 +3,10 @@
 Rules are word-boundary regexes over *normalized* text (lowercase, ``-``/``_``
 turned into spaces, whitespace collapsed), so "School-Girl", "SCHOOL_GIRL" and
 "school  girl" are all the same term. Tiers: ``instagram`` (SFW showcase: no
-lingerie, no fetish cues), ``social`` (X, Reddit, paid Telegram) and ``fanvue``. Rules are keyed by tier; to relax a tier
-later (e.g. explicit Fanvue) edit its entry in ``TIER_RULES``.
+lingerie, no fetish cues), ``social`` (X, Reddit, paid Telegram) and ``fanvue``
+(full nudity allowed: breasts, buttocks, genitals; sexual acts still banned).
+Minors and real-person likeness are banned on every tier. Rules are keyed by
+tier; edit ``TIER_RULES`` to change a tier.
 """
 from __future__ import annotations
 
@@ -47,15 +49,36 @@ _AGE = (
     ),
 )
 
-# v1: no nudity on any tier, including cues that render as nudity (sheer, see-through).
+# Visible nudity, including genitals and cues that render as nudity (sheer, see-through).
+# Banned on instagram and social; allowed on fanvue (owner decision, 16 Nov 2026).
+# Render on the Mac only (RunPod ToS).
 _NUDITY = (
     "nudity",
     _words(
-        r"nude", r"nudes", r"nudity", r"nake\w*", r"topless", r"bottomless",
-        r"nipples?", r"areolas?", r"explicit", r"nsfw", r"porn(?:ographic)?",
-        r"genitals?", r"pussy", r"bare\sbreasts?", r"undress\w*", r"unclothed",
+        r"nude", r"nudes", r"nudity", r"nake\w*",
+        r"nipples?", r"areolas?", r"explicit", r"nsfw",
+        r"genitals?", r"genitalia", r"vulva", r"labia", r"pussy",
+        r"undress\w*", r"unclothed",
         r"see\s?through", r"transparent", r"sheer",
     ),
+)
+
+# Sexual acts and porn: banned on every tier, fanvue included.
+_SEX = (
+    "sexual act",
+    _words(
+        r"porn\w*", r"sex", r"sexual\s(?:act|intercourse|activity)", r"intercourse",
+        r"masturbat\w*", r"penetrat\w*", r"orgasm\w*", r"cum(?:shots?|ming)?", r"blow\s?jobs?",
+        r"oral\ssex", r"fingering", r"dildos?", r"vibrators?", r"sex\stoys?",
+    ),
+)
+
+# Implied topless: no top, breasts covered by her hands or arms, nothing visible.
+# Banned on instagram and social; allowed on fanvue only (owner decision, 14 Nov 2026).
+# Render these on the Mac only (RunPod ToS) and cull any frame where anything shows.
+_TOPLESS = (
+    "topless",
+    _words(r"topless", r"bare\sbreasts?", r"bare\schest(?:ed)?", r"hand\s?bra"),
 )
 
 # Instagram tier additionally bans lingerie / underwear.
@@ -94,11 +117,19 @@ _FETISH = (
     ),
 )
 
-_BASE: list[Rule] = [_AGE, _NUDITY, _LIKENESS]
+_BASE: list[Rule] = [_AGE, _SEX, _LIKENESS]
+
+# Rear nudity: no bottom, buttocks bare, seen from behind, genitals never visible.
+# Banned on instagram and social; allowed on fanvue only (owner decision, 14 Nov 2026).
+# Same handling as _TOPLESS: Mac only, cull any frame where anything else shows.
+_REAR = (
+    "rear nudity",
+    _words(r"bottomless", r"bare\s(?:buttocks|bottom|butt)", r"no\s(?:panties|underwear|bikini\sbottom)"),
+)
 
 TIER_RULES: dict[str, list[Rule]] = {
-    "instagram": [*_BASE, _LINGERIE, _FETISH],
-    "social": list(_BASE),
+    "instagram": [*_BASE, _NUDITY, _TOPLESS, _REAR, _LINGERIE, _FETISH],
+    "social": [*_BASE, _NUDITY, _TOPLESS, _REAR],
     "fanvue": list(_BASE),
 }
 

@@ -1,0 +1,18 @@
+# Days 5-6 X and Telegram frames (x05, x06, t05, t06), hero-opt 40 settings, tier social.
+defaults:
+  tier: social
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: x05-feet-sofa-pedicure
+  seed: 8701
+  prompt: close photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, afternoon, she sits on the low cream sofa with her bare legs stretched out toward the camera and her feet crossed at the ankles on the round travertine coffee table, oxblood pedicure, soles of her feet slightly toward the camera, exactly two legs, oversized white linen shirt, her face visible in the background with a teasing smile, warm daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: x06-towel-after-shower
+  seed: 8711
+  prompt: half-body photo taken by a friend in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, morning, just out of the shower, she stands by the glass shower wrapped in a short white bath towel tucked under her arms, wet hair combed back, water drops on her shoulders and collarbones, one hand holding the towel at her chest, steam on the glass, soft playful smile at the camera, warm light, natural skin texture, light everyday makeup, candid phone photo
+- id: t05-sofa-shirt-matcha
+  seed: 8801
+  prompt: half-body photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, afternoon, she sits on the low cream sofa with her bare legs tucked under her, oversized white linen shirt with rolled sleeves, holding a tall glass of iced matcha latte, hair down, relaxed warm smile at the camera, a book on the travertine coffee table, warm daylight from the window, natural skin texture, light everyday makeup, candid phone photo
+- id: t06-robe-balcony-sunset
+  seed: 8811
+  prompt: half-body photo taken by a friend on the balcony of her high-rise apartment in Dubai Marina at sunset, glass railing, marina towers and the sea glowing behind her, she leans with her back against the railing in a white waffle cotton bathrobe loosely tied at the waist, hair down and slightly damp, looking at the camera over her shoulder with a soft smile, golden warm light on her face, natural skin texture, light everyday makeup, candid phone photo

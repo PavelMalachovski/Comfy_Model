@@ -1,0 +1,20 @@
+# Swap graph: workflows/qwen/room.json (Qwen-Image-Edit 2511, image1 = her photo, image2 = plate).
+# Fixed locations for Roxana (Dubai Marina apartment). Pick one plate per location, save it
+# under rooms/, then swap it in behind her: `cm lora refine SRC --out DEST
+#   --graph workflows/qwen/room.json --room rooms/<plate>.png`.
+# A plate is the room as it appears BEHIND her (what a mirror selfie reflects), with no mirror
+# and no people in it; the mirror itself belongs to her photo, not to the plate.
+defaults:
+  tier: instagram
+  aspect: '9:16'
+  count: 4
+scenes:
+- id: room-bedroom
+  prompt: master bedroom of a luxury high-rise apartment in Dubai Marina, eye-level view toward the bed, a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, two travertine bedside tables, each with a brass table lamp with a rounded brass bottle base and a white linen drum shade, an oak herringbone floor, a tall olive tree in a white stone pot, a floor-to-ceiling window with light white linen curtains and a view of marina towers, soft morning daylight, warm beige walls
+- id: room-bathroom
+  aspect: '4:5'
+  count: 3
+  prompt: luxury bathroom in a high-rise apartment in Dubai Marina, eye-level view of the back wall, a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, bright warm light
+- id: room-living-room
+  count: 3
+  prompt: modern living room in a high-rise apartment, a black leather armchair and a low cream sofa, an oak herringbone floor, a round travertine coffee table, a floor-to-ceiling window with a view of marina towers and the sea, soft afternoon daylight

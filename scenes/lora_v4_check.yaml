@@ -1,0 +1,29 @@
+# LoRA v4 check (face + body): render with --profile character/profile_phone.yaml, once with
+# ohwxroxana_v4 and once with ohwxroxana_v3 at the same seeds for a side-by-side.
+# Close-up selfies also test the "no phone in a front camera selfie" rule.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+  seed: 4242
+scenes:
+- id: v4-selfie-car
+  prompt: close-up front camera selfie in the passenger seat of a car in daylight, soft smile, hair down, black top
+- id: v4-selfie-cafe
+  prompt: close-up front camera selfie at a cafe terrace in the sun, laughing, hair down, white linen shirt
+- id: v4-selfie-home-evening
+  prompt: close-up front camera selfie at home in the evening under a warm lamp, calm look, hair in a messy bun, grey t-shirt
+- id: v4-mirror-gym
+  aspect: '9:16'
+  prompt: full-body mirror selfie in a gym, black fitted sports top and black leggings, white sneakers, high ponytail, head to toe in frame
+- id: v4-mirror-dress
+  aspect: '9:16'
+  prompt: full-body mirror selfie at home, fitted black long-sleeve bodycon midi dress, black heels, hair down, head to toe in frame
+- id: v4-friend-white-dress
+  aspect: '9:16'
+  prompt: full-body photo taken by a friend on a hotel terrace, fitted white midi dress, sandals with heels, hair down, sea behind her, head to toe in frame
+- id: v4-friend-leather
+  aspect: '9:16'
+  prompt: full-body photo taken by a friend on a city street in the evening, black leather trousers, fitted black turtleneck, heeled boots, walking, head to toe in frame
+- id: v4-seated-bar
+  prompt: full-body photo of her sitting on a tall bar stool, legs crossed, fitted black mini dress, black heels, warm bar lights, looking at the camera

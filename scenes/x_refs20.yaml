@@ -1,0 +1,87 @@
+# X / Telegram set from 20 user pose references (21 Nov 2026), 3 variants each, clothed (social tier).
+# Only the DWPose skeleton comes from each reference (out/dev/pose-refs/x20/refNN.jpg, real people): never their faces,
+# clothes, tattoos or watermarks. Home shots stay in the fixed Dubai Marina rooms (scenes/rooms.yaml).
+# The operator runs it on the open session: scripts/fanvue_inpaint.sh refs
+tier: social
+count: 3
+scenes:
+- id: x01-red-knit-dress-promenade
+  ref: out/dev/pose-refs/x20/ref01.jpg
+  seed: 17010
+  prompt: photo cropped from her chin to her upper thighs, no eyes in frame, she stands on the Dubai Marina promenade at golden hour with the water and marina towers softly out of focus behind her, a fitted red ribbed knit mini dress with an off-shoulder scalloped neckline and a tiny bow, one hand holding the flared hem at her thigh, a brown leather bag strap on her shoulder, a diamond cocktail ring, warm low sun
+- id: x02-cardigan-lace-bra-sofa
+  ref: out/dev/pose-refs/x20/ref02.jpg
+  seed: 17020
+  prompt: photo cropped from her chin to her hips, her lips and jaw at the top edge, she reclines on the low cream sofa in her Dubai Marina living room, an oversized chocolate brown mohair cardigan with white check lines slipping off her shoulders, a burgundy lace balconette bra, high-waisted white jeans, her hand tucked into the sleeve, soft overcast window light
+- id: x03-red-backless-dress-fitting-room
+  ref: out/dev/pose-refs/x20/ref03.jpg
+  seed: 17030
+  prompt: photo from behind in a boutique fitting room in Dubai Mall with black and white striped curtains, she tries on a red backless maxi dress with an open back and the zip at her lower back half open, a black thong strap peeking at her hip, hands at her waist, her long dark brunette hair down her back, a wooden chair with jeans thrown on it, warm boutique light
+- id: x04-shadow-silhouette-closet
+  ref: out/dev/pose-refs/x20/ref04.jpg
+  seed: 17040
+  prompt: only her shadow is in frame, the dark silhouette of a woman taking a mirror selfie cast on a white paneled wardrobe door in her Dubai Marina bedroom, her hair in a loose high ponytail, she wears a fitted strapless bodysuit, the outline of her curves, warm low evening sun, soft grain
+- id: x05-armchair-stretch-bw
+  ref: out/dev/pose-refs/x20/ref05.jpg
+  seed: 17050
+  prompt: black and white photo from above, she lies back across the black leather armchair in her Dubai Marina living room with both arms stretched over her head, eyes closed, a white ribbed knit cropped tank top, high-cut black briefs, toned stomach, oak herringbone floor, dramatic window light and deep shadows
+- id: x06-leg-bath-water
+  seed: 17060
+  prompt: moody photo looking down at her own leg in the freestanding white stone bathtub of her Dubai Marina bathroom, her lower leg raised against the tub wall under a thin stream of water from the brass hand shower, water droplets on the white tub, foamy water below, dim warm evening light, a dark phone photo
+- id: x07-white-jumpsuit-mat
+  ref: out/dev/pose-refs/x20/ref07.jpg
+  seed: 17070
+  prompt: high-angle selfie from above at arm's length, cropped at her lips, she sits on a cream yoga mat on the oak herringbone floor of her Dubai Marina living room, a white long-sleeve zip-front yoga jumpsuit unzipped to a deep V with a white sports bra under it, long dark brunette hair falling over one shoulder, soft daylight
+- id: x08-plow-pose-hoodie
+  ref: out/dev/pose-refs/x20/ref08.jpg
+  seed: 17080
+  prompt: side view on a plain light grey studio floor, she lies on her back in a plow-like pose with her hips raised and her bare legs bent over her head, an oversized pale pink cropped hoodie with two small pink stars, white over-ear headphones, eyes closed, her hair in a low bun, soft warm studio light
+- id: x09-disco-ball-bridge
+  ref: out/dev/pose-refs/x20/ref09.jpg
+  seed: 17090
+  prompt: side view against a plain white rooftop wall in bright Dubai sun, she lies back in a bridge with her hips resting on a silver mirror disco ball, one leg raised high with a pointed toe, the other knee bent, arms stretched back on the floor, a lilac high-cut one-piece swimsuit, glowing tanned skin, crisp hard shadows
+- id: x10-cap-sports-bra-street
+  ref: out/dev/pose-refs/x20/ref10.jpg
+  crop: [0.5, 0.0, 1.0, 1.0]
+  seed: 17100
+  prompt: full-body photo in a concrete underground parking garage in Dubai, she walks looking to the side, a washed charcoal baseball cap with enamel pins, a sage green scoop sports bra, layered silver pendant necklaces, an oversized cream overshirt off her shoulders, a brown jacket tied around her waist, charcoal leggings, slouchy white socks and chunky sneakers, warm film tone
+- id: x11-pigeon-pose-window
+  ref: out/dev/pose-refs/x20/ref11.jpg
+  seed: 17110
+  prompt: she kneels in a deep king pigeon stretch on the oak herringbone floor by the floor-to-ceiling window of her Dubai Marina living room, one hand holding her raised back foot behind her head, chest lifted, looking up, a dark charcoal ribbed open-back bodysuit, grey cable-knit over-the-knee socks, the low cream sofa behind her, bright backlit morning sun
+- id: x12-wide-leg-fold-rear
+  ref: out/dev/pose-refs/x20/ref12.jpg
+  seed: 17120
+  prompt: low view from behind, she folds forward in a wide-legged stretch on a light wood floor in a calm yoga studio with light white linen curtains and arched warm LED niches, her palms on the floor, black high-waisted leggings and a black sports bra, long dark brunette hair hanging down, soft warm light
+- id: x13-downward-dog-studio
+  ref: out/dev/pose-refs/x20/ref13.jpg
+  seed: 17130
+  prompt: side view, she holds downward dog on a pale pink yoga mat in a calm yoga studio with a mirror wall, light white linen curtains and warm LED cove lights, black sports bra, black leggings with fine black mesh panels on the legs, her long dark brunette hair hanging down, warm evening light
+- id: x14-leather-skirt-heels-low
+  ref: out/dev/pose-refs/x20/ref14.jpg
+  seed: 17140
+  prompt: very low angle from the floor behind her, she leans over a round white dining table with her hands on it, one leg bent up behind her showing the red sole of a glossy black patent stiletto pump, a black leather midi pencil skirt with a back slit, thin black seamed tights, a black lace camisole, upholstered grey dining chairs on light wood legs, white curtains, soft daylight
+- id: x15-forearms-floor-studio
+  ref: out/dev/pose-refs/x20/ref15.jpg
+  seed: 17150
+  prompt: on a seamless light grey studio backdrop, she rests on her forearms and knees with her hips raised behind her, her chin on her clasped hands, looking into the lens with a calm confident gaze, a grey headband in her hair, a black strappy crop top, black leggings, chunky white sneakers, gold bracelets and gold earrings, soft studio light
+- id: x16-standing-split-wall-bars
+  ref: out/dev/pose-refs/x20/ref16.jpg
+  seed: 17160
+  prompt: in a gymnastics hall, she stands in a standing split against wooden wall bars, one leg raised straight up beside her head, one hand on a bar, her long dark brunette hair in a side braid, a black long-sleeve ribbed bodysuit, opaque black tights, red gym mats and a vaulting box behind her, warm hall lights
+- id: x17-zip-bodysuit-lounger
+  ref: out/dev/pose-refs/x20/ref17.jpg
+  seed: 17170
+  prompt: she reclines on a white cushioned teak lounger on her sunny Dubai Marina balcony, both arms bent behind her head, looking down into the lens, a black long-sleeve high-neck zip-front bodysuit with a high-cut leg, toned bare legs, white pebbles behind, bright soft daylight
+- id: x18-legs-up-mat-dining
+  ref: out/dev/pose-refs/x20/ref18.jpg
+  seed: 17180
+  prompt: high-angle photo from above her, she lies on a black yoga mat on the oak herringbone floor of her Dubai Marina living room with both legs raised straight up and her hands holding her calves, smiling up at the lens, black seamless leggings, a cream long-sleeve top, a white headband, soft daylight
+- id: x19-mirror-selfie-floor
+  ref: out/dev/pose-refs/x20/ref19.jpg
+  seed: 17190
+  prompt: mirror selfie, she sits on the floor in front of the tall mirror in her Dubai Marina bedroom with her legs folded to the side, the phone in a leopard print case covering part of her face, a soft heather grey long-sleeve top and matching grey lounge leggings, warm lamp light, a little grainy
+- id: x20-sofa-lying-legs-up
+  ref: out/dev/pose-refs/x20/ref20.jpg
+  seed: 17200
+  prompt: she lies on her stomach on the low cream sofa in her Dubai Marina living room with her calves crossed up in the air, her cheek resting on her folded arms, looking into the lens with a soft smile, hair falling across her face, a chocolate brown long-sleeve fitted top, black high-cut briefs, warm golden window light, cinematic
