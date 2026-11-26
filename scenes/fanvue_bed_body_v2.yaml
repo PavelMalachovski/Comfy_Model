@@ -1,0 +1,40 @@
+# Fanvue faceless body set, second pass (21 Nov 2026). The first pass (fanvue_bed_body.yaml) drew her face in every frame
+# because the profile described the face. This pass uses character/profile_body_40.yaml + the -body graph
+# (face in the negative) and hard crops: the top edge of the frame cuts her at the neck or the head is turned away.
+# Fixed Dubai Marina bedroom. Adult 40, alone, no acts, no toys. The operator runs it:
+#   scripts/fanvue_bed_body_v2.sh
+defaults:
+  tier: fanvue
+  aspect: '4:5'
+  count: 2
+scenes:
+# --- breasts ---
+- id: m01-torso-breasts-lying
+  seed: 14300
+  prompt: headless torso crop, the top edge of the frame cuts across her neck, no head in frame, close-up shot from above of a nude 40-year-old adult woman lying on her back on rumpled white linen, her natural full breasts with visible nipples and areolas filling the frame, slightly uneven, soft natural weight, collarbones with a thin gold chain, softly toned stomach at the bottom of the frame, soft morning window light, macro detail of real skin with visible pores and fine goosebumps
+- id: m02-torso-breasts-sitting
+  seed: 14302
+  prompt: headless torso crop from her neck to her thighs, no head in frame, front view at chest height, a nude 40-year-old adult woman sits on the edge of a low white boucle bed, her natural full breasts with visible nipples and areolas in sharp detail, her navel and softly toned stomach, her hands resting on her thighs, white linen curtains behind her, warm late afternoon window light, real skin with visible pores and faint tan lines
+- id: m03-torso-breasts-side
+  seed: 14304
+  prompt: headless side-profile torso crop, the frame starts at her shoulder, no head in frame, a nude 40-year-old adult woman kneels upright on a white bed, her natural full breast and nipple in profile against a bright window with white linen curtains, the curve of her waist and hip, soft backlight outlining her skin, real skin with visible pores and fine hair
+# --- buttocks ---
+- id: m04-rear-buttocks-stomach
+  seed: 14306
+  prompt: close-up from behind of the lower back, buttocks and upper thighs of a nude 40-year-old adult woman lying on her stomach on rumpled white linen, her upper body and head out of frame, bare round toned buttocks filling the frame, two dimples above them, faint tan lines, soft morning window light, macro detail of real skin with visible pores and faint skin creases
+- id: m05-rear-buttocks-kneeling
+  seed: 14308
+  prompt: close-up from behind at hip height of a nude 40-year-old adult woman kneeling upright on a white bed, the frame cut at the middle of her back, no head in frame, bare round toned buttocks, narrow waist and lower back filling the frame, her hands resting on her heels, faint tan lines, warm late afternoon window light, real skin with visible pores
+- id: m06-rear-all-fours
+  seed: 14310
+  prompt: close-up from behind of a nude 40-year-old adult woman on all fours on a white bed with her back arched, her head out of frame beyond her back, bare round toned buttocks and her vulva with labia visible between her thighs in sharp detail, natural adult anatomy, faint tan lines, rumpled white linen, soft morning window light, real skin with visible pores
+# --- vulva ---
+- id: m07-front-lying-body
+  seed: 14312
+  prompt: view down the body from above her breasts to her knees, her head out of frame, a nude 40-year-old adult woman lies on her back on a white bed with her knees bent and slightly apart, her natural full breasts with visible nipples, softly toned stomach and her vulva with labia visible, neatly trimmed, natural adult anatomy, rumpled white linen, soft morning window light, real skin with visible pores
+- id: m08-front-vulva-close
+  seed: 14314
+  prompt: close-up between her thighs, nothing above her navel in frame, a nude 40-year-old adult woman lies on her back on white linen with her knees bent and apart, her vulva with labia in sharp detail, neatly trimmed, natural adult anatomy, her inner thighs and lower stomach, soft morning window light, real skin with visible pores
+- id: m09-rear-legs-apart
+  seed: 14316
+  prompt: low close-up from behind at mattress level of a nude 40-year-old adult woman lying on her stomach on a white bed with her legs apart, her back and head out of frame, bare round toned buttocks and her vulva with labia visible between her thighs in sharp detail, natural adult anatomy, faint tan lines, rumpled white linen, warm late afternoon window light, real skin with visible pores

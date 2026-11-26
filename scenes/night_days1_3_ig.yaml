@@ -1,0 +1,25 @@
+# Days 1-3 overnight (17-18 Nov 2026), hero-opt v5 age-tuned: --profile character/profile_phone_40.yaml
+# --lora ohwxroxana_v5.safetensors --strength 0.8 --workflows workflows/qwen-mac-hero-opt-v5-40. Mac only.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: p01a-coffee-window
+  seed: 7801
+  prompt: half-body photo taken by a friend standing across the room in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, morning, she stands by the window holding a white ceramic coffee mug with a handle with both hands near her chest, both arms close to her body, oversized white shirt, messy hair down, soft sleepy smile looking at the camera, soft morning daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: p01b-bed-edge-coffee
+  seed: 7811
+  prompt: photo taken by a friend from the doorway of her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, morning, she sits on the edge of the bed with a white ceramic coffee mug with a handle in both hands on her knees, oversized white shirt over soft grey cotton lounge shorts, her knees together, white socks, messy hair down, laughing at something with her head tilted, rumpled white sheets behind her, soft morning daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: p02b-unroll-mat
+  seed: 7881
+  prompt: half-body photo taken by a friend on an empty Dubai beach at sunrise, a neat row of empty yoga mats on the sand, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she crouches on the sand and unrolls a yoga mat with both hands, looking up at the camera and laughing, fitted sand-colored sports top and matching high-waisted leggings, high ponytail with loose strands, natural skin texture, light everyday makeup, candid phone photo
+- id: p02c-mat-coffee-sun
+  seed: 7891
+  prompt: half-body photo taken by a friend on an empty Dubai beach at sunrise, a neat row of empty yoga mats on the sand, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she sits cross-legged on a yoga mat holding a takeaway coffee cup in both hands in her lap, squinting into the low sun with a soft smile, fitted sand-colored sports top and matching leggings, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: p03b-reformer-springs
+  seed: 7901
+  prompt: half-body photo taken by a friend in a bright pilates studio in Dubai in the morning, white walls, oak floor, reformer machines, soft daylight from big windows, she sits sideways on a reformer carriage and adjusts the springs with one hand, her other hand resting on her knee, calm focused look down at the springs, fitted black sports top and high-waisted black leggings, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: p03c-ponytail-smile
+  seed: 7911
+  prompt: close-up photo taken by a friend in a bright pilates studio in Dubai in the morning, white walls, oak floor, reformer machines, soft daylight from big windows, she tightens her high ponytail with both hands raised behind her head, small warm smile at the camera, fitted black sports top, small gold hoop earrings, reformers blurred behind her, natural skin texture, light everyday makeup, candid phone photo

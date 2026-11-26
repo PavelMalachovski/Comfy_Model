@@ -1,0 +1,12 @@
+# Start frame for video 0 (Roxy walks along the beach, two-piece swimsuit), 9:16. Pick one, then animate.
+defaults:
+  tier: instagram
+  aspect: '9:16'
+  count: 1
+scenes:
+- id: v00a-beach-walk-start
+  seed: 20000
+  prompt: full-body photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she walks along the wet sand at the edge of the water toward the camera, relaxed natural stride, soft smile, terracotta two-piece bikini, long dark hair loose and moving in the wind, she is alone on the beach, warm golden light on her skin, natural skin texture, light everyday makeup, candid phone photo
+- id: v00b-beach-walk-start
+  seed: 20002
+  prompt: full-body photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she walks through the shallow foam at the waterline, mid-step, looking at the camera with a calm smile, black two-piece bikini, long dark hair loose and moving in the wind, she is alone on the beach, warm golden light on her skin, natural skin texture, light everyday makeup, candid phone photo

@@ -1,0 +1,22 @@
+# Day 14 re-renders: selfie drift and wrong outfit on p14b-e, s14b. 2 variants each.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 2
+scenes:
+- id: p14b-dune-walk-sandals
+  seed: 12401
+  prompt: wide full-body photo taken by a friend standing five meters away, not a selfie, both of her hands visible, on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she walks up the crest of a dune away from the camera and looks back, holding her sandals in one hand, the long dress moving in the wind, her whole body in the frame, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, natural skin texture, light everyday makeup, candid phone photo
+- id: p14c-tea-pour
+  seed: 12408
+  prompt: close-up photo on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around of her hands pouring tea from a brass teapot into a small glass on a woven rug, oxblood nail polish, the terracotta linen dress on her knees, golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: p14d-rug-lying-laugh
+  seed: 12415
+  prompt: photo taken by a friend standing above her looking straight down, not a selfie, on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she lies on her back on a woven rug on the sand with her arms spread out and her hair spread around her head, laughing, her whole body in the frame, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: p14e-dune-silhouette
+  seed: 12422
+  prompt: wide full-body photo taken by a friend standing five meters away, not a selfie, both of her hands visible, on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she stands small on top of a distant dune against the low setting sun, a dark silhouette, the long dress and her hair blowing in the wind, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, natural skin texture, light everyday makeup, candid phone photo
+- id: s14b-sunset-far
+  seed: 12429
+  prompt: wide landscape photo taken by a friend far away, not a selfie, on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she is a small figure standing on a distant dune crest, the sun setting behind the dunes, a long flowing terracotta linen dress with thin straps, small gold hoop earrings, hair down moving in the wind, natural skin texture, light everyday makeup, candid phone photo
+  aspect: '9:16'

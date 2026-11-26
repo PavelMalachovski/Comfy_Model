@@ -1,0 +1,10 @@
+# Gemini feedback test (15 Nov 2026): varied head pose and expression instead of the "same calm look", LoRA 0.7 vs 0.8.
+# Same scene and seed as fv5-flash-jeans_01 (scenes/mac_refs_vip5_fanvue.yaml). Fanvue tier, Mac only.
+defaults:
+  tier: fanvue
+  aspect: '9:16'
+  count: 1
+  seed: 7511
+scenes:
+- id: lt-flash-jeans
+  prompt: half-body photo with direct phone flash taken by a friend standing in front of her at night in a dim apartment, both of her hands on the open waistband of unbuttoned light blue jeans low on her hips, dark red curtains and a dark armchair with clothes thrown on it behind her, black lace bralette, black lace thong straps high on her hips above the jeans, toned stomach, thin gold chain with a small round gold pendant, gold bracelet, her head tilted to one side and turned slightly away, laughing mid-word with her eyes half closed, dark brown hair pushed back on one side and tucked behind her ear, a few loose strands across her cheek, hard flash light with dark falloff, real skin with visible pores, fine hair on her arms, natural skin texture

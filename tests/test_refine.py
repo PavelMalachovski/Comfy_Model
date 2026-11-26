@@ -163,3 +163,33 @@ def test_refine_with_seedvr_graph_drops_the_prompt(tmp_path):
     assert len(report.done) == 3
     up = next(n for n in c.queued[0].values() if n["class_type"] == "SeedVR2VideoUpscaler")
     assert isinstance(up["inputs"]["seed"], int)
+
+
+def test_room_graph_contract():
+    g = json.loads((GRAPH_DIR / "room.json").read_text())
+    assert all(isinstance(n, dict) for n in g.values()), "ComfyUI rejects non-node keys (e.g. _comment)"
+    assert placeholders(g) == {"image", "room_image", "seed", "filename_prefix"}
+    enc = next(n for n in g.values() if isinstance(n, dict) and n.get("class_type") == "TextEncodeQwenImageEditPlus"
+               and n["inputs"]["prompt"])
+    assert "image1" in enc["inputs"] and "image2" in enc["inputs"]
+
+
+def test_refine_with_room_uploads_the_plate_once(tmp_path):
+    plate = tmp_path / "plate.png"
+    Image.new("RGB", (64, 96)).save(plate)
+    c = FakeClient()
+    report = refine_dataset(_src(tmp_path), tmp_path / "dst", c, graph_path=GRAPH_DIR / "room.json", room=plate)
+    assert len(report.done) == 3
+    assert c.uploads.count(plate) == 1
+    loads = [n["inputs"]["image"] for n in c.queued[0].values() if isinstance(n, dict) and n.get("class_type") == "LoadImage"]
+    assert len(loads) == 2 and any("plate.png" in x for x in loads)
+
+
+def test_room_graph_needs_a_plate_and_others_refuse_one(tmp_path):
+    src = _src(tmp_path)
+    with pytest.raises(ValueError, match="--room"):
+        refine_dataset(src, tmp_path / "dst", FakeClient(), graph_path=GRAPH_DIR / "room.json")
+    plate = tmp_path / "plate.png"
+    Image.new("RGB", (8, 8)).save(plate)
+    with pytest.raises(ValueError, match="room_image"):
+        refine_dataset(src, tmp_path / "dst2", FakeClient(), graph_path=GRAPH_DIR / "seedvr.json", room=plate)

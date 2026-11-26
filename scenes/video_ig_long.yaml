@@ -1,0 +1,65 @@
+# Instagram long clips (12-14 s), keyframes -> Wan 2.2 first-last-frame, Lightning + FILM (scripts/video_keys.py).
+#   .venv/bin/python scripts/video_keys.py keys  scenes/video_ig_long.yaml --out out/dev/video-ig-long --url http://127.0.0.1:8190
+#   .venv/bin/python scripts/video_keys.py video scenes/video_ig_long.yaml --out out/dev/video-ig-long --url http://127.0.0.1:8190 --set 1
+# keys: one 'base' (Qwen + LoRA), the others are Qwen-Edit changes of the base. segments[i]: k<i> -> k<i+1>, 105 frames each.
+videos:
+- id: v05-split-fold
+  tier: instagram
+  base:
+    seed: 21000
+    prompt: full-body side view photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, soft morning daylight, she sits on a grey yoga mat in full front splits, one leg straight forward and the other straight back, torso upright, both arms raised overhead, calm face, fitted sage green sports top and high-waisted sage green leggings, high ponytail, she is alone in the room, natural skin texture, light everyday makeup, candid phone photo
+  keys:
+  - base
+  - prompt: full-body side view photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, soft morning daylight, she sits on a grey yoga mat in full front splits, one leg straight forward and the other straight back flat on the mat, she folds her torso forward and low over her front leg, both hands resting on her front shin, her head lowered toward her front knee, eyes closed, fitted sage green sports top and high-waisted sage green leggings, high ponytail, she is alone in the room, natural skin texture, light everyday makeup, candid phone photo
+  - prompt: full-body side view photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, soft morning daylight, she sits on a grey yoga mat in full front splits, one leg straight forward and the other straight back flat on the mat, her torso folded forward over her front leg with both hands on her front shin, she lifts her head and looks straight into the camera with a soft warm smile, fitted sage green sports top and high-waisted sage green leggings, high ponytail, she is alone in the room, natural skin texture, light everyday makeup, candid phone photo
+  segments:
+  - prompt: in full front splits on the mat she breathes in, then slowly and smoothly folds her torso forward over her front leg, arms reaching along the leg, controlled calm yoga movement, ponytail moves gently, static handheld phone video, realistic motion
+  - prompt: she holds the deep forward fold over her front leg, breathes slowly, then lifts her head and looks into the camera with a soft warm smile, tiny natural movements, static handheld phone video, realistic motion
+- id: v06-side-plank
+  tier: instagram
+  base:
+    seed: 21100
+    prompt: full-body side view photo taken by a friend in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, she is in a high plank on a grey mat with straight arms, body in a straight line, looking down at the mat, fitted burgundy sports top and high-waisted burgundy leggings, grey grip socks, high ponytail, oxblood nail polish, she is alone in the studio, natural skin texture, light everyday makeup, candid phone photo
+  keys:
+  - base
+  - prompt: full-body side view photo taken by a friend in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, she holds a side plank on her right hand on a grey mat facing the camera, body in one straight line, her top arm reaching straight up toward the ceiling with fingers spread, oxblood nails visible, she smiles at the camera, fitted burgundy sports top and high-waisted burgundy leggings, grey grip socks, high ponytail, oxblood nail polish, she is alone in the studio, natural skin texture, light everyday makeup, candid phone photo
+  - prompt: full-body side view photo taken by a friend in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, she holds a strong side plank on her right hand on a grey mat facing the camera, body in one straight line, her top hand resting on her hip, she laughs softly looking into the camera, fitted burgundy sports top and high-waisted burgundy leggings, grey grip socks, high ponytail, oxblood nail polish, she is alone in the studio, natural skin texture, light everyday makeup, candid phone photo
+  segments:
+  - prompt: from a high plank she smoothly rotates onto her right hand into a side plank, lifts her top arm straight up toward the ceiling and smiles at the camera, controlled pilates movement, static handheld phone video, realistic motion
+  - prompt: she holds the side plank steadily, breathing, her body trembles very slightly from effort, she lowers her top hand to her hip and laughs softly into the camera, static handheld phone video, realistic motion
+- id: v07-balcony-evening
+  tier: instagram
+  base:
+    seed: 21200
+    prompt: half-body photo taken by a friend on the balcony of her high-rise apartment in Dubai Marina at night, glass railing, glowing marina towers and city lights and the dark sea behind her, warm light from the living room on her face, she leans with her back against the glass railing facing the camera, a glass of water in one hand near her chest, calm warm smile, long white terry bathrobe tied at the waist, long dark hair loose, she is alone on the balcony, natural skin texture, light everyday makeup, candid phone photo
+  keys:
+  - edit: "Keep the same woman, her face, hair, white bathrobe, the glass of water, the same balcony, night light and camera framing exactly as they are. Change only her pose: she has turned around and faces away from the camera toward the marina, leaning with her forearms on the glass railing, we see her back and the back of her head, her face is not visible, the glass of water in her hand on the railing."
+  - prompt: photo taken by a friend from behind on the balcony of her high-rise apartment in Dubai Marina at night, glass railing, glowing marina towers and city lights and the dark sea below, she leans with her forearms on the glass railing with her back to the camera, a glass of water in one hand, she turns her head back over her shoulder and looks at the camera with a soft smile, long white terry bathrobe tied at the waist, long dark hair loose down her back, she is alone on the balcony, natural skin texture, light everyday makeup, candid phone photo
+  - base
+  segments:
+  - prompt: she leans on the balcony railing with her back to the camera looking at the night marina lights, a light breeze moves her hair, she slowly turns her head and shoulders back and looks at the camera with a soft smile, city lights twinkle, static handheld phone video, realistic motion
+  - prompt: she slowly turns around to face the camera, leans her back against the glass railing, raises the glass of water and takes a small sip, then looks into the camera with a calm warm smile, hair moving in the breeze, static handheld phone video, realistic motion
+- id: v05-split-chain
+  tier: instagram
+  base:
+    seed: 21000
+    prompt: full-body side view photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, soft morning daylight, she sits on a grey yoga mat in full front splits, one leg straight forward and the other straight back, torso upright, both arms raised overhead, calm face, fitted sage green sports top and high-waisted sage green leggings, high ponytail, she is alone in the room, natural skin texture, light everyday makeup, candid phone photo
+  keys:
+  - base
+  segments:
+  - prompt: in full front splits on the mat with both arms raised overhead, she breathes in, then slowly and smoothly folds her torso forward and low over her front leg, her hands sliding down along the front leg, her head lowering toward her knee, legs stay in the splits, controlled calm yoga movement, ponytail moves gently, static handheld phone video, realistic motion
+  - prompt: she holds the deep forward fold over her front leg in the splits, breathes slowly, then slowly lifts her head and looks into the camera with a soft warm smile, tiny natural movements, static handheld phone video, realistic motion
+# v3 (20 Nov): k0/k1 = v05-split-fold set2 (LoRA renders), k2 = small head edit of k1 + LoRA face fix.
+- id: v05-split-v3
+  tier: instagram
+  base:
+    seed: 21000
+    prompt: full-body side view photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, soft morning daylight, she sits on a grey yoga mat in full front splits, one leg straight forward and the other straight back, torso upright, both arms raised overhead, calm face, fitted sage green sports top and high-waisted sage green leggings, high ponytail, she is alone in the room, natural skin texture, light everyday makeup, candid phone photo
+  keys:
+  - base
+  - prompt: full-body side view photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, soft morning daylight, she sits on a grey yoga mat in full front splits, one leg straight forward and the other straight back flat on the mat, she folds her torso forward and low over her front leg, both hands resting on her front shin, her head lowered toward her front knee, eyes closed, fitted sage green sports top and high-waisted sage green leggings, high ponytail, she is alone in the room, natural skin texture, light everyday makeup, candid phone photo
+  - from: 1
+    edit: "Keep the same woman, her body, her pose on the mat, her legs, arms and hands, her outfit, the same room, light and camera framing exactly as they are. Change only her head: she lifts her head and looks straight into the camera with a soft warm smile."
+  segments:
+  - prompt: in front splits on the mat with both arms raised overhead, she breathes out and slowly lowers her arms and leans her torso forward over her front leg, her hands sliding down onto her front leg, her gaze lowering, legs stay in the splits, smooth calm stretching movement, ponytail moves gently, static handheld phone video, realistic motion
+  - prompt: she holds the stretch over her front leg with her hands on the leg, breathes slowly, then slowly lifts her head and looks into the camera with a soft warm smile, tiny natural movements, static handheld phone video, realistic motion

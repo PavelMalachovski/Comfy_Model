@@ -1,0 +1,12 @@
+# Start frame for video "slow dog-to-cobra" in the fixed living room (scenes/rooms.yaml), 9:16.
+defaults:
+  tier: instagram
+  aspect: '9:16'
+  count: 1
+scenes:
+- id: v03a-downdog-start
+  seed: 20200
+  prompt: full-body photo taken by a friend from a low side angle in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she holds downward dog pose on a grey yoga mat by the window, hips high, arms and back in one straight line, head relaxed between her arms, fitted sage green sports top and high-waisted sage green leggings, high ponytail, she is alone in the room, soft morning daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: v03b-downdog-start
+  seed: 20202
+  prompt: full-body photo taken by a friend from a low three-quarter front angle in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she holds downward dog pose on a grey yoga mat in front of the window, hips high, long straight arms, calm face looking back between her arms toward the camera, fitted sage green sports top and high-waisted sage green leggings, high ponytail, she is alone in the room, soft morning daylight, natural skin texture, light everyday makeup, candid phone photo

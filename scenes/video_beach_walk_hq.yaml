@@ -1,0 +1,11 @@
+# Video 0, HQ test: same start frame and seed as v00-stop-hair-laugh, 20 steps without Lightning + FILM x2 (32 fps).
+#   cm batch video scenes/video_beach_walk_hq.yaml --workflows workflows/wan22-i2v-14b-hq --out out/dev/video-beach-walk-hq --url http://127.0.0.1:8190
+defaults:
+  tier: instagram
+  aspect: '9:16'
+  count: 1
+scenes:
+- id: v00-stop-hair-laugh-hq
+  seed: 20104
+  image: ../out/dev/video-beach-start/v00a-beach-walk-start_01.png
+  prompt: she takes two slow steps toward the camera, stops, tucks her hair behind her ear with one hand and laughs softly, looking into the camera, the wind moves her hair, gentle waves roll in behind her, static handheld phone video, realistic motion

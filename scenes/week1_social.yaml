@@ -1,0 +1,38 @@
+# Week 1 top-up to 16 units a day (docs/guide/16-posts-30-days.md), hero-opt 40 settings:
+#   --profile character/profile_phone_40.yaml --lora ohwxroxana_v5.safetensors --strength 0.8 --workflows workflows/qwen-mac-hero-opt-v5-40
+# SFW (social tier, X and Telegram): rendered on vast.ai.
+defaults:
+  tier: social
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: x01b-lace-bed-edge
+  seed: 9151
+  prompt: half-body photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, morning, she sits on the edge of the bed in a white lace bralette and matching white lace briefs, one hand in her hair, sleepy half smile at the camera, soft morning daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: x02b-wet-sand-lying
+  seed: 9251
+  prompt: photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she lies on her side on wet sand propped on one elbow, fitted sand-colored sports top and matching high-waisted leggings, high ponytail with loose strands, sand on her skin, warm golden light on her body, relaxed smile, natural skin texture, light everyday makeup, candid phone photo
+- id: x03b-glute-bridge-shorts
+  seed: 9351
+  prompt: side view photo taken by a friend in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, morning, she holds a glute bridge on a grey mat, hips lifted, in tight black bike shorts and a black cropped sports top, toned legs, natural skin texture, light everyday makeup, candid phone photo
+- id: t03b-locker-towel
+  seed: 9353
+  prompt: half-body photo taken by a friend in a pilates studio changing room with light wood lockers, after class, she wears a black sports bra and black leggings, a small white towel around her neck, flushed glowing skin, tired happy smile, natural skin texture, light everyday makeup, candid phone photo
+- id: x04b-lace-bodysuit-mirror
+  seed: 9451
+  prompt: mirror selfie in a tall floor mirror in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, evening, warm lamp light, she wears a black lace bodysuit, hair down, small gold hoop earrings, one hand on her hip, calm confident look, natural skin texture, light everyday makeup, candid phone photo
+- id: x05b-shirt-sofa-legs
+  seed: 9551
+  prompt: photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, afternoon, she sits on the low cream sofa in only an oversized white linen shirt with the top buttons open, long bare legs stretched onto the travertine coffee table, soft smile, sunlight, natural skin texture, light everyday makeup, candid phone photo
+- id: x06b-pigeon-back
+  seed: 9651
+  prompt: photo taken by a friend from behind in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she holds pigeon pose on a grey yoga mat, looking over her shoulder at the camera, fitted sage green sports top and high-waisted sage green leggings, high ponytail, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: x07a-silk-robe-legs
+  seed: 9751
+  prompt: photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, Sunday morning, she lies in bed in a short champagne silk robe, bare legs on top of the white sheet, looking at the camera, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: x07b-lace-in-bed
+  seed: 9753
+  prompt: photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, Sunday morning, she lies on her side in bed in a white lace bralette and matching briefs, head on the pillow, looking at the camera with a soft smile, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: t07b-sheet-shoulders-selfie
+  seed: 9755
+  prompt: close selfie lying in bed, Sunday morning, a white sheet pulled up to her chest, bare shoulders, sleepy smile, messy hair on the pillow, soft daylight, natural skin texture, light everyday makeup, candid phone photo

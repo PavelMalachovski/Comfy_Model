@@ -1,0 +1,78 @@
+# Week 1 top-up to 16 units a day (docs/guide/16-posts-30-days.md), Fanvue tier, full nudity (bible, 19 Nov 2026).
+# The operator launches it. On vast.ai (owner decision 19 Nov 2026; separate instance, destroyed after):
+#   scripts/vast_batch.sh scenes/fanvue_week1.yaml out/dev/fanvue-week1
+# Or on the Mac overnight:
+#   CM_WAIT_TIMEOUT_S=36000 .venv/bin/cm batch photo scenes/fanvue_week1.yaml --profile character/profile_phone_40.yaml \
+#     --lora ohwxroxana_v5.safetensors --strength 0.8 --workflows workflows/qwen-mac-hero-opt-v5-40 --out out/dev/fanvue-week1 --url http://127.0.0.1:8188
+# Then: .venv/bin/python scripts/prod_pack.py day1 day2 day3 day4 day5 day6 day7
+defaults:
+  tier: fanvue
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: f01a-lace-off-window
+  seed: 9171
+  prompt: half-body photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, morning, by the window she takes off her white lace bralette with one hand, bare breasts, white lace briefs, messy hair down, playful look at the camera, soft morning daylight on her skin, natural skin texture, light everyday makeup, candid phone photo
+- id: f01b-nude-window-coffee
+  seed: 9173
+  prompt: three-quarter photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, morning, she stands by the window fully nude, bare breasts, natural body of a fit 40-year-old woman, holding a white ceramic coffee mug with a handle near her chest, soft backlight from the window outlining her body, sleepy smile at the camera, natural skin texture, light everyday makeup, candid phone photo
+- id: f01c-nude-sheets-look-back
+  seed: 9175
+  prompt: photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, morning, she lies on her stomach fully nude, bare breasts, natural body of a fit 40-year-old woman on rumpled white sheets, bare back and bare buttocks, looking back at the camera over her shoulder with a soft smile, soft morning daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: f01d-nude-bed-stretch
+  seed: 9177
+  prompt: photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, morning, she sits on the bed fully nude, bare breasts, natural body of a fit 40-year-old woman, stretching both arms up over her head, eyes half closed, messy hair, soft morning daylight on her skin, natural skin texture, light everyday makeup, candid phone photo
+- id: f02c-nude-towel-sunrise
+  seed: 9271
+  prompt: photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she lies on her back on a beach towel fully nude, bare breasts, natural body of a fit 40-year-old woman, one knee bent, arm over her head, eyes closed, warm golden light on her skin, natural skin texture, light everyday makeup, candid phone photo
+- id: f02d-nude-out-of-sea
+  seed: 9273
+  prompt: three-quarter photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she walks out of the calm sea toward the camera fully nude, bare breasts, natural body of a fit 40-year-old woman, water at her knees, wet hair slicked back, water drops on her skin, calm smile, golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: f03c-nude-reformer-evening
+  seed: 9371
+  prompt: photo taken by a friend in a bright pilates studio in Dubai, white walls, oak floor, reformer machines, soft daylight from big windows, evening, the studio is empty, she sits on a reformer carriage fully nude, bare breasts, natural body of a fit 40-year-old woman, legs apart with knees bent, leaning back on her hands, confident look at the camera, warm evening light, natural skin texture, light everyday makeup, candid phone photo
+- id: f03d-nude-studio-shower
+  seed: 9373
+  prompt: three-quarter photo taken by a friend in a studio shower with beige tiles and a glass door, after class, she stands under the water fully nude, bare breasts, natural body of a fit 40-year-old woman, both hands in her wet hair, water running down her body, eyes closed, natural skin texture, light everyday makeup, candid phone photo
+- id: f04c-nude-all-fours-lamp
+  seed: 9471
+  prompt: photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, night, warm light from the brass table lamp, she is on her hands and knees on the bed fully nude, bare breasts, natural body of a fit 40-year-old woman, back arched, looking back at the camera over her shoulder, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: f04d-nude-back-knee-lamp
+  seed: 9473
+  prompt: photo taken by a friend standing at the foot of the bed in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, night, warm light from the brass table lamp, she lies on her back on the bed fully nude, bare breasts, natural body of a fit 40-year-old woman, one knee raised, one arm above her head on the pillow, looking at the camera, natural skin texture, light everyday makeup, candid phone photo
+- id: f05a-shirt-sliding-off
+  seed: 9571
+  prompt: photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, afternoon, she sits on the low cream sofa, an oversized white linen shirt fully unbuttoned and sliding off her shoulders, bare breasts, no underwear, long bare legs, playful smile at the camera, sunlight, natural skin texture, light everyday makeup, candid phone photo
+- id: f05b-nude-sofa-legs-up
+  seed: 9573
+  prompt: photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, afternoon, she lies on her back on the low cream sofa fully nude, bare breasts, natural body of a fit 40-year-old woman, legs up on the sofa back, holding a tall narrow straight-sided clear glass of pale green iced matcha latte with ice and a light beige paper straw, smiling at the camera, sunlight on her skin, natural skin texture, light everyday makeup, candid phone photo
+- id: f05c-nude-sofa-recline
+  seed: 9575
+  prompt: photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, afternoon, she reclines on the low cream sofa fully nude, bare breasts, natural body of a fit 40-year-old woman, one arm behind her head, thighs apart with one knee bent, relaxed confident look at the camera, sunlight on her skin, natural skin texture, light everyday makeup, candid phone photo
+- id: f05d-nude-window-front
+  seed: 9577
+  prompt: three-quarter photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, afternoon, she stands in front of the floor-to-ceiling window fully nude, bare breasts, natural body of a fit 40-year-old woman, facing the camera, sunlight from behind outlining her body, hair down, calm smile, natural skin texture, light everyday makeup, candid phone photo
+- id: f06a-nude-down-dog
+  seed: 9671
+  prompt: side view photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she holds downward dog on a grey yoga mat fully nude, bare breasts, natural body of a fit 40-year-old woman, hips high, palms flat, soft morning daylight on her body, natural skin texture, light everyday makeup, candid phone photo
+- id: f06b-nude-cobra
+  seed: 9673
+  prompt: photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she holds cobra pose on a grey yoga mat fully nude, bare breasts, natural body of a fit 40-year-old woman, chest lifted, looking at the camera, soft morning daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: f06c-nude-wide-fold
+  seed: 9675
+  prompt: photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she sits on a grey yoga mat fully nude, bare breasts, natural body of a fit 40-year-old woman in a wide-legged seated forward fold, legs spread wide, hands forward on the mat, looking up at the camera, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: f06d-nude-tree-window
+  seed: 9677
+  prompt: three-quarter photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she holds tree pose by the floor-to-ceiling window fully nude, bare breasts, natural body of a fit 40-year-old woman, hands together above her head, calm face, soft morning daylight on her body, natural skin texture, light everyday makeup, candid phone photo
+- id: f07a-nude-sheet-off
+  seed: 9771
+  prompt: photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, Sunday morning, she pulls the white sheet off her body in bed fully nude, bare breasts, natural body of a fit 40-year-old woman, sleepy smile at the camera, messy hair on the pillow, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: f07b-nude-belly-look-back
+  seed: 9773
+  prompt: photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, Sunday morning, she lies on her stomach on the bed fully nude, bare breasts, natural body of a fit 40-year-old woman, bare buttocks, legs bent up behind her, looking back at the camera with a playful smile, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: f07c-nude-crosslegged-book
+  seed: 9775
+  prompt: photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, Sunday morning, she sits cross-legged on the bed fully nude, bare breasts, natural body of a fit 40-year-old woman holding an open paperback book on her lap, smiling at the camera, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: f07d-nude-bed-arch
+  seed: 9777
+  prompt: photo taken by a friend in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, Sunday morning, she stretches on the bed fully nude, bare breasts, natural body of a fit 40-year-old woman, back arched, arms above her head, eyes closed, soft daylight on her skin, natural skin texture, light everyday makeup, candid phone photo

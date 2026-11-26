@@ -1,0 +1,18 @@
+# Phone look, tuned to read as 40 (not 50) in hero-opt (17 Nov 2026).
+# Prompt profile for the persona. Operator may edit; keep `appearance` starting
+# with a stated adult age (35-49) and free of banned terms (see safety.py).
+name: "Roxana"
+trigger: "ohwxroxana"
+appearance: >-
+  40-year-old woman who looks no older than 35, fresh well-rested youthful face, smooth firm skin with a healthy glow, natural candid expression, slim oval face with a narrow
+  jawline and slight natural asymmetry, high cheekbones, naturally full lips in their own natural
+  soft rosy pink color with clear lip balm, soft natural sheen and visible lip lines, no lipstick, glossy oxblood red manicured nails, natural skin with
+  faint peach fuzz, long dark brunette hair with loose flyaway
+  strands and baby hairs at the hairline, dark brown eyes, light everyday makeup with mascara, groomed brows and a little concealer, tall slender woman
+  about 174 cm with long slim legs, lean athletic figure, narrow waist, full high bust
+style_suffix: >-
+  casual photo taken on an iPhone, flat phone HDR, soft even light, slightly overexposed, low contrast,
+  everything in focus, natural skin texture, natural hands, slight sensor noise
+video_negative: >-
+  child, teen, underage, nude, naked, topless, nipples, see-through, deformed,
+  extra limbs, upskirt, underwear, blurry, low quality, distorted face, plastic skin, text, watermark

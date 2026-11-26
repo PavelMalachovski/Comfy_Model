@@ -1,0 +1,37 @@
+# Fanvue versions of 7 approved X/Telegram frames (21 Nov 2026), 3 variants each. The pose comes from the DWPose
+# skeleton of our own render (out/dev/pose-refs/fv7/<id>.png), same rooms and outfits, less clothing.
+# Adult 40, alone, no acts, no toys. y04 asked for the popsicle pushed into her panties: that is an object in a sexual
+# act and is banned on every tier, so it is a topless popsicle frame with a melting drip on her chest instead.
+# Nipples are described in the prompt so the oxblood nail colour does not bleed onto them (seen in m01).
+# OPERATOR ONLY, on his own vast instance: scripts/fanvue_inpaint.sh fvrefs
+tier: fanvue
+count: 3
+scenes:
+- id: f02-cardigan-no-bra-sofa
+  ref: out/dev/pose-refs/fv7/x02.png
+  seed: 19020
+  prompt: she sits on the low cream sofa in her Dubai Marina living room leaning on the sofa arm, smiling softly into the lens, an oversized chocolate brown knit cardigan with white check lines worn open and slipping off her shoulders, no bra, her natural full breasts bare between the open cardigan with natural soft brown nipples, high-waisted white jeans, soft overcast window light
+- id: f03-red-dress-thong-fitting-room
+  ref: out/dev/pose-refs/fv7/x03.png
+  seed: 19030
+  prompt: photo from behind in a boutique fitting room with black and white striped curtains, she looks back over her shoulder with a playful smile, a red backless dress hitched up to her waist with her hands at her hips, a black lace thong, her bare round toned buttocks, long dark brunette hair down her back, a wooden chair with jeans thrown on it, warm boutique light
+- id: f07-white-jumpsuit-one-breast
+  ref: out/dev/pose-refs/fv7/x07.png
+  seed: 19070
+  prompt: high-angle selfie from above at arm's length, she sits on a cream yoga mat on the oak herringbone floor of her Dubai Marina living room smiling into the lens, a white long-sleeve zip-front yoga jumpsuit unzipped to her waist and pulled aside on one side, one natural full breast bare with a natural soft brown nipple, the other still covered by the white fabric, no bra, long dark brunette hair over one shoulder, soft daylight
+- id: f11-pigeon-pose-only-socks
+  ref: out/dev/pose-refs/fv7/x11.png
+  seed: 19110
+  prompt: she kneels in a deep king pigeon stretch on the oak herringbone floor by the floor-to-ceiling window of her Dubai Marina living room, one hand holding her raised back foot, chest lifted, looking up with a smile, fully nude except grey cable-knit over-the-knee socks, natural full breasts with natural soft brown nipples, toned stomach, natural adult pubic area neatly trimmed, the low cream sofa behind her, bright backlit morning sun
+- id: f13-plank-thong-topless-studio
+  ref: out/dev/pose-refs/fv7/x13.png
+  seed: 19130
+  prompt: side view, she holds a high plank on a pale pink yoga mat in a calm yoga studio with a mirror wall, light white linen curtains and warm LED cove lights, smiling to the side, topless, natural full breasts hanging naturally with clearly visible natural soft brown nipples, only a black thong, bare round toned buttocks, long dark brunette hair falling down, warm evening light
+- id: f18-legs-up-mat-thong-bra
+  ref: out/dev/pose-refs/fv7/x18.png
+  seed: 19180
+  prompt: high-angle photo from above her, she lies on a black yoga mat on the oak herringbone floor of her Dubai Marina living room with both legs raised straight up and her hands holding her calves, smiling up at the lens, a white headband, a black lace bra and a matching black lace thong, toned stomach, bare legs and bare soles, soft daylight
+- id: f04-popsicle-topless-sitting
+  ref: out/dev/pose-refs/fv7/y04.png
+  seed: 19040
+  prompt: close photo, she sits cross-legged on a white sheepskin rug on the oak herringbone floor of her Dubai Marina living room, black cat-eye sunglasses, biting a red watermelon popsicle with a playful smile, topless, natural full breasts with natural soft brown nipples, a drop of melted pink popsicle running down her chest, black bikini bottoms, gold rings on her hand, bright summer daylight

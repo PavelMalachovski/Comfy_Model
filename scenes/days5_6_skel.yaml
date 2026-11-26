@@ -1,0 +1,9 @@
+# Day 6 full-body frame with a hand-drawn OpenPose skeleton (key 'skel'), rendered by the skeleton script, not cm batch.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+scenes:
+- id: p06b-tree-pose-window
+  seed: 8621
+  skel: tree-pose
+  prompt: full-body photo taken by a friend standing a few meters away in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she is the only person in the frame, she stands on a grey yoga mat in tree pose facing the camera, one leg bent with the knee out to the side and resting against the inner thigh of her standing leg, palms together high above her head, calm small smile, fitted sage green sports top and high-waisted sage green leggings, high ponytail, marina towers and the sea in the window behind her, soft morning daylight, head to toe in frame, natural skin texture, light everyday makeup, candid phone photo

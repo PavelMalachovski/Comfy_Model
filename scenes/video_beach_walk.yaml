@@ -1,0 +1,20 @@
+# Video 0: Roxy walks along the beach, terracotta two-piece (start frame A). Wan 2.2 I2V 14B, 121 frames @16 fps (~7.5 s).
+#   cm batch video scenes/video_beach_walk.yaml --workflows workflows/wan22-i2v-14b --out out/dev/video-beach-walk --url http://127.0.0.1:8190
+# Prompts describe only motion.
+defaults:
+  tier: instagram
+  aspect: '9:16'
+  count: 1
+scenes:
+- id: v00-walk-to-camera
+  seed: 20100
+  image: ../out/dev/video-beach-start/v00a-beach-walk-start_01.png
+  prompt: she walks slowly toward the camera along the wet sand with a natural relaxed stride, arms swinging gently, long hair moving in the sea breeze, small waves rolling onto the shore behind her, soft warm smile, the camera tracks backward at walking pace, smooth handheld phone video, realistic motion
+- id: v00-walk-glance-sea
+  seed: 20102
+  image: ../out/dev/video-beach-start/v00a-beach-walk-start_01.png
+  prompt: she walks toward the camera along the shoreline, turns her head to look out at the sea for a moment, then looks back into the camera and smiles, hair blowing in the wind, gentle waves behind her, the camera tracks backward slowly, smooth handheld phone video, realistic motion
+- id: v00-stop-hair-laugh
+  seed: 20104
+  image: ../out/dev/video-beach-start/v00a-beach-walk-start_01.png
+  prompt: she takes two slow steps toward the camera, stops, tucks her hair behind her ear with one hand and laughs softly, looking into the camera, the wind moves her hair, gentle waves roll in behind her, static handheld phone video, realistic motion

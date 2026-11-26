@@ -1,0 +1,16 @@
+# Fanvue for day 2 (f02a, f02b): the same beach morning as the p02 carousel. Tier fanvue. MAC ONLY. The operator launches it:
+#   CM_WAIT_TIMEOUT_S=36000 .venv/bin/cm batch photo scenes/fanvue_day2.yaml \
+#     --profile character/profile_phone_40.yaml --lora ohwxroxana_v5.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-hero-opt-v5-40 --out out/dev/fanvue-d2 --url http://127.0.0.1:8188
+#   then .venv/bin/python scripts/prod_pack.py day2
+defaults:
+  tier: fanvue
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: fv02a-top-off-beach
+  seed: 8311
+  prompt: half-body photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, after her class, she pulls her fitted sand-colored sports top off over her head with both hands, topless, bare breasts, toned stomach, matching high-waisted leggings, high ponytail, playful smile at the camera, warm light on her skin, real skin with visible pores, natural skin texture, light everyday makeup, candid phone photo
+- id: fv02b-sea-topless
+  seed: 8321
+  prompt: half-body photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she stands waist-deep in the calm sea after her class, topless, bare breasts, wet hair slicked back, water drops on her skin, squinting softly at the camera with a calm smile, golden light, real skin with visible pores, natural skin texture, light everyday makeup, candid phone photo

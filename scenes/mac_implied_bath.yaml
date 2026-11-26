@@ -1,0 +1,15 @@
+# Implied topless in her bathroom, Fanvue only (tier fanvue: covered by her hands/arms,
+# nothing visible). Mac only (RunPod ToS). Cull any frame where anything shows -> rejected/.
+#   CM_WAIT_TIMEOUT_S=3600 .venv/bin/cm batch photo scenes/mac_implied_bath.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-fast --out out/dev/mac-implied --url http://127.0.0.1:8188
+defaults:
+  tier: fanvue
+  aspect: '4:5'
+  count: 1
+  seed: 7311
+scenes:
+- id: mi-bath-arms-crossed
+  prompt: half-body photo taken by a friend in her bathroom in the evening, she stands by the travertine wall, topless, her forearms crossed firmly over her chest fully covering her breasts, high-waisted black satin briefs, hair down over one shoulder, chin slightly raised, cool calm look at the camera, brass sconce and freestanding stone tub behind her, warm soft light
+- id: mi-bath-hands-cover
+  prompt: waist-up photo taken by a friend in her bathroom, she sits on the edge of the freestanding stone tub, topless, both hands pressed flat over her chest fully covering her breasts, hair clipped up with loose strands, faint knowing smile, travertine walls, brass tap and sea-view window behind her, soft warm light

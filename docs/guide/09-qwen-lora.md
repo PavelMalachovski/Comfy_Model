@@ -1,6 +1,6 @@
 # 09. Датасет и LoRA на Qwen-Image 2512
 
-Цель: из выбранного лица `out/qwen-faces-2/phone-2.png` получить LoRA с триггером
+Цель: из выбранного лица `out/dev/qwen-faces-2/phone-2.png` получить LoRA с триггером
 `ohwxroxana`. Перед началом сделайте обратный поиск по этому лицу: на нём не должен находиться
 реальный человек. Лицензия Qwen-Image и Qwen-Image-Edit: Apache 2.0. Кадры FLUX и Kontext сюда
 не добавляйте.
@@ -17,21 +17,21 @@
 
 ```bash
 .venv/bin/cm pod up --models pod/qwen_models.yaml
-.venv/bin/cm batch dataset scenes/dataset_qwen.yaml --ref out/qwen-faces-2/phone-2.png --workflows workflows/qwen --out out/qwen-dataset
+.venv/bin/cm batch dataset scenes/dataset_qwen.yaml --ref out/dev/qwen-faces-2/phone-2.png --workflows workflows/qwen --out out/dev/qwen-dataset
 .venv/bin/cm pod down
 ```
 
 ## 3. Отбор
 
-В `out/qwen-dataset/` оставьте 15–30 кадров, где лицо совпадает с `phone-2`. Удалите кадры, где
+В `out/dev/qwen-dataset/` оставьте 15–30 кадров, где лицо совпадает с `phone-2`. Удалите кадры, где
 лицо уплыло или поза копирует референс. Затем:
 
 На следующем поде верните текстуру кожи отобранным кадрам (сила 0.25, примерно по минуте на кадр):
 
 ```bash
 .venv/bin/cm pod up --models pod/qwen_models.yaml
-.venv/bin/cm lora refine out/qwen-dataset --out out/qwen-dataset-refined
-.venv/bin/cm lora prepare out/qwen-dataset-refined
+.venv/bin/cm lora refine out/dev/qwen-dataset --out out/dev/qwen-dataset-refined
+.venv/bin/cm lora prepare out/dev/qwen-dataset-refined
 ```
 
 ## 4. Обучение
@@ -51,7 +51,7 @@
 ## 5. Проверка
 
 ```bash
-.venv/bin/cm batch photo scenes/lora_check.yaml --lora ohwxroxana_v1.safetensors --workflows workflows/qwen --out out/qwen-lora-check
+.venv/bin/cm batch photo scenes/lora_check.yaml --lora ohwxroxana_v1.safetensors --workflows workflows/qwen --out out/dev/qwen-lora-check
 .venv/bin/cm pod down
 .venv/bin/cm pod status
 ```

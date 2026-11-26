@@ -1,0 +1,13 @@
+# Rear nudity in her bathroom, Fanvue only (back to camera, legs together, genitals never visible).
+# Pose and mood from an operator reference; Mac only (RunPod ToS); cull anything else visible -> rejected/.
+#   CM_WAIT_TIMEOUT_S=7200 .venv/bin/cm batch photo scenes/mac_bath_lying_rear.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-fast --out out/dev/mac-bath-rear --url http://127.0.0.1:8188
+defaults:
+  tier: fanvue
+  aspect: '4:5'
+  count: 2
+  seed: 7351
+scenes:
+- id: mb-bath-lying-rear
+  prompt: photo from above taken by a friend standing over her in her bathroom, she lies on her side on a thick white bath towel spread on the wide travertine ledge beside the freestanding stone tub, her back to the camera, white cropped ribbed tank top, bottomless, bare buttocks, her legs bent and pressed together, both arms raised above her head with one forearm resting across her forehead, she looks back over her shoulder up at the camera with a lazy calm look, long dark brown hair spread on the towel, brass tap, soft window daylight with a bright stripe of sun across her hips

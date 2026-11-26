@@ -1,0 +1,9 @@
+# Day 2 Telegram frame (t02), hero-opt 40 settings, renders after days 3-4.
+defaults:
+  tier: social
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: t02-beach-after-class
+  seed: 8301
+  prompt: half-body photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, after her class, the yoga mats are packed away, she stands with a rolled yoga mat under one arm and her other hand shading her eyes from the low sun, warm tired smile at the camera, a few loose strands from her high ponytail in the wind, fitted sand-colored sports top and matching high-waisted leggings, small gold hoop earrings, natural skin texture, light everyday makeup, candid phone photo

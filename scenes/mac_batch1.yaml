@@ -1,0 +1,29 @@
+# First Mac batch (fast mode): five frames, each testing one weak spot.
+#   CM_WAIT_TIMEOUT_S=3600 cm batch photo scenes/mac_batch1.yaml --profile character/profile_phone.yaml \
+#     --lora ohwxroxana_v4.safetensors --strength 0.8 --workflows workflows/qwen-mac-fast \
+#     --out out/dev/mac-batch1 --url http://127.0.0.1:8188
+# then scripts/phone_finish.py --hdr 0.5.
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+  seed: 7311
+scenes:
+# 1. Front-camera selfie with no phone in the picture: the phone IS the camera.
+- id: mb1-car-coffee-selfie
+  prompt: close-up front camera selfie in the driver's seat of a parked car in the morning, she holds a takeaway coffee cup in her other hand, her near arm reaches toward the lens and is cut off by the edge of the frame, the camera is the phone itself so no phone appears anywhere, sleepy soft smile, hair down, beige knit sweater, soft daylight
+# 2. Her own bedroom (matches the bedroom plates): can the prompt alone keep the room?
+- id: mb1-bedroom-mirror
+  aspect: '9:16'
+  prompt: full-body mirror selfie in her bedroom in a luxury Dubai Marina apartment, white boucle bed with a grey throw, travertine bedside table with a brass lamp, olive tree in a white pot, floor-to-ceiling window with light white linen curtains and Marina towers outside, herringbone oak floor, cream ribbed knit dress, hair down, phone in hand, head to toe in frame, daylight
+# 3. Body in glossy latex: does the figure hold? Fully covered, non-explicit (fanvue tier).
+- id: mb1-latex-mirror
+  tier: fanvue
+  aspect: '9:16'
+  prompt: full-body mirror selfie at home, glossy black latex midi dress with long sleeves and a high neck, fully covered, black heels, hair down, calm confident look, phone in hand, head to toe in frame, warm evening lamp light
+# 4. Warm backlight at sunset, where faces usually drift.
+- id: mb1-balcony-sunset
+  prompt: half-body photo taken by a friend on a high balcony over Dubai Marina at sunset, warm golden backlight on her hair, glass of white wine in hand, champagne silk blouse, hair down, soft smile, towers and sea behind her
+# 5. Seated full body with harsh direct flash, where skin usually turns plastic.
+- id: mb1-restaurant-flash
+  prompt: full-body photo with direct phone flash taken by a friend in a dark upscale restaurant at night, she sits on a velvet banquette with legs crossed, fitted black midi dress, black heels, hair down, candid laugh, people and warm lights blurred behind her

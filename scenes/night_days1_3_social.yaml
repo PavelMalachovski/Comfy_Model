@@ -1,0 +1,19 @@
+# Days 1-3 overnight (17-18 Nov 2026), hero-opt v5 age-tuned: --profile character/profile_phone_40.yaml
+# --lora ohwxroxana_v5.safetensors --strength 0.8 --workflows workflows/qwen-mac-hero-opt-v5-40. Mac only.
+defaults:
+  tier: social
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: x01-lace-morning-window
+  seed: 7921
+  prompt: half-body photo taken by a friend standing across the room in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, morning, she stands by the window in a white lace bra and matching white lace briefs holding a white ceramic coffee mug with a handle with both hands near her chest, both arms close to her body, messy hair down, sleepy half smile at the camera, soft morning daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: p05-tg-welcome-bed
+  seed: 7932
+  prompt: half-body photo taken by a friend standing at the foot of the bed in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, morning, she sits on the bed leaning against the pillows with both knees drawn up together, exactly two legs, in an oversized white shirt slipping off one shoulder, a white ceramic coffee mug with a handle in both hands resting on her knees, hair down and messy, warm sleepy smile at the camera, rumpled white sheets, soft morning daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: x05-sports-bra-sweat
+  seed: 7941
+  prompt: close-up photo taken by a friend in a bright pilates studio in Dubai in the morning, white walls, oak floor, reformer machines, soft daylight from big windows, after a hot pilates class, she sits on a mat with her arms resting on her knees, black sports bra, glistening sweat on her chest and stomach, flushed cheeks, hair in a messy ponytail, she bites her lip slightly and looks at the camera, natural skin texture, light everyday makeup, candid phone photo
+- id: x06-leggings-down-dog-rear
+  seed: 7951
+  prompt: full-body photo taken by a friend from behind in a bright pilates studio in Dubai in the morning, white walls, oak floor, reformer machines, soft daylight from big windows, she holds downward dog on a grey mat in tight beige leggings and a beige cropped sports top, both palms flat on the mat, toned legs and hips, she looks back between her legs at the camera with a smile, head to toe in frame, natural skin texture, light everyday makeup, candid phone photo

@@ -1,0 +1,30 @@
+# Five yacht shots with the focus on her buttocks, poses from operator references (pose only).
+# Mac only. Tier per scene; fanvue ones: cull anything beyond back and buttocks -> rejected/.
+#   CM_WAIT_TIMEOUT_S=3600 .venv/bin/cm batch photo scenes/mac_yacht_rear5.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-fast --out out/dev/mac-yacht-rear5 --url http://127.0.0.1:8188
+defaults:
+  aspect: '9:16'
+  count: 2
+  seed: 7371
+scenes:
+# 1. Bow of a sailing yacht, arms up on the forestay (reference 2).
+- id: yr1-bow-arms-up
+  tier: social
+  prompt: wide full-length photo taken by a friend standing four metres behind her on the white deck of a sailing yacht, she stands at the very tip of the bow facing away toward the open sea, both arms raised high holding the forestay cable, the whole body from her raised hands to her bare feet on the deck is visible with deck below her feet, black thong bikini, toned legs and round firm buttocks, long dark brown hair down her back, steel bow railing, tall white mast, deep blue sea and distant hazy mountains, bright sun and a few white clouds
+# 2. Sitting on the deck, wind in the hair, looking at the sea (reference 1).
+- id: yr2-deck-sitting-wind
+  tier: fanvue
+  prompt: photo taken by a friend from behind and slightly above on the deck of a sailing yacht, she sits on the white deck cushion leaning back on her straight arms, her back to the camera, topless, her chest turned away from the camera and hidden, smooth tanned bare back, black thong bikini bottom, round firm buttocks on the cushion, very long dark brown hair blown sideways by the wind, sunglasses, her head turned in profile toward the sea, grey inflatable dinghy, bright hazy sunlight over the water
+# 3. Golden hour at the side rail with the sail-shaped hotel on the horizon (reference 3).
+- id: yr3-sunset-rail
+  tier: social
+  prompt: full-length photo taken by a friend from behind on the side deck of a white motor yacht in Dubai at golden hour, she stands at the steel railing with her back to the camera, one hand on the rail, her head turned in profile toward the setting sun, white one-piece swimsuit with a high-cut leg and a cheeky back, round firm buttocks, long dark brown hair moving in the breeze, the sail-shaped hotel tower and the sun on the horizon, golden reflections on the water, the whole body from head to her bare feet on the deck in frame
+# 4. Climbing out of the water up the stern ladder, seen from the deck above.
+- id: yr4-stern-ladder
+  tier: social
+  prompt: photo from the swim platform above and behind her at the stern of a white yacht, she climbs out of the turquoise water up the chrome swim ladder, both hands on the ladder rails, one knee raised on a step, wet glistening skin with water droplets, wet dark hair stuck to her back, black thong bikini, round firm buttocks, she glances back over her shoulder at the camera, bright midday sun
+# 5. Kneeling on the sunbed cushion, tying her hair up, no clothes (mood of reference 4).
+- id: yr5-cushion-hair-up
+  tier: fanvue
+  prompt: photo from behind and slightly above taken by a friend on the sun deck of a white yacht, she sits on her heels on a thick cream sunbed cushion with her back to the camera, topless and bottomless, her legs folded together under her, bare round firm buttocks resting on her heels, smooth tanned bare back gently arched, both arms raised gathering her long dark brown hair into a bun, her head turned slightly to the side, teak deck, steel railing and glittering turquoise sea, hard sun with sharp shadows

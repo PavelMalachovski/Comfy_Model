@@ -1,0 +1,12 @@
+# Location plates: empty rooms for the fixed-location background swap (workflows/qwen/room.json).
+# Render with `cm batch photo scenes/rooms.yaml --profile character/profile_room.yaml
+#   --lora ohwxroxana_v3.safetensors --strength 0` (the LoRA is off; the room has no person).
+name: "Room"
+trigger: "ohwxroxana"
+appearance: >-
+  empty interior with no people in it, nobody in the picture, lived-in real apartment
+style_suffix: >-
+  casual photo taken on an iPhone, flat phone HDR, soft even light, slightly overexposed, low contrast,
+  everything in focus, realistic textures, slight sensor noise
+video_negative: >-
+  people, person, woman, man, text, watermark, blurry, low quality

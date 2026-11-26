@@ -1,0 +1,13 @@
+# Days 3-4 X frames, full body: rendered with hand-drawn OpenPose skeletons (key 'skel'), not via cm batch.
+defaults:
+  tier: social
+  aspect: '4:5'
+scenes:
+- id: x03-wet-swimsuit-pool
+  seed: 8031
+  skel: wring-hair
+  prompt: full-body photo taken by a friend standing a few meters away on a rooftop pool deck in Dubai Marina, she is the only person in the frame, she stands at the edge of the pool just out of the water in a white high-cut one-piece swimsuit and wrings the water out of her wet hair with both hands over one shoulder, water drops on her skin, toned legs, glass towers and blue sky behind her, bright midday sun, head to toe in frame, natural skin texture, light everyday makeup, candid phone photo
+- id: x06-leggings-down-dog-side
+  seed: 7951
+  skel: down-dog-side
+  prompt: full-body side view photo taken by a friend in a bright pilates studio in Dubai in the morning, white walls, oak floor, reformer machines, soft daylight from big windows, she holds downward dog on a grey mat in tight beige leggings and a beige cropped sports top, both palms flat on the mat, hips high, toned legs and hips, she looks at the camera from between her arms with a smile, head to toe in frame, natural skin texture, light everyday makeup, candid phone photo

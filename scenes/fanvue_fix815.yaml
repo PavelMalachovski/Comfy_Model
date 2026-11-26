@@ -1,0 +1,32 @@
+# Fanvue days 8-15 re-renders (review 19 Nov 2026): c/d frames where the chest was cropped or covered.
+# Both bare breasts fully visible, wider framing. Adult 40, alone, no sex acts. 2 variants each. The operator runs:
+#   scripts/fanvue_fix815.sh
+defaults:
+  tier: fanvue
+  aspect: '4:5'
+  count: 2
+scenes:
+- id: f08d-nude-knee-deep-front
+  seed: 13000
+  prompt: full-body photo taken by a friend standing three meters away, not a selfie, on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she stands knee-deep in the calm sea facing the camera, fully nude, both bare breasts fully visible, nothing covering her chest, her arms away from her chest, natural body of a fit 40-year-old woman, arms relaxed at her sides, wet hair slicked back, water drops on her skin, low sun behind her, soft smile, natural skin texture, light everyday makeup, candid phone photo
+- id: f10c-nude-balcony-lounger
+  seed: 13011
+  prompt: three-quarter photo taken by a friend standing three meters away, not a selfie, on the balcony of her high-rise apartment in Dubai Marina, glass railing, marina towers and the sea behind her, morning, she reclines on a lounge chair facing the camera, fully nude, both bare breasts fully visible, nothing covering her chest, her arms away from her chest, natural body of a fit 40-year-old woman, both hands behind her head, the white shirt on the floor beside the chair, soft morning light, natural skin texture, light everyday makeup, candid phone photo
+- id: f11c-nude-kitchen-window-mug
+  seed: 13022
+  prompt: three-quarter photo taken by a friend standing three meters away, not a selfie, in the open kitchen of her Dubai Marina apartment with a white marble island, light oak cabinets, brass pendant lights, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she leans back against the white marble island facing the camera, fully nude, both bare breasts fully visible, nothing covering her chest, her arms away from her chest, natural body of a fit 40-year-old woman, holding a white ceramic coffee mug with a handle low at her waist in one hand, soft smile, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: f12d-nude-side-plank
+  seed: 13033
+  prompt: full-body photo taken by a friend standing three meters away, not a selfie, side view, in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she holds a side plank on a grey yoga mat facing the camera, supporting arm straight, top arm reaching straight up to the ceiling, fully nude, both bare breasts fully visible, nothing covering her chest, her arms away from her chest, natural body of a fit 40-year-old woman, body in a straight line, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: f13c-nude-tub-candles
+  seed: 13044
+  prompt: three-quarter photo taken by a friend standing three meters away, not a selfie, in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, evening, she sits upright on the wide rim of the white stone bathtub facing the camera, fully nude, both bare breasts fully visible, nothing covering her chest, her arms away from her chest, natural body of a fit 40-year-old woman, hands resting on the rim beside her hips, candles along the edge, warm light, natural skin texture, light everyday makeup, candid phone photo
+- id: f14c-nude-dune-side
+  seed: 13055
+  prompt: full-body photo taken by a friend standing three meters away, not a selfie, side view, on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she stands on the crest of a dune in profile with her face turned to the camera, fully nude, both bare breasts fully visible, nothing covering her chest, her arms away from her chest, natural body of a fit 40-year-old woman, her dress lying on the sand at her feet, arms at her sides, low golden sun, natural skin texture, light everyday makeup, candid phone photo
+- id: f14d-nude-rug-sitting
+  seed: 13066
+  prompt: full-body photo taken by a friend standing three meters away, not a selfie, on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she sits on a woven rug facing the camera leaning back on her straight arms, fully nude, both bare breasts fully visible, nothing covering her chest, her arms away from her chest, natural body of a fit 40-year-old woman, legs bent to one side, golden light on her skin, calm smile, natural skin texture, light everyday makeup, candid phone photo
+- id: f15c-nude-bed-smile
+  seed: 13077
+  prompt: three-quarter photo taken by a friend standing three meters away, not a selfie, in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, evening, warm lamp light, she kneels upright on the bed facing the camera, fully nude, both bare breasts fully visible, nothing covering her chest, her arms away from her chest, natural body of a fit 40-year-old woman, hands resting on her thighs, no sheet, warm welcoming smile, natural skin texture, light everyday makeup, candid phone photo

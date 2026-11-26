@@ -1,0 +1,17 @@
+# Round 2 from the operator's references (pose and mood only, not the people in them).
+# Fanvue tier, Mac only. Three variants each (count 3 = three seeds).
+#   CM_WAIT_TIMEOUT_S=3600 .venv/bin/cm batch photo scenes/mac_ref_poses2.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-fast --out out/dev/mac-ref-poses2 --url http://127.0.0.1:8188
+defaults:
+  tier: fanvue
+  aspect: '9:16'
+  count: 3
+  seed: 7321
+scenes:
+# 1. High-angle front-camera shot on her bed, latex bodysuit, O-ring collar.
+- id: mr2-bed-latex-highangle
+  prompt: high-angle front camera photo from above at arm's length, her arm reaching toward the lens is cut off by the edge of the frame, no phone visible, she sits on her white bed with her knees wide apart and her feet tucked together under her, glossy black latex underwire bodysuit with thin straps, her breasts fully held inside the cups, black leather O-ring choker, one hand resting flat on her upper chest below the collarbone, lips pushed into a playful pout, eyes looking up into the lens, hair down over one shoulder, white sheets and pillows, grey wardrobe doors behind her, flat daylight from a window
+# 2. Back view, half turn, her bathroom, thong, full length (re-render of mr-bath-back-halfturn).
+- id: mr2-bath-back-thong
+  prompt: wide full-length photo taken by a friend standing three metres behind her in her bathroom, the whole body from the top of her head to her bare feet on the travertine floor is visible with floor space below her feet, she stands facing away toward the freestanding stone tub and the sea-view window, her head and shoulders turned halfway back over her shoulder to look at the camera, one hand lifted lightly at her side, black string bikini top tied at the back and a black thong bikini bottom with thin side strings, toned legs and round firm buttocks, long hair down her back, travertine walls, brass fixtures, white towels on a stool, warm soft daylight

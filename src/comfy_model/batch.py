@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import random
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -25,6 +26,8 @@ MANIFEST_NAME = "manifest.jsonl"
 # How long to wait for one prompt. A Wan 2.2 clip (121 frames) takes far longer than an image.
 WAIT_TIMEOUT_S = {"video": 2700}
 DEFAULT_WAIT_TIMEOUT_S = 900
+# CM_WAIT_TIMEOUT_S overrides both, e.g. for a slow local ComfyUI on a Mac.
+WAIT_TIMEOUT_ENV = "CM_WAIT_TIMEOUT_S"
 BUSY_MESSAGE = (
     "ComfyUI still busy; re-run later to resume (same --out; finished files are skipped). "
     "{item} did not finish within {timeout:g}s, so nothing more was queued behind it."
@@ -113,7 +116,7 @@ def run_batch(
     ext = _ext(kind)
     report = BatchReport()
     uploads: dict[Path, str] = {}
-    timeout_s = WAIT_TIMEOUT_S.get(kind, DEFAULT_WAIT_TIMEOUT_S)
+    timeout_s = float(os.environ.get(WAIT_TIMEOUT_ENV) or WAIT_TIMEOUT_S.get(kind, DEFAULT_WAIT_TIMEOUT_S))
 
     def prompt_for(s: Scene) -> str:
         if kind in ("face", "photo"):

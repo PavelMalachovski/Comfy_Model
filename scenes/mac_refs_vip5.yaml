@@ -1,0 +1,23 @@
+# Operator references (5 story screenshots, 15 Nov 2026): pose, outfit idea and mood only, never the people.
+# Fast mode, 2 variants each (~11 min per frame on the Mac):
+#   CM_WAIT_TIMEOUT_S=3600 .venv/bin/cm batch photo scenes/mac_refs_vip5.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-fast --out out/dev/mac-refs-vip5 --url http://127.0.0.1:8188
+defaults:
+  tier: social
+  aspect: '9:16'
+  count: 2
+  seed: 7501
+scenes:
+- id: v5-flash-jeans
+  prompt: half-body photo with direct phone flash taken by a friend at night in a dim apartment, dark red curtains and a dark armchair with clothes thrown on it behind her, she leans slightly toward the camera with one hand hooked in the waistband of light blue jeans pulled low on her hips, the waistband of plain grey cotton briefs showing above the jeans, grey ribbed cropped tank top over a black sports bra, thin gold necklace with a small pendant, gold bracelet, a white smartwatch, long dark brown hair messy and falling over one shoulder, lips slightly parted, calm direct look into the lens, hard flash light with dark falloff, real skin with visible pores, fine hair on her arms, natural skin texture
+- id: v5-silk-shirt-lean
+  tier: instagram
+  prompt: three-quarter photo from slightly above in a bare studio with a grey wall and a wooden floor, she leans forward toward the camera with her hands on her thighs, black satin button-up shirt with the top buttons open, a gold chain necklace with a small letter R pendant, high-waisted grey plaid tailored trousers, long dark brown hair falling forward over one shoulder, soft knowing smile, soft window daylight, real skin with visible pores, natural skin texture
+- id: v5-night-pool-lounger
+  prompt: candid phone photo at night by a backyard pool, she reclines on a white in-pool lounger half in the shallow glowing turquoise water, one knee raised, one hand resting on the lounger, sage green ribbed triangle bikini, wet skin with a few water drops, long dark brown hair in loose waves over her shoulders, calm sultry look at the camera, warm string lights on a dark wooden fence and palm trees behind her, pool light ripples on her legs, real skin with visible pores, natural skin texture, slight sensor noise
+- id: v5-pier-tshirt
+  prompt: full-length photo on a beach under an old wooden pier, she leans her shoulder against a weathered crossed timber pillar with rusty bolts, one hand lifting the hem of a fitted plain white cotton t-shirt above her toned stomach, plain white bikini briefs, long dark brown hair loose and windswept, calm cool look at the camera, sand and pier pillars behind her, soft overcast daylight, real skin with visible pores, faint tan lines, natural skin texture
+- id: v5-cafe-turtleneck
+  tier: instagram
+  prompt: full-length photo taken by a friend in a cosy cafe with wooden tables and chairs, warm lamps and green plants, she stands straight with her hands behind her back, white ribbed fitted turtleneck sweater, camel tartan high-waisted mini skirt with a thin belt, white pointed heels, gold hoop earrings, long dark brown hair in one thick braid over her shoulder, warm wide smile showing her teeth, warm evening light, head to toe in frame, real skin with visible pores, natural skin texture

@@ -1,0 +1,18 @@
+# Two poses from the operator's references (pose and mood only, not the people in them).
+#   CM_WAIT_TIMEOUT_S=3600 .venv/bin/cm batch photo scenes/mac_ref_poses.yaml \
+#     --profile character/profile_phone.yaml --lora ohwxroxana_v4.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-fast --out out/dev/mac-ref-poses --url http://127.0.0.1:8188
+defaults:
+  aspect: '4:5'
+  count: 1
+  seed: 7311
+scenes:
+# 1. Back view, half turn, her bathroom. Fanvue: thong is lingerie, nothing explicit.
+- id: mr-bath-back-halfturn
+  tier: fanvue
+  aspect: '9:16'
+  prompt: full-body photo taken by a friend from behind in her bathroom, she stands facing away toward the freestanding stone tub and the sea-view window, her head and shoulders turned halfway back over her shoulder to look at the camera, one hand lifted lightly at her side, black string thong bikini, toned legs and round firm buttocks, long hair down her back, travertine walls and floor, brass fixtures, white towels on a stool, warm soft daylight, head to toe in frame
+# 2. Clothed, the "girl in white" pose: leaning on dark wood cabinetry, fingertips at her lips.
+- id: mr-white-wrap-wood
+  tier: instagram
+  prompt: three-quarter photo on 35mm film, she leans back against dark carved antique wooden cabinetry with glass doors, one arm folded across her waist, the other hand raised with fingertips resting at her lips, head slightly tilted, intense look at the camera, white long-sleeve wrap crop top tied at the side with a deep v neckline, white satin midi skirt sitting low on her hips, bare midriff, thin gold necklace, voluminous hair down, soft window light, warm film grain

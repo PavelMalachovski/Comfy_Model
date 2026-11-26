@@ -1,7 +1,7 @@
 """Local Mac tests through the Draw Things HTTP API (A1111-compatible, default port 7860).
 
     uv run python scripts/drawthings.py face  [--n 10]
-    uv run python scripts/drawthings.py scene --ref out/mac-test/face/face-03.png [--ids a,b,c]
+    uv run python scripts/drawthings.py scene --ref out/dev/mac-test/face/face-03.png [--ids a,b,c]
 
 Prompts are assembled exactly like `cm` does (appearance + scene + style_suffix) and
 run through the same tier safety check before anything is sent.
@@ -66,7 +66,7 @@ def face(args: argparse.Namespace) -> None:
     scene = next(s for s in load_scenes(Path("scenes/face.yaml"), "face") if s.id == "face-window-light")
     prompt = profile.photo_prompt(scene.prompt, use_trigger=False)
     guard(prompt)
-    out = Path("out/mac-test/face")
+    out = Path("out/dev/mac-test/face")
     out.mkdir(parents=True, exist_ok=True)
     w, h = SIZES["4:5"]
     log = out / "seeds.jsonl"
@@ -99,7 +99,7 @@ def fit_ref(path: str, w: int, h: int) -> str:
 def scene(args: argparse.Namespace) -> None:
     scenes = {s.id: s for s in load_scenes(Path("scenes/instagram.yaml"), "photo")} | EXTRA
     ids = args.ids.split(",") if args.ids else DEFAULT_SCENES
-    out = Path("out/mac-test/kontext")
+    out = Path("out/dev/mac-test/kontext")
     out.mkdir(parents=True, exist_ok=True)
     for sid in ids:
         s = scenes[sid]
@@ -184,7 +184,7 @@ def selfie(args: argparse.Namespace) -> None:
     from PIL import Image
     prompt = SELFIE_PROMPTS[args.prompt]
     guard(prompt)
-    out = Path("out/mac-test/selfie")
+    out = Path("out/dev/mac-test/selfie")
     out.mkdir(parents=True, exist_ok=True)
     w, h = 1024, 1280
     for i in range(args.n):
@@ -224,7 +224,7 @@ def main() -> None:
     s.add_argument("--ids")
     d = sub.add_parser("dataset")
     d.add_argument("--ref", required=True)
-    d.add_argument("--out", default="out/mac-test/dataset")
+    d.add_argument("--out", default="out/dev/mac-test/dataset")
     sf = sub.add_parser("selfie")
     sf.add_argument("--n", type=int, default=4)
     sf.add_argument("--guidance", type=float, default=2.2)

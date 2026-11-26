@@ -1,0 +1,43 @@
+# Extra full-body frames for LoRA v4 so the figure (height, long slim legs, narrow waist,
+# full bust) is learned along with the face. Fitted clothes that show the silhouette, varied
+# angles (front, side, three-quarter back, sitting). Same render recipe as dataset_v4.yaml:
+#   --profile character/profile_phone.yaml --lora ohwxroxana_v3.safetensors --strength 0.8
+# then SeedVR2 and scripts/phone_finish.py --hdr 0.5.
+defaults:
+  tier: instagram
+  aspect: '9:16'
+  count: 1
+scenes:
+- id: body-bodycon-mirror-side
+  prompt: full-body mirror selfie at home, standing sideways to the mirror, fitted black long-sleeve bodycon midi dress, black heels, hair down, head to toe in frame, daylight
+- id: body-yoga-set-studio
+  prompt: full-body photo taken by a friend in a bright yoga studio, matching beige fitted cropped sports top and high-waisted leggings, standing relaxed with one hand on her hip, hair in a high ponytail, head to toe in frame
+- id: body-tennis-court
+  prompt: full-body photo on a tennis court in the sun, white fitted tennis dress, white sneakers, racket in hand, hair in a ponytail, smiling, head to toe in frame
+- id: body-swimsuit-pool
+  prompt: full-body photo by a hotel pool in bright sun, black one-piece swimsuit, sunglasses on her head, standing on the pool deck, hair down and slightly wet, head to toe in frame
+- id: body-jeans-bodysuit-mirror
+  prompt: full-body mirror selfie in a bedroom, black fitted bodysuit tucked into high-waisted blue straight jeans, white sneakers, hair down, head to toe in frame, soft daylight
+- id: body-leather-trousers-street
+  prompt: full-body photo taken by a friend on a city street in the evening, black leather trousers, fitted black turtleneck, black heeled boots, walking toward the camera, hair down, head to toe in frame
+- id: body-satin-slip-dress
+  prompt: full-body photo in a hotel suite at dusk, emerald satin slip midi dress, thin straps, black heels, standing by the window, hair down, head to toe in frame, warm lamp light
+- id: body-back-three-quarter
+  prompt: full-body photo taken from behind at three-quarter angle on a terrace, she looks back over her shoulder at the camera, fitted white knit midi dress, sandals with heels, hair down, sea behind her, head to toe in frame
+- id: body-gym-side-profile
+  prompt: full-body photo in a gym taken by a friend, side profile, black fitted sports top and black leggings, white sneakers, high ponytail, standing by a cable machine, head to toe in frame
+- id: body-red-dress-event
+  aspect: '4:5'
+  prompt: full-body photo with direct phone flash at an evening event, fitted red one-shoulder midi dress, black heels, small black clutch, hair down, candid smile, head to toe in frame
+- id: body-sitting-bar-stool
+  aspect: '4:5'
+  prompt: full-body photo of her sitting on a tall bar stool, legs crossed, fitted black mini dress, black heels, hair down, warm bar lights, looking at the camera
+- id: body-running-shorts-beach
+  prompt: full-body photo on a beach promenade in the morning, black running shorts and a fitted white sports tank top, running shoes, hair in a ponytail, slightly out of breath, head to toe in frame
+- id: body-pilates-mat
+  aspect: '4:5'
+  prompt: full-body photo in a pilates studio, she sits on a mat with long legs stretched forward, fitted grey sports top and grey leggings, hair in a bun, natural light
+- id: body-office-pencil-skirt
+  prompt: full-body photo in a glass office, white fitted blouse tucked into a black high-waisted pencil skirt, black heels, standing by her desk, hair down, head to toe in frame
+- id: body-mirror-ribbed-set
+  prompt: full-body mirror selfie in a walk-in closet, matching cream ribbed knit crop top and wide trousers, hair down, phone in hand, head to toe in frame, warm light

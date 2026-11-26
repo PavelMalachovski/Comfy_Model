@@ -1,0 +1,13 @@
+# Second pass for f12d and f14c: front shots kept covering the chest, rear shots worked every time.
+#   PORT=8193 scripts/vast_batch.sh scenes/fanvue_fix815b.yaml out/dev/fanvue-fix815b
+defaults:
+  tier: fanvue
+  aspect: '4:5'
+  count: 2
+scenes:
+- id: f12d-nude-down-dog-rear
+  seed: 13500
+  prompt: full-body photo taken by a friend standing three meters behind her, not a selfie, fully nude, bare buttocks fully visible, natural body of a fit 40-year-old woman, in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she holds downward dog on a grey yoga mat with her back to the camera, hips high, looking back at the camera between her legs, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: f14c-nude-dune-walk-rear
+  seed: 13513
+  prompt: full-body photo taken by a friend standing three meters behind her, not a selfie, fully nude, bare buttocks fully visible, natural body of a fit 40-year-old woman, on red sand dunes in the desert outside Dubai at sunset, warm golden low sun, long shadows, nobody else around, she walks up the crest of a dune away from the camera, her terracotta dress in one hand trailing on the sand, looking back over her shoulder, low golden sun, long shadow, natural skin texture, light everyday makeup, candid phone photo

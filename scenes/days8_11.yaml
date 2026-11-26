@@ -1,0 +1,167 @@
+# Days 8-11 SFW (16-a-day norm), generated from the shot list in docs/guide/16-posts-30-days.md.
+#   scripts/vast_batch.sh scenes/days8_11.yaml out/dev/days8_11   (hero-opt 40 settings)
+defaults:
+  tier: instagram
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: p08a-beach-warrior
+  seed: 10800
+  prompt: full-body photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she holds warrior two pose on a yoga mat on the sand, arms stretched wide, gaze over her front hand, fitted terracotta sports top and matching high-waisted leggings, high ponytail, warm golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: p08b-tree-waterline
+  seed: 10802
+  prompt: full-body photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she stands in tree pose at the edge of the water, palms together at her chest, calm smile, fitted terracotta sports top and matching high-waisted leggings, high ponytail, warm golden light on her skin, natural skin texture, light everyday makeup, candid phone photo
+- id: p08c-mat-sunrise-face
+  seed: 10804
+  prompt: close-up portrait photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she sits on a yoga mat with the rising sun behind her, warm smile at the camera, fitted terracotta sports top and matching high-waisted leggings, high ponytail, golden rim light in her hair, natural skin texture, light everyday makeup, candid phone photo
+- id: p08d-hands-mat-sand
+  seed: 10806
+  prompt: close-up photo of her hands pressing into a yoga mat covered with a little sand on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, oxblood nail polish, the terracotta leggings at the edge of the frame, warm golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: p08e-walk-away-mat
+  seed: 10808
+  prompt: photo taken by a friend from behind on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she walks along the shore with a rolled yoga mat over her shoulder and looks back at the camera with a smile, fitted terracotta sports top and matching high-waisted leggings, high ponytail, warm golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: s08a-sunrise-selfie
+  seed: 10810
+  aspect: '9:16'
+  prompt: close selfie on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, the rising sun and the sea behind her, wind in her hair, soft smile, fitted terracotta sports top and matching high-waisted leggings, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: s08b-mat-sitting
+  seed: 10812
+  aspect: '9:16'
+  prompt: photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she sits cross-legged on a yoga mat and looks at the camera, the empty beach and the sea behind her, fitted terracotta sports top and matching high-waisted leggings, high ponytail, warm golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: th08-heart-hands-breath
+  seed: 10814
+  prompt: half-body photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she sits on a yoga mat with her eyes closed and palms together at her heart, calm face, fitted terracotta sports top and matching high-waisted leggings, high ponytail, warm golden light on her face, natural skin texture, light everyday makeup, candid phone photo
+- id: t08-sand-water-bottle
+  seed: 10816
+  prompt: photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she sits on the sand next to her yoga mat drinking from a water bottle and smiles at the camera, fitted terracotta sports top and matching high-waisted leggings, high ponytail, warm golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: t08b-wind-selfie
+  seed: 10818
+  prompt: close selfie on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, strong wind blowing her ponytail across her face, laughing, fitted terracotta sports top and matching high-waisted leggings, high ponytail, golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: x08-swimsuit-side-stretch
+  seed: 10820
+  tier: social
+  prompt: full-body photo taken by a friend on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, she does a standing side stretch with one arm over her head, a simple black one-piece swimsuit, high ponytail, toned body, warm golden light on her skin, natural skin texture, light everyday makeup, candid phone photo
+- id: x08b-straps-down-back
+  seed: 10822
+  tier: social
+  prompt: photo taken by a friend from behind on an empty Dubai beach at sunrise, warm low golden sun, Dubai Marina towers far behind in the haze, calm sea, the straps of her black one-piece swimsuit slipped off her shoulders, she looks back over her shoulder at the camera with a small smile, bare back and shoulders, high ponytail, warm golden light, natural skin texture, light everyday makeup, candid phone photo
+- id: p09a-run-toward
+  seed: 10900
+  prompt: full-body photo taken by a friend on a waterfront promenade in Dubai Marina in the early morning, palm trees, yachts and marina towers, soft low sun, she runs toward the camera, mid-stride, focused face, fitted black running tank top, black high-waisted running shorts, white running shoes, a black sports watch, high ponytail, morning sun, natural skin texture, light everyday makeup, candid phone photo
+- id: p09b-catch-breath-laugh
+  seed: 10902
+  prompt: three-quarter photo taken by a friend on a waterfront promenade in Dubai Marina in the early morning, palm trees, yachts and marina towers, soft low sun, she stops with her hands on her knees catching her breath and laughs at the camera, fitted black running tank top, black high-waisted running shorts, white running shoes, a black sports watch, high ponytail, glowing skin, morning sun, natural skin texture, light everyday makeup, candid phone photo
+- id: p09c-quad-stretch-railing
+  seed: 10904
+  prompt: full-body photo taken by a friend on a waterfront promenade in Dubai Marina in the early morning, palm trees, yachts and marina towers, soft low sun, she holds the metal railing with one hand and does a standing quad stretch, yachts behind her, fitted black running tank top, black high-waisted running shorts, white running shoes, a black sports watch, high ponytail, morning sun, natural skin texture, light everyday makeup, candid phone photo
+- id: p09d-post-run-face
+  seed: 10906
+  prompt: close-up portrait photo taken by a friend on a waterfront promenade in Dubai Marina in the early morning, palm trees, yachts and marina towers, soft low sun, after her run, flushed cheeks and a light sheen of sweat, loose strands of hair, happy tired smile, fitted black running tank top, black high-waisted running shorts, white running shoes, a black sports watch, high ponytail, morning sun, natural skin texture, light everyday makeup, candid phone photo
+- id: p09e-home-water-window
+  seed: 10908
+  prompt: half-body photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, back from her run she drinks water from a clear glass bottle by the window, fitted black running tank top, black high-waisted running shorts, white running shoes, a black sports watch, high ponytail, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: s09a-run-selfie
+  seed: 10910
+  aspect: '9:16'
+  prompt: close selfie on a waterfront promenade in Dubai Marina in the early morning, palm trees, yachts and marina towers, soft low sun, after her run, flushed cheeks, she shows a thumbs up, fitted black running tank top, black high-waisted running shorts, white running shoes, a black sports watch, high ponytail, morning sun, natural skin texture, light everyday makeup, candid phone photo
+- id: s09b-bench-laces
+  seed: 10912
+  aspect: '9:16'
+  prompt: photo taken by a friend on a waterfront promenade in Dubai Marina in the early morning, palm trees, yachts and marina towers, soft low sun, she sits on a bench and ties the laces of her white running shoes, looking up at the camera, fitted black running tank top, black high-waisted running shorts, white running shoes, a black sports watch, high ponytail, morning sun, natural skin texture, light everyday makeup, candid phone photo
+- id: th09-steps-yachts
+  seed: 10914
+  prompt: half-body photo taken by a friend on a waterfront promenade in Dubai Marina in the early morning, palm trees, yachts and marina towers, soft low sun, she sits on the stone steps by the water with a water bottle and looks at the yachts, fitted black running tank top, black high-waisted running shorts, white running shoes, a black sports watch, high ponytail, morning sun, natural skin texture, light everyday makeup, candid phone photo
+- id: t09-kitchen-coffee-flushed
+  seed: 10916
+  prompt: half-body photo taken by a friend in the open kitchen of her Dubai Marina apartment with a white marble island, light oak cabinets, brass pendant lights, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, still in her running clothes she holds a white ceramic coffee mug with a handle and smiles at the camera, flushed cheeks, fitted black running tank top, black high-waisted running shorts, white running shoes, a black sports watch, high ponytail, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: t09b-bathroom-towel-selfie
+  seed: 10918
+  prompt: mirror selfie in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, after her run, a white towel around her neck, flushed glowing skin, fitted black running tank top, black high-waisted running shorts, white running shoes, a black sports watch, high ponytail, natural skin texture, light everyday makeup, candid phone photo
+- id: x09-squat-look-back
+  seed: 10920
+  tier: social
+  prompt: photo taken by a friend from behind in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she holds a deep squat on a grey yoga mat and looks back over her shoulder at the camera, tight black high-waisted leggings and a black cropped sports top, high ponytail, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: x09b-balcony-glow
+  seed: 10922
+  tier: social
+  prompt: half-body photo taken by a friend on the balcony of her high-rise apartment in Dubai Marina, glass railing, marina towers and the sea behind her, morning, after her run, a sheen of sweat on her chest and shoulders, black cropped sports top, high ponytail, flushed cheeks, small smile, natural skin texture, light everyday makeup, candid phone photo
+- id: p10a-abra-bench
+  seed: 11000
+  prompt: photo taken by a friend on a wooden abra boat crossing the creek in the historic district of old Dubai by the creek, sand-colored old houses with wind towers, wooden abra boats on the water, bright morning sun, she sits on the wooden bench and smiles at the camera, light white linen wide-leg trousers and a loose white linen top, a light beige scarf over her shoulders, small gold hoop earrings, hair down, bright sun, natural skin texture, light everyday makeup, candid phone photo
+- id: p10b-souk-rose-petals
+  seed: 11002
+  prompt: half-body photo taken by a friend in a covered old spice market in Dubai, open sacks of colorful spices, dried rose buds and saffron, warm light through the wooden roof, she holds a handful of dried rose buds to her face and smells them, eyes half closed, light white linen wide-leg trousers and a loose white linen top, a light beige scarf over her shoulders, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: p10c-old-lane-walk
+  seed: 11004
+  prompt: full-body photo taken by a friend in a narrow lane of the historic district of old Dubai by the creek, sand-colored old houses with wind towers, wooden abra boats on the water, bright morning sun, she walks between sand-colored walls and looks back at the camera, light white linen wide-leg trousers and a loose white linen top, a light beige scarf over her shoulders, small gold hoop earrings, hair down, bright sun and soft shadows, natural skin texture, light everyday makeup, candid phone photo
+- id: p10d-saffron-hands
+  seed: 11006
+  prompt: close-up photo of her hands holding a small glass jar of saffron threads above open sacks of spices in a covered old spice market in Dubai, open sacks of colorful spices, dried rose buds and saffron, warm light through the wooden roof, oxblood nail polish, the white linen sleeve, natural skin texture, light everyday makeup, candid phone photo
+- id: p10e-courtyard-tea
+  seed: 11008
+  prompt: half-body photo taken by a friend in a shaded courtyard cafe in the historic district of old Dubai by the creek, sand-colored old houses with wind towers, wooden abra boats on the water, bright morning sun, she sits at a small table holding a small glass of milky tea, relaxed smile, light white linen wide-leg trousers and a loose white linen top, a light beige scarf over her shoulders, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: s10a-abra-selfie
+  seed: 11010
+  aspect: '9:16'
+  prompt: close selfie on a wooden abra boat in the historic district of old Dubai by the creek, sand-colored old houses with wind towers, wooden abra boats on the water, bright morning sun, the creek and old houses behind her, wind in her hair, smile, light white linen wide-leg trousers and a loose white linen top, a light beige scarf over her shoulders, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: s10b-spice-sacks-hand
+  seed: 11012
+  aspect: '9:16'
+  prompt: close-up photo of her hand touching dried rose buds in an open sack among colorful spices in a covered old spice market in Dubai, open sacks of colorful spices, dried rose buds and saffron, warm light through the wooden roof, oxblood nail polish, natural skin texture, light everyday makeup, candid phone photo
+- id: th10-abra-profile
+  seed: 11014
+  prompt: half-body photo taken by a friend on a wooden abra boat in the historic district of old Dubai by the creek, sand-colored old houses with wind towers, wooden abra boats on the water, bright morning sun, she looks at the water in profile, calm face, light white linen wide-leg trousers and a loose white linen top, a light beige scarf over her shoulders, small gold hoop earrings, hair down, bright sun, natural skin texture, light everyday makeup, candid phone photo
+- id: t10-windowsill-evening
+  seed: 11016
+  prompt: photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, evening, she sits on the wide windowsill with her knees up and looks out at the lit marina towers, pensive calm face, an oversized white linen shirt, hair down, warm lamp light, natural skin texture, light everyday makeup, candid phone photo
+- id: t10b-souk-selfie
+  seed: 11018
+  prompt: close selfie in a covered old spice market in Dubai, open sacks of colorful spices, dried rose buds and saffron, warm light through the wooden roof, spice sacks behind her, warm smile, light white linen wide-leg trousers and a loose white linen top, a light beige scarf over her shoulders, small gold hoop earrings, hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: x10-balcony-shirt-mug
+  seed: 11020
+  tier: social
+  prompt: photo taken by a friend on the balcony of her high-rise apartment in Dubai Marina, glass railing, marina towers and the sea behind her, early morning, she sits on a lounge chair with a white ceramic coffee mug with a handle, only an oversized white linen shirt with the top buttons open, hair down, long bare legs, sleepy smile, soft morning light, natural skin texture, light everyday makeup, candid phone photo
+- id: x10b-shirt-off-shoulder
+  seed: 11022
+  tier: social
+  prompt: photo taken by a friend from behind on the balcony of her high-rise apartment in Dubai Marina, glass railing, marina towers and the sea behind her, morning, an oversized white linen shirt slipping off one shoulder, she looks back over her bare shoulder at the camera, hair down, soft morning light, natural skin texture, light everyday makeup, candid phone photo
+- id: p11a-island-avocado
+  seed: 11100
+  prompt: half-body photo taken by a friend in the open kitchen of her Dubai Marina apartment with a white marble island, light oak cabinets, brass pendant lights, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she slices an avocado on a wooden board at the marble island and smiles at the camera, an oversized white t-shirt and grey cotton shorts, messy hair down, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: p11b-plate-from-above
+  seed: 11102
+  prompt: photo from above of a plate with avocado toast and two fried eggs on the white marble island, a white ceramic coffee mug with a handle next to it, her hand holding a fork, oxblood nail polish, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: p11c-stool-laugh
+  seed: 11104
+  prompt: photo taken by a friend in the open kitchen of her Dubai Marina apartment with a white marble island, light oak cabinets, brass pendant lights, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she sits on a bar stool at the island eating breakfast and laughs, an oversized white t-shirt and grey cotton shorts, messy hair down, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: p11d-french-press-pour
+  seed: 11106
+  prompt: half-body photo taken by a friend in the open kitchen of her Dubai Marina apartment with a white marble island, light oak cabinets, brass pendant lights, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she pours coffee from a glass french press into a white ceramic coffee mug with a handle, an oversized white t-shirt and grey cotton shorts, messy hair down, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: p11e-sofa-plate
+  seed: 11108
+  prompt: photo taken by a friend in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she sits on the low cream sofa with her legs tucked under her and a breakfast plate on her knees, an oversized white t-shirt and grey cotton shorts, messy hair down, sunlight, natural skin texture, light everyday makeup, candid phone photo
+- id: s11a-breakfast-hands
+  seed: 11110
+  aspect: '9:16'
+  prompt: close-up photo from above of her hands holding a white ceramic coffee mug with a handle next to a plate of avocado toast on a white marble counter, oxblood nail polish, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: s11b-kitchen-mug-selfie
+  seed: 11112
+  aspect: '9:16'
+  prompt: close selfie in the open kitchen of her Dubai Marina apartment with a white marble island, light oak cabinets, brass pendant lights, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she holds a white ceramic coffee mug with a handle near her face, sleepy smile, an oversized white t-shirt and grey cotton shorts, messy hair down, natural skin texture, light everyday makeup, candid phone photo
+- id: th11-island-window
+  seed: 11114
+  prompt: half-body photo taken by a friend in the open kitchen of her Dubai Marina apartment with a white marble island, light oak cabinets, brass pendant lights, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she leans on the marble island with a white ceramic coffee mug with a handle and looks out of the window, an oversized white t-shirt and grey cotton shorts, messy hair down, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: t11-stool-crosslegged
+  seed: 11116
+  prompt: photo taken by a friend in the open kitchen of her Dubai Marina apartment with a white marble island, light oak cabinets, brass pendant lights, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she sits cross-legged on a wide bar stool holding a white ceramic coffee mug with a handle with both hands, smiling at the camera, an oversized white t-shirt and grey cotton shorts, messy hair down, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: t11b-sofa-sleepy-selfie
+  seed: 11118
+  prompt: close selfie in her living room in a Dubai Marina apartment with a low cream sofa, a black leather armchair, a round travertine coffee table, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, she lies on the low cream sofa with a white ceramic coffee mug with a handle, sleepy smile, an oversized white t-shirt and grey cotton shorts, messy hair down, sunlight, natural skin texture, light everyday makeup, candid phone photo
+- id: x11-counter-tshirt
+  seed: 11120
+  tier: social
+  prompt: photo taken by a friend in the open kitchen of her Dubai Marina apartment with a white marble island, light oak cabinets, brass pendant lights, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she sits on the marble kitchen counter holding a white ceramic coffee mug with a handle, only an oversized white t-shirt, bare legs, messy hair down, long bare legs, playful smile, soft daylight, natural skin texture, light everyday makeup, candid phone photo
+- id: x11b-tshirt-window-back
+  seed: 11122
+  tier: social
+  prompt: photo taken by a friend from behind in the open kitchen of her Dubai Marina apartment with a white marble island, light oak cabinets, brass pendant lights, oak herringbone floor, a floor-to-ceiling window with a view of marina towers and the sea, morning, she stands at the window on her tiptoes reaching for a shelf, only an oversized white t-shirt, bare legs, messy hair down, the t-shirt riding up her thighs, she looks back at the camera, soft daylight, natural skin texture, light everyday makeup, candid phone photo

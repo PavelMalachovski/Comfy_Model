@@ -1,0 +1,14 @@
+# Body-only variant of profile_phone_40 for faceless Fanvue frames (21 Nov 2026): no face, eyes, lips or makeup cues,
+# so the model does not build the frame around her face. Use with workflows/qwen-mac-hero-opt-v5-40-body
+# (face, head, eyes and portrait in the negative). Keep `appearance` starting with a stated adult age.
+name: "Roxana"
+trigger: "ohwxroxana"
+appearance: >-
+  40-year-old adult woman, mature adult body, tall slender woman about 174 cm with long slim legs, lean athletic figure,
+  narrow waist, full high natural bust, softly toned stomach, round toned buttocks, warm olive skin with visible fine pores,
+  faint peach fuzz, faint tan lines, a few small moles, natural soft brown nipples, short nude manicured nails
+style_suffix: >-
+  casual photo taken on an iPhone, flat phone HDR, soft even light, slightly overexposed, low contrast,
+  everything in focus, natural skin texture, natural hands, slight sensor noise
+video_negative: >-
+  child, teen, underage, deformed, extra limbs, blurry, low quality, plastic skin, text, watermark

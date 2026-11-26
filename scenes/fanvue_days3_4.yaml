@@ -1,0 +1,24 @@
+# Fanvue for days 3-4 (norm: 2 hero-opt frames per day). Tier fanvue: nudity allowed, no sexual acts.
+# MAC ONLY (RunPod ToS). The operator launches it:
+#   CM_WAIT_TIMEOUT_S=36000 .venv/bin/cm batch photo scenes/fanvue_days3_4.yaml \
+#     --profile character/profile_phone_40.yaml --lora ohwxroxana_v5.safetensors --strength 0.8 \
+#     --workflows workflows/qwen-mac-hero-opt-v5-40 --out out/dev/fanvue-d3-4 --url http://127.0.0.1:8188
+#   .venv/bin/python scripts/phone_finish.py out/dev/fanvue-d3-4 out/dev/fanvue-d3-4-final --hdr 0.5
+# Day 3 continues the studio day at home (shower after class); day 4 is the same bedroom and beige dress as the p04 carousel.
+defaults:
+  tier: fanvue
+  aspect: '4:5'
+  count: 1
+scenes:
+- id: fv03a-shower-after-class
+  seed: 8201
+  prompt: half-body photo taken by a friend in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, late morning after her pilates class, she stands nude under the rain shower behind the glass, eyes closed and face tilted up into the water, both hands smoothing her wet hair back, bare breasts, toned stomach, water running down her skin, steam on the glass, warm light, real skin with visible pores, natural skin texture, light everyday makeup, candid phone photo
+- id: fv03b-towel-mirror-drop
+  seed: 8211
+  prompt: half-body photo taken by a friend in her bathroom in a Dubai Marina apartment with a frameless glass walk-in shower with large warm beige travertine tiles, a freestanding white stone bathtub, brushed brass fixtures, a white towel on a brass rail, a tall window with sea view, late morning, she stands by the bathtub after her shower and lets a white towel slip down to her waist, holding it at her hip with one hand, her other hand in her wet hair, topless, water drops on her shoulders and breasts, soft confident smile at the camera, bright warm light, real skin with visible pores, natural skin texture, light everyday makeup, candid phone photo
+- id: fv04a-dress-unzip
+  seed: 8221
+  prompt: half-body photo taken by a friend from behind in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, evening, she stands by the bed in a fitted long-sleeve beige ribbed knit midi dress unzipped down to her lower back, bare back, no bra, holding the dress at her chest with one hand, looking back over her shoulder at the camera with a playful smile, hair down, small gold hoop earrings, warm lamp light, real skin with visible pores, natural skin texture, light everyday makeup, candid phone photo
+- id: fv04b-bed-lamp-nude
+  seed: 8231
+  prompt: photo taken by a friend standing at the foot of the bed in her bedroom in a Dubai Marina apartment with a low upholstered bed in warm white boucle with crisp white linen and a grey knit throw, a travertine bedside table with a brass table lamp with a rounded brass bottle base and a white linen drum shade, a tall olive tree in a white stone pot, oak herringbone floor, a floor-to-ceiling window with light white linen curtains and marina towers outside, evening, she lies on her side on the white sheets nude, propped on one elbow, her top leg bent forward over the other, exactly two legs, bare breasts, the beige dress dropped on the floor, warm light from the bedside lamp, relaxed warm smile at the camera, hair spread on the pillow, real skin with visible pores, natural skin texture, light everyday makeup, candid phone photo
