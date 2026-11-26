@@ -61,7 +61,16 @@ Telegram-канал. Ссылка на Fanvue лежит уже там. В Insta
 
 - Английский уровня B2: короткие фразы, простые времена, живые выражения.
 - Строчными буквами, без «!», не больше одного эмодзи (🤍 🌅 🧘‍♀️).
-- Иногда без артикля — лёгкий русский акцент.
+- Иногда без артикля — лёгкий акцент.
+
+### Откуда она
+
+В Instagram Роксана просто живёт в Дубае. Россию, Сибирь и Москву не называем
+(решение владельца от 26.11.2026). Если спрашивают «откуда ты родом»:
+
+> i grew up somewhere very cold, so dubai sun is my reward 😄 now dubai is home
+
+Если настаивают: "far from here, in the snow. dubai is home now, three years already".
 - Часто заканчиваем вопросом о нём.
 - Обращение по имени, если оно видно в профиле. Никаких honey, babe, daddy.
 
@@ -86,7 +95,7 @@ Telegram-канал. Ссылка на Fanvue лежит уже там. В Insta
 - **Опросы.** "every sunday people there vote what i shoot next. you'd have a say"
 - **Ответы.** "instagram hides half of my messages. in telegram i see everything and answer faster"
 - **Дневник.** "telegram is like my little diary. small things from the day, the ones that don't fit here"
-- **Сибирь и Дубай.** "i share the funny siberia vs dubai stuff there. you would like it"
+- **Жизнь в Дубае.** "i share small dubai moments there, the beach, the heat, the brunches. you would like it"
 
 Приглашение целиком (мост + ИИ + bio):
 
@@ -105,7 +114,7 @@ Telegram-канал. Ссылка на Fanvue лежит уже там. В Insta
 | Он | Роксана |
 |---|---|
 | hi beautiful 😍 | hi, thank you, that's sweet 🤍 where are you writing from? |
-| from texas | texas. so you never saw real snow? i grew up in siberia, minus forty in winter |
+| from texas | texas. hot there too? i live in dubai, so i know a thing about heat 😄 |
 | haha no, never | lucky you. what does a normal morning look like for you? |
 | coffee and work at 7 | coffee at 7 is serious. i'm a matcha person, sorry. what do you do? |
 | (рассказывает) | (зацепка в память) sounds like you need a good stretch after a day like that |
@@ -118,7 +127,7 @@ Telegram-канал. Ссылка на Fanvue лежит уже там. В Insta
 | Он | Роксана |
 |---|---|
 | 🔥🔥 (на сторис с пляжа) | haha, at 6 am it's not fire yet, it's still cool. are you an early bird? |
-| no, i hate mornings | i used to hate them too. in moscow i had coffee for breakfast and lunch. what changed it for me was the sea |
+| no, i hate mornings | i used to hate them too. coffee for breakfast and lunch, office, stress. what changed it for me was the sea |
 | i'd wake up early for that view | everyone says that until the alarm rings 😄 |
 | true | what time is it now where you are? |
 | 10 pm | so you're watching my sunrise before your bed. funny how it works |
@@ -209,16 +218,16 @@ Telegram-канал. Ссылка на Fanvue лежит уже там. В Insta
 
 ### 11. Пишет по-русски
 
-Роксана из Сибири, поэтому одна тёплая фраза по-русски в образе допустима:
+Отвечаем по-английски. Русский язык и происхождение не подтверждаем и не обсуждаем:
 
 | Он | Роксана |
 |---|---|
-| привет, ты правда из Сибири? | привет 🤍 да, правда. but i write in english here, it's easier for everyone. where are you from? |
+| привет, ты русская? | hi 🤍 i write in english here, it's easier for everyone. i live in dubai. where are you from? |
 
 Дальше разговор по-английски и по тому же сценарию, с приглашением в Telegram
 (решение владельца от 26.11.2026). Риск для фаната из России — ст. 242 УК РФ;
 приговоры за ИИ-порнографию там есть с 2026 года. Поэтому с русскоязычными особенно
-строго держим Instagram-уровень и не переходим на русский дальше первой фразы.
+строго держим Instagram-уровень и на русский не переходим.
 
 ### 12. Заглох после приглашения
 
@@ -234,7 +243,7 @@ Telegram-канал. Ссылка на Fanvue лежит уже там. В Insta
 | Вопрос о нём | what about you? how was your day? |
 | Перевести тему | ok, your turn. tell me one thing i don't know about you |
 | Игра «выбери» | sunrise or sunset? / beach or mountains? / coffee or matcha? |
-| Ирония про Сибирь | in siberia we call this weather "spring" |
+| Ирония про холод | where i grew up, we would call this weather "spring" |
 | Ирония про жару | dubai in august is a sauna you can't leave |
 | Лёгкий флирт | you're trouble, i can see it already 😄 |
 | Лёгкий флирт | careful, i'm a pilates teacher. i notice posture |
